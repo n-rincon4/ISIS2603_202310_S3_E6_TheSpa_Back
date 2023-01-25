@@ -22,7 +22,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-package co.edu.uniandes.dse.ZZZ.entities;
+package co.edu.uniandes.dse.thespa.entities;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
