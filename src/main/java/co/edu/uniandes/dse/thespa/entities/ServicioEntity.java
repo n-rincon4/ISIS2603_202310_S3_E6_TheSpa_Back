@@ -1,6 +1,9 @@
 package co.edu.uniandes.dse.thespa.entities;
 
+import java.util.List;
+
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -14,4 +17,8 @@ public class ServicioEntity extends BaseEntity{
     private Boolean disponible;
     private Integer horaInicio;
     private Integer horaFin;
+    
+    @ManyToMany
+    private List<PackDeServiciosEntity> packsDeServicios;
+
 }
