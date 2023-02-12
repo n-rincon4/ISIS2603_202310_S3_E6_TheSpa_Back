@@ -11,7 +11,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-public class ServicioEntity extends BaseEntity{
+public class ServicioEntity extends BeneficioEntity{
     private Integer duracion;
     private String restricciones;
     private Boolean disponible;
