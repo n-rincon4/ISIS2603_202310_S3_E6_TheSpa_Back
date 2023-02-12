@@ -11,13 +11,14 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-public class ServicioEntity extends BeneficioEntity {
-    private int duracion;
+public class ServicioEntity extends BeneficioEntity{
+    private Integer duracion;
     private String restricciones;
     private Boolean disponible;
-    private int horaInicio;
-    private int horaFin;
-
+    private Integer horaInicio;
+    private Integer horaFin;
+    
     @ManyToMany
     private List<PackDeServiciosEntity> packsDeServicios;
+
 }

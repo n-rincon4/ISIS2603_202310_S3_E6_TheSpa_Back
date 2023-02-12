@@ -19,5 +19,5 @@ public class TrabajadorEntity extends BaseEntity
 {
     private String nombre;
     private File foto;
-    private int calificacion; 
+    private Integer calificacion; 
 }
