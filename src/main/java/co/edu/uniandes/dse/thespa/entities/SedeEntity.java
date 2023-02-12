@@ -1,7 +1,6 @@
 package co.edu.uniandes.dse.thespa.entities;
 
 import java.io.File;
-import java.util.ArrayList;
 
 import java.util.List;
 
@@ -33,16 +32,16 @@ public class SedeEntity extends BaseEntity {
     private File imagen;
 
     @PodamExclude
-    @ManyToMany(mappedBy = "Sede")
-    private List<TrabajadorEntity> trabajadores = new ArrayList<>();
+    @ManyToMany(mappedBy = "sedes")
+    private List<TrabajadorEntity> trabajadores;
 
     @PodamExclude
-    @ManyToMany(mappedBy = "Sede")
-    private List<TrabajadorEntity> articulosDeRopa = new ArrayList<>();
+    @OneToMany(mappedBy = "sede", cascade = CascadeType.PERSIST, orphanRemoval = true)
+    private List<ArticuloDeRopaEntity> articulosDeRopa;
 
     @PodamExclude
     @OneToOne
-    private HallOfFameEntity hof = new HallOfFameEntity();
+    private HallOfFameEntity hof;
 
     /**
      * Hace falta la entidad ubicacion para ser creada
@@ -53,12 +52,12 @@ public class SedeEntity extends BaseEntity {
      */
 
     @PodamExclude
-    @OneToMany(mappedBy = "Sede", cascade = CascadeType.PERSIST, orphanRemoval = true)
-    private List<PackDeServiciosEntity> packServicios = new ArrayList<>();
+    @OneToMany(mappedBy = "sede", cascade = CascadeType.PERSIST, orphanRemoval = true)
+    private List<PackDeServiciosEntity> packsDeServicios;
 
     @PodamExclude
-    @OneToMany(mappedBy = "Sede", cascade = CascadeType.PERSIST, orphanRemoval = true)
-    private List<ServicioEntity> servicios = new ArrayList<>();
+    @OneToMany(mappedBy = "sede", cascade = CascadeType.PERSIST, orphanRemoval = true)
+    private List<ServicioEntity> servicios;
 
     // @PodamExclude
     // @OneToMany(mappedBy = "Sede", cascade = CascadeType.PERSIST, orphanRemoval =
@@ -67,7 +66,7 @@ public class SedeEntity extends BaseEntity {
     // Falta la entidad articulo de ropa
 
     @PodamExclude
-    @OneToMany(mappedBy = "Sede", cascade = CascadeType.PERSIST, orphanRemoval = true)
-    private List<ServicioExtraEntity> serviciosExtra = new ArrayList<>();
+    @OneToMany(mappedBy = "sede", cascade = CascadeType.PERSIST, orphanRemoval = true)
+    private List<ServicioExtraEntity> serviciosExtra;
 
 }
