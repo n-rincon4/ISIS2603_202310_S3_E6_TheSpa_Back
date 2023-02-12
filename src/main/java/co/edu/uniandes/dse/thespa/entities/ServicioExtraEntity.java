@@ -10,10 +10,9 @@ import lombok.Setter;
  * @author Nicolás Rincón Sánchez
  */
 
- @Getter
- @Setter
- @Entity
-public class ServicioExtraEntity extends BaseEntity
-{
-    private boolean disponible; 
+@Getter
+@Setter
+@Entity
+public class ServicioExtraEntity extends BeneficioEntity {
+    private boolean disponible;
 }
