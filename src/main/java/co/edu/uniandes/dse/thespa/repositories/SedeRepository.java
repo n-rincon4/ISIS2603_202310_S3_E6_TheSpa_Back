@@ -7,5 +7,4 @@ import co.edu.uniandes.dse.thespa.entities.SedeEntity;
 
 @Repository
 public interface SedeRepository extends JpaRepository<SedeEntity, Long> {
-    
 }
