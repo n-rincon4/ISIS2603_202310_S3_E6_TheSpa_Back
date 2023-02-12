@@ -13,7 +13,7 @@ import lombok.Setter;
  @Getter
  @Setter
  @Entity
-public class ServicioExtraEntity extends BaseEntity
+public class ServicioExtraEntity extends BeneficioEntity
 {
     private Boolean disponible; 
 }
