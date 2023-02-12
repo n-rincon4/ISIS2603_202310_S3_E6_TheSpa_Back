@@ -9,9 +9,9 @@ import lombok.Setter;
 @Setter
 @Entity
 public class ServicioEntity extends BaseEntity{
-    private int duracion;
+    private Integer duracion;
     private String restricciones;
     private Boolean disponible;
-    private int horaInicio;
-    private int horaFin;
+    private Integer horaInicio;
+    private Integer horaFin;
 }

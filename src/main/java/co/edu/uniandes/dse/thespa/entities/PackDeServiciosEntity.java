@@ -12,7 +12,7 @@ import lombok.Setter;
 @Entity
 
 public class PackDeServiciosEntity extends BaseEntity {
-    private int descuento;
+    private Integer descuento;
     private String nombre;
     private File image;
 

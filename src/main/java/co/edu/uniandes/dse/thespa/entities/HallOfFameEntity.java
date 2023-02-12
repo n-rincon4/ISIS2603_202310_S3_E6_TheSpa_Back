@@ -9,5 +9,5 @@ import lombok.Setter;
 @Entity
 
 public class HallOfFameEntity extends BaseEntity{
-    private int ratingPromedio;
+    private Integer ratingPromedio;
 }

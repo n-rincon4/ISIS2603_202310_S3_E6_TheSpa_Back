@@ -15,5 +15,5 @@ import lombok.Setter;
  @Entity
 public class ServicioExtraEntity extends BaseEntity
 {
-    private boolean disponible; 
+    private Boolean disponible; 
 }
