@@ -2,7 +2,7 @@ package co.edu.uniandes.dse.thespa.entities;
 
 import java.io.File;
 
-import javax.persistence.Entity;
+import javax.persistence.MappedSuperclass;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -16,7 +16,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@Entity
+@MappedSuperclass
 public abstract class BeneficioEntity extends BaseEntity {
     protected String nombre;
     protected String description;

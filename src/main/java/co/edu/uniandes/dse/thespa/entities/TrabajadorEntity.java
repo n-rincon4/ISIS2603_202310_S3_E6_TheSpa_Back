@@ -1,6 +1,8 @@
 package co.edu.uniandes.dse.thespa.entities;
 
 import java.io.File;
+import javax.persistence.ManyToMany;
+import java.util.List;
 
 import javax.persistence.Entity;
 import lombok.Getter;
@@ -15,9 +17,11 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-public class TrabajadorEntity extends BaseEntity
-{
+public class TrabajadorEntity extends BaseEntity {
     private String nombre;
     private File foto;
-    private Integer calificacion; 
+    private Integer calificacion;
+
+    @ManyToMany
+    private List<ServicioEntity> sedes;
 }

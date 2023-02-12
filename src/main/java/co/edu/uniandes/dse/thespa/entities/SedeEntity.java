@@ -1,6 +1,6 @@
 package co.edu.uniandes.dse.thespa.entities;
+
 import java.io.File;
-import java.util.ArrayList;
 
 import java.util.List;
 
@@ -11,8 +11,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
-import javax.persistence.OneToMany;
-
+// import javax.persistence.OneToMany;
+// Falta la entidad articulo de ropa
 
 import lombok.Getter;
 import lombok.Setter;
@@ -31,37 +31,42 @@ public class SedeEntity extends BaseEntity {
     private String nombre;
     private File imagen;
 
+    @PodamExclude
+    @ManyToMany(mappedBy = "sedes")
+    private List<TrabajadorEntity> trabajadores;
 
     @PodamExclude
-    @ManyToMany(mappedBy="Sede")
-    private List<TrabajadorEntity> trabajadores = new ArrayList<>();
+    @OneToMany(mappedBy = "sede", cascade = CascadeType.PERSIST, orphanRemoval = true)
+    private List<ArticuloDeRopaEntity> articulosDeRopa;
 
     @PodamExclude
     @OneToOne
-    private HallOfFameEntity hof = new HallOfFameEntity();
+    private HallOfFameEntity hof;
 
-    /** Hace falta la entidad ubicacion para ser creada
+    /**
+     * Hace falta la entidad ubicacion para ser creada
+     * 
      * @PodamExclude
-        *@OneToOne
-        * UbicacionEntity ubicacion = new UbicacionEntity();
-        */
+     * @OneToOne
+     *           UbicacionEntity ubicacion = new UbicacionEntity();
+     */
 
     @PodamExclude
-    @OneToMany(mappedBy = "Sede", cascade = CascadeType.PERSIST, orphanRemoval = true)
-    private List<PackDeServiciosEntity> packServicios = new ArrayList<>();
+    @OneToMany(mappedBy = "sede", cascade = CascadeType.PERSIST, orphanRemoval = true)
+    private List<PackDeServiciosEntity> packsDeServicios;
 
     @PodamExclude
-    @OneToMany(mappedBy = "Sede", cascade = CascadeType.PERSIST, orphanRemoval = true)
-    private List<ServicioEntity> servicios = new ArrayList<>();
+    @OneToMany(mappedBy = "sede", cascade = CascadeType.PERSIST, orphanRemoval = true)
+    private List<ServicioEntity> servicios;
 
-    //@PodamExclude
-    //@OneToMany(mappedBy = "Sede", cascade = CascadeType.PERSIST, orphanRemoval = true)
-    //private List<ArticuloDeRopaEntity> ropa = new ArrayList<>();
-    //Falta la entidad articulo de ropa 
+    // @PodamExclude
+    // @OneToMany(mappedBy = "Sede", cascade = CascadeType.PERSIST, orphanRemoval =
+    // true)
+    // private List<ArticuloDeRopaEntity> ropa = new ArrayList<>();
+    // Falta la entidad articulo de ropa
 
     @PodamExclude
-    @OneToMany(mappedBy = "Sede", cascade = CascadeType.PERSIST, orphanRemoval = true)
-    private List<ServicioExtraEntity> serviciosExtra = new ArrayList<>();
-
+    @OneToMany(mappedBy = "sede", cascade = CascadeType.PERSIST, orphanRemoval = true)
+    private List<ServicioExtraEntity> serviciosExtra;
 
 }
