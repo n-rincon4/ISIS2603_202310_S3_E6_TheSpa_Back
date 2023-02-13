@@ -4,6 +4,7 @@ import java.io.File;
 import javax.persistence.ManyToMany;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import lombok.Getter;
 import lombok.Setter;
@@ -23,5 +24,11 @@ public class TrabajadorEntity extends BaseEntity {
     private Integer calificacion;
 
     @ManyToMany
-    private List<ServicioEntity> sedes;
+    private List<SedeEntity> sedes;
+
+    @ManyToMany
+    private List<ServicioEntity> servicios;
+
+    @ManyToMany(mappedBy = "trabajadores", cascade = CascadeType.PERSIST)
+    private List<HallOfFameEntity> hallOfFame;
 }
