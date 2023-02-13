@@ -43,13 +43,9 @@ public class SedeEntity extends BaseEntity {
     @OneToOne
     private HallOfFameEntity hof;
 
-    /**
-     * Hace falta la entidad ubicacion para ser creada
-     * 
-     * @PodamExclude
-     * @OneToOne
-     *           UbicacionEntity ubicacion = new UbicacionEntity();
-     */
+    @PodamExclude
+    @OneToOne
+    private UbicacionEntity ubicacion;
 
     @PodamExclude
     @OneToMany(mappedBy = "sede", cascade = CascadeType.PERSIST, orphanRemoval = true)
@@ -58,12 +54,6 @@ public class SedeEntity extends BaseEntity {
     @PodamExclude
     @OneToMany(mappedBy = "sede", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<ServicioEntity> servicios;
-
-    // @PodamExclude
-    // @OneToMany(mappedBy = "Sede", cascade = CascadeType.PERSIST, orphanRemoval =
-    // true)
-    // private List<ArticuloDeRopaEntity> ropa = new ArrayList<>();
-    // Falta la entidad articulo de ropa
 
     @PodamExclude
     @OneToMany(mappedBy = "sede", cascade = CascadeType.PERSIST, orphanRemoval = true)
