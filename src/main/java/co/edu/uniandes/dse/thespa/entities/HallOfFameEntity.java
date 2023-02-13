@@ -1,7 +1,9 @@
 package co.edu.uniandes.dse.thespa.entities;
 
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
+import javax.persistence.ManyToMany;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -15,4 +17,7 @@ public class HallOfFameEntity extends BaseEntity {
 
     @OneToOne
     private SedeEntity sede;
+
+    @ManyToMany
+    private List<TrabajadorEntity> trabajadores;
 }

@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
+import javax.persistence.CascadeType;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -25,7 +27,8 @@ public class ServicioEntity extends BeneficioEntity {
     @ManyToOne
     private SedeEntity sede;
 
-    @ManyToMany(mappedBy = "servicios")
+
+    @ManyToMany(mappedBy = "servicios", cascade = CascadeType.PERSIST)
     private List<TrabajadorEntity> trabajadores;
 
 }
