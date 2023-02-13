@@ -2,6 +2,7 @@ package co.edu.uniandes.dse.thespa.entities;
 
 import java.io.File;
 import javax.persistence.ManyToMany;
+
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -31,4 +32,5 @@ public class TrabajadorEntity extends BaseEntity {
 
     @ManyToMany(mappedBy = "trabajadores", cascade = CascadeType.PERSIST)
     private List<HallOfFameEntity> hallOfFame;
+
 }

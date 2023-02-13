@@ -27,6 +27,8 @@ public class ServicioEntity extends BeneficioEntity {
     @ManyToOne
     private SedeEntity sede;
 
+
     @ManyToMany(mappedBy = "servicios", cascade = CascadeType.PERSIST)
     private List<TrabajadorEntity> trabajadores;
+
 }
