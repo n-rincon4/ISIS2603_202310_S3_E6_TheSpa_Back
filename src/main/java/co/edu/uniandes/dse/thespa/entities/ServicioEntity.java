@@ -25,4 +25,7 @@ public class ServicioEntity extends BeneficioEntity {
     @ManyToOne
     private SedeEntity sede;
 
+    @ManyToMany(mappedBy = "servicios")
+    private List<TrabajadorEntity> trabajadores;
+
 }
