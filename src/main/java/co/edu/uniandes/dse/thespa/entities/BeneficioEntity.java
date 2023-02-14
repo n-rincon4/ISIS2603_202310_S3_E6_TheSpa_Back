@@ -18,6 +18,7 @@ import lombok.Setter;
 @Setter
 @MappedSuperclass
 public abstract class BeneficioEntity extends BaseEntity {
+
     protected String nombre;
     protected String description;
     protected Integer precio;

@@ -9,6 +9,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import lombok.Getter;
 import lombok.Setter;
+import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  * Clase que representa un trabajador en la persistencia
@@ -24,12 +25,15 @@ public class TrabajadorEntity extends BaseEntity {
     private File foto;
     private Integer calificacion;
 
+    @PodamExclude
     @ManyToMany
     private List<SedeEntity> sedes;
 
+    @PodamExclude
     @ManyToMany
     private List<ServicioEntity> servicios;
 
+    @PodamExclude
     @ManyToMany(mappedBy = "trabajadores", cascade = CascadeType.PERSIST)
     private List<HallOfFameEntity> hallOfFame;
 

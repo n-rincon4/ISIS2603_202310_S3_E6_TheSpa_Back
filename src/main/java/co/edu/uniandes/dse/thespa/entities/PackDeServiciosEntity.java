@@ -9,6 +9,7 @@ import javax.persistence.ManyToOne;
 
 import lombok.Getter;
 import lombok.Setter;
+import uk.co.jemos.podam.common.PodamExclude;
 
 @Getter
 @Setter
@@ -19,9 +20,11 @@ public class PackDeServiciosEntity extends BaseEntity {
     private String nombre;
     private File image;
 
+    @PodamExclude
     @ManyToOne
     private SedeEntity sede;
 
+    @PodamExclude
     @ManyToMany(mappedBy = "packsDeServicios")
     private List<ServicioEntity> servicios;
 
