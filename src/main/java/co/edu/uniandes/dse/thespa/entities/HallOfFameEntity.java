@@ -7,6 +7,7 @@ import javax.persistence.ManyToMany;
 
 import lombok.Getter;
 import lombok.Setter;
+import uk.co.jemos.podam.common.PodamExclude;
 
 @Getter
 @Setter
@@ -15,9 +16,11 @@ import lombok.Setter;
 public class HallOfFameEntity extends BaseEntity {
     private Integer ratingPromedio;
 
+    @PodamExclude
     @OneToOne
     private SedeEntity sede;
 
+    @PodamExclude
     @ManyToMany
     private List<TrabajadorEntity> trabajadores;
 }

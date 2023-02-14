@@ -6,6 +6,7 @@ import javax.persistence.OneToOne;
 
 import lombok.Getter;
 import lombok.Setter;
+import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  * Clase que contiene las coordenadas geográficas
@@ -23,6 +24,7 @@ public class UbicacionEntity extends BaseEntity {
     private String Ciudad;
     private String Direccion;
 
+    @PodamExclude
     @OneToOne
     private SedeEntity sede;
 

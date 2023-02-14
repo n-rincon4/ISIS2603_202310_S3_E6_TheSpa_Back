@@ -10,6 +10,7 @@ import javax.persistence.CascadeType;
 
 import lombok.Getter;
 import lombok.Setter;
+import uk.co.jemos.podam.common.PodamExclude;
 
 @Getter
 @Setter
@@ -21,13 +22,15 @@ public class ServicioEntity extends BeneficioEntity {
     private Integer horaInicio;
     private Integer horaFin;
 
+    @PodamExclude
     @ManyToMany
     private List<PackDeServiciosEntity> packsDeServicios;
 
+    @PodamExclude
     @ManyToOne
     private SedeEntity sede;
 
-
+    @PodamExclude
     @ManyToMany(mappedBy = "servicios", cascade = CascadeType.PERSIST)
     private List<TrabajadorEntity> trabajadores;
 

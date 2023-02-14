@@ -3,6 +3,7 @@ package co.edu.uniandes.dse.thespa.entities;
 import javax.persistence.Entity;
 import lombok.Getter;
 import lombok.Setter;
+import uk.co.jemos.podam.common.PodamExclude;
 
 import javax.persistence.ManyToOne;
 
@@ -18,6 +19,7 @@ import javax.persistence.ManyToOne;
 public class ServicioExtraEntity extends BeneficioEntity {
     private Boolean disponible;
 
+    @PodamExclude
     @ManyToOne
     private SedeEntity sede;
 
