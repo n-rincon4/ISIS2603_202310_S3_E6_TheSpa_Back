@@ -16,6 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 public class PackDeServiciosService {
 
+    // Inyeccion de dependencias -> Repositorio PackDeServicios
     @Autowired
     private PackDeServiciosRepository packDeServiciosRepository;
 
