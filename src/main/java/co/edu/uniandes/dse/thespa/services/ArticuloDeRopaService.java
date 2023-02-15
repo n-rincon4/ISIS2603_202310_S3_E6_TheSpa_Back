@@ -16,6 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 public class ArticuloDeRopaService {
 
+    // Inyeccion de dependencias -> Repositorio ArticuloDeRopa
     @Autowired
     private ArticuloDeRopaRepository articuloDeRopaRepository;
 
