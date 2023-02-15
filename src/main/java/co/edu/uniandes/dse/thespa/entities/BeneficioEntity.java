@@ -20,8 +20,8 @@ import lombok.Setter;
 public abstract class BeneficioEntity extends BaseEntity {
 
     protected String nombre;
-    protected String description;
-    protected Integer precio;
+    protected String descripcion;
+    protected Double precio;
     protected File imagen;
 
 }
