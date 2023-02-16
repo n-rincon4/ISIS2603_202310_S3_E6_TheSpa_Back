@@ -12,7 +12,7 @@ import uk.co.jemos.podam.common.PodamExclude;
 @Entity
 public class ArticuloDeRopaEntity extends BeneficioEntity {
 
-    private Integer talla;
+    private String talla;
     private String color;
     private Integer numDisponible;
 
