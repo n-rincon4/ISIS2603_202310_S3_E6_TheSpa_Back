@@ -33,5 +33,4 @@ public class ServicioEntity extends BeneficioEntity {
     @PodamExclude
     @ManyToMany(mappedBy = "servicios", cascade = CascadeType.PERSIST)
     private List<TrabajadorEntity> trabajadores;
-
 }
