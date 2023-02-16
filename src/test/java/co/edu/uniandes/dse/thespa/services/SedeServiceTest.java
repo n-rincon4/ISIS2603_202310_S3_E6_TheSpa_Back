@@ -55,8 +55,7 @@ public class SedeServiceTest {
     // Limpia las tablas que están implicadas en la prueba
     private void clearData() {
         entityManager.getEntityManager().createQuery("delete from SedeEntity");
-        entityManager.getEntityManager().createQuery("delete from EditorialEntity");
-        entityManager.getEntityManager().createQuery("delete from AuthorEntity");
+
     }
 
     // Inserta los datos de prueba en la lista de Sedes
@@ -103,17 +102,7 @@ public class SedeServiceTest {
         });
     }
 
-    //Prueba 4: Crear una sede con un nombre correcto (Nombre Unico)
-    @Test
-    void testCreateSedeWithValidName() {
-        assertThrows(IllegalOperationException.class, () -> {
-                SedeEntity newEntity = factory.manufacturePojo(SedeEntity.class);
-                newEntity.setNombre("Sede Prueba 123123");
-                SedeService.createSede(newEntity);
-        });
-    }
-
-    //Prueba 5: getSedes 
+    //Prueba 4: getSedes 
     @Test
     void testGetSedes() {
         List<SedeEntity> list = SedeService.getSedes();
@@ -129,7 +118,7 @@ public class SedeServiceTest {
         }
     }
 
-    //Prueba 6: getSede
+    //Prueba 5: getSede
     @Test
     void testGetSede() throws EntityNotFoundException {
         SedeEntity entity = sedes.get(0);
@@ -140,7 +129,7 @@ public class SedeServiceTest {
         assertEquals(entity.getImagen(), resultEntity.getImagen());
     }
 
-    //Prueba 7: getSede (sede no existente)
+    //Prueba 6: getSede (sede no existente)
     @Test
     void testGetInvalidSede() {
         assertThrows(EntityNotFoundException.class,()->{
@@ -148,7 +137,7 @@ public class SedeServiceTest {
         });
     }
 
-    //Prueba 8: Update Sede ()
+    //Prueba 7: Update Sede ()
     @Test
     void testUpdateSede() throws EntityNotFoundException, IllegalOperationException {
         SedeEntity entity = sedes.get(0);
@@ -162,7 +151,7 @@ public class SedeServiceTest {
         assertEquals(pojoEntity.getImagen(), resp.getImagen());
     }
 
-    //Prueba 9: Update Sede (No existe Sede)
+    //Prueba 8: Update Sede (No existe Sede)
     @Test
     void testUpdateSedeInvalid() {
         assertThrows(EntityNotFoundException.class, () -> {
@@ -172,7 +161,7 @@ public class SedeServiceTest {
         });
     }
 
-    //Prueba 10: deleteSede
+    //Prueba 9: deleteSede
     @Test
     void testDeleteSede() throws EntityNotFoundException, IllegalOperationException {
         SedeEntity entity = sedes.get(1);
@@ -181,7 +170,7 @@ public class SedeServiceTest {
         assertNull(deleted);
     }
 
-    //Prueba 11: deleteSede (No existe la sede)
+    //Prueba 10: deleteSede (No existe la sede)
     @Test
     void testDeleteInvalidSede() {
         assertThrows(EntityNotFoundException.class, ()->{

@@ -43,6 +43,10 @@ public class SedeService {
             }
 
         }
+        //Assert 4: el nombre no debe ser un string vacio
+        if (nombreSede==""){
+            throw new IllegalOperationException("La sede tiene que tener un nombre no vacio.");
+        }
 
         log.info("Finaliza proceso de creacion de Sede.");
         return sedeRepo.save(sede);
