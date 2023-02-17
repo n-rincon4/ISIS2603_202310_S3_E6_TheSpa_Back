@@ -3,20 +3,24 @@ package co.edu.uniandes.dse.thespa.services;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.context.annotation.Import;
+
 import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.transaction.Transactional;
 
 import co.edu.uniandes.dse.thespa.entities.ArticuloDeRopaEntity;
 import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
 import co.edu.uniandes.dse.thespa.exceptions.EntityNotFoundException;
 
-// @ExtendWith(SpringExtension.class)
-// @DataJpaTest
-// @Transactional
-// @Import(ArticuloDeRopaService.class)
+@DataJpaTest
+@Transactional
+@Import(ArticuloDeRopaService.class)
 public class ArticuloDeRopaServiceTest {
 
     // Servicio que se va a probar
@@ -42,9 +46,7 @@ public class ArticuloDeRopaServiceTest {
 
     // Limpia la base de datos de los datos de prueba
     private void clearData() {
-        entityManager.getEntityManager().createQuery("delete from BookEntity");
-        entityManager.getEntityManager().createQuery("delete from EditorialEntity");
-        entityManager.getEntityManager().createQuery("delete from AuthorEntity");
+        entityManager.getEntityManager().createQuery("delete from ArticuloDeRopaEntity");
     }
 
     // Inserta los datos de prueba en la lista de articulos de ropa

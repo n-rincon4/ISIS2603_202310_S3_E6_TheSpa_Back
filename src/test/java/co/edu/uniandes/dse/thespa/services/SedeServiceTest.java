@@ -1,4 +1,5 @@
 package co.edu.uniandes.dse.thespa.services;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -8,19 +9,19 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import javax.transaction.Transactional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.context.annotation.Import;
+
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import co.edu.uniandes.dse.thespa.entities.HallOfFameEntity;
 import co.edu.uniandes.dse.thespa.entities.PackDeServiciosEntity;
+
 import co.edu.uniandes.dse.thespa.entities.SedeEntity;
 import co.edu.uniandes.dse.thespa.entities.ServicioEntity;
 import co.edu.uniandes.dse.thespa.entities.TrabajadorEntity;
@@ -30,18 +31,16 @@ import co.edu.uniandes.dse.thespa.exceptions.IllegalOperationException;
 import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
 
-
-@ExtendWith(SpringExtension.class)
 @DataJpaTest
 @Transactional
 @Import(SedeService.class)
 public class SedeServiceTest {
-    
+
     // Servicio que se va a probar
     @Autowired
     private SedeService SedeService;
 
-    //TestEntityManager
+    // TestEntityManager
     @Autowired
     private TestEntityManager entityManager;
 
@@ -73,8 +72,7 @@ public class SedeServiceTest {
         }
     }
 
-
-    //Prueba 1: Crear una sede
+    // Prueba 1: Crear una sede
     @Test
     void testCreateSede() throws EntityNotFoundException, IllegalOperationException {
         SedeEntity newEntity = factory.manufacturePojo(SedeEntity.class);
@@ -106,43 +104,43 @@ public class SedeServiceTest {
 
     }
 
-    //Prueba 2: Crear una sede con un nombre incorrecto (Vacio)
+    // Prueba 2: Crear una sede con un nombre incorrecto (Vacio)
     @Test
     void testCreateSedeWithNoValidName() {
         assertThrows(IllegalOperationException.class, () -> {
-                SedeEntity newEntity = factory.manufacturePojo(SedeEntity.class);
-                newEntity.setNombre("");
-                SedeService.createSede(newEntity);
+            SedeEntity newEntity = factory.manufacturePojo(SedeEntity.class);
+            newEntity.setNombre("");
+            SedeService.createSede(newEntity);
         });
     }
 
-    //Prueba 3: Crear una sede con un nombre incorrecto (Nulo)
+    // Prueba 3: Crear una sede con un nombre incorrecto (Nulo)
     @Test
     void testCreateSedeWithNoValidName2() {
         assertThrows(IllegalOperationException.class, () -> {
-                SedeEntity newEntity = factory.manufacturePojo(SedeEntity.class);
-                newEntity.setNombre(null);
-                SedeService.createSede(newEntity);
+            SedeEntity newEntity = factory.manufacturePojo(SedeEntity.class);
+            newEntity.setNombre(null);
+            SedeService.createSede(newEntity);
         });
     }
 
-    //Prueba 4: getSedes 
+    // Prueba 4: getSedes
     @Test
     void testGetSedes() {
         List<SedeEntity> list = SedeService.getSedes();
         assertEquals(sedes.size(), list.size());
         for (SedeEntity entity : list) {
-                boolean found = false;
-                for (SedeEntity storedEntity : sedes) {
-                        if (entity.getId().equals(storedEntity.getId())) {
-                                found = true;
-                        }
+            boolean found = false;
+            for (SedeEntity storedEntity : sedes) {
+                if (entity.getId().equals(storedEntity.getId())) {
+                    found = true;
                 }
-                assertTrue(found);
+            }
+            assertTrue(found);
         }
     }
 
-    //Prueba 5: getSede
+    // Prueba 5: getSede
     @Test
     void testGetSede() throws EntityNotFoundException {
         SedeEntity entity = sedes.get(0);
@@ -153,15 +151,15 @@ public class SedeServiceTest {
         assertEquals(entity.getImagen(), resultEntity.getImagen());
     }
 
-    //Prueba 6: getSede (sede no existente)
+    // Prueba 6: getSede (sede no existente)
     @Test
     void testGetInvalidSede() {
-        assertThrows(EntityNotFoundException.class,()->{
-                SedeService.getSede(0L);
+        assertThrows(EntityNotFoundException.class, () -> {
+            SedeService.getSede(0L);
         });
     }
 
-    //Prueba 7: Update Sede ()
+    // Prueba 7: Update Sede ()
     @Test
     void testUpdateSede() throws EntityNotFoundException, IllegalOperationException {
         SedeEntity entity = sedes.get(0);
@@ -175,17 +173,17 @@ public class SedeServiceTest {
         assertEquals(pojoEntity.getImagen(), resp.getImagen());
     }
 
-    //Prueba 8: Update Sede (No existe Sede)
+    // Prueba 8: Update Sede (No existe Sede)
     @Test
     void testUpdateSedeInvalid() {
         assertThrows(EntityNotFoundException.class, () -> {
-                SedeEntity pojoEntity = factory.manufacturePojo(SedeEntity.class);
-                pojoEntity.setId(0L);
-                SedeService.updateSede(0L, pojoEntity);
+            SedeEntity pojoEntity = factory.manufacturePojo(SedeEntity.class);
+            pojoEntity.setId(0L);
+            SedeService.updateSede(0L, pojoEntity);
         });
     }
 
-    //Prueba 9: deleteSede
+    // Prueba 9: deleteSede
     @Test
     void testDeleteSede() throws EntityNotFoundException, IllegalOperationException {
         SedeEntity entity = sedes.get(1);
@@ -194,11 +192,11 @@ public class SedeServiceTest {
         assertNull(deleted);
     }
 
-    //Prueba 10: deleteSede (No existe la sede)
+    // Prueba 10: deleteSede (No existe la sede)
     @Test
     void testDeleteInvalidSede() {
-        assertThrows(EntityNotFoundException.class, ()->{
-                SedeService.deleteSede(0L);
+        assertThrows(EntityNotFoundException.class, () -> {
+            SedeService.deleteSede(0L);
         });
-}
+    }
 }
