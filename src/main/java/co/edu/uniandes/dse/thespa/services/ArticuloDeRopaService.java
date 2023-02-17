@@ -34,6 +34,10 @@ public class ArticuloDeRopaService {
         if (articuloDeRopa.getPrecio() == null) {
             throw new IllegalOperationException("El precio del articulo no puede ser null");
         }
+        // revisa que la sede del articulo no sea null
+        if (articuloDeRopa.getSede() == null) {
+            throw new IllegalOperationException("La sede del articulo no puede ser null");
+        }
         return articuloDeRopaRepository.save(articuloDeRopa);
     }
 
