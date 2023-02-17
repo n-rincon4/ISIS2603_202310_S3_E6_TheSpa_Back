@@ -35,15 +35,15 @@ public class SedeService {
         // Assert 3: la sede no debe de existir en la base de datos
         List<SedeEntity> allSedes = getSedes();
         for (SedeEntity sed : allSedes) {
-            if (sed.getNombre() == sede.getNombre()) {
+            if (sed.getNombre().equals(sede.getNombre())) {
                 throw new IllegalOperationException("El nombre de la sede debe ser unico.");
-            } else if (sed.getId() == sede.getId()) {
+            } else if (sed.getId().equals(sede.getId())) {
                 throw new IllegalOperationException("La sede ya existe en la base de datos.");
             }
 
         }
         // Assert 4: el nombre no debe ser un string vacio
-        if (nombreSede == "") {
+        if (nombreSede.equals("")) {
             throw new IllegalOperationException("La sede tiene que tener un nombre no vacio.");
         }
 
