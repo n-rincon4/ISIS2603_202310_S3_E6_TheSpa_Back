@@ -17,6 +17,7 @@ import co.edu.uniandes.dse.thespa.entities.ArticuloDeRopaEntity;
 import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
 import co.edu.uniandes.dse.thespa.exceptions.EntityNotFoundException;
+import co.edu.uniandes.dse.thespa.exceptions.IllegalOperationException;
 
 @DataJpaTest
 @Transactional
@@ -61,7 +62,7 @@ public class ArticuloDeRopaServiceTest {
 
     // Crea un articulo de ropa
     @Test
-    void testCreateArticuloDeRopa() {
+    void testCreateArticuloDeRopa() throws IllegalOperationException {
         ArticuloDeRopaEntity newEntity = factory.manufacturePojo(ArticuloDeRopaEntity.class);
         // newEntity.setSede(null);
         ArticuloDeRopaEntity result = articuloDeRopaService.createArticuloDeRopa(newEntity);
@@ -76,6 +77,26 @@ public class ArticuloDeRopaServiceTest {
         assertEquals(newEntity.getImagen(), entity.getImagen());
         // assertEquals(newEntity.getSede(), entity.getSede());
 
+    }
+
+    // hace un test que espera un error al crear un articulo de ropa sin nombre
+    @Test
+    void testCreateArticuloDeRopaSinNombre() {
+        ArticuloDeRopaEntity newEntity = factory.manufacturePojo(ArticuloDeRopaEntity.class);
+        newEntity.setNombre(null);
+        assertThrows(IllegalOperationException.class, () -> {
+            articuloDeRopaService.createArticuloDeRopa(newEntity);
+        });
+    }
+
+    // hace un test que espera un error al crear un articulo de ropa sin precio
+    @Test
+    void testCreateArticuloDeRopaSinPrecio() {
+        ArticuloDeRopaEntity newEntity = factory.manufacturePojo(ArticuloDeRopaEntity.class);
+        newEntity.setPrecio(null);
+        assertThrows(IllegalOperationException.class, () -> {
+            articuloDeRopaService.createArticuloDeRopa(newEntity);
+        });
     }
 
     // Obtiene todos los articulos de ropa
