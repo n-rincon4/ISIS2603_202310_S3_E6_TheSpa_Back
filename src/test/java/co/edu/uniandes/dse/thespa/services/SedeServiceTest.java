@@ -18,7 +18,13 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+import co.edu.uniandes.dse.thespa.entities.HallOfFameEntity;
+import co.edu.uniandes.dse.thespa.entities.PackDeServiciosEntity;
 import co.edu.uniandes.dse.thespa.entities.SedeEntity;
+import co.edu.uniandes.dse.thespa.entities.ServicioEntity;
+import co.edu.uniandes.dse.thespa.entities.TrabajadorEntity;
+import co.edu.uniandes.dse.thespa.entities.UbicacionEntity;
 import co.edu.uniandes.dse.thespa.exceptions.EntityNotFoundException;
 import co.edu.uniandes.dse.thespa.exceptions.IllegalOperationException;
 import uk.co.jemos.podam.api.PodamFactory;
@@ -72,7 +78,25 @@ public class SedeServiceTest {
     @Test
     void testCreateSede() throws EntityNotFoundException, IllegalOperationException {
         SedeEntity newEntity = factory.manufacturePojo(SedeEntity.class);
+
         newEntity.setNombre("Sede Ficticia 1");
+
+        newEntity.setHof(new HallOfFameEntity());
+
+        List<PackDeServiciosEntity> packServiciosFicticios = new ArrayList<>();
+        packServiciosFicticios.add(new PackDeServiciosEntity());
+        newEntity.setPacksDeServicios(packServiciosFicticios);
+
+        List<ServicioEntity> serviciosFicticios = new ArrayList<>();
+        serviciosFicticios.add(new ServicioEntity());
+        newEntity.setServicios(serviciosFicticios);
+
+        List<TrabajadorEntity> trabajadoresFicticios = new ArrayList<>();
+        trabajadoresFicticios.add(new TrabajadorEntity());
+        newEntity.setTrabajadores(trabajadoresFicticios);
+
+        newEntity.setUbicacion(new UbicacionEntity());
+
         SedeEntity result = SedeService.createSede(newEntity);
         assertNotNull(result);
         SedeEntity entity = entityManager.find(SedeEntity.class, result.getId());
