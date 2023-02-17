@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import co.edu.uniandes.dse.thespa.entities.ServicioEntity;
 import co.edu.uniandes.dse.thespa.exceptions.EntityNotFoundException;
+import co.edu.uniandes.dse.thespa.exceptions.IllegalOperationException;
 import co.edu.uniandes.dse.thespa.repositories.PackDeServiciosRepository;
 import co.edu.uniandes.dse.thespa.repositories.SedeRepository;
 import co.edu.uniandes.dse.thespa.repositories.ServicioRepository;
@@ -35,48 +36,43 @@ public class ServicioService {
     @Autowired
     TrabajadorRepository trabajadorRepository;
 
-
-
     @Transactional
-    public ServicioEntity createServicio(ServicioEntity servicioEntity) throws EntityNotFoundException {
+    public ServicioEntity createServicio(ServicioEntity servicioEntity)
+            throws EntityNotFoundException, IllegalOperationException {
         log.info("Inicia proceso de creación del servicio");
 
-        if (servicioEntity.getDuracion() == null) {
-            throw new EntityNotFoundException("Duración is not valid");
+        if (servicioEntity.getNombre() == null || servicioEntity.getNombre().equals("")) {
+            throw new IllegalOperationException("El nombre del servicio no es válido");
         }
 
-        if (servicioEntity.getRestricciones() == null) {
-            throw new EntityNotFoundException("Restricciones is not valid");
+        if (servicioEntity.getDescripcion() == null || servicioEntity.getDescripcion().equals("")) {
+            throw new IllegalOperationException("La descripción del servicio no es válida");
+        }
+
+        if (servicioEntity.getPrecio() == null) {
+            throw new IllegalOperationException("El precio del servicio no es válido");
+        }
+
+        if (servicioEntity.getDuracion() == null) {
+            throw new IllegalOperationException("La duración del servicio no es válida");
+        }
+
+        if (servicioEntity.getRestricciones().isEmpty() || servicioEntity.getRestricciones().equals("")) {
+            throw new IllegalOperationException("Las restricciones no son válidas");
         }
 
         if (servicioEntity.getDisponible() == null) {
-            throw new EntityNotFoundException("Disponible is not valid");
+            throw new IllegalOperationException("El servicio no tiene un estado de disponibilidad válido");
         }
 
         if (servicioEntity.getHoraInicio() == null) {
-            throw new EntityNotFoundException("HoraInicio is not valid");
+            throw new IllegalOperationException("La hora de inicio del servicio no es válida");
         }
 
         if (servicioEntity.getHoraFin() == null) {
-            throw new EntityNotFoundException("HoraFin is not valid");
+            throw new IllegalOperationException("La hora de fin del servicio no es válida");
         }
 
-        if (servicioEntity.getNombre() == null) {
-            throw new EntityNotFoundException("Nombre is not valid");
-        }
-
-        if (servicioEntity.getPacksDeServicios() == null){
-            throw new EntityNotFoundException("PacksDeServicios is not valid");
-        }
-
-        if (servicioEntity.getSede() == null){
-            throw new EntityNotFoundException("Sede is not valid");
-        }
-
-        if (servicioEntity.getTrabajadores() == null){
-            throw new EntityNotFoundException("Trabajadores is not valid");
-        }
-        
         log.info("Termina proceso de creación del Servicio");
 
         return servicioRepository.save(servicioEntity);
