@@ -158,18 +158,18 @@ public class ServicioServiceTest {
     }
 
     @Test
-    void testUpdateBook() throws EntityNotFoundException, IllegalOperationException{
+    void testUpdateServicio() throws EntityNotFoundException, IllegalOperationException{
         ServicioEntity entity = servicioList.get(0);
         ServicioEntity pojoEntity = factory.manufacturePojo(ServicioEntity.class);
         pojoEntity.setId(entity.getId());
-        servicioService.updateServicio(entity.getId(), entity);
+        servicioService.updateServicio(entity.getId(), pojoEntity);
 
         ServicioEntity resp = entityManager.find(ServicioEntity.class, entity.getId());
         assertEquals(pojoEntity.getId(), resp.getId());
-        assertEquals(pojoEntity.getNombre(), resp.getNombre());
         assertEquals(pojoEntity.getDescripcion(), resp.getDescripcion());
         assertEquals(pojoEntity.getPrecio(), resp.getPrecio());
         assertEquals(pojoEntity.getSede(), resp.getSede());
+        assertEquals(pojoEntity.getNombre(), resp.getNombre());
         assertEquals(pojoEntity.getPacksDeServicios(), resp.getPacksDeServicios());
         assertEquals(pojoEntity.getTrabajadores(), resp.getTrabajadores());
         assertEquals(pojoEntity.getDuracion(), resp.getDuracion());
