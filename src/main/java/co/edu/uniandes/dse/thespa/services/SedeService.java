@@ -62,12 +62,7 @@ public class SedeService {
             throw new IllegalOperationException("La sede tiene que tener una ubicacion.");
         }
 
-        // Assert 8: debe tener un hall of fame
-        if (sede.getHof().equals(null)) {
-            throw new IllegalOperationException("La sede tiene que tener un hall of fame.");
-        }
-
-        // Assert 9: debe tener un Pack de servicios
+        // Assert 8: debe tener un Pack de servicios
         if (sede.getPacksDeServicios().isEmpty() == true) {
             throw new IllegalOperationException("La sede tiene que tener al menos unpack de servicios");
         }

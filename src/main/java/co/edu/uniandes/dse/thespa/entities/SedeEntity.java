@@ -36,10 +36,6 @@ public class SedeEntity extends BaseEntity {
 
     @PodamExclude
     @OneToOne
-    private HallOfFameEntity hof;
-
-    @PodamExclude
-    @OneToOne
     private UbicacionEntity ubicacion;
 
     @PodamExclude
