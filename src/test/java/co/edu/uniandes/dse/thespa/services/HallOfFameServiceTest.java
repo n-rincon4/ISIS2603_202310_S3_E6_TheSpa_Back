@@ -34,23 +34,19 @@ public class HallOfFameServiceTest {
     private PodamFactory factory = new PodamFactoryImpl();
 
     private List<HallOfFameEntity> hofList = new ArrayList<>();
-    
+
     @BeforeEach
-    void setUp()
-    {
+    void setUp() {
         clearData();
         insertData();
     }
 
-    private void clearData()
-    {
+    private void clearData() {
         entityManager.getEntityManager().createQuery("delete from HallOfFameEntity");
     }
 
-    private void insertData()
-    {
-        for (int i = 0; i < 3; i++)
-        {
+    private void insertData() {
+        for (int i = 0; i < 3; i++) {
             HallOfFameEntity hofEntity = factory.manufacturePojo(HallOfFameEntity.class);
             entityManager.persist(hofEntity);
             hofList.add(hofEntity);

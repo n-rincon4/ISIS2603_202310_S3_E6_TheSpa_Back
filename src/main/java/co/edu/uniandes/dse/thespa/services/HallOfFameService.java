@@ -4,12 +4,9 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.util.List;
 import java.util.Optional;
 
-import co.edu.uniandes.dse.thespa.entities.ArticuloDeRopaEntity;
 import co.edu.uniandes.dse.thespa.entities.HallOfFameEntity;
-import co.edu.uniandes.dse.thespa.repositories.ArticuloDeRopaRepository;
 import co.edu.uniandes.dse.thespa.repositories.HallOfFameRepository;
 import co.edu.uniandes.dse.thespa.exceptions.EntityNotFoundException;
 import lombok.extern.slf4j.Slf4j;
@@ -17,7 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Service
 
-public class HallOfFameService{
+public class HallOfFameService {
     @Autowired
     HallOfFameRepository hallOfFameRepository;
 
