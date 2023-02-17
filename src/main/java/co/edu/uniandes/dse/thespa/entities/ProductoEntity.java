@@ -17,7 +17,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @MappedSuperclass
-public abstract class BeneficioEntity extends BaseEntity {
+public abstract class ProductoEntity extends BaseEntity {
 
     protected String nombre;
     protected String descripcion;

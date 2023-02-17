@@ -17,8 +17,6 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.context.annotation.Import;
 
-import org.springframework.test.context.junit.jupiter.SpringExtension;
-
 import co.edu.uniandes.dse.thespa.entities.HallOfFameEntity;
 import co.edu.uniandes.dse.thespa.entities.PackDeServiciosEntity;
 

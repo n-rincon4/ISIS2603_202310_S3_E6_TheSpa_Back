@@ -47,34 +47,33 @@ public class SedeService {
             throw new IllegalOperationException("La sede tiene que tener un nombre no vacio.");
         }
 
-        //Assert 5: la lista de servicios no debe ser vacia
-        if (sede.getServicios().isEmpty() == true){
-            throw new IllegalOperationException("La sede tiene que tener al menos un servicio."); 
+        // Assert 5: la lista de servicios no debe ser vacia
+        if (sede.getServicios().isEmpty() == true) {
+            throw new IllegalOperationException("La sede tiene que tener al menos un servicio.");
         }
 
-        //Assert 6: Debe haber al menos un trabajador
-        if (sede.getTrabajadores().isEmpty() == true){
-            throw new IllegalOperationException("La sede tiene que tener al menos un trabajador."); 
+        // Assert 6: Debe haber al menos un trabajador
+        if (sede.getTrabajadores().isEmpty() == true) {
+            throw new IllegalOperationException("La sede tiene que tener al menos un trabajador.");
         }
 
-        //Assert 7: debe tener una ubicacion la sede
-        if (sede.getUbicacion().equals(null)){
-            throw new IllegalOperationException("La sede tiene que tener una ubicacion."); 
+        // Assert 7: debe tener una ubicacion la sede
+        if (sede.getUbicacion().equals(null)) {
+            throw new IllegalOperationException("La sede tiene que tener una ubicacion.");
         }
 
-        //Assert 8: debe tener un hall of fame
-        if (sede.getHof().equals(null)){
-            throw new IllegalOperationException("La sede tiene que tener un hall of fame."); 
+        // Assert 8: debe tener un hall of fame
+        if (sede.getHof().equals(null)) {
+            throw new IllegalOperationException("La sede tiene que tener un hall of fame.");
         }
 
-        //Assert 9: debe tener un Pack de servicios
-        if (sede.getPacksDeServicios().isEmpty()==true){
-            throw new IllegalOperationException("La sede tiene que tener al menos unpack de servicios"); 
+        // Assert 9: debe tener un Pack de servicios
+        if (sede.getPacksDeServicios().isEmpty() == true) {
+            throw new IllegalOperationException("La sede tiene que tener al menos unpack de servicios");
         }
 
         log.info("Finaliza proceso de creacion de Sede.");
         return sedeRepo.save(sede);
-
 
     }
 
