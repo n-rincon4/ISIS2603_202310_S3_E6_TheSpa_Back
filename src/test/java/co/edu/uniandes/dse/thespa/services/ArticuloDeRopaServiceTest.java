@@ -14,9 +14,11 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import co.edu.uniandes.dse.thespa.entities.ArticuloDeRopaEntity;
+import co.edu.uniandes.dse.thespa.entities.SedeEntity;
 import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
 import co.edu.uniandes.dse.thespa.exceptions.EntityNotFoundException;
+import co.edu.uniandes.dse.thespa.exceptions.IllegalOperationException;
 
 @DataJpaTest
 @Transactional
@@ -47,6 +49,7 @@ public class ArticuloDeRopaServiceTest {
     // Limpia la base de datos de los datos de prueba
     private void clearData() {
         entityManager.getEntityManager().createQuery("delete from ArticuloDeRopaEntity");
+        entityManager.getEntityManager().createQuery("delete from SedeEntity");
     }
 
     // Inserta los datos de prueba en la lista de articulos de ropa
@@ -57,13 +60,22 @@ public class ArticuloDeRopaServiceTest {
             entityManager.persist(entity);
             listaArticulosDeRopa.add(entity);
         }
+        // crea una sede para asociarla a los articulos de ropa
+        SedeEntity sede = factory.manufacturePojo(SedeEntity.class);
+        entityManager.persist(sede);
+        // Asocia la sede a los articulos de ropa
+        for (ArticuloDeRopaEntity articuloDeRopa : listaArticulosDeRopa) {
+            articuloDeRopa.setSede(sede);
+        }
+
     }
 
     // Crea un articulo de ropa
     @Test
-    void testCreateArticuloDeRopa() {
+    void testCreateArticuloDeRopa() throws IllegalOperationException {
         ArticuloDeRopaEntity newEntity = factory.manufacturePojo(ArticuloDeRopaEntity.class);
-        // newEntity.setSede(null);
+        // añade una sede a la entidad
+        newEntity.setSede(listaArticulosDeRopa.get(0).getSede());
         ArticuloDeRopaEntity result = articuloDeRopaService.createArticuloDeRopa(newEntity);
         assertNotNull(result);
         ArticuloDeRopaEntity entity = entityManager.find(ArticuloDeRopaEntity.class, result.getId());
@@ -74,8 +86,38 @@ public class ArticuloDeRopaServiceTest {
         assertEquals(newEntity.getDescripcion(), entity.getDescripcion());
         assertEquals(newEntity.getPrecio(), entity.getPrecio());
         assertEquals(newEntity.getImagen(), entity.getImagen());
-        // assertEquals(newEntity.getSede(), entity.getSede());
+        assertEquals(newEntity.getSede(), entity.getSede());
 
+    }
+
+    // hace un test que espera un error al crear un articulo de ropa sin nombre
+    @Test
+    void testCreateArticuloDeRopaSinNombre() {
+        ArticuloDeRopaEntity newEntity = factory.manufacturePojo(ArticuloDeRopaEntity.class);
+        newEntity.setNombre(null);
+        assertThrows(IllegalOperationException.class, () -> {
+            articuloDeRopaService.createArticuloDeRopa(newEntity);
+        });
+    }
+
+    // hace un test que espera un error al crear un articulo de ropa sin precio
+    @Test
+    void testCreateArticuloDeRopaSinPrecio() {
+        ArticuloDeRopaEntity newEntity = factory.manufacturePojo(ArticuloDeRopaEntity.class);
+        newEntity.setPrecio(null);
+        assertThrows(IllegalOperationException.class, () -> {
+            articuloDeRopaService.createArticuloDeRopa(newEntity);
+        });
+    }
+
+    // hace un test que espera un error al crear un articulo de ropa sin sede
+    @Test
+    void testCreateArticuloDeRopaSinSede() {
+        ArticuloDeRopaEntity newEntity = factory.manufacturePojo(ArticuloDeRopaEntity.class);
+        newEntity.setSede(null);
+        assertThrows(IllegalOperationException.class, () -> {
+            articuloDeRopaService.createArticuloDeRopa(newEntity);
+        });
     }
 
     // Obtiene todos los articulos de ropa

@@ -10,6 +10,7 @@ import java.util.Optional;
 import co.edu.uniandes.dse.thespa.entities.ArticuloDeRopaEntity;
 import co.edu.uniandes.dse.thespa.repositories.ArticuloDeRopaRepository;
 import co.edu.uniandes.dse.thespa.exceptions.EntityNotFoundException;
+import co.edu.uniandes.dse.thespa.exceptions.IllegalOperationException;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -22,8 +23,21 @@ public class ArticuloDeRopaService {
 
     // creación de articulos de ropa
     @Transactional
-    public ArticuloDeRopaEntity createArticuloDeRopa(ArticuloDeRopaEntity articuloDeRopa) {
+    public ArticuloDeRopaEntity createArticuloDeRopa(ArticuloDeRopaEntity articuloDeRopa)
+            throws IllegalOperationException {
         log.info("Creando un articulo de ropa nuevo");
+        // revisa que el nombre del articulo no sea null
+        if (articuloDeRopa.getNombre() == null) {
+            throw new IllegalOperationException("El nombre del articulo no puede ser null");
+        }
+        // revisa que el precio del articulo no sea null
+        if (articuloDeRopa.getPrecio() == null) {
+            throw new IllegalOperationException("El precio del articulo no puede ser null");
+        }
+        // revisa que la sede del articulo no sea null
+        if (articuloDeRopa.getSede() == null) {
+            throw new IllegalOperationException("La sede del articulo no puede ser null");
+        }
         return articuloDeRopaRepository.save(articuloDeRopa);
     }
 
