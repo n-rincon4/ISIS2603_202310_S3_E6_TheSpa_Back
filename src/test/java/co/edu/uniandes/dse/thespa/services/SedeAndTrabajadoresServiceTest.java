@@ -1,4 +1,5 @@
 package co.edu.uniandes.dse.thespa.services;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -23,8 +24,8 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
 
 @DataJpaTest
 @Transactional
-@Import({SedeService.class, TrabajadorService.class})
-public class SedeTrabajadoresTest {
+@Import({ SedeService.class, TrabajadorService.class })
+public class SedeAndTrabajadoresServiceTest {
 
     // Servicio que se va a probar
     @Autowired
@@ -42,7 +43,6 @@ public class SedeTrabajadoresTest {
 
     // Lista de trabajadores
     private List<TrabajadorEntity> trabajadores = new ArrayList<>();
-
 
     // Configuracion inicial de la prueba
     @BeforeEach
@@ -84,8 +84,8 @@ public class SedeTrabajadoresTest {
     void testAddTrabajadorToSede() throws EntityNotFoundException, IllegalOperationException {
         SedeEntity sede = sedes.get(0);
         TrabajadorEntity trabaj = trabajadores.get(0);
-        
-        TrabajadorEntity answer = SedeService.addSedeTrabajador(sede.getId(),trabaj.getId());
+
+        TrabajadorEntity answer = SedeService.addSedeTrabajador(sede.getId(), trabaj.getId());
         assertNotNull(answer);
         assertEquals(trabaj.getId(), answer.getId());
 
@@ -96,8 +96,8 @@ public class SedeTrabajadoresTest {
     void testdeleteTrabajadorToSede() throws EntityNotFoundException, IllegalOperationException {
         SedeEntity sede = sedes.get(0);
         TrabajadorEntity trabaj = sede.getTrabajadores().get(0);
-        
-        TrabajadorEntity answer = SedeService.deleteSedeTrabajador(sede.getId(),trabaj.getId());
+
+        TrabajadorEntity answer = SedeService.deleteSedeTrabajador(sede.getId(), trabaj.getId());
         assertNotNull(answer);
         assertEquals(trabaj.getId(), answer.getId());
 

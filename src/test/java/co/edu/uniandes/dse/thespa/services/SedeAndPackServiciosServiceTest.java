@@ -1,4 +1,5 @@
 package co.edu.uniandes.dse.thespa.services;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import java.util.ArrayList;
@@ -10,8 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.context.annotation.Import;
+import co.edu.uniandes.dse.thespa.entities.PackDeServiciosEntity;
 import co.edu.uniandes.dse.thespa.entities.SedeEntity;
-import co.edu.uniandes.dse.thespa.entities.ServicioEntity;
 import co.edu.uniandes.dse.thespa.exceptions.EntityNotFoundException;
 import co.edu.uniandes.dse.thespa.exceptions.IllegalOperationException;
 import uk.co.jemos.podam.api.PodamFactory;
@@ -20,8 +21,8 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
 
 @DataJpaTest
 @Transactional
-@Import({SedeService.class, ServicioService.class})
-public class SedeServicesTest {
+@Import({ SedeService.class, PackDeServiciosService.class })
+public class SedeAndPackServiciosServiceTest {
 
     // Servicio que se va a probar
     @Autowired
@@ -37,8 +38,8 @@ public class SedeServicesTest {
     // Lista de sedes
     private List<SedeEntity> sedes = new ArrayList<>();
 
-    //Lista de servicios
-    private List<ServicioEntity> servicios = new ArrayList<>();
+    // Lista de pack de servicios
+    private List<PackDeServiciosEntity> packs = new ArrayList<>();
 
     // Configuracion inicial de la prueba
     @BeforeEach
@@ -50,7 +51,7 @@ public class SedeServicesTest {
     // Limpia las tablas que están implicadas en la prueba
     private void clearData() {
         entityManager.getEntityManager().createQuery("delete from SedeEntity");
-        entityManager.getEntityManager().createQuery("delete from ServicioEntity");
+        entityManager.getEntityManager().createQuery("delete from PackDeServiciosEntity");
 
     }
 
@@ -58,48 +59,45 @@ public class SedeServicesTest {
     private void insertData() {
         for (int i = 0; i < 3; i++) {
             SedeEntity entity = factory.manufacturePojo(SedeEntity.class);
-            List<ServicioEntity> serviciosFicticios = new ArrayList<>();
-            
+            PackDeServiciosEntity pEntity = factory.manufacturePojo(PackDeServiciosEntity.class);
+            entityManager.persist(pEntity);
 
-            for (int n=0; n < 3; n++){
-                ServicioEntity serEntity = factory.manufacturePojo(ServicioEntity.class);
-                entityManager.persist(serEntity); 
-                serviciosFicticios.add(serEntity);
-            }
-
-            entity.setServicios(serviciosFicticios);
-
+            List<PackDeServiciosEntity> p = new ArrayList<>();
+            p.add(pEntity);
+            entity.setPacksDeServicios(p);
             entityManager.persist(entity);
             sedes.add(entity);
 
         }
         for (int i = 0; i < 3; i++) {
-            ServicioEntity entity = factory.manufacturePojo(ServicioEntity.class);
+            PackDeServiciosEntity entity = factory.manufacturePojo(PackDeServiciosEntity.class);
             entityManager.persist(entity);
-            servicios.add(entity);
+            packs.add(entity);
         }
     }
 
-    // Prueba 1: Agregar un servicio a una sede
+    // Prueba 1: Agregar un Pack de servicios a una sede
     @Test
-    void testAddServiceToSede() throws EntityNotFoundException, IllegalOperationException {
+    void testAddPackDeServiciosToSede() throws EntityNotFoundException, IllegalOperationException {
         SedeEntity sede = sedes.get(0);
-        ServicioEntity service = servicios.get(0);
-        
-        ServicioEntity answer = SedeService.addSedeServicio(sede.getId(),service.getId());
+        PackDeServiciosEntity PackDeServicios = packs.get(0);
+
+        PackDeServiciosEntity answer = SedeService.addSedePackDeServicios(sede.getId(), PackDeServicios.getId());
         assertNotNull(answer);
-        assertEquals(service.getId(), answer.getId());
+        assertEquals(PackDeServicios.getId(), answer.getId());
 
     }
 
-    // Prueba 2: Eliminar un servicio a una sede
+    // Prueba 2: Eliminar un Pack de servicios de una sede
     @Test
-    void testDeleteServiceToSede() throws EntityNotFoundException, IllegalOperationException {
+    void testdeletePackDeServiciosToSede() throws EntityNotFoundException, IllegalOperationException {
         SedeEntity sede = sedes.get(0);
-        ServicioEntity serv = sede.getServicios().get(0);
+        PackDeServiciosEntity PackDeServicios = sede.getPacksDeServicios().get(0);
 
-        ServicioEntity answer = SedeService.deleteSedeServicio(sede.getId(), serv.getId());
+        PackDeServiciosEntity answer = SedeService.deleteSedePackDeServicios(sede.getId(), PackDeServicios.getId());
         assertNotNull(answer);
-        assertEquals(serv.getId(), answer.getId());
+        assertEquals(PackDeServicios.getId(), answer.getId());
+
     }
+
 }
