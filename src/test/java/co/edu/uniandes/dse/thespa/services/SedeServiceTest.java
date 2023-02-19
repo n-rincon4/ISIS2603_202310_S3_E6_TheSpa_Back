@@ -17,9 +17,6 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.context.annotation.Import;
 
-import org.springframework.test.context.junit.jupiter.SpringExtension;
-
-import co.edu.uniandes.dse.thespa.entities.HallOfFameEntity;
 import co.edu.uniandes.dse.thespa.entities.PackDeServiciosEntity;
 
 import co.edu.uniandes.dse.thespa.entities.SedeEntity;
@@ -78,8 +75,6 @@ public class SedeServiceTest {
         SedeEntity newEntity = factory.manufacturePojo(SedeEntity.class);
 
         newEntity.setNombre("Sede Ficticia 1");
-
-        newEntity.setHof(new HallOfFameEntity());
 
         List<PackDeServiciosEntity> packServiciosFicticios = new ArrayList<>();
         packServiciosFicticios.add(new PackDeServiciosEntity());

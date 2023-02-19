@@ -10,7 +10,7 @@ import uk.co.jemos.podam.common.PodamExclude;
 @Getter
 @Setter
 @Entity
-public class ArticuloDeRopaEntity extends BeneficioEntity {
+public class ArticuloDeRopaEntity extends ProductoEntity {
 
     private String talla;
     private String color;

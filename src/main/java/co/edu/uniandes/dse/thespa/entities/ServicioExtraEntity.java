@@ -16,7 +16,7 @@ import javax.persistence.ManyToOne;
 @Getter
 @Setter
 @Entity
-public class ServicioExtraEntity extends BeneficioEntity {
+public class ServicioExtraEntity extends ProductoEntity {
     private Boolean disponible;
 
     @PodamExclude

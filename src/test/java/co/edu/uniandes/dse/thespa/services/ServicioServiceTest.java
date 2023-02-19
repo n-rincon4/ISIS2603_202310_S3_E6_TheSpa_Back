@@ -22,7 +22,6 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-
 @DataJpaTest
 @Transactional
 @Import(ServicioService.class)
@@ -151,14 +150,14 @@ public class ServicioServiceTest {
     }
 
     @Test
-    void testGetInvalidSServicio(){
+    void testGetInvalidSServicio() {
         assertThrows(EntityNotFoundException.class, () -> {
             servicioService.getServicio(0L);
         });
     }
 
     @Test
-    void testUpdateServicio() throws EntityNotFoundException, IllegalOperationException{
+    void testUpdateServicio() throws EntityNotFoundException, IllegalOperationException {
         ServicioEntity entity = servicioList.get(0);
         ServicioEntity pojoEntity = factory.manufacturePojo(ServicioEntity.class);
         pojoEntity.setId(entity.getId());
@@ -180,7 +179,7 @@ public class ServicioServiceTest {
     }
 
     @Test
-    void testDeleteBook() throws EntityNotFoundException, IllegalOperationException{
+    void testDeleteBook() throws EntityNotFoundException, IllegalOperationException {
         ServicioEntity entity = servicioList.get(1);
         servicioService.deleteServicio(entity.getId());
         ServicioEntity deleted = entityManager.find(ServicioEntity.class, entity.getId());

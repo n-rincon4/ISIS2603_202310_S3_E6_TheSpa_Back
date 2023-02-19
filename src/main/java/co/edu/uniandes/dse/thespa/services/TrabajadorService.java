@@ -24,12 +24,13 @@ public class TrabajadorService {
 
     // Método para la Creación de un trabajador
     @Transactional
-    public TrabajadorEntity createTrabajador(TrabajadorEntity trabajadorEntity) throws EntityNotFoundException, IllegalOperationException {
+    public TrabajadorEntity createTrabajador(TrabajadorEntity trabajadorEntity)
+            throws EntityNotFoundException, IllegalOperationException {
         log.info("Inicia el proceso de creación del trabajador");
 
         if (trabajadorEntity.getNombre() == null)
             throw new IllegalOperationException("El nombre del trabajador no puede estar vacío");
-        
+
         log.info("Termina proceso de creación del trabajador");
         return trabajadorRepository.save(trabajadorEntity);
     }
@@ -54,15 +55,15 @@ public class TrabajadorService {
 
     // Método para actualizar un trabajador
     @Transactional
-    public TrabajadorEntity updateTrabajador(Long trabajadorId, TrabajadorEntity trabajador) 
-        throws EntityNotFoundException, IllegalOperationException {
+    public TrabajadorEntity updateTrabajador(Long trabajadorId, TrabajadorEntity trabajador)
+            throws EntityNotFoundException, IllegalOperationException {
         log.info("Inicia proceso de actualizar el trabajador con id = {0}", trabajadorId);
         Optional<TrabajadorEntity> trabajadorEntity = trabajadorRepository.findById(trabajadorId);
         if (trabajadorEntity.isEmpty())
-                throw new EntityNotFoundException("El trabajador con el id = " + trabajadorId + " no existe");
+            throw new EntityNotFoundException("El trabajador con el id = " + trabajadorId + " no existe");
 
         if (trabajador.getNombre() == null)
-                throw new IllegalOperationException("El nombre del trabajador no puede estar vacío");
+            throw new IllegalOperationException("El nombre del trabajador no puede estar vacío");
 
         trabajador.setId(trabajadorId);
         log.info("Termina proceso de actualizar el trabajador con id = {0}", trabajadorId);
@@ -75,7 +76,7 @@ public class TrabajadorService {
         log.info("Inicia proceso de borrar el trabajador con id = {0}", trabajadorId);
         Optional<TrabajadorEntity> trabajadorEntity = trabajadorRepository.findById(trabajadorId);
         if (trabajadorEntity.isEmpty())
-                throw new EntityNotFoundException("No se encontró el trabajador con id = " + trabajadorId + " no existe");
+            throw new EntityNotFoundException("No se encontró el trabajador con id = " + trabajadorId + " no existe");
 
         trabajadorRepository.deleteById(trabajadorId);
         log.info("Termina proceso de borrar el trabajador con id = {0}", trabajadorId);

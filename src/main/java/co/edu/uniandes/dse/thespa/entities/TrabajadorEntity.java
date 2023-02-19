@@ -5,7 +5,6 @@ import javax.persistence.ManyToMany;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import lombok.Getter;
 import lombok.Setter;
@@ -24,6 +23,7 @@ public class TrabajadorEntity extends BaseEntity {
     private String nombre;
     private File foto;
     private Integer calificacion;
+    private Boolean enHallOfFame;
 
     @PodamExclude
     @ManyToMany
@@ -32,9 +32,5 @@ public class TrabajadorEntity extends BaseEntity {
     @PodamExclude
     @ManyToMany
     private List<ServicioEntity> servicios;
-
-    @PodamExclude
-    @ManyToMany(mappedBy = "trabajadores", cascade = CascadeType.PERSIST)
-    private List<HallOfFameEntity> hallOfFame;
 
 }

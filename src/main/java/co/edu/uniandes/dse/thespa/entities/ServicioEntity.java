@@ -15,7 +15,7 @@ import uk.co.jemos.podam.common.PodamExclude;
 @Getter
 @Setter
 @Entity
-public class ServicioEntity extends BeneficioEntity {
+public class ServicioEntity extends ProductoEntity {
     private Integer duracion;
     private String restricciones;
     private Boolean disponible;

@@ -17,20 +17,20 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Service
 public class ServicioExtraService {
-    
+
     // Inyeccion de dependencias -> Repositorio ServicioExtra
     @Autowired
     private ServicioExtraRepository servicioExtraRepository;
 
     // Método para la Creación de un servicio extra
     @Transactional
-    public ServicioExtraEntity createServicioExtra(ServicioExtraEntity servicioExtraEntity) 
-        throws EntityNotFoundException, IllegalOperationException {
+    public ServicioExtraEntity createServicioExtra(ServicioExtraEntity servicioExtraEntity)
+            throws EntityNotFoundException, IllegalOperationException {
         log.info("Inicia el proceso de creación del servicio extra");
 
         if (servicioExtraEntity.getNombre() == null)
             throw new IllegalOperationException("El nombre del servicio extra no puede estar vacío");
-        
+
         log.info("Termina proceso de creación del servicio extra");
         return servicioExtraRepository.save(servicioExtraEntity);
     }
@@ -55,15 +55,15 @@ public class ServicioExtraService {
 
     // Método para actualizar un servicio extra
     @Transactional
-    public ServicioExtraEntity updateServicioExtra(Long servicioExtraId, ServicioExtraEntity servicioExtra) 
-        throws EntityNotFoundException, IllegalOperationException {
+    public ServicioExtraEntity updateServicioExtra(Long servicioExtraId, ServicioExtraEntity servicioExtra)
+            throws EntityNotFoundException, IllegalOperationException {
         log.info("Inicia proceso de actualizar el servicio extra con id = {0}", servicioExtraId);
         Optional<ServicioExtraEntity> servicioExtraEntity = servicioExtraRepository.findById(servicioExtraId);
         if (servicioExtraEntity.isEmpty())
-                throw new EntityNotFoundException("El servicio extra con el id = " + servicioExtraId + " no existe");
+            throw new EntityNotFoundException("El servicio extra con el id = " + servicioExtraId + " no existe");
 
         if (servicioExtra.getNombre() == null)
-                throw new IllegalOperationException("El nombre del servicio extra no puede estar vacío");
+            throw new IllegalOperationException("El nombre del servicio extra no puede estar vacío");
 
         servicioExtra.setId(servicioExtraId);
         log.info("Termina proceso de actualizar el servicio extra con id = {0}", servicioExtraId);
@@ -76,7 +76,8 @@ public class ServicioExtraService {
         log.info("Inicia proceso de borrar el servicio extra con id = {0}", servicioExtraId);
         Optional<ServicioExtraEntity> servicioExtraEntity = servicioExtraRepository.findById(servicioExtraId);
         if (servicioExtraEntity.isEmpty())
-                throw new EntityNotFoundException("No se encontró el servicio extra con id = " + servicioExtraId + " no existe");
+            throw new EntityNotFoundException(
+                    "No se encontró el servicio extra con id = " + servicioExtraId + " no existe");
 
         servicioExtraRepository.deleteById(servicioExtraId);
         log.info("Termina proceso de borrar el servicio extra con id = {0}", servicioExtraId);
