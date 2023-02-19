@@ -27,6 +27,7 @@ import co.edu.uniandes.dse.thespa.exceptions.EntityNotFoundException;
 import co.edu.uniandes.dse.thespa.exceptions.IllegalOperationException;
 import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
+//@Autor -> Juan Coronel
 
 @DataJpaTest
 @Transactional
@@ -91,6 +92,7 @@ public class SedeServiceTest {
         newEntity.setUbicacion(new UbicacionEntity());
 
         SedeEntity result = SedeService.createSede(newEntity);
+        sedes.add(result);
         assertNotNull(result);
         SedeEntity entity = entityManager.find(SedeEntity.class, result.getId());
         assertEquals(newEntity.getId(), entity.getId());
@@ -194,4 +196,5 @@ public class SedeServiceTest {
             SedeService.deleteSede(0L);
         });
     }
+
 }
