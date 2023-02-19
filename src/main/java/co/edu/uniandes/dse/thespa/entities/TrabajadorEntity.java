@@ -23,6 +23,7 @@ public class TrabajadorEntity extends BaseEntity {
     private String nombre;
     private File foto;
     private Integer calificacion;
+    private Boolean enHallOfFame;
 
     @PodamExclude
     @ManyToMany
