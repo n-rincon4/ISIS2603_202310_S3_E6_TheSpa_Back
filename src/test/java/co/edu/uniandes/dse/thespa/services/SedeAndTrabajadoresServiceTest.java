@@ -2,6 +2,7 @@ package co.edu.uniandes.dse.thespa.services;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -91,7 +92,20 @@ public class SedeAndTrabajadoresServiceTest {
 
     }
 
-    // Prueba 2: Eliminar un Trabajador a una sede
+    // Prueba 2: Agregar un Trabajador que ya existe en una sede, esperando una
+    // excepcion de tipo IllegalOperationException
+    @Test
+    void testAddTrabajadorToSedeAlreadyExists() throws EntityNotFoundException, IllegalOperationException {
+        SedeEntity sede = sedes.get(0);
+        TrabajadorEntity trabaj = sede.getTrabajadores().get(0);
+
+        assertThrows(IllegalOperationException.class, () -> {
+            SedeService.addSedeTrabajador(sede.getId(), trabaj.getId());
+        });
+
+    }
+
+    // Prueba 3: Eliminar un Trabajador a una sede
     @Test
     void testdeleteTrabajadorToSede() throws EntityNotFoundException, IllegalOperationException {
         SedeEntity sede = sedes.get(0);
@@ -100,6 +114,19 @@ public class SedeAndTrabajadoresServiceTest {
         TrabajadorEntity answer = SedeService.deleteSedeTrabajador(sede.getId(), trabaj.getId());
         assertNotNull(answer);
         assertEquals(trabaj.getId(), answer.getId());
+
+    }
+
+    // Prueba 4: Eliminar un Trabajador que no existe en una sede, esperando una
+    // excepcion de tipo IllegalOperationException
+    @Test
+    void testdeleteTrabajadorToSedeNotExists() throws EntityNotFoundException, IllegalOperationException {
+        SedeEntity sede = sedes.get(0);
+        TrabajadorEntity trabaj = trabajadores.get(0);
+
+        assertThrows(IllegalOperationException.class, () -> {
+            SedeService.deleteSedeTrabajador(sede.getId(), trabaj.getId());
+        });
 
     }
 

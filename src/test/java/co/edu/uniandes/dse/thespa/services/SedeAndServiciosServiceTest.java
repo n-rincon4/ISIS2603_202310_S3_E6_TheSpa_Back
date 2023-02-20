@@ -2,6 +2,7 @@ package co.edu.uniandes.dse.thespa.services;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import java.util.ArrayList;
 import java.util.List;
 import javax.transaction.Transactional;
@@ -92,14 +93,37 @@ public class SedeAndServiciosServiceTest {
 
     }
 
-    // Prueba 2: Eliminar un servicio a una sede
+    // Prueba 2: Agregar un servicio ya existente en una sede
+    @Test
+    void testAddServiceToSedeAlreadyExist() throws EntityNotFoundException, IllegalOperationException {
+        SedeEntity sede = sedes.get(0);
+        ServicioEntity service = sede.getServicios().get(0);
+
+        assertThrows(IllegalOperationException.class, () -> {
+            SedeService.addSedeServicio(sede.getId(), service.getId());
+        });
+    }
+
+    // Prueba 3: eliminar un servicio de una sede
     @Test
     void testDeleteServiceToSede() throws EntityNotFoundException, IllegalOperationException {
         SedeEntity sede = sedes.get(0);
         ServicioEntity serv = sede.getServicios().get(0);
 
         ServicioEntity answer = SedeService.deleteSedeServicio(sede.getId(), serv.getId());
+
         assertNotNull(answer);
         assertEquals(serv.getId(), answer.getId());
+    }
+
+    // Prueba 4: eliminar un servicio que no existe en una sede
+    @Test
+    void testDeleteServiceToSedeNotExist() throws EntityNotFoundException, IllegalOperationException {
+        SedeEntity sede = sedes.get(0);
+        ServicioEntity serv = servicios.get(0);
+
+        assertThrows(IllegalOperationException.class, () -> {
+            SedeService.deleteSedeServicio(sede.getId(), serv.getId());
+        });
     }
 }
