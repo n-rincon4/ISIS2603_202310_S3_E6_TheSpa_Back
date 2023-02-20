@@ -89,20 +89,8 @@ public class ServicioServiceTest {
     }
 
     @Test
-    void testCreateService() throws EntityNotFoundException, IllegalOperationException {
-        ServicioEntity newEntity = factory.manufacturePojo(ServicioEntity.class);
-        newEntity.setNombre("Servicio de prueba");
-        newEntity.setDescripcion("Descripcion de prueba");
-        newEntity.setPrecio(1000.1);
-        newEntity.setSede(sedeList.get(0));
-        newEntity.setPacksDeServicios(packList);
-        newEntity.setTrabajadores(trabajadorList);
-        newEntity.setDuracion(30);
-        newEntity.setRestricciones("Ninguna");
-        newEntity.setDisponible(true);
-        newEntity.setHoraInicio(8);
-        newEntity.setHoraFin(5);
-
+    void testCreateServicio() throws EntityNotFoundException, IllegalOperationException {
+        ServicioEntity newEntity = servicioList.get(0);
         ServicioEntity result = servicioService.createServicio(newEntity);
         assertNotNull(result);
 
@@ -113,6 +101,33 @@ public class ServicioServiceTest {
         assertEquals(newEntity.getDisponible(), entity.getDisponible());
         assertEquals(newEntity.getHoraInicio(), entity.getHoraInicio());
         assertEquals(newEntity.getHoraFin(), entity.getHoraFin());
+    }
+
+    @Test
+    void testCreateServicioSinNombre() {
+        ServicioEntity newEntity = factory.manufacturePojo(ServicioEntity.class);
+        newEntity.setNombre(null);
+        assertThrows(IllegalOperationException.class, () -> {
+            servicioService.createServicio(newEntity);
+        });
+    }
+
+    @Test
+    void testCreateServicioSinSede() {
+        ServicioEntity newEntity = factory.manufacturePojo(ServicioEntity.class);
+        newEntity.setSede(null);
+        assertThrows(IllegalOperationException.class, () -> {
+            servicioService.createServicio(newEntity);
+        });
+    }
+
+    @Test
+    void testCreateServicioSinTrabajadores() {
+        ServicioEntity newEntity = factory.manufacturePojo(ServicioEntity.class);
+        newEntity.setSede(null);
+        assertThrows(IllegalOperationException.class, () -> {
+            servicioService.createServicio(newEntity);
+        });
     }
 
     @Test
