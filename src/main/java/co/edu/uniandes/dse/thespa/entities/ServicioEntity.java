@@ -1,6 +1,7 @@
 package co.edu.uniandes.dse.thespa.entities;
 
 import java.util.List;
+import java.util.ArrayList;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
@@ -24,7 +25,7 @@ public class ServicioEntity extends ProductoEntity {
 
     @PodamExclude
     @ManyToMany
-    private List<PackDeServiciosEntity> packsDeServicios;
+    private List<PackDeServiciosEntity> packsDeServicios = new ArrayList<PackDeServiciosEntity>();
 
     @PodamExclude
     @ManyToOne
@@ -32,5 +33,5 @@ public class ServicioEntity extends ProductoEntity {
 
     @PodamExclude
     @ManyToMany(mappedBy = "servicios", cascade = CascadeType.PERSIST)
-    private List<TrabajadorEntity> trabajadores;
+    private List<TrabajadorEntity> trabajadores = new ArrayList<TrabajadorEntity>();
 }

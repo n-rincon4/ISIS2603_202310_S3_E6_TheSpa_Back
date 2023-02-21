@@ -72,37 +72,28 @@ public class ServicioServiceTest {
             PackDeServiciosEntity pack = factory.manufacturePojo(PackDeServiciosEntity.class);
             entityManager.persist(pack);
             packList.add(pack);
+            servicioList.get(i).getPacksDeServicios().add(pack);
         }
 
         for (int i = 0; i < 3; i++) {
             SedeEntity sede = factory.manufacturePojo(SedeEntity.class);
             entityManager.persist(sede);
             sedeList.add(sede);
+            servicioList.get(i).setSede(sede);
         }
 
         for (int i = 0; i < 3; i++) {
             TrabajadorEntity trabajador = factory.manufacturePojo(TrabajadorEntity.class);
             entityManager.persist(trabajador);
             trabajadorList.add(trabajador);
+            servicioList.get(i).getTrabajadores().add(trabajador);
         }
 
     }
 
     @Test
-    void testCreateService() throws EntityNotFoundException, IllegalOperationException {
-        ServicioEntity newEntity = factory.manufacturePojo(ServicioEntity.class);
-        newEntity.setNombre("Servicio de prueba");
-        newEntity.setDescripcion("Descripcion de prueba");
-        newEntity.setPrecio(1000.1);
-        newEntity.setSede(sedeList.get(0));
-        newEntity.setPacksDeServicios(packList);
-        newEntity.setTrabajadores(trabajadorList);
-        newEntity.setDuracion(30);
-        newEntity.setRestricciones("Ninguna");
-        newEntity.setDisponible(true);
-        newEntity.setHoraInicio(8);
-        newEntity.setHoraFin(5);
-
+    void testCreateServicio() throws EntityNotFoundException, IllegalOperationException {
+        ServicioEntity newEntity = servicioList.get(0);
         ServicioEntity result = servicioService.createServicio(newEntity);
         assertNotNull(result);
 
@@ -113,6 +104,98 @@ public class ServicioServiceTest {
         assertEquals(newEntity.getDisponible(), entity.getDisponible());
         assertEquals(newEntity.getHoraInicio(), entity.getHoraInicio());
         assertEquals(newEntity.getHoraFin(), entity.getHoraFin());
+        assertEquals(newEntity.getPrecio(), entity.getPrecio());
+        assertEquals(newEntity.getNombre(), entity.getNombre());
+        assertEquals(newEntity.getSede(), entity.getSede());
+        assertEquals(newEntity.getTrabajadores(), entity.getTrabajadores());
+        assertEquals(newEntity.getPacksDeServicios(), entity.getPacksDeServicios());
+
+    }
+
+    @Test
+    void testCreateServicioSinNombre() {
+        ServicioEntity newEntity = factory.manufacturePojo(ServicioEntity.class);
+        newEntity.setNombre(null);
+        assertThrows(IllegalOperationException.class, () -> {
+            servicioService.createServicio(newEntity);
+        });
+    }
+
+    @Test
+    void testCreateServicioSinSede() {
+        ServicioEntity newEntity = factory.manufacturePojo(ServicioEntity.class);
+        newEntity.setSede(null);
+        assertThrows(IllegalOperationException.class, () -> {
+            servicioService.createServicio(newEntity);
+        });
+    }
+
+    @Test
+    void testCreateServicioSinTrabajadores() {
+        ServicioEntity newEntity = factory.manufacturePojo(ServicioEntity.class);
+        newEntity.setTrabajadores(null);
+        assertThrows(IllegalOperationException.class, () -> {
+            servicioService.createServicio(newEntity);
+        });
+    }
+
+    @Test
+    void testCreateServicioSinPacks() {
+        ServicioEntity newEntity = factory.manufacturePojo(ServicioEntity.class);
+        newEntity.setPacksDeServicios(null);
+        assertThrows(IllegalOperationException.class, () -> {
+            servicioService.createServicio(newEntity);
+        });
+    }
+
+    /*
+     * duracion, restricciones, disponible, horaInicio, horaFin, precio
+     * 
+     */
+    
+    @Test
+    void testCreateServicioSinDuracion(){
+        ServicioEntity newEntity = factory.manufacturePojo(ServicioEntity.class);
+        newEntity.setDuracion(null);
+        assertThrows(IllegalOperationException.class, () -> {
+            servicioService.createServicio(newEntity);
+        });
+    }
+
+    @Test
+    void testCreateServicioSinRestricciones(){
+        ServicioEntity newEntity = factory.manufacturePojo(ServicioEntity.class);
+        newEntity.setRestricciones(null);
+        assertThrows(IllegalOperationException.class, () -> {
+            servicioService.createServicio(newEntity);
+        });
+    }
+
+    @Test
+    void testCreateServicioSinDisponible(){
+        ServicioEntity newEntity = factory.manufacturePojo(ServicioEntity.class);
+        newEntity.setDisponible(null);
+        assertThrows(IllegalOperationException.class, () -> {
+            servicioService.createServicio(newEntity);
+        });
+    }
+
+    @Test
+    void testCreateServicioSinHoraInicio(){
+        ServicioEntity newEntity = factory.manufacturePojo(ServicioEntity.class);
+        newEntity.setHoraInicio(null);
+        assertThrows(IllegalOperationException.class, () -> {
+            servicioService.createServicio(newEntity);
+        });
+    }
+
+    @Test
+    void testCreateServicioSinHoraFin(){
+        ServicioEntity newEntity = factory.manufacturePojo(ServicioEntity.class);
+        newEntity.setHoraFin(null);
+        assertThrows(IllegalOperationException.class, () -> {
+            servicioService.createServicio(newEntity);
+        });
     }
 
     @Test
@@ -150,7 +233,7 @@ public class ServicioServiceTest {
     }
 
     @Test
-    void testGetInvalidSServicio() {
+    void testGetInvalidServicio() {
         assertThrows(EntityNotFoundException.class, () -> {
             servicioService.getServicio(0L);
         });
@@ -179,10 +262,25 @@ public class ServicioServiceTest {
     }
 
     @Test
-    void testDeleteBook() throws EntityNotFoundException, IllegalOperationException {
+    void testUpdateInvalidServicio(){
+        ServicioEntity pojoEntity = factory.manufacturePojo(ServicioEntity.class);
+        assertThrows(EntityNotFoundException.class, () -> {
+            servicioService.updateServicio(0L, pojoEntity);
+        });
+    }
+
+    @Test
+    void testDeleteServicio() throws EntityNotFoundException, IllegalOperationException {
         ServicioEntity entity = servicioList.get(1);
         servicioService.deleteServicio(entity.getId());
         ServicioEntity deleted = entityManager.find(ServicioEntity.class, entity.getId());
         assertNull(deleted);
+    }
+
+    @Test
+    void testDeleteInvalidServicio() {
+        assertThrows(EntityNotFoundException.class, () -> {
+            servicioService.deleteServicio(0L);
+        });
     }
 }
