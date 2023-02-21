@@ -28,7 +28,7 @@ public class ServicioExtraService {
             throws EntityNotFoundException, IllegalOperationException {
         log.info("Inicia el proceso de creación del servicio extra");
 
-        if ((servicioExtraEntity.getNombre().equals("")) || (servicioExtraEntity.getNombre() == null))
+        if ((servicioExtraEntity.getNombre() == null) || (servicioExtraEntity.getNombre().equals("")))
             throw new IllegalOperationException("El nombre del servicio extra no puede estar vacío");
 
         log.info("Termina proceso de creación del servicio extra");

@@ -25,7 +25,7 @@ import co.edu.uniandes.dse.thespa.exceptions.IllegalOperationException;
 @Transactional
 @Import(ServicioExtraService.class)
 public class ServicioExtraServiceTest {
-    
+
     @Autowired
     private ServicioExtraService servicioExtraService;
 
@@ -87,9 +87,9 @@ public class ServicioExtraServiceTest {
     // Crea un servicio extra cuyo nombre es una cadena vacía -> Operación ilegal
     void testCreateServicioExtraSinNombre() {
         assertThrows(IllegalOperationException.class, () -> {
-                ServicioExtraEntity newEntity = factory.manufacturePojo(ServicioExtraEntity.class);
-                newEntity.setNombre("");
-                servicioExtraService.createServicioExtra(newEntity);
+            ServicioExtraEntity newEntity = factory.manufacturePojo(ServicioExtraEntity.class);
+            newEntity.setNombre("");
+            servicioExtraService.createServicioExtra(newEntity);
         });
     }
 
@@ -97,9 +97,9 @@ public class ServicioExtraServiceTest {
     // Crea un servicio extra cuyo nombre es nulo -> Operación ilegal
     void testCreateServicioExtraSinNombre2() {
         assertThrows(IllegalOperationException.class, () -> {
-                ServicioExtraEntity newEntity = factory.manufacturePojo(ServicioExtraEntity.class);
-                newEntity.setNombre(null);
-                servicioExtraService.createServicioExtra(newEntity);
+            ServicioExtraEntity newEntity = factory.manufacturePojo(ServicioExtraEntity.class);
+            newEntity.setNombre(null);
+            servicioExtraService.createServicioExtra(newEntity);
         });
     }
 
@@ -108,13 +108,13 @@ public class ServicioExtraServiceTest {
         List<ServicioExtraEntity> list = servicioExtraService.getServiciosExtras();
         assertEquals(servicioExtraList.size(), list.size());
         for (ServicioExtraEntity entity : list) {
-                boolean found = false;
-                for (ServicioExtraEntity storedEntity : servicioExtraList) {
-                        if (entity.getId().equals(storedEntity.getId())) {
-                                found = true;
-                        }
+            boolean found = false;
+            for (ServicioExtraEntity storedEntity : servicioExtraList) {
+                if (entity.getId().equals(storedEntity.getId())) {
+                    found = true;
                 }
-                assertTrue(found);
+            }
+            assertTrue(found);
         }
     }
 
@@ -134,13 +134,14 @@ public class ServicioExtraServiceTest {
 
     @Test
     void testGetServicioExtraNoExistente() {
-        assertThrows(EntityNotFoundException.class,()->{
-                servicioExtraService.getServicioExtra(0L);
+        assertThrows(EntityNotFoundException.class, () -> {
+            servicioExtraService.getServicioExtra(0L);
         });
     }
 
     @Test
-    // Actualiza el servicio extra con ID dado, asumiendo todas las condiciones de un servicio extra
+    // Actualiza el servicio extra con ID dado, asumiendo todas las condiciones de
+    // un servicio extra
     void testUpdateServicioExtra() throws EntityNotFoundException, IllegalOperationException {
         ServicioExtraEntity entity = servicioExtraList.get(0);
         ServicioExtraEntity pojoEntity = factory.manufacturePojo(ServicioExtraEntity.class);
@@ -162,9 +163,9 @@ public class ServicioExtraServiceTest {
     // actualiza servicio extra con ID inválido
     void testUpdateServicioExtraIDInvalido() {
         assertThrows(EntityNotFoundException.class, () -> {
-                ServicioExtraEntity pojoEntity = factory.manufacturePojo(ServicioExtraEntity.class);
-                pojoEntity.setId(0L);
-                servicioExtraService.updateServicioExtra(0L, pojoEntity);
+            ServicioExtraEntity pojoEntity = factory.manufacturePojo(ServicioExtraEntity.class);
+            pojoEntity.setId(0L);
+            servicioExtraService.updateServicioExtra(0L, pojoEntity);
         });
     }
 
@@ -172,11 +173,11 @@ public class ServicioExtraServiceTest {
     // actualiza servicio extra con nombre cadena vacía -> Operación inválida
     void testUpdateServicioExtraSinNombre() {
         assertThrows(IllegalOperationException.class, () -> {
-                ServicioExtraEntity entity = servicioExtraList.get(0);
-                ServicioExtraEntity pojoEntity = factory.manufacturePojo(ServicioExtraEntity.class);
-                pojoEntity.setNombre("");
-                pojoEntity.setId(entity.getId());
-                servicioExtraService.updateServicioExtra(entity.getId(), pojoEntity);
+            ServicioExtraEntity entity = servicioExtraList.get(0);
+            ServicioExtraEntity pojoEntity = factory.manufacturePojo(ServicioExtraEntity.class);
+            pojoEntity.setNombre("");
+            pojoEntity.setId(entity.getId());
+            servicioExtraService.updateServicioExtra(entity.getId(), pojoEntity);
         });
     }
 
@@ -194,17 +195,18 @@ public class ServicioExtraServiceTest {
 
     @Test
     void testDeleteServicioExtra() throws EntityNotFoundException, IllegalOperationException {
-            ServicioExtraEntity entity = servicioExtraList.get(0);
-            servicioExtraService.deleteServicioExtra(entity.getId());
-            ServicioExtraEntity deleted = entityManager.find(ServicioExtraEntity.class, entity.getId());
-            assertNull(deleted);
+        ServicioExtraEntity entity = servicioExtraList.get(0);
+        servicioExtraService.deleteServicioExtra(entity.getId());
+        ServicioExtraEntity deleted = entityManager.find(ServicioExtraEntity.class, entity.getId());
+        assertNull(deleted);
     }
 
     @Test
-    // eliminar un servicio extra con un índice incorrecto/no existente -> Operación inválida
+    // eliminar un servicio extra con un índice incorrecto/no existente -> Operación
+    // inválida
     void testDeleteServicioExtraIDInvalido() {
-        assertThrows(EntityNotFoundException.class, ()->{
-                servicioExtraService.deleteServicioExtra(0L);
+        assertThrows(EntityNotFoundException.class, () -> {
+            servicioExtraService.deleteServicioExtra(0L);
         });
     }
 }
