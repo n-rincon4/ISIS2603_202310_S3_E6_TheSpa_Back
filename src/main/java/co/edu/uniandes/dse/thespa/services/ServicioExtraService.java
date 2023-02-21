@@ -28,7 +28,7 @@ public class ServicioExtraService {
             throws EntityNotFoundException, IllegalOperationException {
         log.info("Inicia el proceso de creación del servicio extra");
 
-        if (servicioExtraEntity.getNombre() == null)
+        if ((servicioExtraEntity.getNombre() == "")||(servicioExtraEntity.getNombre() == null))
             throw new IllegalOperationException("El nombre del servicio extra no puede estar vacío");
 
         log.info("Termina proceso de creación del servicio extra");
@@ -44,7 +44,7 @@ public class ServicioExtraService {
 
     // Método para obtener un servicio extra por ID
     @Transactional
-    public ServicioExtraEntity getTrabajador(Long servicioExtraId) throws EntityNotFoundException {
+    public ServicioExtraEntity getServicioExtra(Long servicioExtraId) throws EntityNotFoundException {
         log.info("Inicia proceso de consultar el servicio extra con id = {0}", servicioExtraId);
         Optional<ServicioExtraEntity> servicioExtraEntity = servicioExtraRepository.findById(servicioExtraId);
         if (servicioExtraEntity.isEmpty())
@@ -62,7 +62,7 @@ public class ServicioExtraService {
         if (servicioExtraEntity.isEmpty())
             throw new EntityNotFoundException("El servicio extra con el id = " + servicioExtraId + " no existe");
 
-        if (servicioExtra.getNombre() == null)
+        if ((servicioExtra.getNombre() == null)||(servicioExtra.getNombre() == ""))
             throw new IllegalOperationException("El nombre del servicio extra no puede estar vacío");
 
         servicioExtra.setId(servicioExtraId);
