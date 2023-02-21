@@ -55,7 +55,7 @@ public class ServicioService {
             throw new IllegalOperationException("La duración del servicio no es válida");
         }
 
-        if (servicioEntity.getRestricciones().isEmpty() || servicioEntity.getRestricciones().equals("")) {
+        if (servicioEntity.getRestricciones() == null || servicioEntity.getRestricciones().equals("")) {
             throw new IllegalOperationException("Las restricciones no son válidas");
         }
 
@@ -69,6 +69,18 @@ public class ServicioService {
 
         if (servicioEntity.getHoraFin() == null) {
             throw new IllegalOperationException("La hora de fin del servicio no es válida");
+        }
+
+        if (servicioEntity.getSede() == null) {
+            throw new IllegalOperationException("La sede del servicio no es válida");
+        }
+        
+        if (servicioEntity.getTrabajadores() == null) {
+            throw new IllegalOperationException("Los trabajadores del servicio no son válidos");
+        }
+
+        if (servicioEntity.getPacksDeServicios() == null) {
+            throw new IllegalOperationException("Los de servicios del servicio no son válidos");
         }
 
         log.info("Termina proceso de creación del Servicio");
