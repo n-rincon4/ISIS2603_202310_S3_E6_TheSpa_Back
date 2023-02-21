@@ -39,9 +39,6 @@ public class SedeService {
     @Autowired
     PackDeServiciosRepository PackDeServiciosRepo;
 
-
-
-
     // Crear Sede
     @Transactional
     public SedeEntity createSede(SedeEntity sede) throws EntityNotFoundException, IllegalOperationException {
@@ -141,23 +138,29 @@ public class SedeService {
 
     // Añadir un servicio a la sede
     @Transactional
-    public ServicioEntity addSedeServicio(Long SedeId, Long ServicioId) throws EntityNotFoundException, IllegalOperationException {
+    public ServicioEntity addSedeServicio(Long SedeId, Long ServicioId)
+            throws EntityNotFoundException, IllegalOperationException {
         log.info("Inicia proceso de añadir a la sede un servicio con con id = {0}", ServicioId);
         Optional<ServicioEntity> servEntity = servicioRepo.findById(ServicioId);
-        if (servEntity.isEmpty()){
+        if (servEntity.isEmpty()) {
             throw new EntityNotFoundException("SERVICE_NOT_FOUND");
         }
 
         Optional<SedeEntity> sedeEntity = sedeRepo.findById(SedeId);
-        if (sedeEntity.isEmpty()){
+        if (sedeEntity.isEmpty()) {
             throw new EntityNotFoundException("SEDE_NOT_FOUND");
+        }
+
+        // revisa si el servicio ya esta en la sede, si esta lanza una
+        // IllegalOperationException
+        if (sedeEntity.get().getServicios().contains(servEntity.get())) {
+            throw new IllegalOperationException("SERVICE_ALREADY_EXISTS");
         }
 
         List<ServicioEntity> servicios = sedeEntity.get().getServicios();
         servicios.add(servEntity.get());
 
         sedeEntity.get().setServicios(servicios);
-
 
         log.info("Termina proceso de añadir a la sede un servicio con con id = {0}", SedeId);
 
@@ -166,27 +169,29 @@ public class SedeService {
 
     // Eliminar un servicio a la sede
     @Transactional
-    public ServicioEntity deleteSedeServicio(Long SedeId, Long ServicioId) throws EntityNotFoundException, IllegalOperationException {
+    public ServicioEntity deleteSedeServicio(Long SedeId, Long ServicioId)
+            throws EntityNotFoundException, IllegalOperationException {
         log.info("Inicia proceso de eliminar de la sede un servicio con con id = {0}", ServicioId);
         Optional<ServicioEntity> servEntity = servicioRepo.findById(ServicioId);
-        if (servEntity.isEmpty()){
+        if (servEntity.isEmpty()) {
             throw new EntityNotFoundException("SERVICE_NOT_FOUND");
         }
 
         Optional<SedeEntity> sedeEntity = sedeRepo.findById(SedeId);
-        if (sedeEntity.isEmpty()){
+        if (sedeEntity.isEmpty()) {
             throw new EntityNotFoundException("SEDE_NOT_FOUND");
         }
 
         List<ServicioEntity> servicios = sedeEntity.get().getServicios();
 
-        if (servicios.contains(servEntity.get())==false){
-            throw new EntityNotFoundException("SERVICIO_NOT_FOUND_IN_CURRENT_SEDE");
+        // revisa si el servicio no esta en la sede, si no esta lanza una
+        // IllegalOperationException
+        if (servicios.contains(servEntity.get()) == false) {
+            throw new IllegalOperationException("SERVICIO_NOT_FOUND_IN_CURRENT_SEDE");
         }
         servicios.remove(servEntity.get());
 
         sedeEntity.get().setServicios(servicios);
-
 
         log.info("Termina proceso de elimnar de la sede un servicio con con id = {0}", SedeId);
 
@@ -195,23 +200,29 @@ public class SedeService {
 
     // Añadir un trabajador a la sede
     @Transactional
-    public TrabajadorEntity addSedeTrabajador(Long SedeId, Long TrabajadorId) throws EntityNotFoundException, IllegalOperationException {
+    public TrabajadorEntity addSedeTrabajador(Long SedeId, Long TrabajadorId)
+            throws EntityNotFoundException, IllegalOperationException {
         log.info("Inicia proceso de añadir a la sede un Trabajador con con id = {0}", TrabajadorId);
         Optional<TrabajadorEntity> trabEntity = trabajadoresRepo.findById(TrabajadorId);
-        if (trabEntity.isEmpty()){
+        if (trabEntity.isEmpty()) {
             throw new EntityNotFoundException("TRABAJADOR_NOT_FOUND");
         }
 
         Optional<SedeEntity> sedeEntity = sedeRepo.findById(SedeId);
-        if (sedeEntity.isEmpty()){
+        if (sedeEntity.isEmpty()) {
             throw new EntityNotFoundException("SEDE_NOT_FOUND");
+        }
+
+        // revisa si el trabajador ya esta en la sede, si esta lanza una
+        // IllegalOperationException
+        if (sedeEntity.get().getTrabajadores().contains(trabEntity.get())) {
+            throw new IllegalOperationException("TRABAJADOR_ALREADY_EXISTS");
         }
 
         List<TrabajadorEntity> trabajs = sedeEntity.get().getTrabajadores();
         trabajs.add(trabEntity.get());
 
         sedeEntity.get().setTrabajadores(trabajs);
-
 
         log.info("Termina proceso de añadir a la sede un Trabajador con con id = {0}", SedeId);
 
@@ -220,23 +231,29 @@ public class SedeService {
 
     // Eliminar un trabajador de la sede
     @Transactional
-    public TrabajadorEntity deleteSedeTrabajador(Long SedeId, Long TrabajadorId) throws EntityNotFoundException, IllegalOperationException {
+    public TrabajadorEntity deleteSedeTrabajador(Long SedeId, Long TrabajadorId)
+            throws EntityNotFoundException, IllegalOperationException {
         log.info("Inicia proceso de eliminar de la sede un Trabajador con con id = {0}", TrabajadorId);
         Optional<TrabajadorEntity> trabEntity = trabajadoresRepo.findById(TrabajadorId);
-        if (trabEntity.isEmpty()){
+        if (trabEntity.isEmpty()) {
             throw new EntityNotFoundException("TRABAJADOR_NOT_FOUND");
         }
 
         Optional<SedeEntity> sedeEntity = sedeRepo.findById(SedeId);
-        if (sedeEntity.isEmpty()){
+        if (sedeEntity.isEmpty()) {
             throw new EntityNotFoundException("SEDE_NOT_FOUND");
+        }
+
+        // revisa si el trabajador no esta en la sede, si no esta lanza una
+        // IllegalOperationException
+        if (sedeEntity.get().getTrabajadores().contains(trabEntity.get()) == false) {
+            throw new IllegalOperationException("TRABAJADOR_NOT_FOUND_IN_CURRENT_SEDE");
         }
 
         List<TrabajadorEntity> trabajs = sedeEntity.get().getTrabajadores();
         trabajs.remove(trabEntity.get());
 
         sedeEntity.get().setTrabajadores(trabajs);
-
 
         log.info("Termina proceso de añadir a la sede un Trabajador con con id = {0}", SedeId);
 
@@ -245,23 +262,29 @@ public class SedeService {
 
     // Añadir un Pack de servicios a la sede
     @Transactional
-    public PackDeServiciosEntity addSedePackDeServicios(Long SedeId, Long PackDeServiciosId) throws EntityNotFoundException, IllegalOperationException {
+    public PackDeServiciosEntity addSedePackDeServicios(Long SedeId, Long PackDeServiciosId)
+            throws EntityNotFoundException, IllegalOperationException {
         log.info("Inicia proceso de añadir a la sede un PackDeServicios con con id = {0}", PackDeServiciosId);
         Optional<PackDeServiciosEntity> packEntity = PackDeServiciosRepo.findById(PackDeServiciosId);
-        if (packEntity.isEmpty()){
+        if (packEntity.isEmpty()) {
             throw new EntityNotFoundException("PACK_NOT_FOUND");
         }
 
         Optional<SedeEntity> sedeEntity = sedeRepo.findById(SedeId);
-        if (sedeEntity.isEmpty()){
+        if (sedeEntity.isEmpty()) {
             throw new EntityNotFoundException("SEDE_NOT_FOUND");
+        }
+
+        // revisa si el pack ya esta en la sede, si esta lanza una
+        // IllegalOperationException
+        if (sedeEntity.get().getPacksDeServicios().contains(packEntity.get())) {
+            throw new IllegalOperationException("PACK_ALREADY_EXISTS");
         }
 
         List<PackDeServiciosEntity> PackDeServicios = sedeEntity.get().getPacksDeServicios();
         PackDeServicios.add(packEntity.get());
 
         sedeEntity.get().setPacksDeServicios(PackDeServicios);
-
 
         log.info("Termina proceso de añadir a la sede un Trabajador con con id = {0}", SedeId);
 
@@ -270,16 +293,23 @@ public class SedeService {
 
     // Eliminar un pack de servicios de la sede
     @Transactional
-    public PackDeServiciosEntity deleteSedePackDeServicios(Long SedeId, Long PackDeServiciosId) throws EntityNotFoundException, IllegalOperationException {
+    public PackDeServiciosEntity deleteSedePackDeServicios(Long SedeId, Long PackDeServiciosId)
+            throws EntityNotFoundException, IllegalOperationException {
         log.info("Inicia proceso de añadir a la sede un PackDeServicios con con id = {0}", PackDeServiciosId);
         Optional<PackDeServiciosEntity> packEntity = PackDeServiciosRepo.findById(PackDeServiciosId);
-        if (packEntity.isEmpty()){
+        if (packEntity.isEmpty()) {
             throw new EntityNotFoundException("PACK_NOT_FOUND");
         }
 
         Optional<SedeEntity> sedeEntity = sedeRepo.findById(SedeId);
-        if (sedeEntity.isEmpty()){
+        if (sedeEntity.isEmpty()) {
             throw new EntityNotFoundException("SEDE_NOT_FOUND");
+        }
+
+        // revisa si el pack no esta en la sede, si no esta lanza una
+        // IllegalOperationException
+        if (sedeEntity.get().getPacksDeServicios().contains(packEntity.get()) == false) {
+            throw new IllegalOperationException("PACK_NOT_FOUND_IN_CURRENT_SEDE");
         }
 
         List<PackDeServiciosEntity> PackDeServicios = sedeEntity.get().getPacksDeServicios();
@@ -287,12 +317,9 @@ public class SedeService {
 
         sedeEntity.get().setPacksDeServicios(PackDeServicios);
 
-
         log.info("Termina proceso de eliminar de la sede un PackDeServicios con con id = {0}", SedeId);
 
         return packEntity.get();
     }
-
-    
 
 }
