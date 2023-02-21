@@ -34,12 +34,12 @@ public class TrabajadorService {
             throws EntityNotFoundException, IllegalOperationException {
         log.info("Inicia el proceso de creación del trabajador");
 
-        if ((trabajadorEntity.getNombre() == null)||(trabajadorEntity.getNombre() == ""))
+        if ((trabajadorEntity.getNombre() == null) || (trabajadorEntity.getNombre().equals("")))
             throw new IllegalOperationException("El nombre del trabajador no puede estar vacío");
 
         if (trabajadorEntity.getSedes() == null)
             throw new IllegalOperationException("El trabajador debe estar en al menos una sede");
-        
+
         if (trabajadorEntity.getServicios() == null)
             throw new IllegalOperationException("El trabajador debe tener relacionado al menos un servicio");
 
@@ -74,12 +74,12 @@ public class TrabajadorService {
         if (trabajadorEntity.isEmpty())
             throw new EntityNotFoundException("El trabajador con el id = " + trabajadorId + " no existe");
 
-        if ((trabajador.getNombre() == null)||(trabajador.getNombre() == ""))
+        if ((trabajador.getNombre() == null) || (trabajador.getNombre().equals("")))
             throw new IllegalOperationException("El nombre del trabajador no puede estar vacío");
 
         if (trabajador.getSedes() == null)
             throw new IllegalOperationException("El trabajador debe estar en al menos una sede");
-        
+
         if (trabajador.getServicios() == null)
             throw new IllegalOperationException("El trabajador debe tener relacionado al menos un servicio");
 
@@ -99,7 +99,6 @@ public class TrabajadorService {
         trabajadorRepository.deleteById(trabajadorId);
         log.info("Termina proceso de borrar el trabajador con id = {0}", trabajadorId);
     }
-
 
     // Añadir un servicio al trabajador
     @Transactional

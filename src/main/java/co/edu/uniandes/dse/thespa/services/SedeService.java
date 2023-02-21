@@ -84,7 +84,7 @@ public class SedeService {
         }
 
         // Assert 7: debe tener una ubicacion la sede
-        if (sede.getUbicacion().equals(null)) {
+        if (sede.getUbicacion() == null) {
             throw new IllegalOperationException("La sede tiene que tener una ubicacion.");
         }
 
