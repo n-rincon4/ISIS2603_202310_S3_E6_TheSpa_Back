@@ -19,10 +19,10 @@ import uk.co.jemos.podam.common.PodamExclude;
 @Entity
 public class UbicacionEntity extends BaseEntity {
 
-    private Integer latitud;
-    private Integer longitud;
-    private String Ciudad;
-    private String Direccion;
+    private Double latitud;
+    private Double longitud;
+    private String ciudad;
+    private String direccion;
 
     @PodamExclude
     @OneToOne
