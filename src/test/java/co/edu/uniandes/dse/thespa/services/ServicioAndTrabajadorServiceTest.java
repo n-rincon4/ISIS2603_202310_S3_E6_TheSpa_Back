@@ -24,7 +24,7 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
 
 @DataJpaTest
 @Transactional
-@Import({ ServicioAndTrabajadorService.class})
+@Import({ ServicioAndTrabajadorService.class })
 
 public class ServicioAndTrabajadorServiceTest {
 
@@ -39,7 +39,6 @@ public class ServicioAndTrabajadorServiceTest {
     private List<ServicioEntity> servicios = new ArrayList<>();
 
     private List<TrabajadorEntity> trabajadores = new ArrayList<>();
-
 
     @BeforeEach
     void setUp() {
@@ -66,7 +65,7 @@ public class ServicioAndTrabajadorServiceTest {
                 servicio.getTrabajadores().add(trabajador);
             }
         }
-        
+
     }
 
     @Test
@@ -120,7 +119,7 @@ public class ServicioAndTrabajadorServiceTest {
         TrabajadorEntity trabajador = factory.manufacturePojo(TrabajadorEntity.class);
         entityManager.persist(trabajador);
         trabajadores.add(trabajador);
-        
+
         assertThrows(IllegalOperationException.class, () -> {
             servicioService.removeTrabajador(servicio.getId(), trabajador.getId());
         });

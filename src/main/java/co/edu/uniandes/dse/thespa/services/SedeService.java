@@ -1,4 +1,5 @@
 package co.edu.uniandes.dse.thespa.services;
+
 import java.util.List;
 import java.util.Optional;
 import javax.transaction.Transactional;
@@ -10,7 +11,6 @@ import co.edu.uniandes.dse.thespa.exceptions.IllegalOperationException;
 import co.edu.uniandes.dse.thespa.repositories.SedeRepository;
 import lombok.extern.slf4j.Slf4j;
 
-
 //Author -> @Juan Coronel
 
 @Slf4j
@@ -20,7 +20,6 @@ public class SedeService {
     // Inyeccion de dependencias -> Repositorio Sede
     @Autowired
     SedeRepository sedeRepo;
-
 
     // Crear Sede
     @Transactional
