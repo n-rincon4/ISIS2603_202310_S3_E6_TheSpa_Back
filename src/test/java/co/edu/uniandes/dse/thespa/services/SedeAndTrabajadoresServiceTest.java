@@ -25,12 +25,12 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
 
 @DataJpaTest
 @Transactional
-@Import({ SedeTrabajadorService.class, TrabajadorService.class })
+@Import({ SedeAndTrabajadorService.class, TrabajadorService.class })
 public class SedeAndTrabajadoresServiceTest {
 
     // Servicio que se va a probar
     @Autowired
-    private SedeTrabajadorService SedeService;
+    private SedeAndTrabajadorService SedeService;
 
     // TestEntityManager
     @Autowired

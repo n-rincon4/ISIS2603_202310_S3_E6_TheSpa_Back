@@ -17,16 +17,16 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
-public class SedePackServicesService {
-    
+public class SedeAndPackServicesService {
+
     // Inyeccion de dependencias -> Repositorio Sede
     @Autowired
     SedeRepository sedeRepo;
-    
+
     // Inyeccion de dependencias -> Repositorio Pack de Servicios
     @Autowired
     PackDeServiciosRepository PackDeServiciosRepo;
-    
+
     // Añadir un Pack de servicios a la sede
     @Transactional
     public PackDeServiciosEntity addSedePackDeServicios(Long SedeId, Long PackDeServiciosId)

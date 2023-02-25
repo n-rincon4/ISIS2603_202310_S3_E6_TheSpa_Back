@@ -17,7 +17,7 @@ import co.edu.uniandes.dse.thespa.repositories.ServicioExtraRepository;
 
 @Slf4j
 @Service
-public class SedeServiceExtraService {
+public class SedeAndServicioExtraService {
 
     // Inyeccion de dependencias -> Repositorio Sede
     @Autowired
@@ -89,5 +89,5 @@ public class SedeServiceExtraService {
         return servEntity.get();
 
     }
-    
+
 }
