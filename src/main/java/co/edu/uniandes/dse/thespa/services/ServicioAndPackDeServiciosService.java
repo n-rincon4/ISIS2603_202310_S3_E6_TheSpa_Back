@@ -9,8 +9,6 @@ import co.edu.uniandes.dse.thespa.entities.ServicioEntity;
 import co.edu.uniandes.dse.thespa.entities.PackDeServiciosEntity;
 import co.edu.uniandes.dse.thespa.exceptions.EntityNotFoundException;
 import co.edu.uniandes.dse.thespa.exceptions.IllegalOperationException;
-import co.edu.uniandes.dse.thespa.repositories.TrabajadorRepository;
-import co.edu.uniandes.dse.thespa.repositories.SedeRepository;
 import co.edu.uniandes.dse.thespa.repositories.ServicioRepository;
 import co.edu.uniandes.dse.thespa.repositories.PackDeServiciosRepository;
 
@@ -30,7 +28,8 @@ public class ServicioAndPackDeServiciosService {
     PackDeServiciosRepository packDeServiciosRepository;
 
     @Transactional
-    public PackDeServiciosEntity addPackDeServicios(Long servicioID, long packDeServiciosID) throws EntityNotFoundException, IllegalOperationException {
+    public PackDeServiciosEntity addPackDeServicios(Long servicioID, long packDeServiciosID)
+            throws EntityNotFoundException, IllegalOperationException {
         log.info("Inicia proceso de agregar un pack de servicios al servicio con id = {0}", servicioID);
         Optional<ServicioEntity> servicioEntity = servicioRepository.findById(servicioID);
         if (servicioEntity.isEmpty()) {
@@ -42,7 +41,8 @@ public class ServicioAndPackDeServiciosService {
         }
 
         if (servicioEntity.get().getPacksDeServicios().contains(packDeServiciosEntity.get())) {
-            throw new IllegalOperationException("El pack de servicios con el id = " + packDeServiciosID + " ya está asociado al servicio con el id = " + servicioID);
+            throw new IllegalOperationException("El pack de servicios con el id = " + packDeServiciosID
+                    + " ya está asociado al servicio con el id = " + servicioID);
         }
         servicioEntity.get().getPacksDeServicios().add(packDeServiciosEntity.get());
         log.info("Termina proceso de agregar un pack de servicios al servicio con id = {0}", servicioID);
@@ -62,7 +62,8 @@ public class ServicioAndPackDeServiciosService {
     }
 
     @Transactional
-    public PackDeServiciosEntity removePackDeServicios(Long servicioID, long packDeServiciosID) throws EntityNotFoundException, IllegalOperationException {
+    public PackDeServiciosEntity removePackDeServicios(Long servicioID, long packDeServiciosID)
+            throws EntityNotFoundException, IllegalOperationException {
         log.info("Inicia proceso de remover un pack de servicios del servicio con id = {0}", servicioID);
         Optional<ServicioEntity> servicioEntity = servicioRepository.findById(servicioID);
         if (servicioEntity.isEmpty()) {
@@ -74,12 +75,13 @@ public class ServicioAndPackDeServiciosService {
         }
 
         if (!servicioEntity.get().getPacksDeServicios().contains(packDeServiciosEntity.get())) {
-            throw new IllegalOperationException("El pack de servicios con el id = " + packDeServiciosID + " no está asociado al servicio con el id = " + servicioID);
+            throw new IllegalOperationException("El pack de servicios con el id = " + packDeServiciosID
+                    + " no está asociado al servicio con el id = " + servicioID);
         }
         servicioEntity.get().getPacksDeServicios().remove(packDeServiciosEntity.get());
         log.info("Termina proceso de remover un pack de servicios del servicio con id = {0}", servicioID);
 
         return packDeServiciosEntity.get();
     }
-    
+
 }

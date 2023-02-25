@@ -10,9 +10,7 @@ import co.edu.uniandes.dse.thespa.entities.TrabajadorEntity;
 import co.edu.uniandes.dse.thespa.exceptions.EntityNotFoundException;
 import co.edu.uniandes.dse.thespa.exceptions.IllegalOperationException;
 import co.edu.uniandes.dse.thespa.repositories.TrabajadorRepository;
-import co.edu.uniandes.dse.thespa.repositories.SedeRepository;
 import co.edu.uniandes.dse.thespa.repositories.ServicioRepository;
-import co.edu.uniandes.dse.thespa.repositories.PackDeServiciosRepository;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -28,9 +26,10 @@ public class ServicioAndTrabajadorService {
 
     @Autowired
     TrabajadorRepository trabajadorRepository;
-    
+
     @Transactional
-    public TrabajadorEntity addTrabajador(Long servicioID, long trabajadorID) throws EntityNotFoundException, IllegalOperationException {
+    public TrabajadorEntity addTrabajador(Long servicioID, long trabajadorID)
+            throws EntityNotFoundException, IllegalOperationException {
         log.info("Inicia proceso de agregar un trabajador al servicio con id = {0}", servicioID);
         Optional<ServicioEntity> servicioEntity = servicioRepository.findById(servicioID);
         if (servicioEntity.isEmpty()) {
@@ -42,7 +41,8 @@ public class ServicioAndTrabajadorService {
         }
 
         if (servicioEntity.get().getTrabajadores().contains(trabajadorEntity.get())) {
-            throw new IllegalOperationException("El trabajador con el id = " + trabajadorID + " ya está asociado al servicio con el id = " + servicioID);
+            throw new IllegalOperationException("El trabajador con el id = " + trabajadorID
+                    + " ya está asociado al servicio con el id = " + servicioID);
         }
         servicioEntity.get().getTrabajadores().add(trabajadorEntity.get());
         log.info("Termina proceso de agregar un trabajador al servicio con id = {0}", servicioID);
@@ -62,7 +62,8 @@ public class ServicioAndTrabajadorService {
     }
 
     @Transactional
-    public TrabajadorEntity removeTrabajador(Long servicioID, long trabajadorID) throws EntityNotFoundException, IllegalOperationException {
+    public TrabajadorEntity removeTrabajador(Long servicioID, long trabajadorID)
+            throws EntityNotFoundException, IllegalOperationException {
         log.info("Inicia proceso de remover un trabajador del servicio con id = {0}", servicioID);
         Optional<ServicioEntity> servicioEntity = servicioRepository.findById(servicioID);
         if (servicioEntity.isEmpty()) {
@@ -74,12 +75,13 @@ public class ServicioAndTrabajadorService {
         }
 
         if (!servicioEntity.get().getTrabajadores().contains(trabajadorEntity.get())) {
-            throw new IllegalOperationException("El trabajador con el id = " + trabajadorID + " no está asociado al servicio con el id = " + servicioID);
+            throw new IllegalOperationException("El trabajador con el id = " + trabajadorID
+                    + " no está asociado al servicio con el id = " + servicioID);
         }
         servicioEntity.get().getTrabajadores().remove(trabajadorEntity.get());
         log.info("Termina proceso de remover un trabajador del servicio con id = {0}", servicioID);
 
         return trabajadorEntity.get();
     }
-    
+
 }

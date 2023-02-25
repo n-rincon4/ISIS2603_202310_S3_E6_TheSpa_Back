@@ -6,8 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import co.edu.uniandes.dse.thespa.entities.ServicioEntity;
-import co.edu.uniandes.dse.thespa.entities.TrabajadorEntity;
-import co.edu.uniandes.dse.thespa.entities.PackDeServiciosEntity;
 import co.edu.uniandes.dse.thespa.exceptions.EntityNotFoundException;
 import co.edu.uniandes.dse.thespa.exceptions.IllegalOperationException;
 import co.edu.uniandes.dse.thespa.repositories.TrabajadorRepository;
@@ -77,7 +75,7 @@ public class ServicioService {
         if (servicioEntity.getSede() == null) {
             throw new IllegalOperationException("La sede del servicio no es válida");
         }
-        
+
         if (servicioEntity.getTrabajadores() == null) {
             throw new IllegalOperationException("Los trabajadores del servicio no son válidos");
         }
