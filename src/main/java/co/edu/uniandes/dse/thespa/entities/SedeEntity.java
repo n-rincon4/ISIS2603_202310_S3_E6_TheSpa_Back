@@ -1,7 +1,5 @@
 package co.edu.uniandes.dse.thespa.entities;
 
-import java.io.File;
-
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -24,7 +22,7 @@ import uk.co.jemos.podam.common.PodamExclude;
 @Entity
 public class SedeEntity extends BaseEntity {
     private String nombre;
-    private File imagen;
+    private String imagen;
 
     @PodamExclude
     @ManyToMany(mappedBy = "sedes")
