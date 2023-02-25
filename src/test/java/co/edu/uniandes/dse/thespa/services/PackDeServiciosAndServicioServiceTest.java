@@ -24,12 +24,12 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
 
 @DataJpaTest
 @Transactional
-@Import({ PackDeServiciosService.class, ServicioService.class })
+@Import({ ServicioService.class, PackDeServiciosAndServicioService.class })
 public class PackDeServiciosAndServicioServiceTest {
 
     // Servicio que se va a probar
     @Autowired
-    private PackDeServiciosService packDeServiciosService;
+    private PackDeServiciosAndServicioService packDeServiciosAndServicioService;
 
     // TestEntityManager
     @Autowired
@@ -91,7 +91,7 @@ public class PackDeServiciosAndServicioServiceTest {
         ServicioEntity servicio = servicios.get(0);
 
         // Se agrega el servicio al pack de servicios
-        ServicioEntity result = packDeServiciosService.addServicio(pack.getId(), servicio.getId());
+        ServicioEntity result = packDeServiciosAndServicioService.addServicio(pack.getId(), servicio.getId());
 
         // Se verifica que el servicio agregado sea el mismo que se obtuvo
         assertNotNull(result);
@@ -111,7 +111,7 @@ public class PackDeServiciosAndServicioServiceTest {
         // Se agrega el servicio al pack de servicios, se espera un error de tipo
         // IllegalOperationException
         assertThrows(IllegalOperationException.class, () -> {
-            packDeServiciosService.addServicio(pack.getId(), servicio.getId());
+            packDeServiciosAndServicioService.addServicio(pack.getId(), servicio.getId());
         });
     }
 
@@ -121,13 +121,29 @@ public class PackDeServiciosAndServicioServiceTest {
         // Se obtiene el primer pack de servicios de la lista de packs de servicios
         PackDeServiciosEntity pack = packs.get(0);
         // Se obtiene la lista de servicios del pack de servicios
-        List<ServicioEntity> serviciosPack = packDeServiciosService.getServicios(pack.getId());
+        List<ServicioEntity> serviciosPack = packDeServiciosAndServicioService.getServicios(pack.getId());
 
         // Se verifica que la lista de servicios del pack de servicios sea la misma que
         // la
         // lista de servicios del pack de servicios
         assertNotNull(serviciosPack);
         assertEquals(pack.getServicios(), serviciosPack);
+    }
+
+    // Prueba para obtener la lista de servicios de un pack de servicios que no
+    // existe, se
+    // espera un error de tipo EntityNotFoundException
+
+    @Test
+    void getServiciosPackNotFoundTest() {
+        // Se obtiene el id de un pack de servicios que no existe
+        Long id = Long.MAX_VALUE;
+
+        // Se obtiene la lista de servicios del pack de servicios, se espera un error de
+        // tipo EntityNotFoundException
+        assertThrows(EntityNotFoundException.class, () -> {
+            packDeServiciosAndServicioService.getServicios(id);
+        });
     }
 
     // Prueba para eliminar un servicio de un pack de servicios
@@ -139,11 +155,11 @@ public class PackDeServiciosAndServicioServiceTest {
         ServicioEntity servicio = pack.getServicios().get(0);
 
         // Se elimina el servicio del pack de servicios
-        packDeServiciosService.removeServicio(pack.getId(), servicio.getId());
+        packDeServiciosAndServicioService.removeServicio(pack.getId(), servicio.getId());
 
         // Se verifica que el servicio no se encuentre en la lista de servicios del pack
         // de servicios
-        List<ServicioEntity> serviciosPack = packDeServiciosService.getServicios(pack.getId());
+        List<ServicioEntity> serviciosPack = packDeServiciosAndServicioService.getServicios(pack.getId());
         assertNotNull(serviciosPack);
         assertEquals(2, serviciosPack.size());
     }
@@ -159,7 +175,7 @@ public class PackDeServiciosAndServicioServiceTest {
 
         // Se elimina el servicio del pack de servicios
         assertThrows(IllegalOperationException.class, () -> {
-            packDeServiciosService.removeServicio(pack.getId(), servicio.getId());
+            packDeServiciosAndServicioService.removeServicio(pack.getId(), servicio.getId());
         });
 
     }
