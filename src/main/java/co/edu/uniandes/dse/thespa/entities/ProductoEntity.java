@@ -1,7 +1,5 @@
 package co.edu.uniandes.dse.thespa.entities;
 
-import java.io.File;
-
 import javax.persistence.MappedSuperclass;
 
 import lombok.Getter;
@@ -22,6 +20,6 @@ public abstract class ProductoEntity extends BaseEntity {
     protected String nombre;
     protected String descripcion;
     protected Double precio;
-    protected File imagen;
+    protected String imagen;
 
 }

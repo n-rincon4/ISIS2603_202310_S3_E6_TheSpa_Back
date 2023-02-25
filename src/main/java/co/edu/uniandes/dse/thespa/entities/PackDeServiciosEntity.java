@@ -1,6 +1,5 @@
 package co.edu.uniandes.dse.thespa.entities;
 
-import java.io.File;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -18,7 +17,7 @@ import uk.co.jemos.podam.common.PodamExclude;
 public class PackDeServiciosEntity extends BaseEntity {
     private Integer descuento;
     private String nombre;
-    private File image;
+    private String image;
 
     @PodamExclude
     @ManyToOne

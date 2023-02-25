@@ -1,6 +1,5 @@
 package co.edu.uniandes.dse.thespa.entities;
 
-import java.io.File;
 import javax.persistence.ManyToMany;
 
 import java.util.List;
@@ -21,7 +20,7 @@ import uk.co.jemos.podam.common.PodamExclude;
 @Entity
 public class TrabajadorEntity extends BaseEntity {
     private String nombre;
-    private File foto;
+    private String foto;
     private Integer calificacion;
     private Boolean enHallOfFame;
 
