@@ -13,14 +13,11 @@ import co.edu.uniandes.dse.thespa.repositories.SedeRepository;
 import co.edu.uniandes.dse.thespa.repositories.ServicioRepository;
 import lombok.extern.slf4j.Slf4j;
 
-
 //Author -> @Juan Coronel
-
-
 
 @Slf4j
 @Service
-public class SedeServicesService {
+public class SedeAndServicioService {
 
     // Inyeccion de dependencias -> Repositorio Sede
     @Autowired
@@ -104,5 +101,5 @@ public class SedeServicesService {
 
         return servEntity.get();
     }
-    
+
 }

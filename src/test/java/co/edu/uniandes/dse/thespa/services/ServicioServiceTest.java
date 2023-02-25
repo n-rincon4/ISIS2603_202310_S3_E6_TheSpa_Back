@@ -152,9 +152,9 @@ public class ServicioServiceTest {
      * duracion, restricciones, disponible, horaInicio, horaFin, precio
      * 
      */
-    
+
     @Test
-    void testCreateServicioSinDuracion(){
+    void testCreateServicioSinDuracion() {
         ServicioEntity newEntity = factory.manufacturePojo(ServicioEntity.class);
         newEntity.setDuracion(null);
         assertThrows(IllegalOperationException.class, () -> {
@@ -163,7 +163,7 @@ public class ServicioServiceTest {
     }
 
     @Test
-    void testCreateServicioSinRestricciones(){
+    void testCreateServicioSinRestricciones() {
         ServicioEntity newEntity = factory.manufacturePojo(ServicioEntity.class);
         newEntity.setRestricciones(null);
         assertThrows(IllegalOperationException.class, () -> {
@@ -172,7 +172,7 @@ public class ServicioServiceTest {
     }
 
     @Test
-    void testCreateServicioSinDisponible(){
+    void testCreateServicioSinDisponible() {
         ServicioEntity newEntity = factory.manufacturePojo(ServicioEntity.class);
         newEntity.setDisponible(null);
         assertThrows(IllegalOperationException.class, () -> {
@@ -181,7 +181,7 @@ public class ServicioServiceTest {
     }
 
     @Test
-    void testCreateServicioSinHoraInicio(){
+    void testCreateServicioSinHoraInicio() {
         ServicioEntity newEntity = factory.manufacturePojo(ServicioEntity.class);
         newEntity.setHoraInicio(null);
         assertThrows(IllegalOperationException.class, () -> {
@@ -190,7 +190,7 @@ public class ServicioServiceTest {
     }
 
     @Test
-    void testCreateServicioSinHoraFin(){
+    void testCreateServicioSinHoraFin() {
         ServicioEntity newEntity = factory.manufacturePojo(ServicioEntity.class);
         newEntity.setHoraFin(null);
         assertThrows(IllegalOperationException.class, () -> {
@@ -262,7 +262,7 @@ public class ServicioServiceTest {
     }
 
     @Test
-    void testUpdateInvalidServicio(){
+    void testUpdateInvalidServicio() {
         ServicioEntity pojoEntity = factory.manufacturePojo(ServicioEntity.class);
         assertThrows(EntityNotFoundException.class, () -> {
             servicioService.updateServicio(0L, pojoEntity);

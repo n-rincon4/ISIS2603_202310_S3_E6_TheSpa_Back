@@ -225,30 +225,4 @@ public class PackDeServiciosTest {
         });
     }
 
-    // prueba para obtener los servicios de un pack de servicios
-    @Test
-    void getServiciosTest() throws EntityNotFoundException {
-        PackDeServiciosEntity entity = packs.get(0);
-        List<ServicioEntity> servicios = PackDeServiciosService.getServicios(entity.getId());
-        assertNotNull(servicios);
-        assertEquals(entity.getServicios().size(), servicios.size());
-        for (ServicioEntity servicio : servicios) {
-            boolean found = false;
-            for (ServicioEntity storedServicio : entity.getServicios()) {
-                if (servicio.getId().equals(storedServicio.getId())) {
-                    found = true;
-                }
-            }
-            assertTrue(found);
-        }
-    }
-
-    // prueba para obtener los servicios de un pack de servicios que no existe
-    @Test
-    void getServiciosNoExisteTest() {
-        assertThrows(EntityNotFoundException.class, () -> {
-            PackDeServiciosService.getServicios(100L);
-        });
-    }
-
 }

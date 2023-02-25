@@ -39,7 +39,6 @@ public class ServicioAndPackDeServiciosServiceTest {
 
     private List<PackDeServiciosEntity> packs = new ArrayList<>();
 
-
     @BeforeEach
     void setUp() {
         clearData();
@@ -64,7 +63,7 @@ public class ServicioAndPackDeServiciosServiceTest {
                 servicio.getPacksDeServicios().add(pack);
             }
         }
-        
+
     }
 
     @Test
@@ -118,7 +117,7 @@ public class ServicioAndPackDeServiciosServiceTest {
         PackDeServiciosEntity pack = factory.manufacturePojo(PackDeServiciosEntity.class);
         entityManager.persist(pack);
         packs.add(pack);
-        
+
         assertThrows(IllegalOperationException.class, () -> {
             servicioService.removePackDeServicios(servicio.getId(), pack.getId());
         });

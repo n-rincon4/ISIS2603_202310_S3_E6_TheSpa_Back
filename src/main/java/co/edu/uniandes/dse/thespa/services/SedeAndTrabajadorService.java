@@ -13,13 +13,12 @@ import co.edu.uniandes.dse.thespa.repositories.SedeRepository;
 import co.edu.uniandes.dse.thespa.repositories.TrabajadorRepository;
 import lombok.extern.slf4j.Slf4j;
 
-
 //Author -> @Juan Coronel
 
 @Slf4j
 @Service
-public class SedeTrabajadorService {
-    
+public class SedeAndTrabajadorService {
+
     // Inyeccion de dependencias -> Repositorio Sede
     @Autowired
     SedeRepository sedeRepo;
@@ -27,8 +26,6 @@ public class SedeTrabajadorService {
     // Inyeccion de dependencias -> Repositorio Trabajadores
     @Autowired
     TrabajadorRepository trabajadoresRepo;
-
-
 
     // Añadir un trabajador a la sede
     @Transactional

@@ -26,7 +26,7 @@ import co.edu.uniandes.dse.thespa.exceptions.IllegalOperationException;
 @Transactional
 @Import(TrabajadorService.class)
 public class TrabajadorServiceTest {
-    
+
     @Autowired
     private TrabajadorService trabajadorService;
 
@@ -101,9 +101,9 @@ public class TrabajadorServiceTest {
     // Crea un trabajador cuyo nombre es una cadena vacía -> Operación ilegal
     void testCreateTrabajadorSinNombre() {
         assertThrows(IllegalOperationException.class, () -> {
-                TrabajadorEntity newEntity = factory.manufacturePojo(TrabajadorEntity.class);
-                newEntity.setNombre("");
-                trabajadorService.createTrabajador(newEntity);
+            TrabajadorEntity newEntity = factory.manufacturePojo(TrabajadorEntity.class);
+            newEntity.setNombre("");
+            trabajadorService.createTrabajador(newEntity);
         });
     }
 
@@ -111,9 +111,9 @@ public class TrabajadorServiceTest {
     // Crea un trabajador cuyo nombre es nulo -> Operación ilegal
     void testCreateTrabajadorSinNombre2() {
         assertThrows(IllegalOperationException.class, () -> {
-                TrabajadorEntity newEntity = factory.manufacturePojo(TrabajadorEntity.class);
-                newEntity.setNombre(null);
-                trabajadorService.createTrabajador(newEntity);
+            TrabajadorEntity newEntity = factory.manufacturePojo(TrabajadorEntity.class);
+            newEntity.setNombre(null);
+            trabajadorService.createTrabajador(newEntity);
         });
     }
 
@@ -121,9 +121,9 @@ public class TrabajadorServiceTest {
     // Crea un trabajador sin una sede asociada -> Operación ilegal
     void testCreateTrabajadorSinSede() {
         assertThrows(IllegalOperationException.class, () -> {
-                TrabajadorEntity newEntity = factory.manufacturePojo(TrabajadorEntity.class);
-                newEntity.setSedes(null);
-                trabajadorService.createTrabajador(newEntity);
+            TrabajadorEntity newEntity = factory.manufacturePojo(TrabajadorEntity.class);
+            newEntity.setSedes(null);
+            trabajadorService.createTrabajador(newEntity);
         });
     }
 
@@ -131,9 +131,9 @@ public class TrabajadorServiceTest {
     // Crea un trabajador sin un servicio asociado -> Operación ilegal
     void testCreateTrabajadorSinServicios() {
         assertThrows(IllegalOperationException.class, () -> {
-                TrabajadorEntity newEntity = factory.manufacturePojo(TrabajadorEntity.class);
-                newEntity.setServicios(null);
-                trabajadorService.createTrabajador(newEntity);
+            TrabajadorEntity newEntity = factory.manufacturePojo(TrabajadorEntity.class);
+            newEntity.setServicios(null);
+            trabajadorService.createTrabajador(newEntity);
         });
     }
 
@@ -142,13 +142,13 @@ public class TrabajadorServiceTest {
         List<TrabajadorEntity> list = trabajadorService.getTrabajadores();
         assertEquals(trabajadorList.size(), list.size());
         for (TrabajadorEntity entity : list) {
-                boolean found = false;
-                for (TrabajadorEntity storedEntity : trabajadorList) {
-                        if (entity.getId().equals(storedEntity.getId())) {
-                                found = true;
-                        }
+            boolean found = false;
+            for (TrabajadorEntity storedEntity : trabajadorList) {
+                if (entity.getId().equals(storedEntity.getId())) {
+                    found = true;
                 }
-                assertTrue(found);
+            }
+            assertTrue(found);
         }
     }
 
@@ -168,13 +168,14 @@ public class TrabajadorServiceTest {
 
     @Test
     void testGetTrabajadorNoExistente() {
-        assertThrows(EntityNotFoundException.class,()->{
-                trabajadorService.getTrabajador(0L);
+        assertThrows(EntityNotFoundException.class, () -> {
+            trabajadorService.getTrabajador(0L);
         });
     }
 
     @Test
-    // Actualiza el trabajador con ID dado, asumiendo todas las condiciones de un trabajador
+    // Actualiza el trabajador con ID dado, asumiendo todas las condiciones de un
+    // trabajador
     void testUpdateTrabajador() throws EntityNotFoundException, IllegalOperationException {
         TrabajadorEntity entity = trabajadorList.get(0);
         TrabajadorEntity pojoEntity = factory.manufacturePojo(TrabajadorEntity.class);
@@ -198,9 +199,9 @@ public class TrabajadorServiceTest {
     // actualiza trabajador con ID inválido
     void testUpdateTrabajadorIDInvalido() {
         assertThrows(EntityNotFoundException.class, () -> {
-                TrabajadorEntity pojoEntity = factory.manufacturePojo(TrabajadorEntity.class);
-                pojoEntity.setId(0L);
-                trabajadorService.updateTrabajador(0L, pojoEntity);
+            TrabajadorEntity pojoEntity = factory.manufacturePojo(TrabajadorEntity.class);
+            pojoEntity.setId(0L);
+            trabajadorService.updateTrabajador(0L, pojoEntity);
         });
     }
 
@@ -208,11 +209,11 @@ public class TrabajadorServiceTest {
     // actualiza trabajador con nombre cadena vacía -> Operación inválida
     void testUpdateTrabajadorSinNombre() {
         assertThrows(IllegalOperationException.class, () -> {
-                TrabajadorEntity entity = trabajadorList.get(0);
-                TrabajadorEntity pojoEntity = factory.manufacturePojo(TrabajadorEntity.class);
-                pojoEntity.setNombre("");
-                pojoEntity.setId(entity.getId());
-                trabajadorService.updateTrabajador(entity.getId(), pojoEntity);
+            TrabajadorEntity entity = trabajadorList.get(0);
+            TrabajadorEntity pojoEntity = factory.manufacturePojo(TrabajadorEntity.class);
+            pojoEntity.setNombre("");
+            pojoEntity.setId(entity.getId());
+            trabajadorService.updateTrabajador(entity.getId(), pojoEntity);
         });
     }
 
@@ -220,11 +221,11 @@ public class TrabajadorServiceTest {
     // actualiza trabajador con nombre nulo -> Operación inválida
     void testUpdateTrabajadorSinNombre2() {
         assertThrows(IllegalOperationException.class, () -> {
-                TrabajadorEntity entity = trabajadorList.get(0);
-                TrabajadorEntity pojoEntity = factory.manufacturePojo(TrabajadorEntity.class);
-                pojoEntity.setNombre(null);
-                pojoEntity.setId(entity.getId());
-                trabajadorService.updateTrabajador(entity.getId(), pojoEntity);
+            TrabajadorEntity entity = trabajadorList.get(0);
+            TrabajadorEntity pojoEntity = factory.manufacturePojo(TrabajadorEntity.class);
+            pojoEntity.setNombre(null);
+            pojoEntity.setId(entity.getId());
+            trabajadorService.updateTrabajador(entity.getId(), pojoEntity);
         });
     }
 
@@ -232,11 +233,11 @@ public class TrabajadorServiceTest {
     // actualiza trabajador sin sedes -> Operación inválida
     void testUpdateTrabajadorSinSedes() {
         assertThrows(IllegalOperationException.class, () -> {
-                TrabajadorEntity entity = trabajadorList.get(0);
-                TrabajadorEntity pojoEntity = factory.manufacturePojo(TrabajadorEntity.class);
-                pojoEntity.setSedes(null);
-                pojoEntity.setId(entity.getId());
-                trabajadorService.updateTrabajador(entity.getId(), pojoEntity);
+            TrabajadorEntity entity = trabajadorList.get(0);
+            TrabajadorEntity pojoEntity = factory.manufacturePojo(TrabajadorEntity.class);
+            pojoEntity.setSedes(null);
+            pojoEntity.setId(entity.getId());
+            trabajadorService.updateTrabajador(entity.getId(), pojoEntity);
         });
     }
 
@@ -244,27 +245,28 @@ public class TrabajadorServiceTest {
     // actualiza trabajador sin servicios -> Operación inválida
     void testUpdateTrabajadorSinServicios() {
         assertThrows(IllegalOperationException.class, () -> {
-                TrabajadorEntity entity = trabajadorList.get(0);
-                TrabajadorEntity pojoEntity = factory.manufacturePojo(TrabajadorEntity.class);
-                pojoEntity.setServicios(null);
-                pojoEntity.setId(entity.getId());
-                trabajadorService.updateTrabajador(entity.getId(), pojoEntity);
+            TrabajadorEntity entity = trabajadorList.get(0);
+            TrabajadorEntity pojoEntity = factory.manufacturePojo(TrabajadorEntity.class);
+            pojoEntity.setServicios(null);
+            pojoEntity.setId(entity.getId());
+            trabajadorService.updateTrabajador(entity.getId(), pojoEntity);
         });
     }
 
     @Test
     void testDeleteTrabajador() throws EntityNotFoundException, IllegalOperationException {
-            TrabajadorEntity entity = trabajadorList.get(0);
-            trabajadorService.deleteTrabajador(entity.getId());
-            TrabajadorEntity deleted = entityManager.find(TrabajadorEntity.class, entity.getId());
-            assertNull(deleted);
+        TrabajadorEntity entity = trabajadorList.get(0);
+        trabajadorService.deleteTrabajador(entity.getId());
+        TrabajadorEntity deleted = entityManager.find(TrabajadorEntity.class, entity.getId());
+        assertNull(deleted);
     }
 
     @Test
-    // eliminar un trabajador con un índice incorrecto/no existente -> Operación inválida
+    // eliminar un trabajador con un índice incorrecto/no existente -> Operación
+    // inválida
     void testDeleteTrabajadorIDInvalido() {
-        assertThrows(EntityNotFoundException.class, ()->{
-                trabajadorService.deleteTrabajador(0L);
+        assertThrows(EntityNotFoundException.class, () -> {
+            trabajadorService.deleteTrabajador(0L);
         });
     }
 }
