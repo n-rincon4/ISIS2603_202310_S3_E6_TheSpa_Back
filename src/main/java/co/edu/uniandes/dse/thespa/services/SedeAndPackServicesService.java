@@ -25,19 +25,19 @@ public class SedeAndPackServicesService {
 
     // Inyeccion de dependencias -> Repositorio Pack de Servicios
     @Autowired
-    PackDeServiciosRepository PackDeServiciosRepo;
+    PackDeServiciosRepository packDeServiciosRepo;
 
     // Añadir un Pack de servicios a la sede
     @Transactional
-    public PackDeServiciosEntity addSedePackDeServicios(Long SedeId, Long PackDeServiciosId)
+    public PackDeServiciosEntity addSedePackDeServicios(Long sedeId, Long packDeServiciosId)
             throws EntityNotFoundException, IllegalOperationException {
-        log.info("Inicia proceso de añadir a la sede un PackDeServicios con con id = {0}", PackDeServiciosId);
-        Optional<PackDeServiciosEntity> packEntity = PackDeServiciosRepo.findById(PackDeServiciosId);
+        log.info("Inicia proceso de añadir a la sede un PackDeServicios con con id = {0}", packDeServiciosId);
+        Optional<PackDeServiciosEntity> packEntity = packDeServiciosRepo.findById(packDeServiciosId);
         if (packEntity.isEmpty()) {
             throw new EntityNotFoundException("PACK_NOT_FOUND");
         }
 
-        Optional<SedeEntity> sedeEntity = sedeRepo.findById(SedeId);
+        Optional<SedeEntity> sedeEntity = sedeRepo.findById(sedeId);
         if (sedeEntity.isEmpty()) {
             throw new EntityNotFoundException("SEDE_NOT_FOUND");
         }
@@ -53,22 +53,22 @@ public class SedeAndPackServicesService {
 
         sedeEntity.get().setPacksDeServicios(PackDeServicios);
 
-        log.info("Termina proceso de añadir a la sede un Trabajador con con id = {0}", SedeId);
+        log.info("Termina proceso de añadir a la sede un Trabajador con con id = {0}", sedeId);
 
         return packEntity.get();
     }
 
     // Eliminar un pack de servicios de la sede
     @Transactional
-    public PackDeServiciosEntity deleteSedePackDeServicios(Long SedeId, Long PackDeServiciosId)
+    public PackDeServiciosEntity deleteSedePackDeServicios(Long sedeId, Long packDeServiciosId)
             throws EntityNotFoundException, IllegalOperationException {
-        log.info("Inicia proceso de remover a la sede un PackDeServicios con con id = {0}", PackDeServiciosId);
-        Optional<PackDeServiciosEntity> packEntity = PackDeServiciosRepo.findById(PackDeServiciosId);
+        log.info("Inicia proceso de remover a la sede un PackDeServicios con con id = {0}", packDeServiciosId);
+        Optional<PackDeServiciosEntity> packEntity = packDeServiciosRepo.findById(packDeServiciosId);
         if (packEntity.isEmpty()) {
             throw new EntityNotFoundException("PACK_NOT_FOUND");
         }
 
-        Optional<SedeEntity> sedeEntity = sedeRepo.findById(SedeId);
+        Optional<SedeEntity> sedeEntity = sedeRepo.findById(sedeId);
         if (sedeEntity.isEmpty()) {
             throw new EntityNotFoundException("SEDE_NOT_FOUND");
         }
@@ -79,12 +79,12 @@ public class SedeAndPackServicesService {
             throw new IllegalOperationException("PACK_NOT_FOUND_IN_CURRENT_SEDE");
         }
 
-        List<PackDeServiciosEntity> PackDeServicios = sedeEntity.get().getPacksDeServicios();
-        PackDeServicios.remove(packEntity.get());
+        List<PackDeServiciosEntity> packDeServicios = sedeEntity.get().getPacksDeServicios();
+        packDeServicios.remove(packEntity.get());
 
-        sedeEntity.get().setPacksDeServicios(PackDeServicios);
+        sedeEntity.get().setPacksDeServicios(packDeServicios);
 
-        log.info("Termina proceso de eliminar de la sede un PackDeServicios con con id = {0}", SedeId);
+        log.info("Termina proceso de eliminar de la sede un PackDeServicios con con id = {0}", sedeId);
 
         return packEntity.get();
     }

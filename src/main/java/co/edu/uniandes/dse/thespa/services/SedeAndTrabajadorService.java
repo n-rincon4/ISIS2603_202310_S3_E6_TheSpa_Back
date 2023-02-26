@@ -18,6 +18,11 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Service
 public class SedeAndTrabajadorService {
+    // String estático para eliminar el code smell en el mensaje de excepción y reporte
+    private static final String TRABAJADOR_NOT_FOUND = "TRABAJADOR_NOT_FOUND";
+    private static final String SEDE_NOT_FOUND = "SEDE_NOT_FOUND";
+    private static final String TRABAJADOR_ALREADY_EXISTS = "TRABAJADOR_ALREADY_EXISTS";
+    private static final String TRABAJADOR_NOT_FOUND_IN_CURRENT_SEDE = "TRABAJADOR_NOT_FOUND_IN_CURRENT_SEDE";
 
     // Inyeccion de dependencias -> Repositorio Sede
     @Autowired
@@ -29,23 +34,23 @@ public class SedeAndTrabajadorService {
 
     // Añadir un trabajador a la sede
     @Transactional
-    public TrabajadorEntity addSedeTrabajador(Long SedeId, Long TrabajadorId)
+    public TrabajadorEntity addSedeTrabajador(Long sedeId, Long trabajadorId)
             throws EntityNotFoundException, IllegalOperationException {
-        log.info("Inicia proceso de añadir a la sede un Trabajador con con id = {0}", TrabajadorId);
-        Optional<TrabajadorEntity> trabEntity = trabajadoresRepo.findById(TrabajadorId);
+        log.info("Inicia proceso de añadir a la sede un Trabajador con con id = {0}", trabajadorId);
+        Optional<TrabajadorEntity> trabEntity = trabajadoresRepo.findById(trabajadorId);
         if (trabEntity.isEmpty()) {
-            throw new EntityNotFoundException("TRABAJADOR_NOT_FOUND");
+            throw new EntityNotFoundException(TRABAJADOR_NOT_FOUND);
         }
 
-        Optional<SedeEntity> sedeEntity = sedeRepo.findById(SedeId);
+        Optional<SedeEntity> sedeEntity = sedeRepo.findById(sedeId);
         if (sedeEntity.isEmpty()) {
-            throw new EntityNotFoundException("SEDE_NOT_FOUND");
+            throw new EntityNotFoundException(SEDE_NOT_FOUND);
         }
 
         // revisa si el trabajador ya esta en la sede, si esta lanza una
         // IllegalOperationException
         if (sedeEntity.get().getTrabajadores().contains(trabEntity.get())) {
-            throw new IllegalOperationException("TRABAJADOR_ALREADY_EXISTS");
+            throw new IllegalOperationException(TRABAJADOR_ALREADY_EXISTS);
         }
 
         List<TrabajadorEntity> trabajs = sedeEntity.get().getTrabajadores();
@@ -53,30 +58,30 @@ public class SedeAndTrabajadorService {
 
         sedeEntity.get().setTrabajadores(trabajs);
 
-        log.info("Termina proceso de añadir a la sede un Trabajador con con id = {0}", SedeId);
+        log.info("Termina proceso de añadir a la sede un Trabajador con con id = {0}", sedeId);
 
         return trabEntity.get();
     }
 
     // Eliminar un trabajador de la sede
     @Transactional
-    public TrabajadorEntity deleteSedeTrabajador(Long SedeId, Long TrabajadorId)
+    public TrabajadorEntity deleteSedeTrabajador(Long sedeId, Long trabajadorId)
             throws EntityNotFoundException, IllegalOperationException {
-        log.info("Inicia proceso de eliminar de la sede un Trabajador con con id = {0}", TrabajadorId);
-        Optional<TrabajadorEntity> trabEntity = trabajadoresRepo.findById(TrabajadorId);
+        log.info("Inicia proceso de eliminar de la sede un Trabajador con con id = {0}", trabajadorId);
+        Optional<TrabajadorEntity> trabEntity = trabajadoresRepo.findById(trabajadorId);
         if (trabEntity.isEmpty()) {
-            throw new EntityNotFoundException("TRABAJADOR_NOT_FOUND");
+            throw new EntityNotFoundException(TRABAJADOR_NOT_FOUND);
         }
 
-        Optional<SedeEntity> sedeEntity = sedeRepo.findById(SedeId);
+        Optional<SedeEntity> sedeEntity = sedeRepo.findById(sedeId);
         if (sedeEntity.isEmpty()) {
-            throw new EntityNotFoundException("SEDE_NOT_FOUND");
+            throw new EntityNotFoundException(SEDE_NOT_FOUND);
         }
 
         // revisa si el trabajador no esta en la sede, si no esta lanza una
         // IllegalOperationException
         if (sedeEntity.get().getTrabajadores().contains(trabEntity.get()) == false) {
-            throw new IllegalOperationException("TRABAJADOR_NOT_FOUND_IN_CURRENT_SEDE");
+            throw new IllegalOperationException(TRABAJADOR_NOT_FOUND_IN_CURRENT_SEDE);
         }
 
         List<TrabajadorEntity> trabajs = sedeEntity.get().getTrabajadores();
@@ -84,7 +89,7 @@ public class SedeAndTrabajadorService {
 
         sedeEntity.get().setTrabajadores(trabajs);
 
-        log.info("Termina proceso de añadir a la sede un Trabajador con con id = {0}", SedeId);
+        log.info("Termina proceso de añadir a la sede un Trabajador con con id = {0}", sedeId);
 
         return trabEntity.get();
     }

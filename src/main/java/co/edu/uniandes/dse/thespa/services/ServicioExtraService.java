@@ -17,7 +17,9 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Service
 public class ServicioExtraService {
-
+    // String estático para eliminar el code smell en el mensaje de excepción y reporte
+    private static final String MENSAJE_SERVICIOEXTRA_NO_EXISTE = "El servicio extra con el id = {0} no existe";
+    
     // Inyeccion de dependencias -> Repositorio ServicioExtra
     @Autowired
     private ServicioExtraRepository servicioExtraRepository;
@@ -48,7 +50,7 @@ public class ServicioExtraService {
         log.info("Inicia proceso de consultar el servicio extra con id = {0}", servicioExtraId);
         Optional<ServicioExtraEntity> servicioExtraEntity = servicioExtraRepository.findById(servicioExtraId);
         if (servicioExtraEntity.isEmpty())
-            throw new EntityNotFoundException("El servicio extra con el id = " + servicioExtraId + " no existe");
+            throw new EntityNotFoundException(String.format(MENSAJE_SERVICIOEXTRA_NO_EXISTE, servicioExtraId));
         log.info("Termina proceso de consultar el servicio extra con id = {0}", servicioExtraId);
         return servicioExtraEntity.get();
     }
@@ -60,7 +62,7 @@ public class ServicioExtraService {
         log.info("Inicia proceso de actualizar el servicio extra con id = {0}", servicioExtraId);
         Optional<ServicioExtraEntity> servicioExtraEntity = servicioExtraRepository.findById(servicioExtraId);
         if (servicioExtraEntity.isEmpty())
-            throw new EntityNotFoundException("El servicio extra con el id = " + servicioExtraId + " no existe");
+            throw new EntityNotFoundException(String.format(MENSAJE_SERVICIOEXTRA_NO_EXISTE, servicioExtraId));
 
         if ((servicioExtra.getNombre() == null) || (servicioExtra.getNombre().equals("")))
             throw new IllegalOperationException("El nombre del servicio extra no puede estar vacío");
@@ -76,8 +78,7 @@ public class ServicioExtraService {
         log.info("Inicia proceso de borrar el servicio extra con id = {0}", servicioExtraId);
         Optional<ServicioExtraEntity> servicioExtraEntity = servicioExtraRepository.findById(servicioExtraId);
         if (servicioExtraEntity.isEmpty())
-            throw new EntityNotFoundException(
-                    "No se encontró el servicio extra con id = " + servicioExtraId + " no existe");
+            throw new EntityNotFoundException("No se encontró el servicio extra con id = " + servicioExtraId);
 
         servicioExtraRepository.deleteById(servicioExtraId);
         log.info("Termina proceso de borrar el servicio extra con id = {0}", servicioExtraId);

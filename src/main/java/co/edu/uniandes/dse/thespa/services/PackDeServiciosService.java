@@ -17,6 +17,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Service
 public class PackDeServiciosService {
+    // String estático para eliminar el code smell en el mensaje de excepción y reporte
+    private static final String MENSAJE_PACK_NO_EXISTE = "El pack de servicios con el id = {0} no existe";
 
     // Inyeccion de dependencias -> Repositorio PackDeServicios
     @Autowired
@@ -53,12 +55,12 @@ public class PackDeServiciosService {
     @Transactional
     public PackDeServiciosEntity getPackDeServicios(Long id) throws EntityNotFoundException {
         log.info("Consultando el pack de servicios con id = {}", id);
-        Optional<PackDeServiciosEntity> PacksBuscados = packDeServiciosRepository.findById(id);
-        if (PacksBuscados.isEmpty()) {
-            throw new EntityNotFoundException("El pack de servicios con el id = " + id + " no existe");
+        Optional<PackDeServiciosEntity> packsBuscados = packDeServiciosRepository.findById(id);
+        if (packsBuscados.isEmpty()) {
+            throw new EntityNotFoundException(String.format(MENSAJE_PACK_NO_EXISTE, id));
         }
         log.info("Pack de servicios encontrado");
-        return PacksBuscados.get();
+        return packsBuscados.get();
 
     }
 
@@ -68,9 +70,9 @@ public class PackDeServiciosService {
             throws EntityNotFoundException {
 
         log.info("Actualizando el pack de servicios con id = {}", id);
-        Optional<PackDeServiciosEntity> PacksBuscados = packDeServiciosRepository.findById(id);
-        if (PacksBuscados.isEmpty()) {
-            throw new EntityNotFoundException("El pack de servicios con el id = " + id + " no existe");
+        Optional<PackDeServiciosEntity> packsBuscados = packDeServiciosRepository.findById(id);
+        if (packsBuscados.isEmpty()) {
+            throw new EntityNotFoundException(String.format(MENSAJE_PACK_NO_EXISTE, id));
         }
 
         packDeServicios.setId(id);
@@ -83,9 +85,9 @@ public class PackDeServiciosService {
     @Transactional
     public void deletePackDeServicios(Long id) throws EntityNotFoundException {
         log.info("Borrando el pack de servicios con id = {}", id);
-        Optional<PackDeServiciosEntity> PacksBuscados = packDeServiciosRepository.findById(id);
-        if (PacksBuscados.isEmpty()) {
-            throw new EntityNotFoundException("El pack de servicios con el id = " + id + " no existe");
+        Optional<PackDeServiciosEntity> packsBuscados = packDeServiciosRepository.findById(id);
+        if (packsBuscados.isEmpty()) {
+            throw new EntityNotFoundException(String.format(MENSAJE_PACK_NO_EXISTE, id));
         }
         packDeServiciosRepository.deleteById(id);
         log.info("Pack de servicios borrado");

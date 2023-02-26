@@ -17,6 +17,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Service
 public class TrabajadorService {
+    // String estático para eliminar el code smell en el mensaje de excepción y reporte
+    private static final String MENSAJE_TRABAJADOR_NO_EXISTE = "El trabajador con el id = {0} no existe";
 
     // Inyeccion de dependencias -> Repositorio Trabajador
     @Autowired
@@ -54,7 +56,7 @@ public class TrabajadorService {
         log.info("Inicia proceso de consultar el trabajador con id = {0}", trabajadorId);
         Optional<TrabajadorEntity> trabajadorEntity = trabajadorRepository.findById(trabajadorId);
         if (trabajadorEntity.isEmpty())
-            throw new EntityNotFoundException("El trabajador con el id = " + trabajadorId + " no existe");
+            throw new EntityNotFoundException(String.format(MENSAJE_TRABAJADOR_NO_EXISTE, trabajadorId));
         log.info("Termina proceso de consultar el trabajador con id = {0}", trabajadorId);
         return trabajadorEntity.get();
     }
@@ -66,7 +68,7 @@ public class TrabajadorService {
         log.info("Inicia proceso de actualizar el trabajador con id = {0}", trabajadorId);
         Optional<TrabajadorEntity> trabajadorEntity = trabajadorRepository.findById(trabajadorId);
         if (trabajadorEntity.isEmpty())
-            throw new EntityNotFoundException("El trabajador con el id = " + trabajadorId + " no existe");
+            throw new EntityNotFoundException(String.format(MENSAJE_TRABAJADOR_NO_EXISTE, trabajadorId));
 
         if ((trabajador.getNombre() == null) || (trabajador.getNombre().equals("")))
             throw new IllegalOperationException("El nombre del trabajador no puede estar vacío");

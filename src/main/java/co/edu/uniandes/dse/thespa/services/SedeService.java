@@ -16,6 +16,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Service
 public class SedeService {
+    // String estático para eliminar el code smell en el mensaje de excepción y reporte
+    private static final String SEDE_NOT_FOUND = "SEDE_NOT_FOUND";
 
     // Inyeccion de dependencias -> Repositorio Sede
     @Autowired
@@ -49,12 +51,12 @@ public class SedeService {
         }
 
         // Assert 5: la lista de servicios no debe ser vacia
-        if (sede.getServicios().isEmpty() == true) {
+        if (sede.getServicios().isEmpty()) {
             throw new IllegalOperationException("La sede tiene que tener al menos un servicio.");
         }
 
         // Assert 6: Debe haber al menos un trabajador
-        if (sede.getTrabajadores().isEmpty() == true) {
+        if (sede.getTrabajadores().isEmpty()) {
             throw new IllegalOperationException("La sede tiene que tener al menos un trabajador.");
         }
 
@@ -64,7 +66,7 @@ public class SedeService {
         }
 
         // Assert 8: debe tener un Pack de servicios
-        if (sede.getPacksDeServicios().isEmpty() == true) {
+        if (sede.getPacksDeServicios().isEmpty()) {
             throw new IllegalOperationException("La sede tiene que tener al menos unpack de servicios");
         }
 
@@ -86,36 +88,36 @@ public class SedeService {
         log.info("Inicia proceso de consultar la Sede con id = {0}", sedeId);
         Optional<SedeEntity> sedeEntity = sedeRepo.findById(sedeId);
         if (sedeEntity.isEmpty())
-            throw new EntityNotFoundException("SEDE_NOT_FOUND");
+            throw new EntityNotFoundException(SEDE_NOT_FOUND);
         log.info("Termina proceso de consultar la Sede con id = {0}", sedeId);
         return sedeEntity.get();
     }
 
     // Actualizar una sede
     @Transactional
-    public SedeEntity updateSede(Long SedeId, SedeEntity sede)
+    public SedeEntity updateSede(Long sedeId, SedeEntity sede)
             throws EntityNotFoundException, IllegalOperationException {
-        log.info("Inicia proceso de actualizar la Sede con id = {0}", SedeId);
-        Optional<SedeEntity> SedeEntity = sedeRepo.findById(SedeId);
-        if (SedeEntity.isEmpty())
-            throw new EntityNotFoundException("SEDE_NOT_FOUND");
+        log.info("Inicia proceso de actualizar la Sede con id = {0}", sedeId);
+        Optional<SedeEntity> sedeEntity = sedeRepo.findById(sedeId);
+        if (sedeEntity.isEmpty())
+            throw new EntityNotFoundException(SEDE_NOT_FOUND);
 
-        sede.setId(SedeId);
-        log.info("Termina proceso de actualizar la Sede con id = {0}", SedeId);
+        sede.setId(sedeId);
+        log.info("Termina proceso de actualizar la Sede con id = {0}", sedeId);
         return sedeRepo.save(sede);
     }
 
     // Eliminar una Sede
     @Transactional
-    public void deleteSede(Long SedeId) throws EntityNotFoundException, IllegalOperationException {
-        log.info("Inicia proceso de borrar la sede con id = {0}", SedeId);
-        Optional<SedeEntity> sedeEntity = sedeRepo.findById(SedeId);
+    public void deleteSede(Long sedeId) throws EntityNotFoundException, IllegalOperationException {
+        log.info("Inicia proceso de borrar la sede con id = {0}", sedeId);
+        Optional<SedeEntity> sedeEntity = sedeRepo.findById(sedeId);
         if (sedeEntity.isEmpty()) {
-            throw new EntityNotFoundException("SEDE_NOT_FOUND");
+            throw new EntityNotFoundException(SEDE_NOT_FOUND);
         }
 
-        sedeRepo.deleteById(SedeId);
-        log.info("Termina proceso de borrar la sede con id = {0}", SedeId);
+        sedeRepo.deleteById(sedeId);
+        log.info("Termina proceso de borrar la sede con id = {0}", sedeId);
     }
 
 }

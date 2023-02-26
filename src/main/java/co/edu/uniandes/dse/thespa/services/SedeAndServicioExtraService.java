@@ -29,15 +29,15 @@ public class SedeAndServicioExtraService {
 
     // añadir un servicio extra a la sede
     @Transactional
-    ServicioExtraEntity addSedeExtraService(Long SedeId, Long SedeExtraServiceId)
+    ServicioExtraEntity addSedeExtraService(Long sedeId, Long sedeExtraServiceId)
             throws EntityNotFoundException, IllegalOperationException {
-        log.info("Inicia proceso de añadir a la sede un servicio extra con con id = {0}", SedeExtraServiceId);
-        Optional<ServicioExtraEntity> servEntity = servicioExtraRepo.findById(SedeExtraServiceId);
+        log.info("Inicia proceso de añadir a la sede un servicio extra con con id = {0}", sedeExtraServiceId);
+        Optional<ServicioExtraEntity> servEntity = servicioExtraRepo.findById(sedeExtraServiceId);
         if (servEntity.isEmpty()) {
             throw new EntityNotFoundException("EXTRA_SERVICE_NOT_FOUND");
         }
 
-        Optional<SedeEntity> sedeEntity = sedeRepo.findById(SedeId);
+        Optional<SedeEntity> sedeEntity = sedeRepo.findById(sedeId);
         if (sedeEntity.isEmpty()) {
             throw new EntityNotFoundException("SEDE_NOT_FOUND");
         }
@@ -53,22 +53,22 @@ public class SedeAndServicioExtraService {
 
         sedeEntity.get().setServiciosExtra(servs);
 
-        log.info("Termina proceso de añadir a la sede un servicio extra con con id = {0}", SedeId);
+        log.info("Termina proceso de añadir a la sede un servicio extra con con id = {0}", sedeId);
 
         return servEntity.get();
     }
 
     // Eliminar un servicio extra de la sede
     @Transactional
-    ServicioExtraEntity deleteSedeExtraService(Long SedeId, Long SedeExtraServiceId)
+    ServicioExtraEntity deleteSedeExtraService(Long sedeId, Long sedeExtraServiceId)
             throws EntityNotFoundException, IllegalOperationException {
-        log.info("Inicia proceso de remover a la sede un servicio extra con con id = {0}", SedeExtraServiceId);
-        Optional<ServicioExtraEntity> servEntity = servicioExtraRepo.findById(SedeExtraServiceId);
+        log.info("Inicia proceso de remover a la sede un servicio extra con con id = {0}", sedeExtraServiceId);
+        Optional<ServicioExtraEntity> servEntity = servicioExtraRepo.findById(sedeExtraServiceId);
         if (servEntity.isEmpty()) {
             throw new EntityNotFoundException("EXTRA_SERVICE_NOT_FOUND");
         }
 
-        Optional<SedeEntity> sedeEntity = sedeRepo.findById(SedeId);
+        Optional<SedeEntity> sedeEntity = sedeRepo.findById(sedeId);
         if (sedeEntity.isEmpty()) {
             throw new EntityNotFoundException("SEDE_NOT_FOUND");
         }
@@ -84,7 +84,7 @@ public class SedeAndServicioExtraService {
 
         sedeEntity.get().setServiciosExtra(servs);
 
-        log.info("Termina proceso de eliminar de la sede un servicio extra con con id = {0}", SedeId);
+        log.info("Termina proceso de eliminar de la sede un servicio extra con con id = {0}", sedeId);
 
         return servEntity.get();
 

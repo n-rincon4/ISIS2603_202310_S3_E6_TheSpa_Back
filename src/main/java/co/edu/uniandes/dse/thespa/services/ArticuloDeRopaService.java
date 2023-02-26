@@ -16,6 +16,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Service
 public class ArticuloDeRopaService {
+    // String estático para eliminar el code smell en el mensaje de excepción y reporte
+    private static final String MENSAJE_ARTICULO_NO_EXISTE = "El articulo de ropa con el id = {0} no existe";
 
     // Inyeccion de dependencias -> Repositorio ArticuloDeRopa
     @Autowired
@@ -54,7 +56,7 @@ public class ArticuloDeRopaService {
         log.info("Consultando el articulo de ropa con id = {}", id);
         Optional<ArticuloDeRopaEntity> articulosBuscados = articuloDeRopaRepository.findById(id);
         if (articulosBuscados.isEmpty()) {
-            throw new EntityNotFoundException("El articulo de ropa con el id = " + id + " no existe");
+            throw new EntityNotFoundException(String.format(MENSAJE_ARTICULO_NO_EXISTE, id));
         }
         log.info("Articulo de ropa encontrado");
         return articulosBuscados.get();
@@ -68,7 +70,7 @@ public class ArticuloDeRopaService {
         log.info("Actualizando el articulo de ropa con id = {}", id);
         Optional<ArticuloDeRopaEntity> articulosBuscados = articuloDeRopaRepository.findById(id);
         if (articulosBuscados.isEmpty()) {
-            throw new EntityNotFoundException("El articulo de ropa con el id = " + id + " no existe");
+            throw new EntityNotFoundException(String.format(MENSAJE_ARTICULO_NO_EXISTE, id));
         }
 
         articuloDeRopa.setId(id);
@@ -82,7 +84,7 @@ public class ArticuloDeRopaService {
         log.info("Borrando el articulo de ropa con id = {}", id);
         Optional<ArticuloDeRopaEntity> articulosBuscados = articuloDeRopaRepository.findById(id);
         if (articulosBuscados.isEmpty()) {
-            throw new EntityNotFoundException("El articulo de ropa con el id = " + id + " no existe");
+            throw new EntityNotFoundException(String.format(MENSAJE_ARTICULO_NO_EXISTE, id));
         }
         articuloDeRopaRepository.deleteById(id);
         log.info("articulo de ropa borrado");
