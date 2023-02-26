@@ -21,6 +21,9 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Service
 public class PackDeServiciosAndServicioService {
+    // String estático para eliminar el code smell en el mensaje de excepción y reporte
+    private static final String MENSAJE_PACK_NO_EXISTE = "El pack de servicios con el id = {0} no existe";
+    private static final String MENSAJE_SERVICIO_NO_EXISTE = "El servicio con el id = {0} no existe";
 
     // Inyeccion de dependencias -> Repositorio PackDeServicios
     @Autowired
@@ -34,12 +37,12 @@ public class PackDeServiciosAndServicioService {
     @Transactional
     public List<ServicioEntity> getServicios(Long id) throws EntityNotFoundException {
         log.info("Consultando los servicios del pack de servicios con id = {}", id);
-        Optional<PackDeServiciosEntity> PacksBuscados = packDeServiciosRepository.findById(id);
-        if (PacksBuscados.isEmpty()) {
-            throw new EntityNotFoundException("El pack de servicios con el id = " + id + " no existe");
+        Optional<PackDeServiciosEntity> packsBuscados = packDeServiciosRepository.findById(id);
+        if (packsBuscados.isEmpty()) {
+            throw new EntityNotFoundException(String.format(MENSAJE_PACK_NO_EXISTE, id));
         }
         log.info("Servicios del pack de servicios encontrados");
-        return PacksBuscados.get().getServicios();
+        return packsBuscados.get().getServicios();
     }
 
     // Agrega un servicio a un pack de servicios
@@ -49,29 +52,29 @@ public class PackDeServiciosAndServicioService {
         log.info("Agregando el servicio con id = {} al pack de servicios con id = {}", servicioID, packid);
 
         // Busca el pack de servicios
-        Optional<PackDeServiciosEntity> PacksBuscados = packDeServiciosRepository.findById(packid);
-        if (PacksBuscados.isEmpty()) {
-            throw new EntityNotFoundException("El pack de servicios con el id = " + packid + " no existe");
+        Optional<PackDeServiciosEntity> packsBuscados = packDeServiciosRepository.findById(packid);
+        if (packsBuscados.isEmpty()) {
+            throw new EntityNotFoundException(String.format(MENSAJE_PACK_NO_EXISTE, packid));
         }
 
         // Busca el servicio
-        Optional<ServicioEntity> ServiciosBuscados = servicioRepository.findById(servicioID);
-        if (ServiciosBuscados.isEmpty()) {
-            throw new EntityNotFoundException("El servicio con el id = " + servicioID + " no existe");
+        Optional<ServicioEntity> serviciosBuscados = servicioRepository.findById(servicioID);
+        if (serviciosBuscados.isEmpty()) {
+            throw new EntityNotFoundException(String.format(MENSAJE_SERVICIO_NO_EXISTE, servicioID));
         }
 
         // Verifica que el servicio no este ya en el pack de servicios
-        if (PacksBuscados.get().getServicios().contains(ServiciosBuscados.get())) {
+        if (packsBuscados.get().getServicios().contains(serviciosBuscados.get())) {
             throw new IllegalOperationException("El servicio con el id = " + servicioID
                     + " ya se encuentra en el pack de servicios con el id = " + packid);
         }
 
         // Agrega el servicio al pack de servicios
-        PacksBuscados.get().getServicios().add(ServiciosBuscados.get());
+        packsBuscados.get().getServicios().add(serviciosBuscados.get());
 
         log.info("Servicio agregado al pack de servicios");
 
-        return ServiciosBuscados.get();
+        return serviciosBuscados.get();
 
     }
 
@@ -82,29 +85,29 @@ public class PackDeServiciosAndServicioService {
         log.info("eliminando el servicio con id = {} del pack de servicios con id = {}", servicioID, packid);
 
         // Busca el pack de servicios
-        Optional<PackDeServiciosEntity> PacksBuscados = packDeServiciosRepository.findById(packid);
-        if (PacksBuscados.isEmpty()) {
-            throw new EntityNotFoundException("El pack de servicios con el id = " + packid + " no existe");
+        Optional<PackDeServiciosEntity> packsBuscados = packDeServiciosRepository.findById(packid);
+        if (packsBuscados.isEmpty()) {
+            throw new EntityNotFoundException(String.format(MENSAJE_PACK_NO_EXISTE, packid));
         }
 
         // Busca el servicio
-        Optional<ServicioEntity> ServiciosBuscados = servicioRepository.findById(servicioID);
-        if (ServiciosBuscados.isEmpty()) {
-            throw new EntityNotFoundException("El servicio con el id = " + servicioID + " no existe");
+        Optional<ServicioEntity> serviciosBuscados = servicioRepository.findById(servicioID);
+        if (serviciosBuscados.isEmpty()) {
+            throw new EntityNotFoundException(String.format(MENSAJE_SERVICIO_NO_EXISTE, servicioID));
         }
 
         // Verifica que el servicio este en el pack de servicios
-        if (!PacksBuscados.get().getServicios().contains(ServiciosBuscados.get())) {
+        if (!packsBuscados.get().getServicios().contains(serviciosBuscados.get())) {
             throw new IllegalOperationException("El servicio con el id = " + servicioID
                     + " no esta en el pack de servicios con el id = " + packid);
         }
 
         // Elimina el servicio del pack de servicios
-        PacksBuscados.get().getServicios().remove(ServiciosBuscados.get());
+        packsBuscados.get().getServicios().remove(serviciosBuscados.get());
 
         log.info("Servicio eliminado del pack de servicios");
 
-        return ServiciosBuscados.get();
+        return serviciosBuscados.get();
     }
 
 }

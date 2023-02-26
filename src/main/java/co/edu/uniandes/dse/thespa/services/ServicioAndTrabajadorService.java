@@ -20,6 +20,9 @@ import java.util.Optional;
 @Slf4j
 @Service
 public class ServicioAndTrabajadorService {
+    // String estático para eliminar el code smell en el mensaje de excepción y reporte
+    private static final String MENSAJE_TRABAJADOR_NO_EXISTE = "El trabajador con el id = {0} no existe";
+    private static final String MENSAJE_SERVICIO_NO_EXISTE = "El servicio con el id = {0} no existe";
 
     @Autowired
     ServicioRepository servicioRepository;
@@ -33,11 +36,11 @@ public class ServicioAndTrabajadorService {
         log.info("Inicia proceso de agregar un trabajador al servicio con id = {0}", servicioID);
         Optional<ServicioEntity> servicioEntity = servicioRepository.findById(servicioID);
         if (servicioEntity.isEmpty()) {
-            throw new EntityNotFoundException("El servicio con el id = " + servicioID + " no existe");
+            throw new EntityNotFoundException(String.format(MENSAJE_SERVICIO_NO_EXISTE, servicioID));
         }
         Optional<TrabajadorEntity> trabajadorEntity = trabajadorRepository.findById(trabajadorID);
         if (trabajadorEntity.isEmpty()) {
-            throw new EntityNotFoundException("El trabajador con el id = " + trabajadorID + " no existe");
+            throw new EntityNotFoundException(String.format(MENSAJE_TRABAJADOR_NO_EXISTE, trabajadorID));
         }
 
         if (servicioEntity.get().getTrabajadores().contains(trabajadorEntity.get())) {
@@ -55,7 +58,7 @@ public class ServicioAndTrabajadorService {
         log.info("Inicia proceso de consultar los trabajadores del servicio con id = {0}", servicioID);
         Optional<ServicioEntity> servicioEntity = servicioRepository.findById(servicioID);
         if (servicioEntity.isEmpty()) {
-            throw new EntityNotFoundException("El servicio con el id = " + servicioID + " no existe");
+            throw new EntityNotFoundException(String.format(MENSAJE_SERVICIO_NO_EXISTE, servicioID));
         }
         log.info("Termina proceso de consultar los trabajadores del servicio con id = {0}", servicioID);
         return servicioEntity.get().getTrabajadores();
@@ -67,11 +70,11 @@ public class ServicioAndTrabajadorService {
         log.info("Inicia proceso de remover un trabajador del servicio con id = {0}", servicioID);
         Optional<ServicioEntity> servicioEntity = servicioRepository.findById(servicioID);
         if (servicioEntity.isEmpty()) {
-            throw new EntityNotFoundException("El servicio con el id = " + servicioID + " no existe");
+            throw new EntityNotFoundException(String.format(MENSAJE_SERVICIO_NO_EXISTE, servicioID));
         }
         Optional<TrabajadorEntity> trabajadorEntity = trabajadorRepository.findById(trabajadorID);
         if (trabajadorEntity.isEmpty()) {
-            throw new EntityNotFoundException("El trabajador con el id = " + trabajadorID + " no existe");
+            throw new EntityNotFoundException(String.format(MENSAJE_TRABAJADOR_NO_EXISTE, trabajadorID));
         }
 
         if (!servicioEntity.get().getTrabajadores().contains(trabajadorEntity.get())) {

@@ -9,6 +9,7 @@ import javax.persistence.ManyToOne;
 
 import javax.persistence.CascadeType;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import uk.co.jemos.podam.common.PodamExclude;
@@ -16,6 +17,7 @@ import uk.co.jemos.podam.common.PodamExclude;
 @Getter
 @Setter
 @Entity
+@EqualsAndHashCode(callSuper=true)
 public class ServicioEntity extends ProductoEntity {
     private Integer duracion;
     private String restricciones;
@@ -25,7 +27,7 @@ public class ServicioEntity extends ProductoEntity {
 
     @PodamExclude
     @ManyToMany
-    private List<PackDeServiciosEntity> packsDeServicios = new ArrayList<PackDeServiciosEntity>();
+    private List<PackDeServiciosEntity> packsDeServicios = new ArrayList<>();
 
     @PodamExclude
     @ManyToOne
@@ -33,5 +35,5 @@ public class ServicioEntity extends ProductoEntity {
 
     @PodamExclude
     @ManyToMany(mappedBy = "servicios", cascade = CascadeType.PERSIST)
-    private List<TrabajadorEntity> trabajadores = new ArrayList<TrabajadorEntity>();
+    private List<TrabajadorEntity> trabajadores = new ArrayList<>();
 }

@@ -21,11 +21,11 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
 
 @DataJpaTest
 @Transactional
-@Import({ TrabajadorService.class, ServicioService.class })
+@Import({ TrabajadorAndServicioService.class, ServicioService.class })
 public class TrabajadorAndServicioServiceTest {
     // Servicio que se va a probar
     @Autowired
-    private TrabajadorService trabajadorService;
+    private TrabajadorAndServicioService trabajadorandServicioService;
 
     // TestEntityManager
     @Autowired
@@ -81,7 +81,7 @@ public class TrabajadorAndServicioServiceTest {
         TrabajadorEntity trabajador = trabajadores.get(0);
         ServicioEntity servicio = servicios.get(0);
 
-        ServicioEntity answer = trabajadorService.addServicioToTrabajador(trabajador.getId(), servicio.getId());
+        ServicioEntity answer = trabajadorandServicioService.addServicioToTrabajador(trabajador.getId(), servicio.getId());
         assertNotNull(answer);
         assertEquals(servicio.getId(), answer.getId());
     }
@@ -93,7 +93,7 @@ public class TrabajadorAndServicioServiceTest {
         ServicioEntity servicio = trabajador.getServicios().get(0);
 
         assertThrows(IllegalOperationException.class, () -> {
-            trabajadorService.addServicioToTrabajador(trabajador.getId(), servicio.getId());
+            trabajadorandServicioService.addServicioToTrabajador(trabajador.getId(), servicio.getId());
         });
     }
 
@@ -103,7 +103,7 @@ public class TrabajadorAndServicioServiceTest {
         TrabajadorEntity trabajador = trabajadores.get(0);
         ServicioEntity servicio = trabajador.getServicios().get(0);
 
-        ServicioEntity answer = trabajadorService.deleteServicioTrabajador(trabajador.getId(), servicio.getId());
+        ServicioEntity answer = trabajadorandServicioService.deleteServicioTrabajador(trabajador.getId(), servicio.getId());
         assertNotNull(answer);
         assertEquals(servicio.getId(), answer.getId());
     }
@@ -115,7 +115,7 @@ public class TrabajadorAndServicioServiceTest {
         ServicioEntity servicio = servicios.get(0);
 
         assertThrows(IllegalOperationException.class, () -> {
-            trabajadorService.deleteServicioTrabajador(trabajador.getId(), servicio.getId());
+            trabajadorandServicioService.deleteServicioTrabajador(trabajador.getId(), servicio.getId());
         });
     }
 }

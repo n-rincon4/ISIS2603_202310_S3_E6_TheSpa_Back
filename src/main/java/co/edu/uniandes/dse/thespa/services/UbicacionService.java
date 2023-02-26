@@ -18,6 +18,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Service
 public class UbicacionService {
+    // String estático para eliminar el code smell en el mensaje de excepción y reporte
+    private static final String MENSAJE_UBICACION_NO_EXISTE = "La ubicación con el id = {0} no existe";
 
     // Inyeccion de dependencias -> Repositorio Ubicacion
     @Autowired
@@ -76,7 +78,7 @@ public class UbicacionService {
         log.info("Consultando la ubicacion con id = {}", id);
         Optional<UbicacionEntity> ubicacionesBuscadas = ubicacionRepository.findById(id);
         if (ubicacionesBuscadas.isEmpty()) {
-            throw new EntityNotFoundException("La ubicacion con el id = " + id + " no existe");
+            throw new EntityNotFoundException(String.format(MENSAJE_UBICACION_NO_EXISTE, id));
         }
         log.info("Ubicacion encontrada");
         return ubicacionesBuscadas.get();
@@ -89,7 +91,7 @@ public class UbicacionService {
         log.info("Actualizando la ubicacion con id = {}", id);
         Optional<UbicacionEntity> ubicacionesBuscadas = ubicacionRepository.findById(id);
         if (ubicacionesBuscadas.isEmpty()) {
-            throw new EntityNotFoundException("La ubicacion con el id = " + id + " no existe");
+            throw new EntityNotFoundException(String.format(MENSAJE_UBICACION_NO_EXISTE, id));
         }
         log.info("Ubicacion encontrada");
         // revisa que la latitud y longitud no esten vacias
@@ -136,7 +138,7 @@ public class UbicacionService {
         log.info("Eliminando la ubicacion con id = {}", id);
         Optional<UbicacionEntity> ubicacionesBuscadas = ubicacionRepository.findById(id);
         if (ubicacionesBuscadas.isEmpty()) {
-            throw new EntityNotFoundException("La ubicacion con el id = " + id + " no existe");
+            throw new EntityNotFoundException(String.format(MENSAJE_UBICACION_NO_EXISTE, id));
         }
         log.info("Ubicacion encontrada");
         ubicacionRepository.deleteById(id);

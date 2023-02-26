@@ -5,6 +5,8 @@ import javax.persistence.ManyToMany;
 import java.util.List;
 
 import javax.persistence.Entity;
+
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import uk.co.jemos.podam.common.PodamExclude;
@@ -18,6 +20,7 @@ import uk.co.jemos.podam.common.PodamExclude;
 @Getter
 @Setter
 @Entity
+@EqualsAndHashCode(callSuper=true)
 public class TrabajadorEntity extends BaseEntity {
     private String nombre;
     private String foto;

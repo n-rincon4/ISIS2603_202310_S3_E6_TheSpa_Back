@@ -2,6 +2,7 @@ package co.edu.uniandes.dse.thespa.entities;
 
 import javax.persistence.MappedSuperclass;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,6 +16,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @MappedSuperclass
+@EqualsAndHashCode(callSuper=true)
 public abstract class ProductoEntity extends BaseEntity {
 
     protected String nombre;
