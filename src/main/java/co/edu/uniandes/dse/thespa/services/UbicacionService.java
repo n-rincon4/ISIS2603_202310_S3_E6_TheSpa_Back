@@ -20,6 +20,7 @@ import lombok.extern.slf4j.Slf4j;
 public class UbicacionService {
     // String estático para eliminar el code smell en el mensaje de excepción y reporte
     private static final String MENSAJE_UBICACION_NO_EXISTE = "La ubicación con el id = {0} no existe";
+    private static final String UBICACION_ENCONTRADA = "Ubicación encontrada";
 
     // Inyeccion de dependencias -> Repositorio Ubicacion
     @Autowired
@@ -80,7 +81,7 @@ public class UbicacionService {
         if (ubicacionesBuscadas.isEmpty()) {
             throw new EntityNotFoundException(String.format(MENSAJE_UBICACION_NO_EXISTE, id));
         }
-        log.info("Ubicacion encontrada");
+        log.info(UBICACION_ENCONTRADA);
         return ubicacionesBuscadas.get();
     }
 
@@ -93,7 +94,7 @@ public class UbicacionService {
         if (ubicacionesBuscadas.isEmpty()) {
             throw new EntityNotFoundException(String.format(MENSAJE_UBICACION_NO_EXISTE, id));
         }
-        log.info("Ubicacion encontrada");
+        log.info(UBICACION_ENCONTRADA);
         // revisa que la latitud y longitud no esten vacias
         if (ubicacion.getLatitud() == null || ubicacion.getLongitud() == null) {
             throw new IllegalOperationException("La latitud y longitud no pueden ser nulas");
@@ -140,7 +141,7 @@ public class UbicacionService {
         if (ubicacionesBuscadas.isEmpty()) {
             throw new EntityNotFoundException(String.format(MENSAJE_UBICACION_NO_EXISTE, id));
         }
-        log.info("Ubicacion encontrada");
+        log.info(UBICACION_ENCONTRADA);
         ubicacionRepository.deleteById(id);
     }
 

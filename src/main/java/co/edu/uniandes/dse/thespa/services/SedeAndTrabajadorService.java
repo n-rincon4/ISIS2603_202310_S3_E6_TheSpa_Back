@@ -80,7 +80,7 @@ public class SedeAndTrabajadorService {
 
         // revisa si el trabajador no esta en la sede, si no esta lanza una
         // IllegalOperationException
-        if (sedeEntity.get().getTrabajadores().contains(trabEntity.get()) == false) {
+        if (!sedeEntity.get().getTrabajadores().contains(trabEntity.get())) {
             throw new IllegalOperationException(TRABAJADOR_NOT_FOUND_IN_CURRENT_SEDE);
         }
 

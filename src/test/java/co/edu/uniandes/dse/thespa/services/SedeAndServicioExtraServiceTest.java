@@ -119,7 +119,7 @@ public class SedeAndServicioExtraServiceTest {
         // Se elimina el servicio extra de la sede
         SedeService.deleteSedeExtraService(sede.getId(), servicioExtra.getId());
         // Se verifica que el servicio extra se haya eliminado de la sede
-        assertEquals(sede.getServiciosExtra().size(), 2);
+        assertEquals(2, sede.getServiciosExtra().size());
     }
 
     // Prueba para eliminar un servicio extra que no existe de una sede

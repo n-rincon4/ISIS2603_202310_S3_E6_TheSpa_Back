@@ -75,7 +75,7 @@ public class SedeAndServicioExtraService {
 
         // revisa si el servicio extra no esta en la sede, si no esta lanza una
         // IllegalOperationException
-        if (sedeEntity.get().getServiciosExtra().contains(servEntity.get()) == false) {
+        if (!sedeEntity.get().getServiciosExtra().contains(servEntity.get())) {
             throw new IllegalOperationException("EXTRA_SERVICE_NOT_FOUND_IN_CURRENT_SEDE");
         }
 
