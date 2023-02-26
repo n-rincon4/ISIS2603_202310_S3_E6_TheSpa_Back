@@ -48,10 +48,10 @@ public class SedeAndPackServicesService {
             throw new IllegalOperationException("PACK_ALREADY_EXISTS");
         }
 
-        List<PackDeServiciosEntity> PackDeServicios = sedeEntity.get().getPacksDeServicios();
-        PackDeServicios.add(packEntity.get());
+        List<PackDeServiciosEntity> packDeServicios = sedeEntity.get().getPacksDeServicios();
+        packDeServicios.add(packEntity.get());
 
-        sedeEntity.get().setPacksDeServicios(PackDeServicios);
+        sedeEntity.get().setPacksDeServicios(packDeServicios);
 
         log.info("Termina proceso de añadir a la sede un Trabajador con con id = {0}", sedeId);
 
@@ -75,7 +75,7 @@ public class SedeAndPackServicesService {
 
         // revisa si el pack no esta en la sede, si no esta lanza una
         // IllegalOperationException
-        if (sedeEntity.get().getPacksDeServicios().contains(packEntity.get()) == false) {
+        if (!sedeEntity.get().getPacksDeServicios().contains(packEntity.get())) {
             throw new IllegalOperationException("PACK_NOT_FOUND_IN_CURRENT_SEDE");
         }
 

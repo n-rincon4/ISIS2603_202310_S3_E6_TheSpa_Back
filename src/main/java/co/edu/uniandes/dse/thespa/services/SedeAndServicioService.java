@@ -78,15 +78,15 @@ public class SedeAndServicioService {
 
     // Eliminar un servicio a la sede
     @Transactional
-    public ServicioEntity deleteSedeServicio(Long SedeId, Long ServicioId)
+    public ServicioEntity deleteSedeServicio(Long sedeId, Long servicioId)
             throws EntityNotFoundException, IllegalOperationException {
-        log.info("Inicia proceso de eliminar de la sede un servicio con con id = {0}", ServicioId);
-        Optional<ServicioEntity> servEntity = servicioRepo.findById(ServicioId);
+        log.info("Inicia proceso de eliminar de la sede un servicio con con id = {0}", servicioId);
+        Optional<ServicioEntity> servEntity = servicioRepo.findById(servicioId);
         if (servEntity.isEmpty()) {
             throw new EntityNotFoundException(SERVICE_NOT_FOUND);
         }
 
-        Optional<SedeEntity> sedeEntity = sedeRepo.findById(SedeId);
+        Optional<SedeEntity> sedeEntity = sedeRepo.findById(sedeId);
         if (sedeEntity.isEmpty()) {
             throw new EntityNotFoundException(SEDE_NOT_FOUND);
         }
@@ -102,7 +102,7 @@ public class SedeAndServicioService {
 
         sedeEntity.get().setServicios(servicios);
 
-        log.info("Termina proceso de elimnar de la sede un servicio con con id = {0}", SedeId);
+        log.info("Termina proceso de elimnar de la sede un servicio con con id = {0}", sedeId);
 
         return servEntity.get();
     }
