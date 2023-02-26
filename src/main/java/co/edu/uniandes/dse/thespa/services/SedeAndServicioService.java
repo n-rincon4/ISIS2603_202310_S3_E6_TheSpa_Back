@@ -95,7 +95,7 @@ public class SedeAndServicioService {
 
         // revisa si el servicio no esta en la sede, si no esta lanza una
         // IllegalOperationException
-        if (servicios.contains(servEntity.get()) == false) {
+        if (!servicios.contains(servEntity.get())) {
             throw new IllegalOperationException(SERVICIO_NOT_FOUND_IN_CURRENT_SEDE);
         }
         servicios.remove(servEntity.get());
