@@ -17,6 +17,8 @@ import org.springframework.context.annotation.Import;
 
 import co.edu.uniandes.dse.thespa.entities.PackDeServiciosEntity;
 import co.edu.uniandes.dse.thespa.entities.ServicioEntity;
+import co.edu.uniandes.dse.thespa.entities.SedeEntity;
+
 import co.edu.uniandes.dse.thespa.exceptions.EntityNotFoundException;
 import co.edu.uniandes.dse.thespa.exceptions.IllegalOperationException;
 import uk.co.jemos.podam.api.PodamFactory;
@@ -43,6 +45,9 @@ public class PackDeServiciosAndServicioServiceTest {
 
     // Lista de servicios para la prueba
     private List<ServicioEntity> servicios = new ArrayList<>();
+
+    // Lista de sedes para la prueba
+    private List<SedeEntity> sedes = new ArrayList<>();
 
     // configuracion inicial de la prueba
     @BeforeEach
@@ -80,6 +85,23 @@ public class PackDeServiciosAndServicioServiceTest {
             }
 
         }
+        // Se crea una lista se sedes
+        for (int i = 0; i < 3; i++) {
+            SedeEntity sede = factory.manufacturePojo(SedeEntity.class);
+            entityManager.persist(sede);
+            sedes.add(sede);
+        }
+
+        // se le agrega una sede al servicio y al pack de servicios
+        for (int i = 0; i < 3; i++) {
+            ServicioEntity servicio = servicios.get(i);
+            servicio.setSede(sedes.get(i));
+            entityManager.merge(servicio);
+            PackDeServiciosEntity pack = packs.get(i);
+            pack.setSede(sedes.get(i));
+            entityManager.merge(pack);
+        }
+
     }
 
     // Prueba para agregar un servicio a un pack de servicios
@@ -131,9 +153,7 @@ public class PackDeServiciosAndServicioServiceTest {
     }
 
     // Prueba para obtener la lista de servicios de un pack de servicios que no
-    // existe, se
-    // espera un error de tipo EntityNotFoundException
-
+    // existe, se espera un error de tipo EntityNotFoundException
     @Test
     void getServiciosPackNotFoundTest() {
         // Se obtiene el id de un pack de servicios que no existe
@@ -178,6 +198,97 @@ public class PackDeServiciosAndServicioServiceTest {
             packDeServiciosAndServicioService.removeServicio(pack.getId(), servicio.getId());
         });
 
+    }
+
+    // Prueba para agregar un servicio a un pack de servicios que no existe
+    @Test
+    void addServicioPackNotFoundTest() {
+        // Se obtiene el id de un pack de servicios que no existe
+        Long id = Long.MAX_VALUE;
+        // Se obtiene el primer servicio de la lista de servicios
+        ServicioEntity servicio = servicios.get(0);
+
+        // Se agrega el servicio al pack de servicios, se espera un error de tipo
+        // EntityNotFoundException
+        assertThrows(EntityNotFoundException.class, () -> {
+            packDeServiciosAndServicioService.addServicio(id, servicio.getId());
+        });
+    }
+
+    // Prueba para agregar un servicio que no existe a un pack de servicios
+    @Test
+    void addServicioNotFoundTest() throws EntityNotFoundException {
+        // Se obtiene el primer pack de servicios de la lista de packs de servicios
+        PackDeServiciosEntity pack = packs.get(0);
+        // Se obtiene el id de un servicio que no existe
+        Long id = Long.MAX_VALUE;
+
+        // Se agrega el servicio al pack de servicios, se espera un error de tipo
+        // EntityNotFoundException
+        assertThrows(EntityNotFoundException.class, () -> {
+            packDeServiciosAndServicioService.addServicio(pack.getId(), id);
+        });
+    }
+
+    // prueba para agregar un servicio que no existe a un pack de servicios que no
+    // existe
+    @Test
+    void addServicioPackAndServicioNotFoundTest() {
+        // Se obtiene el id de un pack de servicios que no existe
+        Long idPack = Long.MAX_VALUE;
+        // Se obtiene el id de un servicio que no existe
+        Long idServicio = Long.MAX_VALUE;
+
+        // Se agrega el servicio al pack de servicios, se espera un error de tipo
+        // EntityNotFoundException
+        assertThrows(EntityNotFoundException.class, () -> {
+            packDeServiciosAndServicioService.addServicio(idPack, idServicio);
+        });
+    }
+
+    // Prueba para eliminar un servicio de un pack de servicios que no existe
+    @Test
+    void removeServicioPackNotFoundTest() {
+        // Se obtiene el id de un pack de servicios que no existe
+        Long id = Long.MAX_VALUE;
+        // Se obtiene el primer servicio de la lista de servicios
+        ServicioEntity servicio = servicios.get(0);
+
+        // Se elimina el servicio del pack de servicios, se espera un error de tipo
+        // EntityNotFoundException
+        assertThrows(EntityNotFoundException.class, () -> {
+            packDeServiciosAndServicioService.removeServicio(id, servicio.getId());
+        });
+    }
+
+    // Prueba para eliminar un servicio que no existe de un pack de servicios
+    @Test
+    void removeServicioNotFoundTest() throws EntityNotFoundException {
+        // Se obtiene el primer pack de servicios de la lista de packs de servicios
+        PackDeServiciosEntity pack = packs.get(0);
+        // Se obtiene el id de un servicio que no existe
+        Long id = Long.MAX_VALUE;
+
+        // Se elimina el servicio del pack de servicios, se espera un error de tipo
+        // EntityNotFoundException
+        assertThrows(EntityNotFoundException.class, () -> {
+            packDeServiciosAndServicioService.removeServicio(pack.getId(), id);
+        });
+    }
+
+    // Prueba para eliminar un servicio que no existe de un pack de servicios que no
+    // existe
+    @Test
+    void removeServicioPackAndServicioNotFoundTest() {
+        // Se obtienen los ids de un pack de servicios y un servicio que no existen
+        Long idPack = Long.MAX_VALUE;
+        Long idServicio = Long.MAX_VALUE;
+
+        // Se elimina el servicio del pack de servicios, se espera un error de tipo
+        // EntityNotFoundException
+        assertThrows(EntityNotFoundException.class, () -> {
+            packDeServiciosAndServicioService.removeServicio(idPack, idServicio);
+        });
     }
 
 }
