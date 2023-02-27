@@ -99,6 +99,50 @@ public class UbicacionTest {
         });
     }
 
+    // crea una ubicacion cuya latitud es menor a -90, espera una excepción
+    // IllegalOperationException
+    @Test
+    void testCreateUbicacionLatitudMenor() {
+        UbicacionEntity newEntity = ubicacionList.get(0);
+        newEntity.setLatitud(-91.0);
+        assertThrows(IllegalOperationException.class, () -> {
+            ubicacionService.createUbicacion(newEntity);
+        });
+    }
+
+    // crea una ubicacion cuya latitud es mayor a 90, espera una excepción
+    // IllegalOperationException
+    @Test
+    void testCreateUbicacionLatitudMayor() {
+        UbicacionEntity newEntity = ubicacionList.get(0);
+        newEntity.setLatitud(91.0);
+        assertThrows(IllegalOperationException.class, () -> {
+            ubicacionService.createUbicacion(newEntity);
+        });
+    }
+
+    // crea una ubicacion cuya longitud es menor a -180, espera una excepción
+    // IllegalOperationException
+    @Test
+    void testCreateUbicacionLongitudMenor() {
+        UbicacionEntity newEntity = ubicacionList.get(0);
+        newEntity.setLongitud(-181.0);
+        assertThrows(IllegalOperationException.class, () -> {
+            ubicacionService.createUbicacion(newEntity);
+        });
+    }
+
+    // crea una ubicacion cuya longitud es mayor a 180, espera una excepción
+    // IllegalOperationException
+    @Test
+    void testCreateUbicacionLongitudMayor() {
+        UbicacionEntity newEntity = ubicacionList.get(0);
+        newEntity.setLongitud(181.0);
+        assertThrows(IllegalOperationException.class, () -> {
+            ubicacionService.createUbicacion(newEntity);
+        });
+    }
+
     // Crea una ubicacion cuya longitud es null, espera una excepción
     // IllegalOperationException
     @Test
@@ -127,6 +171,17 @@ public class UbicacionTest {
     void testCreateUbicacionCiudadVacio() {
         UbicacionEntity newEntity = ubicacionList.get(0);
         newEntity.setCiudad(" ");
+        assertThrows(IllegalOperationException.class, () -> {
+            ubicacionService.createUbicacion(newEntity);
+        });
+    }
+
+    // crea una ubicacion cuya sede es null, espera una excepción
+    // IllegalOperationException
+    @Test
+    void testCreateUbicacionSedeNull() {
+        UbicacionEntity newEntity = ubicacionList.get(0);
+        newEntity.setSede(null);
         assertThrows(IllegalOperationException.class, () -> {
             ubicacionService.createUbicacion(newEntity);
         });
@@ -246,6 +301,66 @@ public class UbicacionTest {
             UbicacionEntity pojoEntity = ubicacionList.get(0);
             pojoEntity.setId(entity.getId());
             pojoEntity.setLongitud(null);
+            ubicacionService.updateUbicacion(entity.getId(), pojoEntity);
+        });
+    }
+
+    // actualiza ubicacion con latitud menor a -90
+    @Test
+    void testUpdateUbicacionLatitudMenor() {
+        assertThrows(IllegalOperationException.class, () -> {
+            UbicacionEntity entity = ubicacionList.get(0);
+            UbicacionEntity pojoEntity = ubicacionList.get(0);
+            pojoEntity.setId(entity.getId());
+            pojoEntity.setLatitud(-91.0);
+            ubicacionService.updateUbicacion(entity.getId(), pojoEntity);
+        });
+    }
+
+    // actualiza ubicacion con latitud mayor a 90
+    @Test
+    void testUpdateUbicacionLatitudMayor() {
+        assertThrows(IllegalOperationException.class, () -> {
+            UbicacionEntity entity = ubicacionList.get(0);
+            UbicacionEntity pojoEntity = ubicacionList.get(0);
+            pojoEntity.setId(entity.getId());
+            pojoEntity.setLatitud(91.0);
+            ubicacionService.updateUbicacion(entity.getId(), pojoEntity);
+        });
+    }
+
+    // actualiza ubicacion con longitud menor a -180
+    @Test
+    void testUpdateUbicacionLongitudMenor() {
+        assertThrows(IllegalOperationException.class, () -> {
+            UbicacionEntity entity = ubicacionList.get(0);
+            UbicacionEntity pojoEntity = ubicacionList.get(0);
+            pojoEntity.setId(entity.getId());
+            pojoEntity.setLongitud(-181.0);
+            ubicacionService.updateUbicacion(entity.getId(), pojoEntity);
+        });
+    }
+
+    // actualiza ubicacion con longitud mayor a 180
+    @Test
+    void testUpdateUbicacionLongitudMayor() {
+        assertThrows(IllegalOperationException.class, () -> {
+            UbicacionEntity entity = ubicacionList.get(0);
+            UbicacionEntity pojoEntity = ubicacionList.get(0);
+            pojoEntity.setId(entity.getId());
+            pojoEntity.setLongitud(181.0);
+            ubicacionService.updateUbicacion(entity.getId(), pojoEntity);
+        });
+    }
+
+    // actualiza ubicacion con sede nula
+    @Test
+    void testUpdateUbicacionSedeNull() {
+        assertThrows(IllegalOperationException.class, () -> {
+            UbicacionEntity entity = ubicacionList.get(0);
+            UbicacionEntity pojoEntity = ubicacionList.get(0);
+            pojoEntity.setId(entity.getId());
+            pojoEntity.setSede(null);
             ubicacionService.updateUbicacion(entity.getId(), pojoEntity);
         });
     }
