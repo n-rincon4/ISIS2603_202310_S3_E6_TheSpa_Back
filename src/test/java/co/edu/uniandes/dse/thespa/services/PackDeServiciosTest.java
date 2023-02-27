@@ -92,7 +92,7 @@ public class PackDeServiciosTest {
             }
             servicios.add(serviciosPack);
         }
-        // se le añaade una lista de servicios a cada pack de servicios
+        // se le añade una lista de servicios a cada pack de servicios
         for (int i = 0; i < packs.size(); i++) {
             packs.get(i).setServicios(servicios.get(i));
         }
@@ -116,7 +116,7 @@ public class PackDeServiciosTest {
     // prueba para crear un pack de servicios sin nombre
     @Test
     void createPackDeServiciosSinNombreTest() {
-        PackDeServiciosEntity newEntity = factory.manufacturePojo(PackDeServiciosEntity.class);
+        PackDeServiciosEntity newEntity = packs.get(0);
         newEntity.setNombre(null);
         assertThrows(IllegalOperationException.class, () -> {
             PackDeServiciosService.createPackDeServicios(newEntity);
@@ -126,7 +126,7 @@ public class PackDeServiciosTest {
     // prueba para crear un pack de servicios sin sede
     @Test
     void createPackDeServiciosSinSedeTest() {
-        PackDeServiciosEntity newEntity = factory.manufacturePojo(PackDeServiciosEntity.class);
+        PackDeServiciosEntity newEntity = packs.get(0);
         newEntity.setSede(null);
         assertThrows(IllegalOperationException.class, () -> {
             PackDeServiciosService.createPackDeServicios(newEntity);
@@ -136,7 +136,7 @@ public class PackDeServiciosTest {
     // prueba para crear un pack de servicios sin servicios
     @Test
     void createPackDeServiciosSinServiciosTest() {
-        PackDeServiciosEntity newEntity = factory.manufacturePojo(PackDeServiciosEntity.class);
+        PackDeServiciosEntity newEntity = packs.get(0);
         newEntity.setServicios(null);
         assertThrows(IllegalOperationException.class, () -> {
             PackDeServiciosService.createPackDeServicios(newEntity);
@@ -146,7 +146,7 @@ public class PackDeServiciosTest {
     // prueba para crear un pack de servicios con servicios null
     @Test
     void createPackDeServiciosConServiciosNullTest() {
-        PackDeServiciosEntity newEntity = factory.manufacturePojo(PackDeServiciosEntity.class);
+        PackDeServiciosEntity newEntity = packs.get(0);
         newEntity.setServicios(null);
         assertThrows(IllegalOperationException.class, () -> {
             PackDeServiciosService.createPackDeServicios(newEntity);
@@ -195,6 +195,10 @@ public class PackDeServiciosTest {
     void updatePackDeServiciosTest() throws EntityNotFoundException {
         PackDeServiciosEntity entity = packs.get(0);
         PackDeServiciosEntity pojoEntity = factory.manufacturePojo(PackDeServiciosEntity.class);
+        // le añade una sede al pojoEntity
+        pojoEntity.setSede(sedes.get(1));
+        // le añade una lista de servicios al pojoEntity
+        pojoEntity.setServicios(servicios.get(1));
 
         pojoEntity.setId(entity.getId());
 
@@ -213,6 +217,10 @@ public class PackDeServiciosTest {
     @Test
     void updatePackDeServiciosNoExisteTest() {
         PackDeServiciosEntity pojoEntity = factory.manufacturePojo(PackDeServiciosEntity.class);
+        // le añade una sede al pojoEntity
+        pojoEntity.setSede(sedes.get(1));
+        // le añade una lista de servicios al pojoEntity
+        pojoEntity.setServicios(servicios.get(1));
         assertThrows(EntityNotFoundException.class, () -> {
             PackDeServiciosService.updatePackDeServicios(100L, pojoEntity);
         });
