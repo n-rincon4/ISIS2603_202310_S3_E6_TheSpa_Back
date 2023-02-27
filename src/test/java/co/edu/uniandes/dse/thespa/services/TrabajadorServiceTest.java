@@ -102,6 +102,11 @@ public class TrabajadorServiceTest {
     void testCreateTrabajadorSinNombre() {
         assertThrows(IllegalOperationException.class, () -> {
             TrabajadorEntity newEntity = factory.manufacturePojo(TrabajadorEntity.class);
+            // añade una sede a la entidad
+            newEntity.setSedes(trabajadorList.get(0).getSedes());
+            // añade un servicio a la entidad
+            newEntity.setServicios(trabajadorList.get(0).getServicios());
+            // setear el nombre al posible error
             newEntity.setNombre("");
             trabajadorService.createTrabajador(newEntity);
         });
@@ -112,6 +117,11 @@ public class TrabajadorServiceTest {
     void testCreateTrabajadorSinNombre2() {
         assertThrows(IllegalOperationException.class, () -> {
             TrabajadorEntity newEntity = factory.manufacturePojo(TrabajadorEntity.class);
+            // añade una sede a la entidad
+            newEntity.setSedes(trabajadorList.get(0).getSedes());
+            // añade un servicio a la entidad
+            newEntity.setServicios(trabajadorList.get(0).getServicios());
+            // setear el nombre al posible error
             newEntity.setNombre(null);
             trabajadorService.createTrabajador(newEntity);
         });
@@ -122,6 +132,9 @@ public class TrabajadorServiceTest {
     void testCreateTrabajadorSinSede() {
         assertThrows(IllegalOperationException.class, () -> {
             TrabajadorEntity newEntity = factory.manufacturePojo(TrabajadorEntity.class);
+            // añade un servicio a la entidad
+            newEntity.setServicios(trabajadorList.get(0).getServicios());
+            // setear las sedes al posible error
             newEntity.setSedes(null);
             trabajadorService.createTrabajador(newEntity);
         });
@@ -132,6 +145,9 @@ public class TrabajadorServiceTest {
     void testCreateTrabajadorSinServicios() {
         assertThrows(IllegalOperationException.class, () -> {
             TrabajadorEntity newEntity = factory.manufacturePojo(TrabajadorEntity.class);
+            // añade una sede a la entidad
+            newEntity.setSedes(trabajadorList.get(0).getSedes());
+            // setear los servicios al posible error
             newEntity.setServicios(null);
             trabajadorService.createTrabajador(newEntity);
         });
@@ -211,6 +227,11 @@ public class TrabajadorServiceTest {
         assertThrows(IllegalOperationException.class, () -> {
             TrabajadorEntity entity = trabajadorList.get(0);
             TrabajadorEntity pojoEntity = factory.manufacturePojo(TrabajadorEntity.class);
+            // añade una sede a la entidad
+            pojoEntity.setSedes(trabajadorList.get(0).getSedes());
+            // añade un servicio a la entidad
+            pojoEntity.setServicios(trabajadorList.get(0).getServicios());
+            // setear el nombre al posible error
             pojoEntity.setNombre("");
             pojoEntity.setId(entity.getId());
             trabajadorService.updateTrabajador(entity.getId(), pojoEntity);
@@ -223,6 +244,11 @@ public class TrabajadorServiceTest {
         assertThrows(IllegalOperationException.class, () -> {
             TrabajadorEntity entity = trabajadorList.get(0);
             TrabajadorEntity pojoEntity = factory.manufacturePojo(TrabajadorEntity.class);
+            // añade una sede a la entidad
+            pojoEntity.setSedes(trabajadorList.get(0).getSedes());
+            // añade un servicio a la entidad
+            pojoEntity.setServicios(trabajadorList.get(0).getServicios());
+            // setear el nombre al posible error
             pojoEntity.setNombre(null);
             pojoEntity.setId(entity.getId());
             trabajadorService.updateTrabajador(entity.getId(), pojoEntity);
@@ -235,6 +261,9 @@ public class TrabajadorServiceTest {
         assertThrows(IllegalOperationException.class, () -> {
             TrabajadorEntity entity = trabajadorList.get(0);
             TrabajadorEntity pojoEntity = factory.manufacturePojo(TrabajadorEntity.class);
+            // añade un servicio a la entidad
+            pojoEntity.setServicios(trabajadorList.get(0).getServicios());
+            // setear las sedes al posible error
             pojoEntity.setSedes(null);
             pojoEntity.setId(entity.getId());
             trabajadorService.updateTrabajador(entity.getId(), pojoEntity);
@@ -247,6 +276,9 @@ public class TrabajadorServiceTest {
         assertThrows(IllegalOperationException.class, () -> {
             TrabajadorEntity entity = trabajadorList.get(0);
             TrabajadorEntity pojoEntity = factory.manufacturePojo(TrabajadorEntity.class);
+            // añade una sede a la entidad
+            pojoEntity.setSedes(trabajadorList.get(0).getSedes());
+            // setear los servicios al posible error
             pojoEntity.setServicios(null);
             pojoEntity.setId(entity.getId());
             trabajadorService.updateTrabajador(entity.getId(), pojoEntity);

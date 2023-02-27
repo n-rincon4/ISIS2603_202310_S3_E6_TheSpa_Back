@@ -87,6 +87,24 @@ public class TrabajadorAndServicioServiceTest {
     }
 
     @Test
+    // agregar un servicio a un trabajador que no existe -> Entidad no encontrada
+    void testAddServicioToTrabajadorNotExist() throws EntityNotFoundException, IllegalOperationException {
+        assertThrows(EntityNotFoundException.class, () -> {
+            ServicioEntity servicio = servicios.get(0);
+            trabajadorandServicioService.addServicioToTrabajador(0L, servicio.getId());
+        });
+    }
+
+    @Test
+    // agregar un servicio no existente a un trabajador -> Entidad no encontrada
+    void testAddServicioNotExistToTrabajador() throws EntityNotFoundException, IllegalOperationException {
+        assertThrows(EntityNotFoundException.class, () -> {
+            TrabajadorEntity trabajador = trabajadores.get(0);
+            trabajadorandServicioService.addServicioToTrabajador(trabajador.getId(), 0L);
+        });
+    }
+
+    @Test
     // agregar un servicio ya existente en un trabajador -> Operación ilegal
     void testAddServicioToTrabajadorAlreadyExist() throws EntityNotFoundException, IllegalOperationException {
         TrabajadorEntity trabajador = trabajadores.get(0);
@@ -106,6 +124,24 @@ public class TrabajadorAndServicioServiceTest {
         ServicioEntity answer = trabajadorandServicioService.deleteServicioTrabajador(trabajador.getId(), servicio.getId());
         assertNotNull(answer);
         assertEquals(servicio.getId(), answer.getId());
+    }
+
+    @Test
+    // eliminar un servicio a un trabajador que no existe -> Entidad no encontrada
+    void testDeleteServicioToTrabajadorNotExist() throws EntityNotFoundException, IllegalOperationException {
+        assertThrows(EntityNotFoundException.class, () -> {
+            ServicioEntity servicio = servicios.get(0);
+            trabajadorandServicioService.deleteServicioTrabajador(0L, servicio.getId());
+        });
+    }
+
+    @Test
+    // eliminar un servicio no existente a un trabajador -> Entidad no encontrada
+    void testDeleteServicioNotExistToTrabajador() throws EntityNotFoundException, IllegalOperationException {
+        assertThrows(EntityNotFoundException.class, () -> {
+            TrabajadorEntity trabajador = trabajadores.get(0);
+            trabajadorandServicioService.deleteServicioTrabajador(trabajador.getId(), 0L);
+        });
     }
 
     @Test
