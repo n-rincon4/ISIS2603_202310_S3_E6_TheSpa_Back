@@ -143,6 +143,16 @@ public class PackDeServiciosTest {
         });
     }
 
+    // prueba para crear un pack de servicios con servicios null
+    @Test
+    void createPackDeServiciosConServiciosNullTest() {
+        PackDeServiciosEntity newEntity = factory.manufacturePojo(PackDeServiciosEntity.class);
+        newEntity.setServicios(null);
+        assertThrows(IllegalOperationException.class, () -> {
+            PackDeServiciosService.createPackDeServicios(newEntity);
+        });
+    }
+
     // prueba obtener todos los packs de servicios
     @Test
     void getPacksDeServiciosTest() {
