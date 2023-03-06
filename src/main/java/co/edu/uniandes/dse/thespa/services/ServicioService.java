@@ -22,7 +22,7 @@ import java.util.Optional;
 @Service
 
 public class ServicioService {
-    private static final String SERVICE_NOT_FOUND = "Servicio not found"; 
+    private static final String SERVICE_NOT_FOUND = "Servicio not found";
 
     @Autowired
     ServicioRepository servicioRepository;
@@ -67,10 +67,6 @@ public class ServicioService {
 
         if (servicioEntity.getHoraInicio() == null) {
             throw new IllegalOperationException("La hora de inicio del servicio no es válida");
-        }
-
-        if (servicioEntity.getHoraFin() == null) {
-            throw new IllegalOperationException("La hora de fin del servicio no es válida");
         }
 
         if (servicioEntity.getSede() == null) {

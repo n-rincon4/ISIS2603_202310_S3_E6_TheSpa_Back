@@ -103,7 +103,6 @@ public class ServicioServiceTest {
         assertEquals(newEntity.getRestricciones(), entity.getRestricciones());
         assertEquals(newEntity.getDisponible(), entity.getDisponible());
         assertEquals(newEntity.getHoraInicio(), entity.getHoraInicio());
-        assertEquals(newEntity.getHoraFin(), entity.getHoraFin());
         assertEquals(newEntity.getPrecio(), entity.getPrecio());
         assertEquals(newEntity.getNombre(), entity.getNombre());
         assertEquals(newEntity.getSede(), entity.getSede());
@@ -190,15 +189,6 @@ public class ServicioServiceTest {
     }
 
     @Test
-    void testCreateServicioSinHoraFin() {
-        ServicioEntity newEntity = factory.manufacturePojo(ServicioEntity.class);
-        newEntity.setHoraFin(null);
-        assertThrows(IllegalOperationException.class, () -> {
-            servicioService.createServicio(newEntity);
-        });
-    }
-
-    @Test
     void testGetServicios() {
         List<ServicioEntity> list = servicioService.getServicios();
         assertEquals(servicioList.size(), list.size());
@@ -229,7 +219,6 @@ public class ServicioServiceTest {
         assertEquals(entity.getRestricciones(), resultEntity.getRestricciones());
         assertEquals(entity.getDisponible(), resultEntity.getDisponible());
         assertEquals(entity.getHoraInicio(), resultEntity.getHoraInicio());
-        assertEquals(entity.getHoraFin(), resultEntity.getHoraFin());
     }
 
     @Test
@@ -258,7 +247,6 @@ public class ServicioServiceTest {
         assertEquals(pojoEntity.getRestricciones(), resp.getRestricciones());
         assertEquals(pojoEntity.getDisponible(), resp.getDisponible());
         assertEquals(pojoEntity.getHoraInicio(), resp.getHoraInicio());
-        assertEquals(pojoEntity.getHoraFin(), resp.getHoraFin());
     }
 
     @Test

@@ -17,13 +17,12 @@ import uk.co.jemos.podam.common.PodamExclude;
 @Getter
 @Setter
 @Entity
-@EqualsAndHashCode(callSuper=true)
+@EqualsAndHashCode(callSuper = true)
 public class ServicioEntity extends ProductoEntity {
     private Integer duracion;
     private String restricciones;
     private Boolean disponible;
     private Integer horaInicio;
-    private Integer horaFin;
 
     @PodamExclude
     @ManyToMany
