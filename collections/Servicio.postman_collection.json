@@ -13,7 +13,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"duracion\": 3,\r\n    \"restricciones\": \"\",\r\n    \"disponible\": true,\r\n    \"horaInicio\": 8,\r\n    \"horaFin\": 17\r\n}",
+					"raw": "{\r\n    \"duracion\": 3,\r\n    \"restricciones\": \"\",\r\n    \"disponible\": true,\r\n    \"horaInicio\": 8,\r\n    \"nombre\": \"masaje\",\r\n    \"descripcion\": \"masaje de relajacion\",\r\n    \"precio\": \"30000\",\r\n    \"imagen\": \"https://thumbs.dreamstime.com/b/spa-massage-outdoor-balinese-woman-receiving-back-53105227.jpg\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -38,7 +38,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\": 1,\r\n    \"duracion\": 3,\r\n    \"restricciones\": \"\",\r\n    \"disponible\": true,\r\n    \"horaInicio\": 8,\r\n    \"horaFin\": 17\r\n}",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"duracion\": 3,\r\n    \"restricciones\": \"\",\r\n    \"disponible\": true,\r\n    \"horaInicio\": 8,\r\n    \"nombre\": \"masaje\",\r\n    \"descripcion\": \"masaje de relajacion\",\r\n    \"precio\": \"30000\",\r\n    \"imagen\": \"https://thumbs.dreamstime.com/b/spa-massage-outdoor-balinese-woman-receiving-back-53105227.jpg\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -94,7 +94,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "[\r\n    {\r\n        \"id\": 1,\r\n        \"duracion\": 3,\r\n        \"restricciones\": \"\",\r\n        \"disponible\": true,\r\n        \"horaInicio\": 8,\r\n        \"horaFin\": 17,\r\n        \"trabajadores\": [],\r\n        \"packs de servicios\": []\r\n    }\r\n]",
+							"raw": "[\r\n    {\r\n        \"id\": 1,\r\n        \"duracion\": 3,\r\n        \"restricciones\": \"\",\r\n        \"disponible\": true,\r\n        \"horaInicio\": 8,\r\n        \"nombre\": \"masaje\",\r\n        \"descripcion\": \"masaje de relajacion\",\r\n        \"precio\": \"30000\",\r\n        \"imagen\": \"https://thumbs.dreamstime.com/b/spa-massage-outdoor-balinese-woman-receiving-back-53105227.jpg\"\r\n    }\r\n]",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -151,7 +151,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "\r\n{\r\n    \"id\": 1,\r\n    \"duracion\": 3,\r\n    \"restricciones\": \"\",\r\n    \"disponible\": true,\r\n    \"horaInicio\": 8,\r\n    \"horaFin\": 17,\r\n    \"trabajadores\": [],\r\n    \"packs de servicios\": []\r\n}",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"duracion\": 3,\r\n    \"restricciones\": \"\",\r\n    \"disponible\": true,\r\n    \"horaInicio\": 8,\r\n    \"nombre\": \"masaje\",\r\n    \"descripcion\": \"masaje de relajacion\",\r\n    \"precio\": \"30000\",\r\n    \"imagen\": \"https://thumbs.dreamstime.com/b/spa-massage-outdoor-balinese-woman-receiving-back-53105227.jpg\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -243,7 +243,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"duracion\": 3,\r\n    \"restricciones\": \"\",\r\n    \"disponible\": false,\r\n    \"horaInicio\": 8,\r\n    \"horaFin\": 17\r\n}",
+					"raw": "{\r\n    \"duracion\": 3,\r\n    \"restricciones\": \"\",\r\n    \"disponible\": false,\r\n    \"horaInicio\": 8,\r\n    \"nombre\": \"masaje\",\r\n    \"descripcion\": \"masaje de relajacion\",\r\n    \"precio\": \"30000\",\r\n    \"imagen\": \"https://thumbs.dreamstime.com/b/spa-massage-outdoor-balinese-woman-receiving-back-53105227.jpg\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -269,7 +269,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\": 1,\r\n    \"duracion\": 3,\r\n    \"restricciones\": \"\",\r\n    \"disponible\": false,\r\n    \"horaInicio\": 8,\r\n    \"horaFin\": 17\r\n}",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"duracion\": 3,\r\n    \"restricciones\": \"\",\r\n    \"disponible\": false,\r\n    \"horaInicio\": 8,\r\n    \"nombre\": \"masaje\",\r\n    \"descripcion\": \"masaje de relajacion\",\r\n    \"precio\": \"30000\",\r\n    \"imagen\": \"https://thumbs.dreamstime.com/b/spa-massage-outdoor-balinese-woman-receiving-back-53105227.jpg\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
