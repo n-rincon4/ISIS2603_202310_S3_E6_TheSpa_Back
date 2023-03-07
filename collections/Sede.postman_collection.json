@@ -3,7 +3,7 @@
 		"_postman_id": "f616c90c-2595-4b19-828d-7b7a587cf706",
 		"name": "Sede",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "25783612"
+		"_exporter_id": "26099886"
 	},
 	"item": [
 		{
@@ -131,13 +131,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{baseUrl}}/sedes/{{author_id_1}}",
+					"raw": "{{baseUrl}}/sedes/{{sede_id_1}}",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
 						"sedes",
-						"{{author_id_1}}"
+						"{{sede_id_1}}"
 					]
 				}
 			},
@@ -164,13 +164,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/sedes/{{author_id_1}}",
+							"raw": "{{baseUrl}}/sedes/{{sede_id_1}}",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"sedes",
-								"{{author_id_1}}"
+								"{{sede_id_1}}"
 							]
 						}
 					},
@@ -256,13 +256,13 @@
 					}
 				},
 				"url": {
-					"raw": "{{baseUrl}}/sedes/{{author_id_1}}",
+					"raw": "{{baseUrl}}/sedes/{{sede_id_1}}",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
 						"sedes",
-						"{{author_id_1}}"
+						"{{sede_id_1}}"
 					]
 				}
 			},
@@ -282,13 +282,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/sedes/{{author_id_1}}",
+							"raw": "{{baseUrl}}/sedes/{{sede_id_1}}",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"sedes",
-								"{{author_id_1}}"
+								"{{sede_id_1}}"
 							]
 						}
 					},
@@ -365,13 +365,13 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{baseUrl}}/sedes/{{author_id_1}}",
+					"raw": "{{baseUrl}}/sedes/{{sede_id_1}}",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
 						"sedes",
-						"{{author_id_1}}"
+						"{{sede_id_1}}"
 					]
 				}
 			},
@@ -382,13 +382,13 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/sedes/{{author_id_1}}",
+							"raw": "{{baseUrl}}/sedes/{{sede_id_1}}",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"sedes",
-								"{{author_id_1}}"
+								"{{sede_id_1}}"
 							]
 						}
 					},
