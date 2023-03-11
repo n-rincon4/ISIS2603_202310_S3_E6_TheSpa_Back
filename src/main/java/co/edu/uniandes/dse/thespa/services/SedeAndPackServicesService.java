@@ -27,6 +27,14 @@ public class SedeAndPackServicesService {
     @Autowired
     PackDeServiciosRepository packDeServiciosRepo;
 
+    //Obtener todos los packs servicios de una sede
+    @Transactional
+    public List<PackDeServiciosEntity> obtenerAllPacks(Long sedeId) throws EntityNotFoundException, IllegalOperationException {
+
+        List<PackDeServiciosEntity> servicios = packDeServiciosRepo.findAll();
+        return servicios;
+    }
+
     // Añadir un Pack de servicios a la sede
     @Transactional
     public PackDeServiciosEntity addSedePackDeServicios(Long sedeId, Long packDeServiciosId)

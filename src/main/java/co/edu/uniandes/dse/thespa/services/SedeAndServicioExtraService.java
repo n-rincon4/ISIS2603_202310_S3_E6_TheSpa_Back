@@ -27,9 +27,17 @@ public class SedeAndServicioExtraService {
     @Autowired
     ServicioExtraRepository servicioExtraRepo;
 
+    //Obtener todos los servicios extra de una sede
+    @Transactional
+    public List<ServicioExtraEntity> obtenerAllServicios(Long sedeId) throws EntityNotFoundException, IllegalOperationException {
+
+        List<ServicioExtraEntity> servicios = servicioExtraRepo.findAll();
+        return servicios;
+    }
+
     // añadir un servicio extra a la sede
     @Transactional
-    ServicioExtraEntity addSedeExtraService(Long sedeId, Long sedeExtraServiceId)
+    public ServicioExtraEntity addSedeExtraService(Long sedeId, Long sedeExtraServiceId)
             throws EntityNotFoundException, IllegalOperationException {
         log.info("Inicia proceso de añadir a la sede un servicio extra con con id = {0}", sedeExtraServiceId);
         Optional<ServicioExtraEntity> servEntity = servicioExtraRepo.findById(sedeExtraServiceId);
@@ -60,7 +68,7 @@ public class SedeAndServicioExtraService {
 
     // Eliminar un servicio extra de la sede
     @Transactional
-    ServicioExtraEntity deleteSedeExtraService(Long sedeId, Long sedeExtraServiceId)
+    public ServicioExtraEntity deleteSedeExtraService(Long sedeId, Long sedeExtraServiceId)
             throws EntityNotFoundException, IllegalOperationException {
         log.info("Inicia proceso de remover a la sede un servicio extra con con id = {0}", sedeExtraServiceId);
         Optional<ServicioExtraEntity> servEntity = servicioExtraRepo.findById(sedeExtraServiceId);

@@ -33,6 +33,18 @@ public class SedeAndServicioService {
     @Autowired
     ServicioRepository servicioRepo;
 
+    //Obtener todos los servicios de una sede
+    @Transactional
+    public List<ServicioEntity> obtenerAllServicios(Long sedeId) throws EntityNotFoundException, IllegalOperationException {
+
+        List<ServicioEntity> servicios = servicioRepo.findAll();
+        if (servicios.isEmpty()) {
+            throw new EntityNotFoundException(SEDE_NOT_FOUND);
+        }
+        
+        return servicios;
+    }
+
     // Eliminar una Sede
     @Transactional
     public void deleteSede(Long sedeId) throws EntityNotFoundException, IllegalOperationException {

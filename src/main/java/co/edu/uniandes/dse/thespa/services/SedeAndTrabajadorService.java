@@ -33,6 +33,19 @@ public class SedeAndTrabajadorService {
     @Autowired
     TrabajadorRepository trabajadoresRepo;
 
+    //Obtener todos los trabajadores de una sede
+    @Transactional
+    public List<TrabajadorEntity> obtenerTrabajadroes(Long sedeId) throws EntityNotFoundException{
+        
+        Optional<SedeEntity> sedeEntity = sedeRepo.findById(sedeId);
+        if (sedeEntity.isEmpty()) {
+            throw new EntityNotFoundException(SEDE_NOT_FOUND);
+        }
+
+        return sedeEntity.get().getTrabajadores();
+
+
+    }
     // Añadir un trabajador a la sede
     @Transactional
     public TrabajadorEntity addSedeTrabajador(Long sedeId, Long trabajadorId)
