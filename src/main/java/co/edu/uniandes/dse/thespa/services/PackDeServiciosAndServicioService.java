@@ -21,7 +21,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Service
 public class PackDeServiciosAndServicioService {
-    // String estático para eliminar el code smell en el mensaje de excepción y reporte
+    // String estático para eliminar el code smell en el mensaje de excepción y
+    // reporte
     private static final String MENSAJE_PACK_NO_EXISTE = "El pack de servicios con el id = {0} no existe";
     private static final String MENSAJE_SERVICIO_NO_EXISTE = "El servicio con el id = {0} no existe";
 

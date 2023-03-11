@@ -16,7 +16,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @MappedSuperclass
-@EqualsAndHashCode(callSuper=true)
+@EqualsAndHashCode(callSuper = true)
 public abstract class ProductoEntity extends BaseEntity {
 
     protected String nombre;

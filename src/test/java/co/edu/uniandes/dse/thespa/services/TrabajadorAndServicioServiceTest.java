@@ -81,7 +81,8 @@ public class TrabajadorAndServicioServiceTest {
         TrabajadorEntity trabajador = trabajadores.get(0);
         ServicioEntity servicio = servicios.get(0);
 
-        ServicioEntity answer = trabajadorandServicioService.addServicioToTrabajador(trabajador.getId(), servicio.getId());
+        ServicioEntity answer = trabajadorandServicioService.addServicioToTrabajador(trabajador.getId(),
+                servicio.getId());
         assertNotNull(answer);
         assertEquals(servicio.getId(), answer.getId());
     }
@@ -121,7 +122,8 @@ public class TrabajadorAndServicioServiceTest {
         TrabajadorEntity trabajador = trabajadores.get(0);
         ServicioEntity servicio = trabajador.getServicios().get(0);
 
-        ServicioEntity answer = trabajadorandServicioService.deleteServicioTrabajador(trabajador.getId(), servicio.getId());
+        ServicioEntity answer = trabajadorandServicioService.deleteServicioTrabajador(trabajador.getId(),
+                servicio.getId());
         assertNotNull(answer);
         assertEquals(servicio.getId(), answer.getId());
     }

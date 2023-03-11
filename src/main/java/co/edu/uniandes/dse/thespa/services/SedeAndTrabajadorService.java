@@ -18,7 +18,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Service
 public class SedeAndTrabajadorService {
-    // String estático para eliminar el code smell en el mensaje de excepción y reporte
+    // String estático para eliminar el code smell en el mensaje de excepción y
+    // reporte
     private static final String TRABAJADOR_NOT_FOUND = "TRABAJADOR_NOT_FOUND";
     private static final String SEDE_NOT_FOUND = "SEDE_NOT_FOUND";
     private static final String TRABAJADOR_ALREADY_EXISTS = "TRABAJADOR_ALREADY_EXISTS";

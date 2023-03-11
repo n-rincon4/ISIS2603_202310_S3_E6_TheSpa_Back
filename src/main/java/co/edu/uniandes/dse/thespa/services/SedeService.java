@@ -16,7 +16,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Service
 public class SedeService {
-    // String estático para eliminar el code smell en el mensaje de excepción y reporte
+    // String estático para eliminar el code smell en el mensaje de excepción y
+    // reporte
     private static final String SEDE_NOT_FOUND = "SEDE_NOT_FOUND";
 
     // Inyeccion de dependencias -> Repositorio Sede

@@ -18,7 +18,7 @@ import javax.persistence.ManyToOne;
 @Getter
 @Setter
 @Entity
-@EqualsAndHashCode(callSuper=true)
+@EqualsAndHashCode(callSuper = true)
 public class ServicioExtraEntity extends ProductoEntity {
     private Boolean disponible;
 

@@ -18,7 +18,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Service
 public class UbicacionService {
-    // String estático para eliminar el code smell en el mensaje de excepción y reporte
+    // String estático para eliminar el code smell en el mensaje de excepción y
+    // reporte
     private static final String MENSAJE_UBICACION_NO_EXISTE = "La ubicación con el id = {0} no existe";
     private static final String UBICACION_ENCONTRADA = "Ubicación encontrada";
 

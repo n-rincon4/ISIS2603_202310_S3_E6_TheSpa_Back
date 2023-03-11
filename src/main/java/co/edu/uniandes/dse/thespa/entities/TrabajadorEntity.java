@@ -20,7 +20,7 @@ import uk.co.jemos.podam.common.PodamExclude;
 @Getter
 @Setter
 @Entity
-@EqualsAndHashCode(callSuper=true)
+@EqualsAndHashCode(callSuper = true)
 public class TrabajadorEntity extends BaseEntity {
     private String nombre;
     private String foto;
