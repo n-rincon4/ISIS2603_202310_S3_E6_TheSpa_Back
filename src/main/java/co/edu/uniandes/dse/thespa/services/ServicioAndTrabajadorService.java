@@ -20,7 +20,8 @@ import java.util.Optional;
 @Slf4j
 @Service
 public class ServicioAndTrabajadorService {
-    // String estático para eliminar el code smell en el mensaje de excepción y reporte
+    // String estático para eliminar el code smell en el mensaje de excepción y
+    // reporte
     private static final String MENSAJE_TRABAJADOR_NO_EXISTE = "El trabajador con el id = {0} no existe";
     private static final String MENSAJE_SERVICIO_NO_EXISTE = "El servicio con el id = {0} no existe";
 

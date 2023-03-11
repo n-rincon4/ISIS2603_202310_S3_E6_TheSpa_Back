@@ -22,7 +22,7 @@ import uk.co.jemos.podam.common.PodamExclude;
 @Getter
 @Setter
 @Entity
-@EqualsAndHashCode(callSuper=true)
+@EqualsAndHashCode(callSuper = true)
 public class SedeEntity extends BaseEntity {
     private String nombre;
     private String imagen;

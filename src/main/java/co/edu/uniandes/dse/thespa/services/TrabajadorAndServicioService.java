@@ -19,7 +19,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Service
 public class TrabajadorAndServicioService {
-    // String estático para eliminar el code smell en el mensaje de excepción y reporte
+    // String estático para eliminar el code smell en el mensaje de excepción y
+    // reporte
     private static final String SERVICE_NOT_FOUND = "SERVICE_NOT_FOUND";
     private static final String TRABAJADOR_NOT_FOUND = "TRABAJADOR_NOT_FOUND";
     private static final String SERVICE_ALREADY_EXISTS = "SERVICE_ALREADY_EXISTS";
@@ -37,7 +38,8 @@ public class TrabajadorAndServicioService {
     @Transactional
     public ServicioEntity addServicioToTrabajador(Long trabajadorId, Long servicioId)
             throws EntityNotFoundException, IllegalOperationException {
-        log.info("Inicia proceso de añadir al trabajador con id = {0} un servicio con id = {1}", trabajadorId, servicioId);
+        log.info("Inicia proceso de añadir al trabajador con id = {0} un servicio con id = {1}", trabajadorId,
+                servicioId);
         Optional<ServicioEntity> servicioEntity = servicioRepository.findById(servicioId);
         if (servicioEntity.isEmpty()) {
             throw new EntityNotFoundException(SERVICE_NOT_FOUND);
@@ -58,7 +60,8 @@ public class TrabajadorAndServicioService {
 
         trabajadorEntity.get().setServicios(servicios);
 
-        log.info("Termina proceso de añadir al trabajador con id = {0} el servicio con id = {1}", trabajadorId, servicioId);
+        log.info("Termina proceso de añadir al trabajador con id = {0} el servicio con id = {1}", trabajadorId,
+                servicioId);
 
         return servicioEntity.get();
     }
@@ -67,7 +70,8 @@ public class TrabajadorAndServicioService {
     @Transactional
     public ServicioEntity deleteServicioTrabajador(Long trabajadorId, Long servicioId)
             throws EntityNotFoundException, IllegalOperationException {
-        log.info("Inicia proceso de remover al trabajador con id = {0} un servicio con id = {1}", trabajadorId, servicioId);
+        log.info("Inicia proceso de remover al trabajador con id = {0} un servicio con id = {1}", trabajadorId,
+                servicioId);
         Optional<ServicioEntity> servicioEntity = servicioRepository.findById(servicioId);
         if (servicioEntity.isEmpty()) {
             throw new EntityNotFoundException(SERVICE_NOT_FOUND);
@@ -88,7 +92,8 @@ public class TrabajadorAndServicioService {
 
         trabajadorEntity.get().setServicios(servicios);
 
-        log.info("Termina proceso de eliminar del trabajador con id = {0} un servicio con id = {1}", trabajadorId, servicioId);
+        log.info("Termina proceso de eliminar del trabajador con id = {0} un servicio con id = {1}", trabajadorId,
+                servicioId);
 
         return servicioEntity.get();
     }

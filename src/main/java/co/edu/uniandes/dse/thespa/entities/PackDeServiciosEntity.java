@@ -14,7 +14,7 @@ import uk.co.jemos.podam.common.PodamExclude;
 @Getter
 @Setter
 @Entity
-@EqualsAndHashCode(callSuper=true)
+@EqualsAndHashCode(callSuper = true)
 public class PackDeServiciosEntity extends BaseEntity {
     private Integer descuento;
     private String nombre;

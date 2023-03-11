@@ -18,7 +18,7 @@ import uk.co.jemos.podam.common.PodamExclude;
 @Getter
 @Setter
 @Entity
-@EqualsAndHashCode(callSuper=true)
+@EqualsAndHashCode(callSuper = true)
 public class UbicacionEntity extends BaseEntity {
 
     private Double latitud;
