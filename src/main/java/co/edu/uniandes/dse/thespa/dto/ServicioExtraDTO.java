@@ -1,5 +1,11 @@
 package co.edu.uniandes.dse.thespa.dto;
 
-public class ServicioExtraDTO {
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+public class ServicioExtraDTO extends ProductoDTO {
+    private Boolean disponible;
     
 }
