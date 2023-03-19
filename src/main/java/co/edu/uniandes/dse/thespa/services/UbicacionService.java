@@ -60,10 +60,7 @@ public class UbicacionService {
         if (ubicacion.getDireccion().equals(" ")) {
             throw new IllegalOperationException("La direccion no puede ser vacia");
         }
-        // revisa que la sede no este vacia
-        if (ubicacion.getSede() == null) {
-            throw new IllegalOperationException("La sede no puede ser nula");
-        }
+        log.info("Ubicacion creada");
         return ubicacionRepository.save(ubicacion);
     }
 
@@ -123,10 +120,6 @@ public class UbicacionService {
         // revisa que la direccion no sea " "
         if (ubicacion.getDireccion().equals(" ")) {
             throw new IllegalOperationException("La direccion no puede ser vacia");
-        }
-        // revisa que la sede no este vacia
-        if (ubicacion.getSede() == null) {
-            throw new IllegalOperationException("La sede no puede ser nula");
         }
 
         ubicacion.setId(id);
