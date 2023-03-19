@@ -52,11 +52,9 @@ public class SedeController {
     // DTO de la entidad creada
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
-    public SedeDTO create(@RequestBody SedeDTO sedeDTO)
-            throws IllegalOperationException, EntityNotFoundException {
+    public SedeDTO create(@RequestBody SedeDTO sedeDTO) throws IllegalOperationException, EntityNotFoundException {
 
-        SedeEntity sede = sedeService
-                .createSede(modelMapper.map(sedeDTO, SedeEntity.class));
+        SedeEntity sede = sedeService.createSede(modelMapper.map(sedeDTO, SedeEntity.class));
         return modelMapper.map(sede, SedeDTO.class);
     }
 
