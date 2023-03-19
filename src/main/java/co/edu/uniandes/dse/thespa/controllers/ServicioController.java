@@ -13,18 +13,17 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
 
-
 import java.util.List;
 
 import co.edu.uniandes.dse.thespa.services.ServicioService;
 import co.edu.uniandes.dse.thespa.entities.ServicioEntity;
 import co.edu.uniandes.dse.thespa.dto.ServicioDTO;
+import co.edu.uniandes.dse.thespa.dto.ServicioDetailDTO;
 
 import org.modelmapper.TypeToken;
 
-import co.edu.uniandes.dse.thespa.exceptions.EntityNotFoundException;  
+import co.edu.uniandes.dse.thespa.exceptions.EntityNotFoundException;
 import co.edu.uniandes.dse.thespa.exceptions.IllegalOperationException;
-
 
 @RestController
 @RequestMapping("/servicios")
@@ -48,23 +47,26 @@ public class ServicioController {
 
     @GetMapping("/{id}")
     @ResponseStatus(code = HttpStatus.OK)
-    public ServicioDTO findOne(@PathVariable("id") Long id) throws EntityNotFoundException{
+    public ServicioDTO findOne(@PathVariable("id") Long id) throws EntityNotFoundException {
         ServicioEntity servicio = servicioService.getServicio(id);
         return modelMapper.map(servicio, ServicioDTO.class);
     }
 
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
-    public ServicioDTO create(@RequestBody ServicioDTO servicioDTO) throws EntityNotFoundException, IllegalOperationException {
+    public ServicioDetailDTO create(@RequestBody ServicioDetailDTO servicioDTO)
+            throws EntityNotFoundException, IllegalOperationException {
         ServicioEntity servicio = servicioService.createServicio(modelMapper.map(servicioDTO, ServicioEntity.class));
 
-        return modelMapper.map(servicio, ServicioDTO.class);
+        return modelMapper.map(servicio, ServicioDetailDTO.class);
     }
 
     @PutMapping("/{id}")
     @ResponseStatus(code = HttpStatus.OK)
-    public ServicioDTO update(@PathVariable("id") Long id, @RequestBody ServicioDTO servicioDTO) throws IllegalOperationException, EntityNotFoundException {
-        ServicioEntity servicio = servicioService.updateServicio(id, modelMapper.map(servicioDTO, ServicioEntity.class));
+    public ServicioDTO update(@PathVariable("id") Long id, @RequestBody ServicioDTO servicioDTO)
+            throws IllegalOperationException, EntityNotFoundException {
+        ServicioEntity servicio = servicioService.updateServicio(id,
+                modelMapper.map(servicioDTO, ServicioEntity.class));
         return modelMapper.map(servicio, ServicioDTO.class);
     }
 
@@ -72,5 +74,5 @@ public class ServicioController {
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     public void delete(@PathVariable("id") Long id) throws EntityNotFoundException {
         servicioService.deleteServicio(id);
-    } 
+    }
 }
