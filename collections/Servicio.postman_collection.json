@@ -54,7 +54,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"id\": 2,\n    \"latitud\": 4.603014,\n    \"longitud\": 74.065227,\n    \"ciudad\": \"Bogotá\",\n    \"direccion\": \"Cl. 20 #19a-71 a 19a-1, Bogotá\",\n    \"sede\": null\n}",
+							"raw": "{\n    \"id\": 1,\n    \"latitud\": 4.603014,\n    \"longitud\": 74.065227,\n    \"ciudad\": \"Bogotá\",\n    \"direccion\": \"Cl. 20 #19a-71 a 19a-1, Bogotá\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -126,7 +126,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\": 1,\r\n    \"nombre\": \"Spa del Jardín\",\r\n    \"imagen\": \"https://www.visit.alsace/wp-content/uploads/lei/pictures/215002309-nature-spa-la-cheneaudiere-11-1600x900.jpg\",\r\n    \"ubicacion\": {\r\n        \"id\": 2,\r\n        \"latitud\": 4.603014,\r\n        \"longitud\": 74.065227,\r\n        \"ciudad\": \"Bogotá\",\r\n        \"direccion\": \"Cl. 20 #19a-71 a 19a-1, Bogotá\",\r\n        \"sede\": null\r\n    }\r\n}",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"nombre\": \"Spa del Jardín\",\r\n    \"imagen\": \"https://www.visit.alsace/wp-content/uploads/lei/pictures/215002309-nature-spa-la-cheneaudiere-11-1600x900.jpg\",\r\n    \"ubicacion\": {\r\n        \"id\": 1,\r\n        \"latitud\": 4.603014,\r\n        \"longitud\": 74.065227,\r\n        \"ciudad\": \"Bogotá\",\r\n        \"direccion\": \"Cl. 20 #19a-71 a 19a-1, Bogotá\",\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -173,7 +173,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"duracion\": 3,\r\n    \"restricciones\": \"restricción\",\r\n    \"disponible\": true,\r\n    \"horaInicio\": 8,\r\n    \"nombre\": \"masaje\",\r\n    \"descripcion\": \"masaje de relajacion\",\r\n    \"precio\": \"30000\",\r\n    \"imagen\": \"https://thumbs.dreamstime.com/b/spa-massage-outdoor-balinese-woman-receiving-back-53105227.jpg\",\r\n    \"sede\": {\"id\": {{sede_id_1}}}\r\n}",
+					"raw": "{\r\n    \"duracion\": 3,\r\n    \"restricciones\": \"restricción\",\r\n    \"disponible\": true,\r\n    \"horaInicio\": 8,\r\n    \"nombre\": \"masaje\",\r\n    \"descripcion\": \"masaje de relajacion\",\r\n    \"precio\": \"30000\",\r\n    \"imagen\": \"https://thumbs.dreamstime.com/b/spa-massage-outdoor-balinese-woman-receiving-back-53105227.jpg\",\r\n    \"sede\": {\r\n        \"id\": {{sede_id_1}}\r\n    }\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -198,7 +198,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\": 1,\r\n    \"nombre\": \"masaje\",\r\n    \"descripcion\": \"masaje de relajacion\",\r\n    \"precio\": 30000.0,\r\n    \"imagen\": \"https://thumbs.dreamstime.com/b/spa-massage-outdoor-balinese-woman-receiving-back-53105227.jpg\",\r\n    \"duracion\": 3,\r\n    \"restricciones\": \"restricción\",\r\n    \"disponible\": true,\r\n    \"horaInicio\": 8,\r\n    \"sede\": {\r\n        \"id\": 1,\r\n        \"nombre\": \"Spa del Jardín\",\r\n        \"imagen\": \"https://www.visit.alsace/wp-content/uploads/lei/pictures/215002309-nature-spa-la-cheneaudiere-11-1600x900.jpg\",\r\n        \"ubicacion\": {\r\n            \"id\": 1,\r\n            \"latitud\": 4.603014,\r\n            \"longitud\": 74.065227,\r\n            \"ciudad\": \"Bogotá\",\r\n            \"direccion\": \"Cl. 20 #19a-71 a 19a-1, Bogotá\",\r\n            \"sede\": null\r\n        }\r\n    }\r\n}",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"nombre\": \"masaje\",\r\n    \"descripcion\": \"masaje de relajacion\",\r\n    \"precio\": 30000.0,\r\n    \"imagen\": \"https://thumbs.dreamstime.com/b/spa-massage-outdoor-balinese-woman-receiving-back-53105227.jpg\",\r\n    \"duracion\": 3,\r\n    \"restricciones\": \"restricción\",\r\n    \"disponible\": true,\r\n    \"horaInicio\": 8,\r\n    \"sede\": {\r\n        \"id\": 1,\r\n        \"nombre\": \"Spa del Jardín\",\r\n        \"imagen\": \"https://www.visit.alsace/wp-content/uploads/lei/pictures/215002309-nature-spa-la-cheneaudiere-11-1600x900.jpg\",\r\n        \"ubicacion\": {\r\n            \"id\": 1,\r\n            \"latitud\": 4.603014,\r\n            \"longitud\": 74.065227,\r\n            \"ciudad\": \"Bogotá\",\r\n            \"direccion\": \"Cl. 20 #19a-71 a 19a-1, Bogotá\"\r\n        }\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -371,6 +371,24 @@
 		},
 		{
 			"name": "Obtener un Servicio que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"   pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.apierror.message).to.eql(\"Servicio not found\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -429,6 +447,19 @@
 		},
 		{
 			"name": "Editar un Servicio",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"   pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "PUT",
 				"header": [],
@@ -488,6 +519,24 @@
 		},
 		{
 			"name": "Editar un servicio que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"   pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.apierror.message).to.eql(\"The autor with the given id was not found\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "PUT",
 				"header": [],
@@ -535,6 +584,8 @@
 							]
 						}
 					},
+					"status": "Not Found",
+					"code": 404,
 					"_postman_previewlanguage": null,
 					"header": null,
 					"cookie": [],
