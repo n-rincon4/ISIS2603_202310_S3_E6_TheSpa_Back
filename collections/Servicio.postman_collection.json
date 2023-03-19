@@ -198,7 +198,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\": 1,\r\n    \"duracion\": 3,\r\n    \"restricciones\": \"restricción\",\r\n    \"disponible\": true,\r\n    \"horaInicio\": 8,\r\n    \"nombre\": \"masaje\",\r\n    \"descripcion\": \"masaje de relajacion\",\r\n    \"precio\": \"30000\",\r\n    \"imagen\": \"https://thumbs.dreamstime.com/b/spa-massage-outdoor-balinese-woman-receiving-back-53105227.jpg\"\r\n\r\n}",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"nombre\": \"masaje\",\r\n    \"descripcion\": \"masaje de relajacion\",\r\n    \"precio\": 30000.0,\r\n    \"imagen\": \"https://thumbs.dreamstime.com/b/spa-massage-outdoor-balinese-woman-receiving-back-53105227.jpg\",\r\n    \"duracion\": 3,\r\n    \"restricciones\": \"restricción\",\r\n    \"disponible\": true,\r\n    \"horaInicio\": 8,\r\n    \"sede\": {\r\n        \"id\": 1,\r\n        \"nombre\": \"Spa del Jardín\",\r\n        \"imagen\": \"https://www.visit.alsace/wp-content/uploads/lei/pictures/215002309-nature-spa-la-cheneaudiere-11-1600x900.jpg\",\r\n        \"ubicacion\": {\r\n            \"id\": 1,\r\n            \"latitud\": 4.603014,\r\n            \"longitud\": 74.065227,\r\n            \"ciudad\": \"Bogotá\",\r\n            \"direccion\": \"Cl. 20 #19a-71 a 19a-1, Bogotá\",\r\n            \"sede\": null\r\n        }\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
