@@ -176,15 +176,14 @@ public class UbicacionTest {
         });
     }
 
-    // crea una ubicacion cuya sede es null, espera una excepción
-    // IllegalOperationException
+    // crea una ubicacion cuya sede es null, espera que se cree la ubicacion
+    // correctamente
     @Test
-    void testCreateUbicacionSedeNull() {
+    void testCreateUbicacionSedeNull() throws EntityNotFoundException, IllegalOperationException {
         UbicacionEntity newEntity = ubicacionList.get(0);
         newEntity.setSede(null);
-        assertThrows(IllegalOperationException.class, () -> {
-            ubicacionService.createUbicacion(newEntity);
-        });
+        UbicacionEntity result = ubicacionService.createUbicacion(newEntity);
+        assertNotNull(result);
     }
 
     // Crea una ubicacion cuya direccion es null, espera una excepción
@@ -353,16 +352,23 @@ public class UbicacionTest {
         });
     }
 
-    // actualiza ubicacion con sede nula
+    // actualiza ubicacion con sede nula, espera que se actualice correctamente
     @Test
-    void testUpdateUbicacionSedeNull() {
-        assertThrows(IllegalOperationException.class, () -> {
-            UbicacionEntity entity = ubicacionList.get(0);
-            UbicacionEntity pojoEntity = ubicacionList.get(0);
-            pojoEntity.setId(entity.getId());
-            pojoEntity.setSede(null);
-            ubicacionService.updateUbicacion(entity.getId(), pojoEntity);
-        });
+    void testUpdateUbicacionSedeNull() throws EntityNotFoundException, IllegalOperationException {
+        UbicacionEntity entity = ubicacionList.get(0);
+        UbicacionEntity pojoEntity = ubicacionList.get(0);
+        pojoEntity.setId(entity.getId());
+        pojoEntity.setSede(null);
+        ubicacionService.updateUbicacion(entity.getId(), pojoEntity);
+        UbicacionEntity resp = entityManager.find(UbicacionEntity.class, entity.getId());
+        assertEquals(pojoEntity.getId(), resp.getId());
+        // compara los atributos del ubicacion
+        assertEquals(pojoEntity.getLatitud(), resp.getLatitud());
+        assertEquals(pojoEntity.getLongitud(), resp.getLongitud());
+        assertEquals(pojoEntity.getCiudad(), resp.getCiudad());
+        assertEquals(pojoEntity.getDireccion(), resp.getDireccion());
+        assertEquals(pojoEntity.getSede(), resp.getSede());
+
     }
 
     // actualiza ubicacion con ciudad nula

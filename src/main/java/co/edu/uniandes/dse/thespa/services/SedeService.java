@@ -1,11 +1,18 @@
 package co.edu.uniandes.dse.thespa.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import co.edu.uniandes.dse.thespa.entities.ArticuloDeRopaEntity;
+import co.edu.uniandes.dse.thespa.entities.PackDeServiciosEntity;
 import co.edu.uniandes.dse.thespa.entities.SedeEntity;
+import co.edu.uniandes.dse.thespa.entities.ServicioEntity;
+import co.edu.uniandes.dse.thespa.entities.ServicioExtraEntity;
+import co.edu.uniandes.dse.thespa.entities.TrabajadorEntity;
 import co.edu.uniandes.dse.thespa.exceptions.EntityNotFoundException;
 import co.edu.uniandes.dse.thespa.exceptions.IllegalOperationException;
 import co.edu.uniandes.dse.thespa.repositories.SedeRepository;
@@ -51,26 +58,25 @@ public class SedeService {
             throw new IllegalOperationException("La sede tiene que tener un nombre no vacio.");
         }
 
-        // Assert 5: la lista de servicios no debe ser vacia
-        if (sede.getServicios().isEmpty()) {
-            throw new IllegalOperationException("La sede tiene que tener al menos un servicio.");
-        }
-
-        // Assert 6: Debe haber al menos un trabajador
-        if (sede.getTrabajadores().isEmpty()) {
-            throw new IllegalOperationException("La sede tiene que tener al menos un trabajador.");
-        }
-
-        // Assert 7: debe tener una ubicacion la sede
+        // Assert 5: debe tener una ubicacion la sede
         if (sede.getUbicacion() == null) {
             throw new IllegalOperationException("La sede tiene que tener una ubicacion.");
         }
 
-        // Assert 8: debe tener un Pack de servicios
-        if (sede.getPacksDeServicios().isEmpty()) {
-            throw new IllegalOperationException("La sede tiene que tener al menos unpack de servicios");
-        }
+        // Se le asigna una lista vacia de Servicios
+        sede.setServicios(new ArrayList<ServicioEntity>());
 
+        // Se le asigna una lista vacia de ServiciosExtra
+        sede.setServiciosExtra(new ArrayList<ServicioExtraEntity>());
+
+        // Se le asigna una lista vacia de ArticulosDERopa
+        sede.setArticulosDeRopa(new ArrayList<ArticuloDeRopaEntity>());
+
+        // Se le asigna una lista vacia de Trabajadores
+        sede.setTrabajadores(new ArrayList<TrabajadorEntity>());
+
+        // Se le asigna una lista vacia de PacksDeServicios
+        sede.setPacksDeServicios(new ArrayList<PackDeServiciosEntity>());
         log.info("Finaliza proceso de creacion de Sede.");
         return sedeRepo.save(sede);
 

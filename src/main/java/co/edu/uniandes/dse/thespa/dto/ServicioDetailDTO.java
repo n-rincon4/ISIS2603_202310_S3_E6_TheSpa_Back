@@ -8,10 +8,8 @@ import java.util.ArrayList;
 
 @Getter
 @Setter
-public class ServicioDetailDTO extends ServicioDTO{
+public class ServicioDetailDTO extends ServicioDTO {
     private List<PackDeServiciosDTO> packsDeServicios = new ArrayList<>();
     private List<TrabajadorDTO> trabajadores = new ArrayList<>();
 
-
-    
 }

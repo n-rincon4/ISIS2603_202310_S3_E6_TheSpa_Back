@@ -6,8 +6,10 @@ import lombok.Setter;
 @Getter
 @Setter
 public class UbicacionDTO {
-    private String latitud;
-    private String longitud;
+    private long id;
+    private Double latitud;
+    private Double longitud;
     private String ciudad;
     private String direccion;
+    private SedeDTO sede;
 }
