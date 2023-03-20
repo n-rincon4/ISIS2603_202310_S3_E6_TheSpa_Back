@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -58,6 +59,16 @@ public class SedeController {
 
         SedeEntity sede = sedeService.createSede(modelMapper.map(sedeDTO, SedeEntity.class));
         return modelMapper.map(sede, SedeDetailDTO.class);
+    }
+
+    //metodo para editar una entidad de sede 
+    @PutMapping(value = "{id}")
+    @ResponseStatus(code = HttpStatus.OK)
+    public SedeDTO update(@PathVariable("id") Long id, @RequestBody SedeDTO SedeDTO)
+            throws IllegalOperationException, EntityNotFoundException {
+                SedeEntity sede = sedeService.updateSede(id,
+                modelMapper.map(SedeDTO, SedeEntity.class));
+        return modelMapper.map(sede, SedeDTO.class);
     }
 
     // metodo para eliminar una sede dado su id
