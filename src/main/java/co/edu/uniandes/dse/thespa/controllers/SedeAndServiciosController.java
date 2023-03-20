@@ -1,7 +1,9 @@
 package co.edu.uniandes.dse.thespa.controllers;
+
 import java.util.List;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,21 +18,23 @@ import co.edu.uniandes.dse.thespa.dto.ServicioDTO;
 import co.edu.uniandes.dse.thespa.services.SedeAndServicioService;
 import co.edu.uniandes.dse.thespa.entities.ServicioEntity;
 
-
 @RestController
 @RequestMapping("/sedes")
 public class SedeAndServiciosController {
 
     // inyectar el servicio de sedes y trabajadores
+    @Autowired
     private SedeAndServicioService SaS;
 
     // inyecta el model mapper
+    @Autowired
     private ModelMapper modelMapper;
 
     // metodo para encontrar todos los servicios dentro de una sede dado su id
     @GetMapping(value = "{id}/servicios")
     @ResponseStatus(code = HttpStatus.OK)
-    public List<ServicioEntity> findAll(@PathVariable("id") Long id) throws EntityNotFoundException, IllegalOperationException {
+    public List<ServicioEntity> findAll(@PathVariable("id") Long id)
+            throws EntityNotFoundException, IllegalOperationException {
         List<ServicioEntity> servicios = SaS.obtenerAllServicios(id);
         return modelMapper.map(servicios, new TypeToken<List<ServicioDTO>>() {
         }.getType());
@@ -38,7 +42,7 @@ public class SedeAndServiciosController {
 
     // metodo para agregar un servicio a una sede dado su id
     @PostMapping(value = "{id}/servicios/{idServicio}")
-    @ResponseStatus(code = HttpStatus.CREATED)
+    @ResponseStatus(code = HttpStatus.OK)
     public ServicioDTO create(@PathVariable("id") Long id, @PathVariable("idServicio") Long idServicio)
             throws IllegalOperationException, EntityNotFoundException {
 

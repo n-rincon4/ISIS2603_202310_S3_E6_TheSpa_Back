@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import co.edu.uniandes.dse.thespa.dto.SedeDTO;
+import co.edu.uniandes.dse.thespa.dto.SedeDetailDTO;
 import co.edu.uniandes.dse.thespa.entities.SedeEntity;
 import co.edu.uniandes.dse.thespa.exceptions.EntityNotFoundException;
 import co.edu.uniandes.dse.thespa.exceptions.IllegalOperationException;
@@ -52,10 +53,11 @@ public class SedeController {
     // DTO de la entidad creada
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
-    public SedeDTO create(@RequestBody SedeDTO sedeDTO) throws IllegalOperationException, EntityNotFoundException {
+    public SedeDetailDTO create(@RequestBody SedeDetailDTO sedeDTO)
+            throws IllegalOperationException, EntityNotFoundException {
 
         SedeEntity sede = sedeService.createSede(modelMapper.map(sedeDTO, SedeEntity.class));
-        return modelMapper.map(sede, SedeDTO.class);
+        return modelMapper.map(sede, SedeDetailDTO.class);
     }
 
     // metodo para eliminar una sede dado su id

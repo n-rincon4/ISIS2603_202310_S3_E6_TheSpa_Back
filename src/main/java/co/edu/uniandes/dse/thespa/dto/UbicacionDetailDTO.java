@@ -5,8 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class SedeDTO {
-    private long id;
-    private String nombre;
-    private String imagen;
+public class UbicacionDetailDTO extends UbicacionDTO {
+    private SedeDTO sede;
+
 }
