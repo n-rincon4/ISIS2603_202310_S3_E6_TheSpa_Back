@@ -6,6 +6,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ServicioExtraDTO extends ProductoDTO {
+    private long id;
     private Boolean disponible;
     
 }

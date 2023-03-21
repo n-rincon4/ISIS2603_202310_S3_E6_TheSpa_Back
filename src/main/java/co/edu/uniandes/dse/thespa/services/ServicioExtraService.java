@@ -23,7 +23,7 @@ public class ServicioExtraService {
 
     // Inyeccion de dependencias -> Repositorio ServicioExtra
     @Autowired
-    private ServicioExtraRepository servicioExtraRepository;
+    ServicioExtraRepository servicioExtraRepository;
 
     // Método para la Creación de un servicio extra
     @Transactional
@@ -68,7 +68,7 @@ public class ServicioExtraService {
         if ((servicioExtra.getNombre() == null) || (servicioExtra.getNombre().equals("")))
             throw new IllegalOperationException("El nombre del servicio extra no puede estar vacío");
 
-        servicioExtra.setId(servicioExtraId);
+        servicioExtra.setId(servicioExtraEntity.get().getId());
         log.info("Termina proceso de actualizar el servicio extra con id = {0}", servicioExtraId);
         return servicioExtraRepository.save(servicioExtra);
     }
