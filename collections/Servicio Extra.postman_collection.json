@@ -1,11 +1,155 @@
 {
 	"info": {
-		"_postman_id": "af20e351-95bf-4a1a-9dbe-6d15274d7e7b",
+		"_postman_id": "1e569a2f-c0e5-4164-9360-eba91087ff16",
 		"name": "Servicio Extra",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "25519060"
+		"_exporter_id": "25783612"
 	},
 	"item": [
+		{
+			"name": "Crear una ubicación",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json()",
+							"pm.globals.set(\"ubicacion_id_1\", data.id);",
+							"",
+							"pm.test(\"Status code is 201\", function () {",
+							"   pm.response.to.have.status(201);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"latitud\": 4.603014,\n    \"longitud\": 74.065227,\n    \"ciudad\": \"Bogotá\",\n    \"direccion\": \"Cl. 20 #19a-71 a 19a-1, Bogotá\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/ubicaciones",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"ubicaciones"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Crear una ubicación",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 1,\n    \"latitud\": 4.603014,\n    \"longitud\": 74.065227,\n    \"ciudad\": \"Bogotá\",\n    \"direccion\": \"Cl. 20 #19a-71 a 19a-1, Bogotá\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/ubicaciones",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"ubicaciones"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Crear una Sede",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json()\r",
+							"pm.globals.set(\"sede_id_1\", data.id);\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"   pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"Spa del Jardín\",\r\n    \"imagen\": \"https://www.visit.alsace/wp-content/uploads/lei/pictures/215002309-nature-spa-la-cheneaudiere-11-1600x900.jpg\",\r\n    \"ubicacion\": {\r\n        \"id\": {{ubicacion_id_1}}\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/sedes",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"sedes"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Crear una Sede",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"nombre\": \"Spa del Jardín\",\r\n    \"imagen\": \"https://www.visit.alsace/wp-content/uploads/lei/pictures/215002309-nature-spa-la-cheneaudiere-11-1600x900.jpg\",\r\n    \"ubicacion\": {\r\n        \"id\": 1,\r\n        \"latitud\": 4.603014,\r\n        \"longitud\": 74.065227,\r\n        \"ciudad\": \"Bogotá\",\r\n        \"direccion\": \"Cl. 20 #19a-71 a 19a-1, Bogotá\",\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/sedes",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"sedes"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
 		{
 			"name": "Crear un Servicio Extra",
 			"event": [
@@ -29,7 +173,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"nombre\": \"Sandwich Gourmet\",\r\n    \"descripción\": \"Para disfrutar mientras espera ser atendido\",\r\n    \"precio\": 5000.0,\r\n    \"imagen\": \"https://d320djwtwnl5uo.cloudfront.net/recetas/cover/s-ndw_AfsS859PRoHcJpKwd6r4Me0FUBDtCg.png\",\r\n    \"disponible\": true\r\n}",
+					"raw": "{\r\n    \"nombre\": \"Sandwich Gourmet\",\r\n    \"descripcion\": \"Para disfrutar mientras espera ser atendido\",\r\n    \"precio\": 5000.0,\r\n    \"imagen\": \"https://d320djwtwnl5uo.cloudfront.net/recetas/cover/s-ndw_AfsS859PRoHcJpKwd6r4Me0FUBDtCg.png\",\r\n    \"disponible\": true,\r\n    \"sede\": {\r\n        \"id\": {{sede_id_1}}\r\n    }\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -187,15 +331,6 @@
 								"type": "text"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
 							"raw": "{{baseUrl}}/serviciosextra/{{servicioextra_id_1}}",
 							"host": [
