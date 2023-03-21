@@ -58,7 +58,7 @@ public class UbicacionController {
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
     public UbicacionDetailDTO create(@RequestBody UbicacionDetailDTO ubicacionDTO)
-            throws IllegalOperationException, EntityNotFoundException {
+            throws IllegalOperationException {
         UbicacionEntity ubicacionEntity = ubicacionService
                 .createUbicacion(modelMapper.map(ubicacionDTO, UbicacionEntity.class));
         return modelMapper.map(ubicacionEntity, UbicacionDetailDTO.class);
@@ -77,7 +77,7 @@ public class UbicacionController {
     // Método para eliminar una ubicacion dado su id
     @DeleteMapping(value = "/{id}")
     @ResponseStatus(code = HttpStatus.OK)
-    public void delete(@PathVariable("id") Long id) throws IllegalOperationException, EntityNotFoundException {
+    public void delete(@PathVariable("id") Long id) throws EntityNotFoundException {
         ubicacionService.deleteUbicacion(id);
     }
 

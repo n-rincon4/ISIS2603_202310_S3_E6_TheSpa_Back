@@ -25,6 +25,7 @@ public class PackDeServiciosAndServicioService {
     // reporte
     private static final String MENSAJE_PACK_NO_EXISTE = "El pack de servicios con el id = {0} no existe";
     private static final String MENSAJE_SERVICIO_NO_EXISTE = "El servicio con el id = {0} no existe";
+    private static final String MENSAJE_SERVICIO_NOTIN_PACK = "El servicio con el id = {0} no esta en el pack de servicios con el id = {1}";
 
     // Inyeccion de dependencias -> Repositorio PackDeServicios
     @Autowired
@@ -67,8 +68,7 @@ public class PackDeServiciosAndServicioService {
 
         // Verifica que el servicio este en el pack de servicios
         if (!packsBuscados.get().getServicios().contains(serviciosBuscados.get())) {
-            throw new IllegalOperationException("El servicio con el id = " + servicioID
-                    + " no esta en el pack de servicios con el id = " + packid);
+            throw new IllegalOperationException(String.format(MENSAJE_SERVICIO_NOTIN_PACK, servicioID, packid));
         }
 
         log.info("Servicio encontrado");
@@ -132,8 +132,7 @@ public class PackDeServiciosAndServicioService {
 
         // Verifica que el servicio este en el pack de servicios
         if (!packsBuscados.get().getServicios().contains(serviciosBuscados.get())) {
-            throw new IllegalOperationException("El servicio con el id = " + servicioID
-                    + " no esta en el pack de servicios con el id = " + packid);
+            throw new IllegalOperationException(String.format(MENSAJE_SERVICIO_NOTIN_PACK, servicioID, packid));
         }
 
         // Elimina el servicio del pack de servicios

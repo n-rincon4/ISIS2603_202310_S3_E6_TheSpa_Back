@@ -23,7 +23,7 @@ import co.edu.uniandes.dse.thespa.entities.ServicioExtraEntity;
 public class SedeAndServicioExtraController {
 
     // inyectar el servicio de sedes y servicios extras
-    private SedeAndServicioExtraService SaE;
+    private SedeAndServicioExtraService saE;
 
     // inyecta el model mapper
     private ModelMapper modelMapper;
@@ -32,7 +32,7 @@ public class SedeAndServicioExtraController {
     @GetMapping(value = "{id}/serviciosExtra")
     @ResponseStatus(code = HttpStatus.OK)
     public List<ServicioExtraEntity> findAll(@PathVariable("id") Long id) throws EntityNotFoundException, IllegalOperationException {
-        List<ServicioExtraEntity> servicios = SaE.obtenerAllServicios(id);
+        List<ServicioExtraEntity> servicios = saE.obtenerAllServicios(id);
         return modelMapper.map(servicios, new TypeToken<List<ServicioExtraDTO>>() {
         }.getType());
     }
@@ -43,7 +43,7 @@ public class SedeAndServicioExtraController {
     public ServicioExtraDTO create(@PathVariable("id") Long id, @PathVariable("idServicio") Long idServicio)
             throws IllegalOperationException, EntityNotFoundException {
 
-        ServicioExtraEntity servicio = SaE.addSedeExtraService(id, idServicio);
+        ServicioExtraEntity servicio = saE.addSedeExtraService(id, idServicio);
         return modelMapper.map(servicio, ServicioExtraDTO.class);
     }
 
@@ -53,7 +53,7 @@ public class SedeAndServicioExtraController {
     public ServicioExtraDTO delete(@PathVariable("id") Long id, @PathVariable("idServicio") Long idServicio)
             throws IllegalOperationException, EntityNotFoundException {
 
-        ServicioExtraEntity servicioEliminado = SaE.deleteSedeExtraService(id, idServicio);
+        ServicioExtraEntity servicioEliminado = saE.deleteSedeExtraService(id, idServicio);
         return modelMapper.map(servicioEliminado, ServicioExtraDTO.class);
     }
 
