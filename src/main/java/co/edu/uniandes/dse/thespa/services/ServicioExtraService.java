@@ -31,8 +31,25 @@ public class ServicioExtraService {
             throws EntityNotFoundException, IllegalOperationException {
         log.info("Inicia el proceso de creación del servicio extra");
 
+        // Verifica que el nombre del servicio extra no esté vacío
         if ((servicioExtraEntity.getNombre() == null) || (servicioExtraEntity.getNombre().equals("")))
             throw new IllegalOperationException("El nombre del servicio extra no puede estar vacío");
+
+        // Verifica que el precio del servicio extra no sea negativo
+        if (servicioExtraEntity.getPrecio() < 0)
+            throw new IllegalOperationException("El precio del servicio extra no puede ser negativo");
+
+        // Verifica que la sede del servicio extra no sea null
+        if (servicioExtraEntity.getSede() == null)
+            throw new IllegalOperationException("La sede del servicio extra no puede ser null");
+
+        // verifica que la descripcion del servicio extra no sea null ni vacia
+        if (servicioExtraEntity.getDescripcion() == null || servicioExtraEntity.getDescripcion().equals(""))
+            throw new IllegalOperationException("La descripcion del servicio extra no puede ser null ni vacia");
+
+        // verifica que la disponibilidad del servicio extra no sea null
+        if (servicioExtraEntity.getDisponible() == null)
+            throw new IllegalOperationException("La disponibilidad del servicio extra no puede ser null");
 
         log.info("Termina proceso de creación del servicio extra");
         return servicioExtraRepository.save(servicioExtraEntity);
