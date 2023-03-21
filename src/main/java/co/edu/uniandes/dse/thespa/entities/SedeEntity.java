@@ -1,5 +1,6 @@
 package co.edu.uniandes.dse.thespa.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -29,11 +30,11 @@ public class SedeEntity extends BaseEntity {
 
     @PodamExclude
     @ManyToMany(mappedBy = "sedes")
-    private List<TrabajadorEntity> trabajadores;
+    private List<TrabajadorEntity> trabajadores = new ArrayList<>();
 
     @PodamExclude
     @OneToMany(mappedBy = "sede", cascade = CascadeType.PERSIST, orphanRemoval = true)
-    private List<ArticuloDeRopaEntity> articulosDeRopa;
+    private List<ArticuloDeRopaEntity> articulosDeRopa = new ArrayList<>();
 
     @PodamExclude
     @OneToOne
@@ -41,14 +42,14 @@ public class SedeEntity extends BaseEntity {
 
     @PodamExclude
     @OneToMany(mappedBy = "sede", cascade = CascadeType.PERSIST, orphanRemoval = true)
-    private List<PackDeServiciosEntity> packsDeServicios;
+    private List<PackDeServiciosEntity> packsDeServicios = new ArrayList<>();
 
     @PodamExclude
     @OneToMany(mappedBy = "sede", cascade = CascadeType.PERSIST, orphanRemoval = true)
-    private List<ServicioEntity> servicios;
+    private List<ServicioEntity> servicios = new ArrayList<>();
 
     @PodamExclude
     @OneToMany(mappedBy = "sede", cascade = CascadeType.PERSIST, orphanRemoval = true)
-    private List<ServicioExtraEntity> serviciosExtra;
+    private List<ServicioExtraEntity> serviciosExtra = new ArrayList<>();
 
 }
