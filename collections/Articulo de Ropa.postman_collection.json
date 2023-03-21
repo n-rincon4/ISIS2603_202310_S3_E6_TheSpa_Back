@@ -7,13 +7,29 @@
 	},
 	"item": [
 		{
-			"name": "Crear un Articulo de Ropa",
+			"name": "Crear una ubicación",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json()",
+							"pm.globals.set(\"ubicacion_id_1\", data.id);",
+							"",
+							"pm.test(\"Status code is 201\", function () {",
+							"   pm.response.to.have.status(201);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"nombre\": \"Crop Top The Spa\",\r\n    \"descripción\": \"Camiseta corta\",\r\n    \"precio\": 15000.0,\r\n    \"imagen\": \"https://cdn.shopify.com/s/files/1/0156/6146/products/TrainingFractionCropTopToffeeBrownB2A5Y-NBH6.1054.142.jpg?v=1668618724g\",\r\n    \"numDiponible\": 100,\r\n    \"talla\": 6,\r\n    \"color\": \"azul\"\r\n}",
+					"raw": "{\n    \"latitud\": 4.603014,\n    \"longitud\": 74.065227,\n    \"ciudad\": \"Bogotá\",\n    \"direccion\": \"Cl. 20 #19a-71 a 19a-1, Bogotá\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -21,12 +37,156 @@
 					}
 				},
 				"url": {
-					"raw": "{{baseUrl}}/articulosderopa",
+					"raw": "{{baseUrl}}/ubicaciones",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
-						"articulosderopa"
+						"ubicaciones"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Crear una ubicación",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 1,\n    \"latitud\": 4.603014,\n    \"longitud\": 74.065227,\n    \"ciudad\": \"Bogotá\",\n    \"direccion\": \"Cl. 20 #19a-71 a 19a-1, Bogotá\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/ubicaciones",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"ubicaciones"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Crear una Sede",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json()\r",
+							"pm.globals.set(\"sede_id_1\", data.id);\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"   pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"Spa del Jardín\",\r\n    \"imagen\": \"https://www.visit.alsace/wp-content/uploads/lei/pictures/215002309-nature-spa-la-cheneaudiere-11-1600x900.jpg\",\r\n    \"ubicacion\": {\r\n        \"id\": {{ubicacion_id_1}}\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/sedes",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"sedes"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Crear una Sede",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"nombre\": \"Spa del Jardín\",\r\n    \"imagen\": \"https://www.visit.alsace/wp-content/uploads/lei/pictures/215002309-nature-spa-la-cheneaudiere-11-1600x900.jpg\",\r\n    \"ubicacion\": {\r\n        \"id\": 1,\r\n        \"latitud\": 4.603014,\r\n        \"longitud\": 74.065227,\r\n        \"ciudad\": \"Bogotá\",\r\n        \"direccion\": \"Cl. 20 #19a-71 a 19a-1, Bogotá\",\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/sedes",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"sedes"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Crear un Articulo de Ropa",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json()",
+							"pm.globals.set(\"articulo_id_1\", data.id);",
+							"",
+							"pm.test(\"Status code is 201\", function () {",
+							"   pm.response.to.have.status(201);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"Crop Top The Spa\",\r\n    \"descripcion\": \"Camiseta corta\",\r\n    \"precio\": 15000.0,\r\n    \"imagen\": \"https://cdn.shopify.com/s/files/1/0156/6146/products/TrainingFractionCropTopToffeeBrownB2A5Y-NBH6.1054.142.jpg?v=1668618724g\",\r\n    \"numDisponible\": 100,\r\n    \"talla\": 6,\r\n    \"color\": \"azul\",\r\n    \"sede\": {\r\n        \"id\": {{sede_id_1}}\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/articulosDeRopa",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"articulosDeRopa"
 					]
 				}
 			},
@@ -66,16 +226,34 @@
 		},
 		{
 			"name": "Obtener todos los Articulos de Ropa",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Numero de servicios > ' + 0, function () {",
+							"   var data = pm.response.json()",
+							"   pm.expect(data.length).to.greaterThan(0)",
+							"});",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"   pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{baseUrl}}/articulosderopa",
+					"raw": "{{baseUrl}}/articulosDeRopa",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
-						"articulosderopa"
+						"articulosDeRopa"
 					]
 				}
 			},
@@ -122,16 +300,29 @@
 		},
 		{
 			"name": "Obtener un Articulo de Ropa",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"   pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{baseUrl}}/articulosderopa/{{articulo_id_1}}",
+					"raw": "{{baseUrl}}/articulosDeRopa/{{articulo_id_1}}",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
-						"articulosderopa",
+						"articulosDeRopa",
 						"{{articulo_id_1}}"
 					]
 				}
@@ -180,16 +371,34 @@
 		},
 		{
 			"name": "Obtener un Articulo de Ropa que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"   pm.response.to.have.status(404);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"   var data = pm.response.json();",
+							"   pm.expect(data.apierror.message).to.eql(\"El articulo de ropa con el id = {0} no existe\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{baseUrl}}/articulosderopa/0",
+					"raw": "{{baseUrl}}/articulosDeRopa/0",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
-						"articulosderopa",
+						"articulosDeRopa",
 						"0"
 					]
 				}
@@ -238,12 +447,25 @@
 		},
 		{
 			"name": "Editar un Articulo de Ropa",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"   pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "PUT",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"id\": 1,\r\n    \"nombre\": \"Crop Top The Spa\",\r\n    \"descripción\": \"Camiseta corta\",\r\n    \"precio\": 15000.0,\r\n    \"imagen\": \"https://cdn.shopify.com/s/files/1/0156/6146/products/TrainingFractionCropTopToffeeBrownB2A5Y-NBH6.1054.142.jpg?v=1668618724g\",\r\n    \"numDiponible\": 100,\r\n    \"talla\": 6,\r\n    \"color\": \"rosado\"\r\n}",
+					"raw": "{\r\n    \"nombre\": \"Crop Top The Spa\",\r\n    \"descripcion\": \"Camiseta corta\",\r\n    \"precio\": 15000.0,\r\n    \"imagen\": \"https://cdn.shopify.com/s/files/1/0156/6146/products/TrainingFractionCropTopToffeeBrownB2A5Y-NBH6.1054.142.jpg?v=1668618724g\",\r\n    \"numDisponible\": 99,\r\n    \"talla\": 6,\r\n    \"color\": \"azul\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -251,12 +473,12 @@
 					}
 				},
 				"url": {
-					"raw": "{{baseUrl}}/articulosderopa/{{articulo_id_1}}",
+					"raw": "{{baseUrl}}/articulosDeRopa/{{articulo_id_1}}",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
-						"articulosderopa",
+						"articulosDeRopa",
 						"{{articulo_id_1}}"
 					]
 				}
@@ -305,16 +527,43 @@
 		},
 		{
 			"name": "Editar un Articulo de Ropa que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"   pm.response.to.have.status(404);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"   var data = pm.response.json();",
+							"   pm.expect(data.apierror.message).to.eql(\"El articulo de ropa con el id = {0} no existe\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "PUT",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nombre\": \"Crop Top The Spa\",\n    \"descripcion\": \"Camiseta corta\",\n    \"precio\": 15000.0,\n    \"imagen\": \"https://cdn.shopify.com/s/files/1/0156/6146/products/TrainingFractionCropTopToffeeBrownB2A5Y-NBH6.1054.142.jpg?v=1668618724g\",\n    \"numDisponible\": 99,\n    \"talla\": 6,\n    \"color\": \"azul\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": "{{baseUrl}}/articulosderopa/0",
+					"raw": "{{baseUrl}}/articulosDeRopa/0",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
-						"articulosderopa",
+						"articulosDeRopa",
 						"0"
 					]
 				}
@@ -363,16 +612,29 @@
 		},
 		{
 			"name": "Borrar un Artículo de Ropa",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {",
+							"   pm.response.to.have.status(204);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{baseUrl}}/articulosderopa/{{articulo_id_1}}",
+					"raw": "{{baseUrl}}/articulosDeRopa/{{articulo_id_1}}",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
-						"articulosderopa",
+						"articulosDeRopa",
 						"{{articulo_id_1}}"
 					]
 				}
@@ -405,16 +667,35 @@
 		},
 		{
 			"name": "Borrar un Articulo de Ropa que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"   pm.response.to.have.status(404);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"   var data = pm.response.json();",
+							"   pm.expect(data.apierror.message).to.eql(\"El articulo de ropa con el id = {0} no existe\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{baseUrl}}/articulosderopa/0",
+					"raw": "{{baseUrl}}/articulosDeRopa/0",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
-						"articulosderopa",
+						"articulosDeRopa",
 						"0"
 					]
 				}

@@ -42,6 +42,15 @@ public class PackDeServiciosService {
         if (packDeServicios.getServicios() == null) {
             throw new IllegalOperationException("Los servicios del pack de servicios no pueden ser null");
         }
+        // revisa que el pack de servicios tenga al menos 2 servicios
+        if (packDeServicios.getServicios().size() < 2) {
+            throw new IllegalOperationException("El pack de servicios debe tener al menos 2 servicios");
+        }
+        // revisa que el descuento del pack de servicios no sea null
+        if (packDeServicios.getDescuento() == null) {
+            throw new IllegalOperationException("El descuento del pack de servicios no puede ser null");
+        }
+
         return packDeServiciosRepository.save(packDeServicios);
     }
 
