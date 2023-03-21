@@ -4,6 +4,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -46,6 +47,7 @@ public class PackDeServiciosService {
         if (packDeServicios.getServicios().size() < 2) {
             throw new IllegalOperationException("El pack de servicios debe tener al menos 2 servicios");
         }
+
         // revisa que el descuento del pack de servicios no sea null
         if (packDeServicios.getDescuento() == null) {
             throw new IllegalOperationException("El descuento del pack de servicios no puede ser null");

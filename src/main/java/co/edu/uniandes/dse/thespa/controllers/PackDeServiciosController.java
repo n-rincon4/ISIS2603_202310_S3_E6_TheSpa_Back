@@ -46,9 +46,9 @@ public class PackDeServiciosController {
     // metodo para encontrar un pack dado su id
     @GetMapping(value = "{id}")
     @ResponseStatus(code = HttpStatus.OK)
-    public PackDeServiciosDTO findOne(@PathVariable("id") Long id) throws EntityNotFoundException {
+    public PackDeServiciosDetailDTO findOne(@PathVariable("id") Long id) throws EntityNotFoundException {
         PackDeServiciosEntity pack = packDeServiciosService.getPackDeServicios(id);
-        return modelMapper.map(pack, PackDeServiciosDTO.class);
+        return modelMapper.map(pack, PackDeServiciosDetailDTO.class);
     }
 
     // metodo para crear una entidad de un pack dado un DTO, retorna el DTO de la

@@ -2,6 +2,7 @@ package co.edu.uniandes.dse.thespa.entities;
 
 import javax.persistence.ManyToMany;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -29,10 +30,10 @@ public class TrabajadorEntity extends BaseEntity {
 
     @PodamExclude
     @ManyToMany
-    private List<SedeEntity> sedes;
+    private List<SedeEntity> sedes = new ArrayList<SedeEntity>();
 
     @PodamExclude
     @ManyToMany
-    private List<ServicioEntity> servicios;
+    private List<ServicioEntity> servicios = new ArrayList<ServicioEntity>();
 
 }

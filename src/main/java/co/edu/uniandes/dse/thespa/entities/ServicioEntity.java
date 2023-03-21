@@ -25,7 +25,7 @@ public class ServicioEntity extends ProductoEntity {
     private Integer horaInicio;
 
     @PodamExclude
-    @ManyToMany
+    @ManyToMany(mappedBy = "servicios", cascade = CascadeType.PERSIST)
     private List<PackDeServiciosEntity> packsDeServicios = new ArrayList<>();
 
     @PodamExclude
