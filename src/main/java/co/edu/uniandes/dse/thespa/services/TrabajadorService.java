@@ -23,7 +23,7 @@ public class TrabajadorService {
 
     // Inyeccion de dependencias -> Repositorio Trabajador
     @Autowired
-    private TrabajadorRepository trabajadorRepository;
+    TrabajadorRepository trabajadorRepository;
 
     // Método para la Creación de un trabajador
     @Transactional
@@ -80,7 +80,7 @@ public class TrabajadorService {
         if (trabajador.getServicios() == null)
             throw new IllegalOperationException("El trabajador debe tener relacionado al menos un servicio");
 
-        trabajador.setId(trabajadorId);
+        trabajador.setId(trabajadorEntity.get().getId());
         log.info("Termina proceso de actualizar el trabajador con id = {0}", trabajadorId);
         return trabajadorRepository.save(trabajador);
     }
@@ -91,7 +91,7 @@ public class TrabajadorService {
         log.info("Inicia proceso de borrar el trabajador con id = {0}", trabajadorId);
         Optional<TrabajadorEntity> trabajadorEntity = trabajadorRepository.findById(trabajadorId);
         if (trabajadorEntity.isEmpty())
-            throw new EntityNotFoundException("No se encontró el trabajador con id = " + trabajadorId + " no existe");
+            throw new EntityNotFoundException("El trabajador con id = " + trabajadorId + " no existe");
 
         trabajadorRepository.deleteById(trabajadorId);
         log.info("Termina proceso de borrar el trabajador con id = {0}", trabajadorId);

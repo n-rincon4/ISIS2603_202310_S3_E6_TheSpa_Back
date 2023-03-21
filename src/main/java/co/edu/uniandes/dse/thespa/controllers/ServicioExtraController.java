@@ -21,6 +21,7 @@ import co.edu.uniandes.dse.thespa.exceptions.IllegalOperationException;
 
 import co.edu.uniandes.dse.thespa.services.ServicioExtraService;
 import co.edu.uniandes.dse.thespa.dto.ServicioExtraDTO;
+import co.edu.uniandes.dse.thespa.dto.ServicioExtraDetailDTO;
 import co.edu.uniandes.dse.thespa.entities.ServicioExtraEntity;
 
 @RestController
@@ -55,17 +56,20 @@ public class ServicioExtraController {
     // Método para crear un servicio extra a partir de un DTO
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
-    public ServicioExtraDTO create(@RequestBody ServicioExtraDTO ServicioExtraDTO) throws IllegalOperationException, EntityNotFoundException {
-        ServicioExtraEntity ServicioExtraEntity = servicioExtraService.createServicioExtra(modelMapper.map(ServicioExtraDTO, ServicioExtraEntity.class));
-        return modelMapper.map(ServicioExtraEntity, ServicioExtraDTO.class);
+    public ServicioExtraDetailDTO create(@RequestBody ServicioExtraDetailDTO ServicioExtraDTO)
+            throws IllegalOperationException, EntityNotFoundException {
+        ServicioExtraEntity ServicioExtraEntity = servicioExtraService
+                .createServicioExtra(modelMapper.map(ServicioExtraDTO, ServicioExtraEntity.class));
+        return modelMapper.map(ServicioExtraEntity, ServicioExtraDetailDTO.class);
     }
 
     // Método para actualizar la información de un servicio extra dado su id
     @PutMapping(value = "/{id}")
     @ResponseStatus(code = HttpStatus.OK)
     public ServicioExtraDTO update(@PathVariable("id") Long id, @RequestBody ServicioExtraDTO ServicioExtraDTO)
-                        throws EntityNotFoundException, IllegalOperationException {
-        ServicioExtraEntity ServicioExtraEntity = servicioExtraService.updateServicioExtra(id, modelMapper.map(ServicioExtraDTO, ServicioExtraEntity.class));
+            throws EntityNotFoundException, IllegalOperationException {
+        ServicioExtraEntity ServicioExtraEntity = servicioExtraService.updateServicioExtra(id,
+                modelMapper.map(ServicioExtraDTO, ServicioExtraEntity.class));
         return modelMapper.map(ServicioExtraEntity, ServicioExtraDTO.class);
     }
 
