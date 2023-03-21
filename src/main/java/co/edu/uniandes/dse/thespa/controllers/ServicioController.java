@@ -64,7 +64,7 @@ public class ServicioController {
     @PutMapping("/{id}")
     @ResponseStatus(code = HttpStatus.OK)
     public ServicioDTO update(@PathVariable("id") Long id, @RequestBody ServicioDTO servicioDTO)
-            throws IllegalOperationException, EntityNotFoundException {
+            throws EntityNotFoundException {
         ServicioEntity servicio = servicioService.updateServicio(id,
                 modelMapper.map(servicioDTO, ServicioEntity.class));
         return modelMapper.map(servicio, ServicioDTO.class);

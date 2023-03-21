@@ -64,10 +64,10 @@ public class SedeController {
     //metodo para editar una entidad de sede 
     @PutMapping(value = "{id}")
     @ResponseStatus(code = HttpStatus.OK)
-    public SedeDTO update(@PathVariable("id") Long id, @RequestBody SedeDTO SedeDTO)
+    public SedeDTO update(@PathVariable("id") Long id, @RequestBody SedeDTO sedeDTO)
             throws IllegalOperationException, EntityNotFoundException {
                 SedeEntity sede = sedeService.updateSede(id,
-                modelMapper.map(SedeDTO, SedeEntity.class));
+                modelMapper.map(sedeDTO, SedeEntity.class));
         return modelMapper.map(sede, SedeDTO.class);
     }
 

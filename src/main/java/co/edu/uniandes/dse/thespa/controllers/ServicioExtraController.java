@@ -49,28 +49,28 @@ public class ServicioExtraController {
     @GetMapping(value = "/{id}")
     @ResponseStatus(code = HttpStatus.OK)
     public ServicioExtraDTO findOne(@PathVariable("id") Long id) throws EntityNotFoundException {
-        ServicioExtraEntity ServicioExtraEntity = servicioExtraService.getServicioExtra(id);
-        return modelMapper.map(ServicioExtraEntity, ServicioExtraDTO.class);
+        ServicioExtraEntity servicioExtraEntity = servicioExtraService.getServicioExtra(id);
+        return modelMapper.map(servicioExtraEntity, ServicioExtraDTO.class);
     }
 
     // Método para crear un servicio extra a partir de un DTO
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
-    public ServicioExtraDetailDTO create(@RequestBody ServicioExtraDetailDTO ServicioExtraDTO)
+    public ServicioExtraDetailDTO create(@RequestBody ServicioExtraDetailDTO servicioExtraDTO)
             throws IllegalOperationException, EntityNotFoundException {
-        ServicioExtraEntity ServicioExtraEntity = servicioExtraService
-                .createServicioExtra(modelMapper.map(ServicioExtraDTO, ServicioExtraEntity.class));
-        return modelMapper.map(ServicioExtraEntity, ServicioExtraDetailDTO.class);
+        ServicioExtraEntity servicioExtraEntity = servicioExtraService
+                .createServicioExtra(modelMapper.map(servicioExtraDTO, ServicioExtraEntity.class));
+        return modelMapper.map(servicioExtraEntity, ServicioExtraDetailDTO.class);
     }
 
     // Método para actualizar la información de un servicio extra dado su id
     @PutMapping(value = "/{id}")
     @ResponseStatus(code = HttpStatus.OK)
-    public ServicioExtraDTO update(@PathVariable("id") Long id, @RequestBody ServicioExtraDTO ServicioExtraDTO)
+    public ServicioExtraDTO update(@PathVariable("id") Long id, @RequestBody ServicioExtraDTO servicioExtraDTO)
             throws EntityNotFoundException, IllegalOperationException {
-        ServicioExtraEntity ServicioExtraEntity = servicioExtraService.updateServicioExtra(id,
-                modelMapper.map(ServicioExtraDTO, ServicioExtraEntity.class));
-        return modelMapper.map(ServicioExtraEntity, ServicioExtraDTO.class);
+        ServicioExtraEntity servicioExtraEntity = servicioExtraService.updateServicioExtra(id,
+                modelMapper.map(servicioExtraDTO, ServicioExtraEntity.class));
+        return modelMapper.map(servicioExtraEntity, ServicioExtraDTO.class);
     }
 
     // Método para borrar la información de un servicio extra dado su id

@@ -193,9 +193,10 @@ public class TrabajadorAndServicioServiceTest {
 
 	// reemplazar/actualizar los servicios de un trabajador
 	@Test
-	void testReplaceServicios() throws EntityNotFoundException, IllegalOperationException {
+	void testReplaceServiciosTrabajadorNotInServicio() throws EntityNotFoundException, IllegalOperationException {
 		List<ServicioEntity> nuevaLista = new ArrayList<>();
-        TrabajadorEntity trabajador = trabajadores.get(0);
+        TrabajadorEntity trabajador = factory.manufacturePojo(TrabajadorEntity.class);
+        entityManager.persist(trabajador);
 		
 		for (int i = 0; i < 3; i++) {
 			ServicioEntity entity = factory.manufacturePojo(ServicioEntity.class);
@@ -210,6 +211,26 @@ public class TrabajadorAndServicioServiceTest {
 			assertTrue(nuevaLista.contains(item));
 		}
 	}
+
+ 	// reemplazar/actualizar un servicios no asociado a un trabajador
+     @Test
+     void testReplaceServicios() throws EntityNotFoundException, IllegalOperationException {
+         List<ServicioEntity> nuevaLista = new ArrayList<>();
+         TrabajadorEntity trabajador = trabajadores.get(0);
+         
+         for (int i = 0; i < 3; i++) {
+             ServicioEntity entity = factory.manufacturePojo(ServicioEntity.class);
+             entityManager.persist(entity);
+             nuevaLista.add(entity);
+         }
+         
+         trabajadorandServicioService.replaceServicios(trabajador.getId(), nuevaLista);
+         
+         List<ServicioEntity> servicioEntities = entityManager.find(TrabajadorEntity.class, trabajador.getId()).getServicios();
+         for (ServicioEntity item : servicioEntities) {
+             assertTrue(nuevaLista.contains(item));
+         }
+     }
 	
 	// actualizar los servicios de un trabajador que no existe
 	@Test
@@ -268,6 +289,18 @@ public class TrabajadorAndServicioServiceTest {
         assertThrows(EntityNotFoundException.class, () -> {
             TrabajadorEntity trabajador = trabajadores.get(0);
             trabajadorandServicioService.deleteServicioTrabajador(trabajador.getId(), 0L);
+        });
+    }
+
+    @Test
+    // eliminar un servicio que no está asociado a un trabajador -> Operación ilegal
+    void testDeleteNotRelatedServicioFromTrabajador() throws EntityNotFoundException, IllegalOperationException {
+        TrabajadorEntity trabajador = trabajadores.get(0);
+        ServicioEntity servicio = factory.manufacturePojo(ServicioEntity.class);
+        entityManager.persist(servicio);
+
+        assertThrows(IllegalOperationException.class, () -> {
+            trabajadorandServicioService.deleteServicioTrabajador(trabajador.getId(), servicio.getId());
         });
     }
 

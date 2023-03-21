@@ -56,7 +56,7 @@ public class PackDeServiciosController {
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
     public PackDeServiciosDetailDTO create(@RequestBody PackDeServiciosDetailDTO packDTO)
-            throws IllegalOperationException, EntityNotFoundException {
+            throws IllegalOperationException {
 
         PackDeServiciosEntity pack = packDeServiciosService
                 .createPackDeServicios(modelMapper.map(packDTO, PackDeServiciosEntity.class));
@@ -68,7 +68,7 @@ public class PackDeServiciosController {
     @PutMapping(value = "{id}")
     @ResponseStatus(code = HttpStatus.OK)
     public PackDeServiciosDTO update(@PathVariable("id") Long id, @RequestBody PackDeServiciosDTO packDTO)
-            throws IllegalOperationException, EntityNotFoundException {
+            throws EntityNotFoundException {
 
         PackDeServiciosEntity pack = packDeServiciosService
                 .updatePackDeServicios(id, modelMapper.map(packDTO, PackDeServiciosEntity.class));
@@ -78,7 +78,7 @@ public class PackDeServiciosController {
     // metodo para eliminar un pack dado su id
     @DeleteMapping(value = "{id}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable("id") Long id) throws IllegalOperationException, EntityNotFoundException {
+    public void delete(@PathVariable("id") Long id) throws EntityNotFoundException {
         packDeServiciosService.deletePackDeServicios(id);
     }
 

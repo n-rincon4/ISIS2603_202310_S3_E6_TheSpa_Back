@@ -30,10 +30,10 @@ public class TrabajadorEntity extends BaseEntity {
 
     @PodamExclude
     @ManyToMany
-    private List<SedeEntity> sedes = new ArrayList<SedeEntity>();
+    private List<SedeEntity> sedes = new ArrayList<>();
 
     @PodamExclude
     @ManyToMany
-    private List<ServicioEntity> servicios = new ArrayList<ServicioEntity>();
+    private List<ServicioEntity> servicios = new ArrayList<>();
 
 }

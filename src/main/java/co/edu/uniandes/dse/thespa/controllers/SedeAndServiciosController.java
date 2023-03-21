@@ -24,7 +24,7 @@ public class SedeAndServiciosController {
 
     // inyectar el servicio de sedes y trabajadores
     @Autowired
-    private SedeAndServicioService SaS;
+    private SedeAndServicioService saS;
 
     // inyecta el model mapper
     @Autowired
@@ -35,7 +35,7 @@ public class SedeAndServiciosController {
     @ResponseStatus(code = HttpStatus.OK)
     public List<ServicioEntity> findAll(@PathVariable("id") Long id)
             throws EntityNotFoundException, IllegalOperationException {
-        List<ServicioEntity> servicios = SaS.obtenerAllServicios(id);
+        List<ServicioEntity> servicios = saS.obtenerAllServicios(id);
         return modelMapper.map(servicios, new TypeToken<List<ServicioDTO>>() {
         }.getType());
     }
@@ -46,7 +46,7 @@ public class SedeAndServiciosController {
     public ServicioDTO create(@PathVariable("id") Long id, @PathVariable("idServicio") Long idServicio)
             throws IllegalOperationException, EntityNotFoundException {
 
-        ServicioEntity servicio = SaS.addSedeServicio(id, idServicio);
+        ServicioEntity servicio = saS.addSedeServicio(id, idServicio);
         return modelMapper.map(servicio, ServicioDTO.class);
     }
 
@@ -56,7 +56,7 @@ public class SedeAndServiciosController {
     public ServicioDTO delete(@PathVariable("id") Long id, @PathVariable("idServicio") Long idServicio)
             throws IllegalOperationException, EntityNotFoundException {
 
-        ServicioEntity servicioEliminado = SaS.deleteSedeServicio(id, idServicio);
+        ServicioEntity servicioEliminado = saS.deleteSedeServicio(id, idServicio);
         return modelMapper.map(servicioEliminado, ServicioDTO.class);
     }
 

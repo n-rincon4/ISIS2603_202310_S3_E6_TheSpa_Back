@@ -104,6 +104,56 @@ public class ServicioExtraServiceTest {
     }
 
     @Test
+    // Crea un servicio extra cuyo precio es negativo -> Operación ilegal
+    void testCreateServicioExtraPrecioNegativo() {
+        assertThrows(IllegalOperationException.class, () -> {
+            ServicioExtraEntity newEntity = factory.manufacturePojo(ServicioExtraEntity.class);
+            newEntity.setPrecio(-7.0);
+            servicioExtraService.createServicioExtra(newEntity);
+        });
+    }
+
+    @Test
+    // Crea un servicio extra sin sede -> Operación ilegal
+    void testCreateServicioExtraSinSede() {
+        assertThrows(IllegalOperationException.class, () -> {
+            ServicioExtraEntity newEntity = factory.manufacturePojo(ServicioExtraEntity.class);
+            newEntity.setSede(null);
+            servicioExtraService.createServicioExtra(newEntity);
+        });
+    }
+
+    @Test
+    // Crea un servicio extra cuya descripción es nula -> Operación ilegal
+    void testCreateServicioExtraSinDescripcion() {
+        assertThrows(IllegalOperationException.class, () -> {
+            ServicioExtraEntity newEntity = factory.manufacturePojo(ServicioExtraEntity.class);
+            newEntity.setDescripcion(null);
+            servicioExtraService.createServicioExtra(newEntity);
+        });
+    }
+
+    @Test
+    // Crea un servicio extra cuya descripcion es vacía -> Operación ilegal
+    void testCreateServicioExtraSinDescripcion2() {
+        assertThrows(IllegalOperationException.class, () -> {
+            ServicioExtraEntity newEntity = factory.manufacturePojo(ServicioExtraEntity.class);
+            newEntity.setDescripcion("");
+            servicioExtraService.createServicioExtra(newEntity);
+        });
+    }
+
+    @Test
+    // Crea un servicio extra cuya disponibilidad es nulo -> Operación ilegal
+    void testCreateServicioExtraSinDisponibilidad() {
+        assertThrows(IllegalOperationException.class, () -> {
+            ServicioExtraEntity newEntity = factory.manufacturePojo(ServicioExtraEntity.class);
+            newEntity.setDisponible(null);
+            servicioExtraService.createServicioExtra(newEntity);
+        });
+    }
+
+    @Test
     void testGetServiciosExtra() {
         List<ServicioExtraEntity> list = servicioExtraService.getServiciosExtras();
         assertEquals(servicioExtraList.size(), list.size());
