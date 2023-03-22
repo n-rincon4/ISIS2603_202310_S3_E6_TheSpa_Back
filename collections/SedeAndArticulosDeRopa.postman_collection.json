@@ -1,19 +1,32 @@
 {
 	"info": {
 		"_postman_id": "8e3a8988-04ca-40af-a02d-2314583bbfda",
-		"name": "Sede Articulos de Ropa",
+		"name": "SedeAndArticulosDeRopa",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "26099886"
+		"_exporter_id": "25783612"
 	},
 	"item": [
 		{
 			"name": "Añadir un articulo de ropa a una sede",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"   pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"nombre\": \"Crop Top The Spa\",\r\n    \"descripción\": \"Camiseta corta\",\r\n    \"precio\": 15000.0,\r\n    \"imagen\": \"https://cdn.shopify.com/s/files/1/0156/6146/products/TrainingFractionCropTopToffeeBrownB2A5Y-NBH6.1054.142.jpg?v=1668618724g\",\r\n    \"numDiponible\": 100,\r\n    \"talla\": 6,\r\n    \"color\": \"azul\"\r\n}",
+					"raw": "",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -21,15 +34,15 @@
 					}
 				},
 				"url": {
-					"raw": "{{baseUrl}}/sedes/{{sede_id}}/articuloRopa/{{articuloRopa_id}}",
+					"raw": "{{baseUrl}}/sedes/{{sede_id_1}}/articulosDeRopa/{{articulo_id_1}}",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
 						"sedes",
-						"{{sede_id}}",
-						"articuloRopa",
-						"{{articuloRopa_id}}"
+						"{{sede_id_1}}",
+						"articulosDeRopa",
+						"{{articulo_id_1}}"
 					]
 				}
 			},
@@ -72,6 +85,19 @@
 		},
 		{
 			"name": "Obtener un articulo de ropa de una sede",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"   pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -88,15 +114,15 @@
 					}
 				},
 				"url": {
-					"raw": "{{baseUrl}}/sedes/{{sede_id}}/articuloRopa/{{articuloRopa_id}}",
+					"raw": "{{baseUrl}}/sedes/{{sede_id_1}}/articuloRopa/{{articulo_id_1}}",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
 						"sedes",
-						"{{sede_id}}",
+						"{{sede_id_1}}",
 						"articuloRopa",
-						"{{articuloRopa_id}}"
+						"{{articulo_id_1}}"
 					]
 				}
 			},
@@ -139,6 +165,24 @@
 		},
 		{
 			"name": "Obtener todos los articulos de ropa de una sede",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Number of articulo de ropa > ' + 0, function () {\r",
+							"   var data = pm.response.json()\r",
+							"   pm.expect(data.length).to.greaterThan(0)\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"   pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -155,13 +199,13 @@
 					}
 				},
 				"url": {
-					"raw": "{{baseUrl}}/sedes/{{sede_id}}/articuloRopa",
+					"raw": "{{baseUrl}}/sedes/{{sede_id_1}}/articuloRopa",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
 						"sedes",
-						"{{sede_id}}",
+						"{{sede_id_1}}",
 						"articuloRopa"
 					]
 				}
@@ -204,6 +248,19 @@
 		},
 		{
 			"name": "Editar un articulo de ropa de una sede",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"   pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "PUT",
 				"header": [],
@@ -217,15 +274,15 @@
 					}
 				},
 				"url": {
-					"raw": "{{baseUrl}}/sedes/{{sede_id}}/articuloRopa/{{articuloRopa_id}}",
+					"raw": "{{baseUrl}}/sedes/{{sede_id_1}}/articuloRopa/{{articulo_id_1}}",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
 						"sedes",
-						"{{sede_id}}",
+						"{{sede_id_1}}",
 						"articuloRopa",
-						"{{articuloRopa_id}}"
+						"{{articulo_id_1}}"
 					]
 				}
 			},
@@ -268,6 +325,24 @@
 		},
 		{
 			"name": "Editar un articulo de ropa que no existe de una sede",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"   pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.apierror.message).to.eql(\"The articulo ropa with the given id was not found\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "PUT",
 				"header": [],
@@ -281,13 +356,13 @@
 					}
 				},
 				"url": {
-					"raw": "{{baseUrl}}/sedes/{{sede_id}}/articuloRopa/0",
+					"raw": "{{baseUrl}}/sedes/{{sede_id_1}}/articuloRopa/0",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
 						"sedes",
-						"{{sede_id}}",
+						"{{sede_id_1}}",
 						"articuloRopa",
 						"0"
 					]
@@ -332,6 +407,19 @@
 		},
 		{
 			"name": "Borrar un articulo de ropa de una sede",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {\r",
+							"   pm.response.to.have.status(204);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "DELETE",
 				"header": [],
@@ -345,15 +433,15 @@
 					}
 				},
 				"url": {
-					"raw": "{{baseUrl}}/sedes/{{sede_id}}/articuloRopa/{{articuloRopa_id}}",
+					"raw": "{{baseUrl}}/sedes/{{sede_id_1}}/articuloRopa/{{articulo_id_1}}",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
 						"sedes",
-						"{{sede_id}}",
+						"{{sede_id_1}}",
 						"articuloRopa",
-						"{{articuloRopa_id}}"
+						"{{articulo_id_1}}"
 					]
 				}
 			},
@@ -396,6 +484,24 @@
 		},
 		{
 			"name": "Borrar un articulo de ropa que no existe, de una sede",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"   pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.apierror.message).to.eql(\"The articulo ropa with the given id was not found\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "DELETE",
 				"header": [],
@@ -409,13 +515,13 @@
 					}
 				},
 				"url": {
-					"raw": "{{baseUrl}}/sedes/{{sede_id}}/articuloRopa/0",
+					"raw": "{{baseUrl}}/sedes/{{sede_id_1}}/articuloRopa/0",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
 						"sedes",
-						"{{sede_id}}",
+						"{{sede_id_1}}",
 						"articuloRopa",
 						"0"
 					]

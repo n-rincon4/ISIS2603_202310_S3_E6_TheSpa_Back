@@ -1,13 +1,26 @@
 {
 	"info": {
 		"_postman_id": "861ac99e-dbbb-4fd6-82a0-532d2f46730a",
-		"name": "Sede Ubicacion",
+		"name": "SedeUbicacion",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "26099886"
+		"_exporter_id": "25783612"
 	},
 	"item": [
 		{
 			"name": "Añadir una ubicacion a una sede",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"   pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -21,15 +34,15 @@
 					}
 				},
 				"url": {
-					"raw": "{{baseUrl}}/sedes/{{sede_id}}/ubicaciones/{{ubicacion1_id}}",
+					"raw": "{{baseUrl}}/sedes/{{sede_id_1}}/ubicaciones/{{ubicacion_id_1}}",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
 						"sedes",
-						"{{sede_id}}",
+						"{{sede_id_1}}",
 						"ubicaciones",
-						"{{ubicacion1_id}}"
+						"{{ubicacion_id_1}}"
 					]
 				}
 			},
@@ -72,6 +85,19 @@
 		},
 		{
 			"name": "Obtener una ubicacion de una sede",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"   pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -80,7 +106,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"latitud\": \"4.603014\",\r\n    \"lonigtud\": \"-74.065227\",\r\n    \"ciudad\": \"Bogotá\",\r\n    \"dirección\": \"Cl. 20 #19a-71 a 19a-1, Bogotá\"\r\n}",
+					"raw": "",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -88,15 +114,15 @@
 					}
 				},
 				"url": {
-					"raw": "{{baseUrl}}/sedes/{{sede_id}}/ubicaciones/{{ubicacion1_id}}",
+					"raw": "{{baseUrl}}/sedes/{{sede_id_1}}/ubicacion/{{ubicacion_id_1}}",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
 						"sedes",
-						"{{sede_id}}",
-						"ubicaciones",
-						"{{ubicacion1_id}}"
+						"{{sede_id_1}}",
+						"ubicacion",
+						"{{ubicacion_id_1}}"
 					]
 				}
 			},
@@ -139,6 +165,19 @@
 		},
 		{
 			"name": "Editar una ubicacion de una sede",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"   pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "PUT",
 				"header": [],
@@ -203,6 +242,24 @@
 		},
 		{
 			"name": "Editar una ubicacion que no existe, de una sede",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"   pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.apierror.message).to.eql(\"The ubicacion with the given id was not found\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "PUT",
 				"header": [],
@@ -267,6 +324,19 @@
 		},
 		{
 			"name": "Borrar una ubicacion de una sede",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {\r",
+							"   pm.response.to.have.status(204);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "DELETE",
 				"header": [],
@@ -331,6 +401,24 @@
 		},
 		{
 			"name": "Borrar una ubicacion que no existe, de una sede",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"   pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.apierror.message).to.eql(\"The ubicacion with the given id was not found\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "DELETE",
 				"header": [],

@@ -910,7 +910,7 @@
 							"",
 							"pm.test(\"Get expected error message\", function () {",
 							"   var data = pm.response.json();",
-							"   pm.expect(data.apierror.message).to.eql(\"El servicio con el id = 4 no esta en el pack de servicios con el id = 1\");",
+							"   pm.expect(data.apierror.message).to.eql(\"El servicio con el id = {0} no esta en el pack de servicios con el id = {1}\");",
 							"});"
 						],
 						"type": "text/javascript"
