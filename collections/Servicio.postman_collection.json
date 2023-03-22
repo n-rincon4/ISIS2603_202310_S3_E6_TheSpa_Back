@@ -530,7 +530,7 @@
 							"\r",
 							"pm.test(\"Get expected error message\", function () {\r",
 							"   var data = pm.response.json();\r",
-							"   pm.expect(data.apierror.message).to.eql(\"The autor with the given id was not found\");\r",
+							"   pm.expect(data.apierror.message).to.eql(\"Servicio not found\");\r",
 							"});"
 						],
 						"type": "text/javascript"
@@ -540,6 +540,15 @@
 			"request": {
 				"method": "PUT",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"duracion\": 3,\n    \"restricciones\": \"\",\n    \"disponible\": false,\n    \"horaInicio\": 8,\n    \"nombre\": \"masaje\",\n    \"descripcion\": \"masaje de relajacion\",\n    \"precio\": \"30000\",\n    \"imagen\": \"https://thumbs.dreamstime.com/b/spa-massage-outdoor-balinese-woman-receiving-back-53105227.jpg\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
 					"raw": "{{baseUrl}}/servicios/0",
 					"host": [
@@ -637,6 +646,17 @@
 		},
 		{
 			"name": "Borrar un Servicio que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "DELETE",
 				"header": [],
@@ -692,6 +712,12 @@
 					"body": null
 				}
 			]
+		}
+	],
+	"variable": [
+		{
+			"key": "servicio_id_0",
+			"value": "0"
 		}
 	]
 }
