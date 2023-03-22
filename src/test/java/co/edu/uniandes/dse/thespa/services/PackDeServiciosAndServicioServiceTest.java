@@ -291,4 +291,158 @@ public class PackDeServiciosAndServicioServiceTest {
         });
     }
 
+    // prueba para obtener un servicio de un pack de servicios
+    @Test
+    void getServicioTest() throws EntityNotFoundException, IllegalOperationException {
+        // Se obtiene el primer pack de servicios de la lista de packs de servicios
+        PackDeServiciosEntity pack = packs.get(0);
+        // Se obtiene el primer servicio de la lista de servicios del pack de servicios
+        ServicioEntity servicio = pack.getServicios().get(0);
+
+        // Se obtiene el servicio del pack de servicios
+        ServicioEntity servicioPack = packDeServiciosAndServicioService.getServicio(pack.getId(), servicio.getId());
+
+        // Se verifica que el servicio obtenido sea el mismo que el que se obtuvo de la
+        // lista de servicios del pack de servicios
+        assertNotNull(servicioPack);
+        assertEquals(servicio.getId(), servicioPack.getId());
+        assertEquals(servicio.getNombre(), servicioPack.getNombre());
+        assertEquals(servicio.getDescripcion(), servicioPack.getDescripcion());
+        assertEquals(servicio.getDisponible(), servicioPack.getDisponible());
+        assertEquals(servicio.getDuracion(), servicioPack.getDuracion());
+        assertEquals(servicio.getHoraInicio(), servicioPack.getHoraInicio());
+        assertEquals(servicio.getImagen(), servicioPack.getImagen());
+        assertEquals(servicio.getPrecio(), servicioPack.getPrecio());
+        assertEquals(servicio.getRestricciones(), servicioPack.getRestricciones());
+
+    }
+
+    // Prueba para obtener un servicio de un pack de servicios que no existe
+    @Test
+    void getServicioPackNotFoundTest() {
+        // Se obtiene el id de un pack de servicios que no existe
+        Long id = Long.MAX_VALUE;
+        // Se obtiene el primer servicio de la lista de servicios
+        ServicioEntity servicio = servicios.get(0);
+
+        // Se obtiene el servicio del pack de servicios, se espera un error de tipo
+        // EntityNotFoundException
+        assertThrows(EntityNotFoundException.class, () -> {
+            packDeServiciosAndServicioService.getServicio(id, servicio.getId());
+        });
+    }
+
+    // Prueba para obtener un servicio que no existe de un pack de servicios
+    @Test
+    void getServicioNotFoundTest() throws EntityNotFoundException {
+        // Se obtiene el primer pack de servicios de la lista de packs de servicios
+        PackDeServiciosEntity pack = packs.get(0);
+        // Se obtiene el id de un servicio que no existe
+        Long id = Long.MAX_VALUE;
+
+        // Se obtiene el servicio del pack de servicios, se espera un error de tipo
+        // EntityNotFoundException
+        assertThrows(EntityNotFoundException.class, () -> {
+            packDeServiciosAndServicioService.getServicio(pack.getId(), id);
+        });
+    }
+
+    // Prueba para obtener un servicio que no existe de un pack de servicios que no
+    // existe
+    @Test
+    void getServicioPackAndServicioNotFoundTest() {
+        // Se obtienen los ids de un pack de servicios y un servicio que no existen
+        Long idPack = Long.MAX_VALUE;
+        Long idServicio = Long.MAX_VALUE;
+
+        // Se obtiene el servicio del pack de servicios, se espera un error de tipo
+        // EntityNotFoundException
+        assertThrows(EntityNotFoundException.class, () -> {
+            packDeServiciosAndServicioService.getServicio(idPack, idServicio);
+        });
+    }
+
+    // Prueba para obtener un servicio que no esta en un pack de servicios
+    @Test
+    void getServicioNotInPackTest() throws EntityNotFoundException {
+        // Se obtiene el primer pack de servicios de la lista de packs de servicios
+        PackDeServiciosEntity pack = packs.get(0);
+        // Se crea un servicio
+        ServicioEntity servicio = factory.manufacturePojo(ServicioEntity.class);
+        entityManager.persist(servicio);
+        servicios.add(servicio);
+
+        // Se obtiene el servicio del pack de servicios, se espera un error de tipo
+        // IllegalOperationException
+        assertThrows(IllegalOperationException.class, () -> {
+            packDeServiciosAndServicioService.getServicio(pack.getId(), servicio.getId());
+        });
+    }
+
+    // prueba para actualiar un pack de servicio con una nueva lista de servicios
+    @Test
+    void updateServiciosTest() throws EntityNotFoundException, IllegalOperationException {
+        // Se obtiene el primer pack de servicios de la lista de packs de servicios
+        PackDeServiciosEntity pack = packs.get(0);
+
+        // Se crea una nueva lista de servicios
+        List<ServicioEntity> newServicios = new ArrayList<>();
+        // Se agregan 3 servicios a la nueva lista de servicios
+        for (int i = 0; i < 3; i++) {
+            ServicioEntity servicio = factory.manufacturePojo(ServicioEntity.class);
+            entityManager.persist(servicio);
+            servicios.add(servicio);
+            newServicios.add(servicio);
+        }
+
+        // Se actualiza la lista de servicios del pack de servicios
+        packDeServiciosAndServicioService.updateServicios(pack.getId(), newServicios);
+
+        // Se obtiene la lista de servicios del pack de servicios
+        List<ServicioEntity> serviciosPackUpdated = packDeServiciosAndServicioService.getServicios(pack.getId());
+
+        // Se verifica que la lista de servicios del pack de servicios sea la misma que
+        // la
+        // nueva lista de servicios
+        assertNotNull(serviciosPackUpdated);
+        assertEquals(newServicios.size(), serviciosPackUpdated.size());
+        for (int i = 0; i < newServicios.size(); i++) {
+            ServicioEntity servicio = newServicios.get(i);
+            ServicioEntity servicioPack = serviciosPackUpdated.get(i);
+            assertEquals(servicio.getId(), servicioPack.getId());
+            assertEquals(servicio.getNombre(), servicioPack.getNombre());
+            assertEquals(servicio.getDescripcion(), servicioPack.getDescripcion());
+            assertEquals(servicio.getDisponible(), servicioPack.getDisponible());
+            assertEquals(servicio.getDuracion(), servicioPack.getDuracion());
+            assertEquals(servicio.getHoraInicio(), servicioPack.getHoraInicio());
+            assertEquals(servicio.getImagen(), servicioPack.getImagen());
+            assertEquals(servicio.getPrecio(), servicioPack.getPrecio());
+            assertEquals(servicio.getRestricciones(), servicioPack.getRestricciones());
+        }
+    }
+
+    // Prueba para actualizar un pack de servicios con una nueva lista de servicios
+    // que
+    // no existe
+    @Test
+    void updateServiciosPackNotFoundTest() {
+        // Se obtiene el id de un pack de servicios que no existe
+        Long id = Long.MAX_VALUE;
+
+        // Se crea una nueva lista de servicios
+        List<ServicioEntity> newServicios = new ArrayList<>();
+        // Se agregan 3 servicios a la nueva lista de servicios
+        for (int i = 0; i < 3; i++) {
+            ServicioEntity servicio = factory.manufacturePojo(ServicioEntity.class);
+            newServicios.add(servicio);
+        }
+
+        // Se actualiza la lista de servicios del pack de servicios, se espera un error
+        // de
+        // tipo EntityNotFoundException
+        assertThrows(EntityNotFoundException.class, () -> {
+            packDeServiciosAndServicioService.updateServicios(id, newServicios);
+        });
+    }
+
 }
