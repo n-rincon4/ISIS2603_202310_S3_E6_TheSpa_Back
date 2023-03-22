@@ -6,10 +6,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 
 import java.util.List;
 
@@ -42,9 +44,16 @@ public class ServicioAndTrabajadorController {
         }.getType());
     }
 
+    @GetMapping("/{id}/trabajadores/{idTrabajador}")
+    @ResponseStatus(code = HttpStatus.OK)
+    public TrabajadorDTO findOne(@PathVariable("id") Long id, @PathVariable("idTrabajador") Long idTrabajador) throws EntityNotFoundException, IllegalOperationException {
+        TrabajadorEntity trabajador = service.getTrabajador(id, idTrabajador);
+        return modelMapper.map(trabajador, TrabajadorDTO.class);
+    }
+
     // Agrega un trabajador a un servicio
     @PostMapping("/{id}/trabajadores/{idTrabajador}")
-    @ResponseStatus(code = HttpStatus.CREATED)
+    @ResponseStatus(code = HttpStatus.OK)
     public TrabajadorDTO create(@PathVariable("id") Long id, @PathVariable("idTrabajador") Long idTrabajador)
             throws EntityNotFoundException, IllegalOperationException {
         TrabajadorEntity trabajador = service.addTrabajador(id, idTrabajador);
@@ -58,5 +67,17 @@ public class ServicioAndTrabajadorController {
             throws EntityNotFoundException, IllegalOperationException {
         TrabajadorEntity trabajadorEliminado = service.removeTrabajador(id, idTrabajador);
         return modelMapper.map(trabajadorEliminado, TrabajadorDTO.class);
+    }
+
+    @PutMapping(value = "/{id}/trabajadores")
+    @ResponseStatus(code = HttpStatus.OK)
+    public List<TrabajadorDTO> update(@PathVariable("id") Long id, @RequestBody List<TrabajadorDTO> trabajadores)
+            throws IllegalOperationException, EntityNotFoundException {
+
+        List<TrabajadorEntity> entities = modelMapper.map(trabajadores, new TypeToken<List<TrabajadorEntity>>() {
+        }.getType());
+        List<TrabajadorEntity> trabajadoresActualizados = service.updateTrabajadores(id, entities);
+        return modelMapper.map(trabajadoresActualizados, new TypeToken<List<TrabajadorDTO>>() {
+        }.getType());
     }
 }

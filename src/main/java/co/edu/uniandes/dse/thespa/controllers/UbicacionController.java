@@ -76,7 +76,7 @@ public class UbicacionController {
 
     // Método para eliminar una ubicacion dado su id
     @DeleteMapping(value = "/{id}")
-    @ResponseStatus(code = HttpStatus.OK)
+    @ResponseStatus(code = HttpStatus.NO_CONTENT)
     public void delete(@PathVariable("id") Long id) throws EntityNotFoundException {
         ubicacionService.deleteUbicacion(id);
     }
