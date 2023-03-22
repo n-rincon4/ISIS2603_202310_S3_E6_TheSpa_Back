@@ -14,6 +14,7 @@ import co.edu.uniandes.dse.thespa.repositories.PackDeServiciosRepository;
 
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,7 +26,6 @@ public class ServicioAndPackDeServiciosService {
     private static final String MENSAJE_PACK_NO_EXISTE = "El pack de servicios con el id = {0} no existe";
     private static final String MENSAJE_SERVICIO_NO_EXISTE = "El servicio con el id = {0} no existe";
     private static final String MENSAJE_PACK_NOTIN_SERVICIO = "El pack de servicios con el id = {1} no esta en el servicio con el id = {0}";
-
 
     @Autowired
     ServicioRepository servicioRepository;
@@ -136,8 +136,17 @@ public class ServicioAndPackDeServiciosService {
             }
         }
 
+        // crea una lista de packs de servicios
+        List<PackDeServiciosEntity> packsDeServicios = new ArrayList<>();
+        // por cada pack en la lista de packs, lo agrega a la lista de packs de
+        // servicios
+        for (PackDeServiciosEntity pack : packs) {
+            Optional<PackDeServiciosEntity> packsBuscados = packDeServiciosRepository.findById(pack.getId());
+            packsDeServicios.add(packsBuscados.get());
+        }
+
         // actualiza la lista de packs del servicio
-        serviciosBuscados.get().setPacksDeServicios(packs);
+        serviciosBuscados.get().setPacksDeServicios(packsDeServicios);
 
         log.info("Packs de servicios del servicio actualizados");
 
