@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
@@ -72,6 +74,20 @@ public class SedeAndServiciosController {
 
         ServicioEntity servicioEliminado = saS.deleteSedeServicio(id, idServicio);
         return modelMapper.map(servicioEliminado, ServicioDTO.class);
+    }
+
+    // metodo para actualizar la lista de servicios de una sede dado su id
+    @PutMapping(value = "/{id}/servicios")
+    @ResponseStatus(code = HttpStatus.OK)
+    public List<ServicioDTO> update(@PathVariable("id") Long id, @RequestBody List<ServicioDTO> servicios)
+            throws IllegalOperationException, EntityNotFoundException {
+
+        List<ServicioEntity> serviciosEntity = modelMapper.map(servicios, new TypeToken<List<ServicioEntity>>() {
+        }.getType());
+        List<ServicioEntity> serviciosActualizados = saS.updateSedeServicios(id, serviciosEntity);
+
+        return modelMapper.map(serviciosActualizados, new TypeToken<List<ServicioDTO>>() {
+        }.getType());
     }
 
 }
