@@ -410,7 +410,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "",
+					"raw": "{\n    \"nombre\": \"Spa del Jardín modificado\",\n    \"imagen\": \"https://www.visit.alsace/wp-content/uploads/lei/pictures/215002309-nature-spa-la-cheneaudiere-11-1600x900.jpg\",\n    \"ubicacion\": \n        {\n            \"id\": {{ubicacion_id_1}}\n        },\n    \"servicios\":[],\n    \"serviciosExtra\":[],\n    \"packs\":[],\n    \"trabajadores\":[]\n\n    \n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -476,7 +476,7 @@
 							"\r",
 							"pm.test(\"Get expected error message\", function () {\r",
 							"   var data = pm.response.json();\r",
-							"   pm.expect(data.apierror.message).to.eql(\"Sede not found\");\r",
+							"   pm.expect(data.apierror.message).to.eql(\"SEDE_NOT_FOUND\");\r",
 							"});"
 						],
 						"type": "text/javascript"
@@ -486,6 +486,15 @@
 			"request": {
 				"method": "PUT",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nombre\": \"Spa del Jardín modificado\",\n    \"imagen\": \"https://www.visit.alsace/wp-content/uploads/lei/pictures/215002309-nature-spa-la-cheneaudiere-11-1600x900.jpg\",\n    \"ubicacion\": \n        {\n            \"id\": {{ubicacion_id_1}}\n        },\n    \"servicios\":[],\n    \"serviciosExtra\":[],\n    \"packs\":[],\n    \"trabajadores\":[]\n\n    \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
 					"raw": "{{baseUrl}}/sedes/0",
 					"host": [
@@ -664,6 +673,61 @@
 					},
 					"status": "Not Found",
 					"code": 404,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Borrar una Ubicación",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {",
+							"   pm.response.to.have.status(204);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/ubicaciones/{{ubicacion_id_1}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"ubicaciones",
+						"{{ubicacion_id_1}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Borrar una Ubicación",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/ubicaciones/{{ubicacion_id_1}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"ubicaciones",
+								"{{ubicacion_id_1}}"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
 					"_postman_previewlanguage": null,
 					"header": null,
 					"cookie": [],
