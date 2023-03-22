@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "8524e874-a164-4472-8715-fcb5d1a07761",
-		"name": "Pack de Servicios Servicios",
+		"name": "PackDeServiciosAndServicios",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "25783612"
 	},
@@ -527,7 +527,7 @@
 							"",
 							"pm.test(\"Get expected error message\", function () {",
 							"   var data = pm.response.json();",
-							"   pm.expect(data.apierror.message).to.eql(\"El servicio con el id = 3 ya se encuentra en el pack de servicios con el id = 1\");",
+							"   pm.expect(data.apierror.message).to.eql(\"El servicio con el id = 5 ya se encuentra en el pack de servicios con el id = 2\");",
 							"});"
 						],
 						"type": "text/javascript"
@@ -1390,6 +1390,420 @@
 					},
 					"status": "Not Found",
 					"code": 404,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Borrar un Pack de Servicios Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {",
+							"   pm.response.to.have.status(204);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/packsDeServicios/{{pack_id_1}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"packsDeServicios",
+						"{{pack_id_1}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Borrar un Pack de Servicios",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/packsdeservicios/{{pack_id_1}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"packsdeservicios",
+								"{{pack_id_1}}"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Borrar un Servicio 4",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/servicios/{{servicio_id_4}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"servicios",
+						"{{servicio_id_4}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Borrar un Servicio",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/servicios/{{servicio_id_1}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"servicios",
+								"{{servicio_id_1}}"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Borrar un Servicio 4 Copy",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/servicios/{{servicio_id_4}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"servicios",
+						"{{servicio_id_4}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Borrar un Servicio",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/servicios/{{servicio_id_1}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"servicios",
+								"{{servicio_id_1}}"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Borrar un Servicio 3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {",
+							"   pm.response.to.have.status(204);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/servicios/{{servicio_id_3}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"servicios",
+						"{{servicio_id_3}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Borrar un Servicio",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/servicios/{{servicio_id_1}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"servicios",
+								"{{servicio_id_1}}"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Borrar un Servicio 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {",
+							"   pm.response.to.have.status(204);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/servicios/{{servicio_id_2}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"servicios",
+						"{{servicio_id_2}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Borrar un Servicio",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/servicios/{{servicio_id_1}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"servicios",
+								"{{servicio_id_1}}"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Borrar un Servicio 1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {",
+							"   pm.response.to.have.status(204);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/servicios/{{servicio_id_1}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"servicios",
+						"{{servicio_id_1}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Borrar un Servicio",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/servicios/{{servicio_id_1}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"servicios",
+								"{{servicio_id_1}}"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Borrar una Sede",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {",
+							"   pm.response.to.have.status(204);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/sedes/{{sede_id_1}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"sedes",
+						"{{sede_id_1}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Borrar una Sede",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/sedes/{{sede_id_1}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"sedes",
+								"{{sede_id_1}}"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Borrar una Ubicación",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {",
+							"   pm.response.to.have.status(204);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/ubicaciones/{{ubicacion_id_1}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"ubicaciones",
+						"{{ubicacion_id_1}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Borrar una Ubicación",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/ubicaciones/{{ubicacion_id_1}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"ubicaciones",
+								"{{ubicacion_id_1}}"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
 					"_postman_previewlanguage": null,
 					"header": null,
 					"cookie": [],
