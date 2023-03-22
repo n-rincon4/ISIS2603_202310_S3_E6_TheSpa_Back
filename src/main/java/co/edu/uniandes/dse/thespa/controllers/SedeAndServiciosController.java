@@ -35,7 +35,7 @@ public class SedeAndServiciosController {
     private ServicioService Ss;
 
     // metodo para encontrar todos los servicios dentro de una sede dado su id
-    @GetMapping(value = "{id}/servicios")
+    @GetMapping(value = "/{id}/servicios")
     @ResponseStatus(code = HttpStatus.OK)
     public List<ServicioEntity> findAll(@PathVariable("id") Long id)
             throws EntityNotFoundException {
@@ -45,7 +45,7 @@ public class SedeAndServiciosController {
     }
 
     // metodo para encontrar un servicio dentro de una sede dado su id
-    @GetMapping(value = "{id}/servicios/{idServicio}")
+    @GetMapping(value = "/{id}/servicios/{idServicio}")
     @ResponseStatus(code = HttpStatus.OK)
     public ServicioDTO findOne(@PathVariable("id") Long id, @PathVariable("idServicio") Long idServicio)
             throws EntityNotFoundException {
@@ -55,7 +55,7 @@ public class SedeAndServiciosController {
     }
 
     // metodo para agregar un servicio a una sede dado su id
-    @PostMapping(value = "{id}/servicios/{idServicio}")
+    @PostMapping(value = "/{id}/servicios/{idServicio}")
     @ResponseStatus(code = HttpStatus.OK)
     public ServicioDTO create(@PathVariable("id") Long id, @PathVariable("idServicio") Long idServicio)
             throws IllegalOperationException, EntityNotFoundException {
@@ -65,7 +65,7 @@ public class SedeAndServiciosController {
     }
 
     // metodo para eliminar un servicio de una sede dado su id
-    @DeleteMapping(value = "{id}/servicio/{idServicio}")
+    @DeleteMapping(value = "/{id}/servicios/{idServicio}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     public ServicioDTO delete(@PathVariable("id") Long id, @PathVariable("idServicio") Long idServicio)
             throws IllegalOperationException, EntityNotFoundException {

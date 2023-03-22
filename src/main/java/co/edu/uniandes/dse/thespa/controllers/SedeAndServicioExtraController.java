@@ -3,6 +3,7 @@ package co.edu.uniandes.dse.thespa.controllers;
 import java.util.List;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +16,7 @@ import co.edu.uniandes.dse.thespa.exceptions.EntityNotFoundException;
 import co.edu.uniandes.dse.thespa.exceptions.IllegalOperationException;
 import co.edu.uniandes.dse.thespa.dto.ServicioExtraDTO;
 import co.edu.uniandes.dse.thespa.services.SedeAndServicioExtraService;
+import co.edu.uniandes.dse.thespa.services.ServicioExtraService;
 import co.edu.uniandes.dse.thespa.entities.ServicioExtraEntity;
 
 @RestController
@@ -22,10 +24,15 @@ import co.edu.uniandes.dse.thespa.entities.ServicioExtraEntity;
 public class SedeAndServicioExtraController {
 
     // inyectar el servicio de sedes y servicios extras
+    @Autowired
     private SedeAndServicioExtraService saE;
 
     // inyecta el model mapper
+    @Autowired
     private ModelMapper modelMapper;
+
+    @Autowired
+    private ServicioExtraService SeS;
 
     // metodo para encontrar todos los servicios extras dentro de una sede dado su
     // id
@@ -35,6 +42,16 @@ public class SedeAndServicioExtraController {
         List<ServicioExtraEntity> servicios = saE.obtenerAllServicios(id);
         return modelMapper.map(servicios, new TypeToken<List<ServicioExtraDTO>>() {
         }.getType());
+    }
+
+    // metodo para encontrar un servicio extra dentro de una sede dado su id
+    @GetMapping(value = "/{id}/serviciosExtra/{idServicio}")
+    @ResponseStatus(code = HttpStatus.OK)
+    public ServicioExtraDTO getServicioExtra(@PathVariable("id") Long id, @PathVariable("idServicio") Long idServicio)
+            throws EntityNotFoundException {
+
+            ServicioExtraEntity servicio = SeS.getServicioExtra(idServicio);
+        return modelMapper.map(servicio, ServicioExtraDTO.class);
     }
 
     // metodo para agregar un servicio Extra a una sede dado su id
