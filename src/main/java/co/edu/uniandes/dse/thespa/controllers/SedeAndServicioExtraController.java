@@ -1,4 +1,5 @@
 package co.edu.uniandes.dse.thespa.controllers;
+
 import java.util.List;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
@@ -16,8 +17,6 @@ import co.edu.uniandes.dse.thespa.dto.ServicioExtraDTO;
 import co.edu.uniandes.dse.thespa.services.SedeAndServicioExtraService;
 import co.edu.uniandes.dse.thespa.entities.ServicioExtraEntity;
 
-
-
 @RestController
 @RequestMapping("/sedes")
 public class SedeAndServicioExtraController {
@@ -28,10 +27,12 @@ public class SedeAndServicioExtraController {
     // inyecta el model mapper
     private ModelMapper modelMapper;
 
-    // metodo para encontrar todos los servicios extras dentro de una sede dado su id
+    // metodo para encontrar todos los servicios extras dentro de una sede dado su
+    // id
     @GetMapping(value = "{id}/serviciosExtra")
     @ResponseStatus(code = HttpStatus.OK)
-    public List<ServicioExtraEntity> findAll(@PathVariable("id") Long id) throws EntityNotFoundException, IllegalOperationException {
+    public List<ServicioExtraEntity> findAll(@PathVariable("id") Long id)
+            throws EntityNotFoundException, IllegalOperationException {
         List<ServicioExtraEntity> servicios = SaE.obtenerAllServicios(id);
         return modelMapper.map(servicios, new TypeToken<List<ServicioExtraDTO>>() {
         }.getType());

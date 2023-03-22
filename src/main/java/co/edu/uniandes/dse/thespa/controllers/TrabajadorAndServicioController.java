@@ -47,7 +47,8 @@ public class TrabajadorAndServicioController {
 	// Busca un servicio dentro de los asociados a un trabajador
 	@GetMapping(value = "/{trabajadorId}/servicios/{servicioId}")
 	@ResponseStatus(code = HttpStatus.OK)
-	public ServicioDetailDTO getServicio(@PathVariable("trabajadorId") Long trabajadorId, @PathVariable("servicioId") Long servicioId)
+	public ServicioDetailDTO getServicio(@PathVariable("trabajadorId") Long trabajadorId,
+			@PathVariable("servicioId") Long servicioId)
 			throws EntityNotFoundException, IllegalOperationException {
 		ServicioEntity servicioEntity = trabajadorServicioService.getServicio(trabajadorId, servicioId);
 		return modelMapper.map(servicioEntity, ServicioDetailDTO.class);
@@ -56,7 +57,8 @@ public class TrabajadorAndServicioController {
 	// Busca todos los servicios asociados a un trabajador
 	@GetMapping(value = "/{trabajadorId}/servicios")
 	@ResponseStatus(code = HttpStatus.OK)
-	public List<ServicioDetailDTO> getServicios(@PathVariable("trabajadorId") Long trabajadorId) throws EntityNotFoundException {
+	public List<ServicioDetailDTO> getServicios(@PathVariable("trabajadorId") Long trabajadorId)
+			throws EntityNotFoundException {
 		List<ServicioEntity> servicioEntity = trabajadorServicioService.getServicios(trabajadorId);
 		return modelMapper.map(servicioEntity, new TypeToken<List<ServicioDetailDTO>>() {
 		}.getType());
@@ -65,7 +67,8 @@ public class TrabajadorAndServicioController {
 	// Reemplaza/Actualiza los servicios asociados a un trabajador
 	@PutMapping(value = "/{trabajadorId}/servicios")
 	@ResponseStatus(code = HttpStatus.OK)
-	public List<ServicioDetailDTO> replaceBooks(@PathVariable("trabajadorId") Long trabajadorId, @RequestBody List<ServicioDTO> servicios)
+	public List<ServicioDetailDTO> replaceBooks(@PathVariable("trabajadorId") Long trabajadorId,
+			@RequestBody List<ServicioDTO> servicios)
 			throws EntityNotFoundException {
 		List<ServicioEntity> entities = modelMapper.map(servicios, new TypeToken<List<ServicioEntity>>() {
 		}.getType());

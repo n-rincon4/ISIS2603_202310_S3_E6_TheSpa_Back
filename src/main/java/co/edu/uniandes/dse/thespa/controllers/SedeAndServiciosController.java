@@ -48,11 +48,11 @@ public class SedeAndServiciosController {
     @GetMapping(value = "{id}/servicios/{idServicio}")
     @ResponseStatus(code = HttpStatus.OK)
     public ServicioDTO findOne(@PathVariable("id") Long id, @PathVariable("idServicio") Long idServicio)
-    throws IllegalOperationException, EntityNotFoundException {
+            throws IllegalOperationException, EntityNotFoundException {
 
-    ServicioEntity servicio = SS.getServicio(idServicio);
-    return modelMapper.map(servicio, ServicioDTO.class);
-}
+        ServicioEntity servicio = SS.getServicio(idServicio);
+        return modelMapper.map(servicio, ServicioDTO.class);
+    }
 
     // metodo para agregar un servicio a una sede dado su id
     @PostMapping(value = "{id}/servicios/{idServicio}")
