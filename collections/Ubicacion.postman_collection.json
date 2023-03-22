@@ -8,12 +8,28 @@
 	"item": [
 		{
 			"name": "Crear una Ubicación",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json()",
+							"pm.globals.set(\"ubicacion_id_1\", data.id);",
+							"",
+							"pm.test(\"Status code is 201\", function () {",
+							"   pm.response.to.have.status(201);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"latitud\": \"4.603014\",\r\n    \"lonigtud\": \"-74.065227\",\r\n    \"ciudad\": \"Bogotá\",\r\n    \"dirección\": \"Cl. 20 #19a-71 a 19a-1, Bogotá\"\r\n}",
+					"raw": "{\r\n    \"latitud\": 4.603014,\r\n    \"longitud\": 74.065227,\r\n    \"ciudad\": \"Bogotá\",\r\n    \"direccion\": \"Cl. 20 #19a-71 a 19a-1, Bogotá\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -66,6 +82,24 @@
 		},
 		{
 			"name": "Obtener todas las Ubicaciones",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Number of authors > ' + 0, function () {",
+							"   var data = pm.response.json()",
+							"   pm.expect(data.length).to.greaterThan(0)",
+							"});",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"   pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -127,6 +161,19 @@
 		},
 		{
 			"name": "Obtener una Ubicación",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"   pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -185,6 +232,24 @@
 		},
 		{
 			"name": "Obtener una Ubicación que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"   pm.response.to.have.status(404);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"   var data = pm.response.json();",
+							"   pm.expect(data.apierror.message).to.eql(\"La ubicación con el id = {0} no existe\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -243,12 +308,25 @@
 		},
 		{
 			"name": "Editar una Ubicación",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"   pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "PUT",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"latitud\": \"4.603014\",\r\n    \"lonigtud\": \"-74.065227\",\r\n    \"ciudad\": \"Bogotá\",\r\n    \"dirección\": \"Cra. 1 #18-12, Bogotá\"\r\n}",
+					"raw": "{\r\n    \"latitud\": 4.603014,\r\n    \"longitud\": 74.065227,\r\n    \"ciudad\": \"Bogotá\",\r\n    \"direccion\": \"Cra. 1 #18-12, Bogotá\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -310,9 +388,36 @@
 		},
 		{
 			"name": "Editar una Ubicacion que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"   pm.response.to.have.status(404);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"   var data = pm.response.json();",
+							"   pm.expect(data.apierror.message).to.eql(\"La ubicación con el id = {0} no existe\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "PUT",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"latitud\": 4.603014,\n    \"lonigtud\": 74.065227,\n    \"ciudad\": \"Bogotá\",\n    \"dirección\": \"Cra. 1 #18-12, Bogotá\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
 					"raw": "{{baseUrl}}/ubicaciones/0",
 					"host": [
@@ -368,6 +473,19 @@
 		},
 		{
 			"name": "Borrar una Ubicación",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {",
+							"   pm.response.to.have.status(204);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "DELETE",
 				"header": [],
@@ -410,6 +528,25 @@
 		},
 		{
 			"name": "Borrar una Ubicación que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"   pm.response.to.have.status(404);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"   var data = pm.response.json();",
+							"   pm.expect(data.apierror.message).to.eql(\"La ubicación con el id = {0} no existe\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "DELETE",
 				"header": [],

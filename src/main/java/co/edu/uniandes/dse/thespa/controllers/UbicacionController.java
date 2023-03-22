@@ -47,7 +47,7 @@ public class UbicacionController {
     }
 
     // Método para encontrar una ubicacion dado su id
-    @GetMapping(value = "/{id}")
+    @GetMapping(value = "{id}")
     @ResponseStatus(code = HttpStatus.OK)
     public UbicacionDTO findOne(@PathVariable("id") Long id) throws EntityNotFoundException {
         UbicacionEntity ubicacionEntity = ubicacionService.getUbicacion(id);
@@ -65,7 +65,7 @@ public class UbicacionController {
     }
 
     // Método para actualizar una ubicacion a partir de un DTO
-    @PutMapping(value = "/{id}")
+    @PutMapping(value = "{id}")
     @ResponseStatus(code = HttpStatus.OK)
     public UbicacionDTO update(@PathVariable("id") Long id, @RequestBody UbicacionDTO ubicacionDTO)
             throws IllegalOperationException, EntityNotFoundException {
@@ -75,7 +75,7 @@ public class UbicacionController {
     }
 
     // Método para eliminar una ubicacion dado su id
-    @DeleteMapping(value = "/{id}")
+    @DeleteMapping(value = "{id}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     public void delete(@PathVariable("id") Long id) throws EntityNotFoundException {
         ubicacionService.deleteUbicacion(id);

@@ -1,5 +1,6 @@
 package co.edu.uniandes.dse.thespa.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import javax.transaction.Transactional;
@@ -27,7 +28,7 @@ public class SedeAndPackServicesService {
     @Autowired
     PackDeServiciosRepository packDeServiciosRepo;
 
-    //Obtener todos los packs servicios de una sede
+    // Obtener todos los packs servicios de una sede
     @Transactional
     public List<PackDeServiciosEntity> obtenerAllPacks(Long sedeId) {
         return packDeServiciosRepo.findAll();
@@ -64,6 +65,36 @@ public class SedeAndPackServicesService {
         return packEntity.get();
     }
 
+    // obtiene un pack de servicios de una sede dado el id de la sede y el id del
+    // pack
+    @Transactional
+    public PackDeServiciosEntity getPack(Long sedeid, Long packID)
+            throws EntityNotFoundException, IllegalOperationException {
+        log.info("Consultando el pack de servicios con id = {} de la sede con id = {}", packID, sedeid);
+
+        // Busca la sede
+        Optional<SedeEntity> sedeBuscado = sedeRepo.findById(sedeid);
+        if (sedeBuscado.isEmpty()) {
+            throw new EntityNotFoundException("SEDE_NOT_FOUND");
+        }
+
+        // Busca el articulo
+        Optional<PackDeServiciosEntity> pack = packDeServiciosRepo.findById(packID);
+        if (pack.isEmpty()) {
+            throw new EntityNotFoundException("PACK_NOT_FOUND");
+        }
+
+        // Verifica que el pack este en la sede
+        if (!sedeBuscado.get().getPacksDeServicios().contains(pack.get())) {
+            throw new IllegalOperationException("PACK_NOT_FOUND_IN_SEDE");
+        }
+
+        log.info("Pack encontrado");
+
+        // Retorna el pack
+        return pack.get();
+    }
+
     // Eliminar un pack de servicios de la sede
     @Transactional
     public PackDeServiciosEntity deleteSedePackDeServicios(Long sedeId, Long packDeServiciosId)
@@ -93,5 +124,38 @@ public class SedeAndPackServicesService {
         log.info("Termina proceso de eliminar de la sede un PackDeServicios con con id = {0}", sedeId);
 
         return packEntity.get();
+    }
+
+    // actualiza la lista de packs de servicios de una sede
+    @Transactional
+    public List<PackDeServiciosEntity> updateSedePackDeServicios(Long sedeId, List<PackDeServiciosEntity> packs)
+            throws EntityNotFoundException, IllegalOperationException {
+        log.info("Inicia proceso de actualizar la lista de packs de servicios de la sede con id = {0}", sedeId);
+        Optional<SedeEntity> sedeEntity = sedeRepo.findById(sedeId);
+        if (sedeEntity.isEmpty()) {
+            throw new EntityNotFoundException("SEDE_NOT_FOUND");
+        }
+
+        // revisa que los packs existan
+        for (PackDeServiciosEntity pack : packs) {
+            Optional<PackDeServiciosEntity> packEntity = packDeServiciosRepo.findById(pack.getId());
+            if (packEntity.isEmpty()) {
+                throw new EntityNotFoundException("PACK_NOT_FOUND");
+            }
+        }
+
+        // crea una lista de packs de servicios
+        List<PackDeServiciosEntity> packDeServicios = new ArrayList<>();
+        for (PackDeServiciosEntity pack : packs) {
+            Optional<PackDeServiciosEntity> packEntity = packDeServiciosRepo.findById(pack.getId());
+            packDeServicios.add(packEntity.get());
+        }
+
+        // actualiza la lista de packs de servicios de la sede
+        sedeEntity.get().setPacksDeServicios(packDeServicios);
+
+        log.info("Termina proceso de actualizar la lista de packs de servicios de la sede con id = {0}", sedeId);
+
+        return sedeEntity.get().getPacksDeServicios();
     }
 }

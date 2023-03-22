@@ -1,5 +1,6 @@
 package co.edu.uniandes.dse.thespa.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import javax.transaction.Transactional;
@@ -27,7 +28,7 @@ public class SedeAndServicioExtraService {
     @Autowired
     ServicioExtraRepository servicioExtraRepo;
 
-    //Obtener todos los servicios extra de una sede
+    // Obtener todos los servicios extra de una sede
     @Transactional
     public List<ServicioExtraEntity> obtenerAllServicios(Long sedeId) {
         return servicioExtraRepo.findAll();
@@ -93,6 +94,40 @@ public class SedeAndServicioExtraService {
         log.info("Termina proceso de eliminar de la sede un servicio extra con con id = {0}", sedeId);
 
         return servEntity.get();
+
+    }
+
+    // actualizar la lista de serviios extra de la sede
+    @Transactional
+    public List<ServicioExtraEntity> updateSedeExtraService(Long sedeId, List<ServicioExtraEntity> sedeExtraServiceId)
+            throws EntityNotFoundException, IllegalOperationException {
+        log.info("Inicia proceso de actualizar la lista de servicios extra de la sede con con id = {0}", sedeId);
+        Optional<SedeEntity> sedeEntity = sedeRepo.findById(sedeId);
+        if (sedeEntity.isEmpty()) {
+            throw new EntityNotFoundException("SEDE_NOT_FOUND");
+        }
+
+        // revisa si los servicios extra existen
+        for (ServicioExtraEntity serv : sedeExtraServiceId) {
+            Optional<ServicioExtraEntity> servEntity = servicioExtraRepo.findById(serv.getId());
+            if (servEntity.isEmpty()) {
+                throw new EntityNotFoundException("EXTRA_SERVICE_NOT_FOUND");
+            }
+        }
+
+        // crea una lista de servicios extra
+        List<ServicioExtraEntity> servs = new ArrayList<ServicioExtraEntity>();
+
+        for (ServicioExtraEntity serv : sedeExtraServiceId) {
+            Optional<ServicioExtraEntity> servEntity = servicioExtraRepo.findById(serv.getId());
+            servs.add(servEntity.get());
+        }
+
+        sedeEntity.get().setServiciosExtra(servs);
+
+        log.info("Termina proceso de actualizar la lista de servicios extra de la sede con con id = {0}", sedeId);
+
+        return sedeEntity.get().getServiciosExtra();
 
     }
 

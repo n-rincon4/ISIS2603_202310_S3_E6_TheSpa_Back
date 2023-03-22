@@ -1,5 +1,6 @@
 package co.edu.uniandes.dse.thespa.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import javax.transaction.Transactional;
@@ -124,6 +125,38 @@ public class SedeAndServicioService {
         log.info("Termina proceso de elimnar de la sede un servicio con con id = {0}", sedeId);
 
         return servEntity.get();
+    }
+
+    // actualiza la lista de servicios de una sede
+    @Transactional
+    public List<ServicioEntity> updateSedeServicios(Long sedeId, List<ServicioEntity> servicios)
+            throws EntityNotFoundException, IllegalOperationException {
+        log.info("Inicia proceso de actualizar la lista de servicios de la sede con id = {0}", sedeId);
+        Optional<SedeEntity> sedeEntity = sedeRepo.findById(sedeId);
+        if (sedeEntity.isEmpty()) {
+            throw new EntityNotFoundException(SEDE_NOT_FOUND);
+        }
+
+        // revisa que todos los servicios existan
+        for (ServicioEntity servicio : servicios) {
+            Optional<ServicioEntity> servEntity = servicioRepo.findById(servicio.getId());
+            if (servEntity.isEmpty()) {
+                throw new EntityNotFoundException(SERVICE_NOT_FOUND);
+            }
+        }
+
+        // crea una lista de servicios
+        List<ServicioEntity> serviciosActuales = new ArrayList<>();
+        for (ServicioEntity servicio : servicios) {
+            Optional<ServicioEntity> servEntity = servicioRepo.findById(servicio.getId());
+            serviciosActuales.add(servEntity.get());
+        }
+
+        sedeEntity.get().setServicios(serviciosActuales);
+
+        log.info("Termina proceso de actualizar la lista de servicios de la sede con id = {0}", sedeId);
+
+        return sedeEntity.get().getServicios();
     }
 
 }
