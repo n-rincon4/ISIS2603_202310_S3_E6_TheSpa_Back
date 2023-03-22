@@ -527,7 +527,7 @@
 							"",
 							"pm.test(\"Get expected error message\", function () {",
 							"   var data = pm.response.json();",
-							"   pm.expect(data.apierror.message).to.eql(\"El servicio con el id = 3 ya se encuentra en el pack de servicios con el id = 1\");",
+							"   pm.expect(data.apierror.message).to.eql(\"El servicio con el id = 5 ya se encuentra en el pack de servicios con el id = 2\");",
 							"});"
 						],
 						"type": "text/javascript"
