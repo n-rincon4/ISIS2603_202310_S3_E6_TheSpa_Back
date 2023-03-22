@@ -1,5 +1,6 @@
 package co.edu.uniandes.dse.thespa.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import javax.transaction.Transactional;
@@ -33,10 +34,10 @@ public class SedeAndTrabajadorService {
     @Autowired
     TrabajadorRepository trabajadoresRepo;
 
-    //Obtener todos los trabajadores de una sede
+    // Obtener todos los trabajadores de una sede
     @Transactional
-    public List<TrabajadorEntity> obtenerTrabajadroes(Long sedeId) throws EntityNotFoundException{
-        
+    public List<TrabajadorEntity> obtenerTrabajadroes(Long sedeId) throws EntityNotFoundException {
+
         Optional<SedeEntity> sedeEntity = sedeRepo.findById(sedeId);
         if (sedeEntity.isEmpty()) {
             throw new EntityNotFoundException(SEDE_NOT_FOUND);
@@ -44,8 +45,8 @@ public class SedeAndTrabajadorService {
 
         return sedeEntity.get().getTrabajadores();
 
-
     }
+
     // Añadir un trabajador a la sede
     @Transactional
     public TrabajadorEntity addSedeTrabajador(Long sedeId, Long trabajadorId)
@@ -106,5 +107,39 @@ public class SedeAndTrabajadorService {
         log.info("Termina proceso de añadir a la sede un Trabajador con con id = {0}", sedeId);
 
         return trabEntity.get();
+    }
+
+    // actualizar la lista de serviios extra de la sede
+    @Transactional
+    public List<TrabajadorEntity> updateSedeTrabajadores(Long sedeId, List<TrabajadorEntity> sedeExtraServiceId)
+            throws EntityNotFoundException, IllegalOperationException {
+        log.info("Inicia proceso de actualizar la lista de servicios extra de la sede con con id = {0}", sedeId);
+        Optional<SedeEntity> sedeEntity = sedeRepo.findById(sedeId);
+        if (sedeEntity.isEmpty()) {
+            throw new EntityNotFoundException("SEDE_NOT_FOUND");
+        }
+
+        // revisa si los servicios extra existen
+        for (TrabajadorEntity serv : sedeExtraServiceId) {
+            Optional<TrabajadorEntity> servEntity = trabajadoresRepo.findById(serv.getId());
+            if (servEntity.isEmpty()) {
+                throw new EntityNotFoundException("TRABAJADOR_NOT_FOUND");
+            }
+        }
+
+        // crea una lista de servicios extra
+        List<TrabajadorEntity> servs = new ArrayList<TrabajadorEntity>();
+
+        for (TrabajadorEntity serv : sedeExtraServiceId) {
+            Optional<TrabajadorEntity> servEntity = trabajadoresRepo.findById(serv.getId());
+            servs.add(servEntity.get());
+        }
+
+        sedeEntity.get().setTrabajadores(servs);
+
+        log.info("Termina proceso de actualizar la lista de servicios extra de la sede con con id = {0}", sedeId);
+
+        return sedeEntity.get().getTrabajadores();
+
     }
 }

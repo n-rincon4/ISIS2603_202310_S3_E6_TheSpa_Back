@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
@@ -50,7 +52,7 @@ public class SedeAndServicioExtraController {
     public ServicioExtraDTO getServicioExtra(@PathVariable("id") Long id, @PathVariable("idServicio") Long idServicio)
             throws EntityNotFoundException {
 
-            ServicioExtraEntity servicio = SeS.getServicioExtra(idServicio);
+        ServicioExtraEntity servicio = SeS.getServicioExtra(idServicio);
         return modelMapper.map(servicio, ServicioExtraDTO.class);
     }
 
@@ -72,6 +74,20 @@ public class SedeAndServicioExtraController {
 
         ServicioExtraEntity servicioEliminado = saE.deleteSedeExtraService(id, idServicio);
         return modelMapper.map(servicioEliminado, ServicioExtraDTO.class);
+    }
+
+    // metodo para actualizar la lista de servicios extras de una sede dado su id
+    @PutMapping(value = "{id}/serviciosExtra")
+    @ResponseStatus(code = HttpStatus.OK)
+    public List<ServicioExtraDTO> update(@PathVariable("id") Long id, @RequestBody List<ServicioExtraDTO> idServicio)
+            throws IllegalOperationException, EntityNotFoundException {
+
+        List<ServicioExtraEntity> serviciosEntity = modelMapper.map(idServicio,
+                new TypeToken<List<ServicioExtraEntity>>() {
+                }.getType());
+        List<ServicioExtraEntity> servicios = saE.updateSedeExtraService(id, serviciosEntity);
+        return modelMapper.map(servicios, new TypeToken<List<ServicioExtraDTO>>() {
+        }.getType());
     }
 
 }
