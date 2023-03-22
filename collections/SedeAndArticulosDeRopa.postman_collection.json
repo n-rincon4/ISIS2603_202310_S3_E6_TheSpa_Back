@@ -516,7 +516,7 @@
 							"\r",
 							"pm.test(\"Get expected error message\", function () {\r",
 							"   var data = pm.response.json();\r",
-							"   pm.expect(data.apierror.message).to.eql(\"SEDE_NOT_FOUND\");\r",
+							"   pm.expect(data.apierror.message).to.eql(\"ARTICULO_NOT_FOUND\");\r",
 							"});"
 						],
 						"type": "text/javascript"
