@@ -67,7 +67,7 @@ public class SedeController {
     public SedeDTO update(@PathVariable("id") Long id, @RequestBody SedeDTO sedeDTO)
             throws IllegalOperationException, EntityNotFoundException {
         SedeEntity sede = sedeService.updateSede(id,
-                modelMapper.map(SedeDTO, SedeEntity.class));
+                modelMapper.map(sedeDTO, SedeEntity.class));
         return modelMapper.map(sede, SedeDTO.class);
     }
 
