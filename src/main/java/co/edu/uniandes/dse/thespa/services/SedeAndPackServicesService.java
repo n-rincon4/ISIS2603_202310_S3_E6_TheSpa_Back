@@ -64,6 +64,35 @@ public class SedeAndPackServicesService {
         return packEntity.get();
     }
 
+    // obtiene un pack de servicios de una sede dado el id de la sede y el id del pack
+    @Transactional
+    public PackDeServiciosEntity getPack(Long sedeid, Long packID)
+            throws EntityNotFoundException, IllegalOperationException {
+        log.info("Consultando el pack de servicios con id = {} de la sede con id = {}", packID, sedeid);
+
+        // Busca la sede
+        Optional<SedeEntity> sedeBuscado = sedeRepo.findById(sedeid);
+        if (sedeBuscado.isEmpty()) {
+            throw new EntityNotFoundException("SEDE_NOT_FOUND");
+        }
+
+        // Busca el articulo
+        Optional<PackDeServiciosEntity> pack = packDeServiciosRepo.findById(packID);
+        if (pack.isEmpty()) {
+            throw new EntityNotFoundException("PACK_NOT_FOUND");
+        }
+
+        // Verifica que el pack este en la sede
+        if (!sedeBuscado.get().getPacksDeServicios().contains(pack.get())) {
+            throw new IllegalOperationException("PACK_NOT_FOUND_IN_SEDE");
+        }
+
+        log.info("Pack encontrado");
+
+        // Retorna el pack
+        return pack.get();
+    }
+
     // Eliminar un pack de servicios de la sede
     @Transactional
     public PackDeServiciosEntity deleteSedePackDeServicios(Long sedeId, Long packDeServiciosId)
