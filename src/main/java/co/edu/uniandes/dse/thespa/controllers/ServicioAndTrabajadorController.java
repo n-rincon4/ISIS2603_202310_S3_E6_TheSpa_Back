@@ -53,7 +53,7 @@ public class ServicioAndTrabajadorController {
     public List<TrabajadorEntity> findAll(@PathVariable("id") Long id) throws EntityNotFoundException {
 
         List<TrabajadorEntity> trabajadores = service.getTrabajadores(id);
-        return modelMapper.map(trabajadores, new TypeToken<List<TrabajadorEntity>>() {
+        return modelMapper.map(trabajadores, new TypeToken<List<TrabajadorDTO>>() {
         }.getType());
     }
 
@@ -75,7 +75,7 @@ public class ServicioAndTrabajadorController {
     // return modelMapper.map(trabajador, TrabajadorDTO.class);
     // }
 
-    // Elimina un traajador de un servicio
+    // Elimina un trabajador de un servicio
     @DeleteMapping(value = "/{id}/trabajadores/{idTrabajador}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     public TrabajadorDTO delete(@PathVariable("id") Long id,
