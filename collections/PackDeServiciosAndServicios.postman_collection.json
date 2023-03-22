@@ -1398,7 +1398,7 @@
 			]
 		},
 		{
-			"name": "Borrar un Pack de Servicios Copy",
+			"name": "Borrar un Pack de Servicios",
 			"event": [
 				{
 					"listen": "test",
@@ -1454,48 +1454,19 @@
 		},
 		{
 			"name": "Borrar un Servicio 4",
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "{{baseUrl}}/servicios/{{servicio_id_4}}",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"servicios",
-						"{{servicio_id_4}}"
-					]
-				}
-			},
-			"response": [
+			"event": [
 				{
-					"name": "Borrar un Servicio",
-					"originalRequest": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "{{baseUrl}}/servicios/{{servicio_id_1}}",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"servicios",
-								"{{servicio_id_1}}"
-							]
-						}
-					},
-					"status": "No Content",
-					"code": 204,
-					"_postman_previewlanguage": null,
-					"header": null,
-					"cookie": [],
-					"body": null
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {",
+							"   pm.response.to.have.status(204);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
 				}
-			]
-		},
-		{
-			"name": "Borrar un Servicio 4 Copy",
+			],
 			"request": {
 				"method": "DELETE",
 				"header": [],
