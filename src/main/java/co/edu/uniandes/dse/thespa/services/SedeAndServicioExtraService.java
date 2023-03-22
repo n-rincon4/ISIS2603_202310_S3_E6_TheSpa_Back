@@ -29,10 +29,8 @@ public class SedeAndServicioExtraService {
 
     //Obtener todos los servicios extra de una sede
     @Transactional
-    public List<ServicioExtraEntity> obtenerAllServicios(Long sedeId) throws EntityNotFoundException, IllegalOperationException {
-
-        List<ServicioExtraEntity> servicios = servicioExtraRepo.findAll();
-        return servicios;
+    public List<ServicioExtraEntity> obtenerAllServicios(Long sedeId) {
+        return servicioExtraRepo.findAll();
     }
 
     // añadir un servicio extra a la sede

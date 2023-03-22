@@ -29,10 +29,8 @@ public class SedeAndPackServicesService {
 
     //Obtener todos los packs servicios de una sede
     @Transactional
-    public List<PackDeServiciosEntity> obtenerAllPacks(Long sedeId) throws EntityNotFoundException, IllegalOperationException {
-
-        List<PackDeServiciosEntity> servicios = packDeServiciosRepo.findAll();
-        return servicios;
+    public List<PackDeServiciosEntity> obtenerAllPacks(Long sedeId) {
+        return packDeServiciosRepo.findAll();
     }
 
     // Añadir un Pack de servicios a la sede

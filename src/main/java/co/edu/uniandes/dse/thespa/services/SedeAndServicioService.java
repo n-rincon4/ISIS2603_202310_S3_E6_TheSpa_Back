@@ -36,7 +36,7 @@ public class SedeAndServicioService {
     // Obtener todos los servicios de una sede
     @Transactional
     public List<ServicioEntity> obtenerAllServicios(Long sedeId)
-            throws EntityNotFoundException, IllegalOperationException {
+            throws EntityNotFoundException {
 
         Optional<SedeEntity> sedeEntity = sedeRepo.findById(sedeId);
         if (sedeEntity.isEmpty()) {

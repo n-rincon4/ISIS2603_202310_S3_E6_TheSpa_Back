@@ -22,7 +22,7 @@ import co.edu.uniandes.dse.thespa.entities.PackDeServiciosEntity;
 public class SedeAndPackdeServiciosController {
 
     // inyectar el servicio de sedes y packs de servicios
-    private SedeAndPackServicesService SaP;
+    private SedeAndPackServicesService saP;
 
     // inyecta el model mapper
     private ModelMapper modelMapper;
@@ -44,7 +44,7 @@ public class SedeAndPackdeServiciosController {
     public PackDeServiciosDTO create(@PathVariable("id") Long id, @PathVariable("idPack") Long idPack)
             throws IllegalOperationException, EntityNotFoundException {
 
-        PackDeServiciosEntity servicio = SaP.addSedePackDeServicios(id, idPack);
+        PackDeServiciosEntity servicio = saP.addSedePackDeServicios(id, idPack);
         return modelMapper.map(servicio, PackDeServiciosDTO.class);
     }
 
@@ -54,7 +54,7 @@ public class SedeAndPackdeServiciosController {
     public PackDeServiciosDTO delete(@PathVariable("id") Long id, @PathVariable("idPack") Long idPack)
             throws IllegalOperationException, EntityNotFoundException {
 
-        PackDeServiciosEntity servicioEliminado = SaP.deleteSedePackDeServicios(id, idPack);
+        PackDeServiciosEntity servicioEliminado = saP.deleteSedePackDeServicios(id, idPack);
         return modelMapper.map(servicioEliminado, PackDeServiciosDTO.class);
     }
 

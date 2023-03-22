@@ -29,39 +29,39 @@ public class UbicacionService {
 
     // creación de ubicaciones
     @Transactional
-    public UbicacionEntity createUbicacion(UbicacionEntity ubicacion)
+    public UbicacionEntity createUbicacion(UbicacionEntity ubicacionEntity)
             throws IllegalOperationException {
         log.info("Creando una ubicacion nueva");
         // revisa que la latitud y longitud no esten vacias
-        if (ubicacion.getLatitud() == null || ubicacion.getLongitud() == null) {
+        if (ubicacionEntity.getLatitud() == null || ubicacionEntity.getLongitud() == null) {
             throw new IllegalOperationException("La latitud y longitud no pueden ser nulas");
         }
         // revisa que la latitud y longitud sean validas
-        if (ubicacion.getLatitud() < -90 || ubicacion.getLatitud() > 90) {
+        if (ubicacionEntity.getLatitud() < -90 || ubicacionEntity.getLatitud() > 90) {
             throw new IllegalOperationException("La latitud debe estar entre -90 y 90");
         }
         // revisa que la latitud y longitud sean validas
-        if (ubicacion.getLongitud() < -180 || ubicacion.getLongitud() > 180) {
+        if (ubicacionEntity.getLongitud() < -180 || ubicacionEntity.getLongitud() > 180) {
             throw new IllegalOperationException("La longitud debe estar entre -180 y 180");
         }
         // revisa que la ciudad no este vacia
-        if (ubicacion.getCiudad() == null) {
+        if (ubicacionEntity.getCiudad() == null) {
             throw new IllegalOperationException("La ciudad no puede ser nula");
         }
         // revisa que la cuidad no sea " "
-        if (ubicacion.getCiudad().equals(" ")) {
+        if (ubicacionEntity.getCiudad().equals(" ")) {
             throw new IllegalOperationException("La ciudad no puede ser vacia");
         }
         // revisa que la direccion no este vacia
-        if (ubicacion.getDireccion() == null) {
+        if (ubicacionEntity.getDireccion() == null) {
             throw new IllegalOperationException("La direccion no puede ser nula");
         }
         // revisa que la direccion no sea " "
-        if (ubicacion.getDireccion().equals(" ")) {
+        if (ubicacionEntity.getDireccion().equals(" ")) {
             throw new IllegalOperationException("La direccion no puede ser vacia");
         }
         log.info("Ubicacion creada");
-        return ubicacionRepository.save(ubicacion);
+        return ubicacionRepository.save(ubicacionEntity);
     }
 
     // obtener todas las ubicaciones

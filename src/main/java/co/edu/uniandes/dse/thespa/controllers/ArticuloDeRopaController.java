@@ -56,7 +56,7 @@ public class ArticuloDeRopaController {
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
     public ArticuloDeRopaDetailDTO create(@RequestBody ArticuloDeRopaDetailDTO articuloDTO)
-            throws IllegalOperationException, EntityNotFoundException {
+            throws IllegalOperationException {
 
         ArticuloDeRopaEntity articulo = articuloDeRopaService
                 .createArticuloDeRopa(modelMapper.map(articuloDTO, ArticuloDeRopaEntity.class));
@@ -76,7 +76,7 @@ public class ArticuloDeRopaController {
     @PutMapping(value = "{id}")
     @ResponseStatus(code = HttpStatus.OK)
     public ArticuloDeRopaDTO update(@PathVariable("id") Long id, @RequestBody ArticuloDeRopaDTO articuloDTO)
-            throws EntityNotFoundException, IllegalOperationException {
+            throws EntityNotFoundException {
         ArticuloDeRopaEntity articulo = articuloDeRopaService.updateArticuloDeRopaEntity(id,
                 modelMapper.map(articuloDTO, ArticuloDeRopaEntity.class));
         return modelMapper.map(articulo, ArticuloDeRopaDTO.class);
