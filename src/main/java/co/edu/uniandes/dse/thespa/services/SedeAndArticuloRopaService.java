@@ -1,5 +1,6 @@
 package co.edu.uniandes.dse.thespa.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,7 +29,7 @@ public class SedeAndArticuloRopaService {
     @Autowired
     ArticuloDeRopaRepository articuloRepo;
 
-    //Obtener todos los articulos de ropa de una sede
+    // Obtener todos los articulos de ropa de una sede
     @Transactional
     public List<ArticuloDeRopaEntity> obtenerAllArticulos(Long sedeId) {
         return articuloRepo.findAll();
@@ -123,5 +124,37 @@ public class SedeAndArticuloRopaService {
         log.info("Termina proceso de eliminar de la sede un ArticuloDeRopa con con id = {0}", sedeId);
 
         return articuloEntity.get();
+    }
+
+    // actualiza la lista de articulos de ropa de una sede
+    @Transactional
+    public List<ArticuloDeRopaEntity> updateArticulos(Long sedeId, List<ArticuloDeRopaEntity> articulos)
+            throws EntityNotFoundException, IllegalOperationException {
+        log.info("Inicia proceso de actualizar la lista de articulos de ropa de la sede con id = {0}", sedeId);
+        Optional<SedeEntity> sedeEntity = sedeRepo.findById(sedeId);
+        if (sedeEntity.isEmpty()) {
+            throw new EntityNotFoundException("SEDE_NOT_FOUND");
+        }
+
+        // revisa que todos los articulos existan
+        for (ArticuloDeRopaEntity articulo : articulos) {
+            Optional<ArticuloDeRopaEntity> articuloEntity = articuloRepo.findById(articulo.getId());
+            if (articuloEntity.isEmpty()) {
+                throw new EntityNotFoundException("ARTICULO_NOT_FOUND");
+            }
+        }
+
+        // obtiene todos los articulos en articulos, y los pone en una lista
+        List<ArticuloDeRopaEntity> articulosActuales = new ArrayList<>();
+        for (ArticuloDeRopaEntity articulo : articulos) {
+            Optional<ArticuloDeRopaEntity> articuloEntity = articuloRepo.findById(articulo.getId());
+            articulosActuales.add(articuloEntity.get());
+        }
+
+        sedeEntity.get().setArticulosDeRopa(articulosActuales);
+
+        log.info("Termina proceso de actualizar la lista de articulos de ropa de la sede con id = {0}", sedeId);
+
+        return sedeEntity.get().getArticulosDeRopa();
     }
 }
