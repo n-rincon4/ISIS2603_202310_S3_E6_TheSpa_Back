@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "8e3a8988-04ca-40af-a02d-2314583bbfda",
+		"_postman_id": "5db4a4c4-bc24-4356-81d4-a92069c9abd6",
 		"name": "SedeAndArticulosDeRopa",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "25783612"
@@ -71,10 +71,10 @@
 							]
 						}
 					},
-					"_postman_previewlanguage": null,
-					"header": null,
+					"_postman_previewlanguage": "Text",
+					"header": [],
 					"cookie": [],
-					"body": null
+					"body": ""
 				}
 			]
 		},
@@ -145,10 +145,10 @@
 					},
 					"status": "Created",
 					"code": 201,
-					"_postman_previewlanguage": null,
-					"header": null,
+					"_postman_previewlanguage": "Text",
+					"header": [],
 					"cookie": [],
-					"body": null
+					"body": ""
 				}
 			]
 		},
@@ -198,15 +198,6 @@
 					"originalRequest": {
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"id\": 1,\r\n    \"nombre\": \"Crop Top The Spa\",\r\n    \"descripción\": \"Camiseta corta\",\r\n    \"precio\": 15000.0,\r\n    \"imagen\": \"https://cdn.shopify.com/s/files/1/0156/6146/products/TrainingFractionCropTopToffeeBrownB2A5Y-NBH6.1054.142.jpg?v=1668618724g\",\r\n    \"numDiponible\": 100,\r\n    \"talla\": 6,\r\n    \"color\": \"azul\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
 							"raw": "{{baseUrl}}/articulosderopa",
 							"host": [
@@ -222,7 +213,7 @@
 					"_postman_previewlanguage": "plain",
 					"header": [],
 					"cookie": [],
-					"body": null
+					"body": ""
 				}
 			]
 		},
@@ -275,15 +266,6 @@
 					"originalRequest": {
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"nombre\": \"Crop Top The Spa\",\r\n    \"descripción\": \"Camiseta corta\",\r\n    \"precio\": 15000.0,\r\n    \"imagen\": \"https://cdn.shopify.com/s/files/1/0156/6146/products/TrainingFractionCropTopToffeeBrownB2A5Y-NBH6.1054.142.jpg?v=1668618724g\",\r\n    \"numDiponible\": 100,\r\n    \"talla\": 6,\r\n    \"color\": \"azul\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
 							"raw": "{{baseUrl}}/sedes/{{sede_id}}/articuloRopa/{{articuloRopa_id}}",
 							"host": [
@@ -299,10 +281,10 @@
 					},
 					"status": "OK",
 					"code": 200,
-					"_postman_previewlanguage": null,
-					"header": null,
+					"_postman_previewlanguage": "Text",
+					"header": [],
 					"cookie": [],
-					"body": null
+					"body": ""
 				}
 			]
 		},
@@ -359,15 +341,6 @@
 					"originalRequest": {
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "[\r\n    {\r\n        \"nombre\": \"Crop Top The Spa\",\r\n        \"descripción\": \"Camiseta corta\",\r\n        \"precio\": 15000.0,\r\n        \"imagen\": \"https://cdn.shopify.com/s/files/1/0156/6146/products/TrainingFractionCropTopToffeeBrownB2A5Y-NBH6.1054.142.jpg?v=1668618724g\",\r\n        \"numDiponible\": 100,\r\n        \"talla\": 6,\r\n        \"color\": \"azul\"\r\n    }\r\n]",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
 							"raw": "{{baseUrl}}/sedes/{{sede_id}}/articuloRopa",
 							"host": [
@@ -382,10 +355,10 @@
 					},
 					"status": "OK",
 					"code": 200,
-					"_postman_previewlanguage": null,
-					"header": null,
+					"_postman_previewlanguage": "Text",
+					"header": [],
 					"cookie": [],
-					"body": null
+					"body": ""
 				}
 			]
 		},
@@ -435,15 +408,6 @@
 					"originalRequest": {
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"id\": 1,\r\n    \"nombre\": \"Crop Top The Spa\",\r\n    \"descripción\": \"Camiseta corta\",\r\n    \"precio\": 15000.0,\r\n    \"imagen\": \"https://cdn.shopify.com/s/files/1/0156/6146/products/TrainingFractionCropTopToffeeBrownB2A5Y-NBH6.1054.142.jpg?v=1668618724g\",\r\n    \"numDiponible\": 100,\r\n    \"talla\": 6,\r\n    \"color\": \"azul\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
 							"raw": "{{baseUrl}}/articulosderopa",
 							"host": [
@@ -459,7 +423,7 @@
 					"_postman_previewlanguage": "plain",
 					"header": [],
 					"cookie": [],
-					"body": null
+					"body": ""
 				}
 			]
 		},
@@ -532,15 +496,96 @@
 					},
 					"status": "OK",
 					"code": 200,
-					"_postman_previewlanguage": null,
-					"header": null,
+					"_postman_previewlanguage": "Text",
+					"header": [],
 					"cookie": [],
-					"body": null
+					"body": ""
 				}
 			]
 		},
 		{
-			"name": "Editar lso articulso de ropa de una sede que no existe",
+			"name": "Editar los articulos de ropa que no existen de una sede",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"   pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.apierror.message).to.eql(\"SEDE_NOT_FOUND\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    {\r\n        \"id\": 0\r\n    }\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/sedes/{{sede_id_1}}/articulosDeRopa",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"sedes",
+						"{{sede_id_1}}",
+						"articulosDeRopa"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Editar un articulo de ropa de una sede",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Crop Top The Spa\",\r\n    \"descripción\": \"Camiseta corta\",\r\n    \"precio\": 15000.0,\r\n    \"imagen\": \"https://cdn.shopify.com/s/files/1/0156/6146/products/TrainingFractionCropTopToffeeBrownB2A5Y-NBH6.1054.142.jpg?v=1668618724g\",\r\n    \"numDiponible\": 100,\r\n    \"talla\": 6,\r\n    \"color\": \"azul\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/sedes/{{sede_id}}/articuloRopa/{{articuloRopa_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"sedes",
+								"{{sede_id}}",
+								"articuloRopa",
+								"{{articuloRopa_id}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "Text",
+					"header": [],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "Editar los articulso de ropa de una sede que no existe",
 			"event": [
 				{
 					"listen": "test",
@@ -613,10 +658,10 @@
 					},
 					"status": "Not Found",
 					"code": 404,
-					"_postman_previewlanguage": null,
-					"header": null,
+					"_postman_previewlanguage": "Text",
+					"header": [],
 					"cookie": [],
-					"body": null
+					"body": ""
 				}
 			]
 		},
@@ -690,10 +735,10 @@
 					},
 					"status": "No Content",
 					"code": 204,
-					"_postman_previewlanguage": null,
-					"header": null,
+					"_postman_previewlanguage": "Text",
+					"header": [],
 					"cookie": [],
-					"body": null
+					"body": ""
 				}
 			]
 		},
@@ -772,10 +817,10 @@
 					},
 					"status": "Not Found",
 					"code": 404,
-					"_postman_previewlanguage": null,
-					"header": null,
+					"_postman_previewlanguage": "Text",
+					"header": [],
 					"cookie": [],
-					"body": null
+					"body": ""
 				}
 			]
 		},
@@ -827,15 +872,15 @@
 					},
 					"status": "No Content",
 					"code": 204,
-					"_postman_previewlanguage": null,
-					"header": null,
+					"_postman_previewlanguage": "Text",
+					"header": [],
 					"cookie": [],
-					"body": null
+					"body": ""
 				}
 			]
 		},
 		{
-			"name": "Borrar un Artículo de Ropa 1 Copy",
+			"name": "Borrar un Artículo de Ropa 2",
 			"event": [
 				{
 					"listen": "test",
@@ -882,10 +927,10 @@
 					},
 					"status": "No Content",
 					"code": 204,
-					"_postman_previewlanguage": null,
-					"header": null,
+					"_postman_previewlanguage": "Text",
+					"header": [],
 					"cookie": [],
-					"body": null
+					"body": ""
 				}
 			]
 		},
@@ -937,10 +982,10 @@
 					},
 					"status": "No Content",
 					"code": 204,
-					"_postman_previewlanguage": null,
-					"header": null,
+					"_postman_previewlanguage": "Text",
+					"header": [],
 					"cookie": [],
-					"body": null
+					"body": ""
 				}
 			]
 		},
@@ -992,10 +1037,10 @@
 					},
 					"status": "No Content",
 					"code": 204,
-					"_postman_previewlanguage": null,
-					"header": null,
+					"_postman_previewlanguage": "Text",
+					"header": [],
 					"cookie": [],
-					"body": null
+					"body": ""
 				}
 			]
 		}
