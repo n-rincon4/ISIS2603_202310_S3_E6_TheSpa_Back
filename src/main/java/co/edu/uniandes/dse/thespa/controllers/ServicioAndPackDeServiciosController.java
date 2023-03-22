@@ -52,7 +52,14 @@ public class ServicioAndPackDeServiciosController {
         return modelMapper.map(packDeServicios, PackDeServiciosDTO.class);
     }
 
-    //Elimina un pack de servicios de un servicio
+    @GetMapping("/{id}/packsdeservicios/{idPack}")
+    @ResponseStatus(code = HttpStatus.OK)
+    public PackDeServiciosDTO findOne(@PathVariable("id") Long id, @PathVariable("idPack") Long idPack) throws EntityNotFoundException, IllegalOperationException {
+        PackDeServiciosEntity packDeServicios = service.getPack(id, idPack);
+        return modelMapper.map(packDeServicios, PackDeServiciosDTO.class);
+    }
+
+    // Elimina un pack de servicios de un servicio
     @DeleteMapping(value = "/{id}/packsdeservicios/{idPack}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     public PackDeServiciosDTO delete(@PathVariable("id") Long id, @PathVariable("idPack") Long idPack) throws EntityNotFoundException, IllegalOperationException {

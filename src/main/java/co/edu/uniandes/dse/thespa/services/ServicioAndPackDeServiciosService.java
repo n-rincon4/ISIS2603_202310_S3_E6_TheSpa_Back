@@ -24,6 +24,8 @@ public class ServicioAndPackDeServiciosService {
     // reporte
     private static final String MENSAJE_PACK_NO_EXISTE = "El pack de servicios con el id = {0} no existe";
     private static final String MENSAJE_SERVICIO_NO_EXISTE = "El servicio con el id = {0} no existe";
+    private static final String MENSAJE_PACK_NOTIN_SERVICIO = "El pack de servicios con el id = {1} no esta en el servicio con el id = {0}";
+
 
     @Autowired
     ServicioRepository servicioRepository;
@@ -52,6 +54,33 @@ public class ServicioAndPackDeServiciosService {
         log.info("Termina proceso de agregar un pack de servicios al servicio con id = {0}", servicioID);
 
         return packDeServiciosEntity.get();
+    }
+
+    @Transactional
+    public PackDeServiciosEntity getPack(Long servicioID, Long packid)
+            throws EntityNotFoundException, IllegalOperationException {
+        log.info("Consultando el pack de servicios con id = {} del servicio con id = {}", packid, servicioID);
+
+        // Busca el pack de servicios
+        Optional<PackDeServiciosEntity> packsBuscados = packDeServiciosRepository.findById(packid);
+        if (packsBuscados.isEmpty()) {
+            throw new EntityNotFoundException(String.format(MENSAJE_PACK_NO_EXISTE, packid));
+        }
+
+        // Busca el servicio
+        Optional<ServicioEntity> serviciosBuscados = servicioRepository.findById(servicioID);
+        if (serviciosBuscados.isEmpty()) {
+            throw new EntityNotFoundException(String.format(MENSAJE_SERVICIO_NO_EXISTE, servicioID));
+        }
+
+        if (!serviciosBuscados.get().getPacksDeServicios().contains(packsBuscados.get())) {
+            throw new IllegalOperationException(String.format(MENSAJE_PACK_NOTIN_SERVICIO, servicioID, packid));
+        }
+
+        log.info("Pack de Servicios encontrado");
+
+        // Retorna el servicio
+        return packsBuscados.get();
     }
 
     @Transactional
