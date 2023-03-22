@@ -7,14 +7,17 @@
 	},
 	"item": [
 		{
-			"name": "Añadir un servicio a una sede",
+			"name": "Crear una ubicación Copy",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Status code is 200\", function () {\r",
-							"   pm.response.to.have.status(200);\r",
+							"var data = pm.response.json()",
+							"pm.globals.set(\"ubicacion_id_1\", data.id);",
+							"",
+							"pm.test(\"Status code is 201\", function () {",
+							"   pm.response.to.have.status(201);",
 							"});"
 						],
 						"type": "text/javascript"
@@ -26,7 +29,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"duracion\": 3,\r\n    \"restricciones\": \"\",\r\n    \"disponible\": true,\r\n    \"horaInicio\": 8,\r\n    \"nombre\": \"masaje\",\r\n    \"descripcion\": \"masaje de relajacion\",\r\n    \"precio\": \"30000\",\r\n    \"imagen\": \"https://thumbs.dreamstime.com/b/spa-massage-outdoor-balinese-woman-receiving-back-53105227.jpg\"\r\n}",
+					"raw": "{\n    \"latitud\": 4.603014,\n    \"longitud\": 74.065227,\n    \"ciudad\": \"Bogotá\",\n    \"direccion\": \"Cl. 20 #19a-71 a 19a-1, Bogotá\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -34,27 +37,24 @@
 					}
 				},
 				"url": {
-					"raw": "{{baseUrl}}/sedes/{{sede_id_1}}/servicios/{{servicio_id_1}}",
+					"raw": "{{baseUrl}}/ubicaciones",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
-						"sedes",
-						"{{sede_id_1}}",
-						"servicios",
-						"{{servicio_id_1}}"
+						"ubicaciones"
 					]
 				}
 			},
 			"response": [
 				{
-					"name": "Añadir un servicio a una sede",
+					"name": "Crear una ubicación",
 					"originalRequest": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"duracion\": 3,\r\n    \"restricciones\": \"\",\r\n    \"disponible\": true,\r\n    \"horaInicio\": 8,\r\n    \"nombre\": \"masaje\",\r\n    \"descripcion\": \"masaje de relajacion\",\r\n    \"precio\": \"30000\",\r\n    \"imagen\": \"https://thumbs.dreamstime.com/b/spa-massage-outdoor-balinese-woman-receiving-back-53105227.jpg\"\r\n}",
+							"raw": "{\n    \"id\": 1,\n    \"latitud\": 4.603014,\n    \"longitud\": 74.065227,\n    \"ciudad\": \"Bogotá\",\n    \"direccion\": \"Cl. 20 #19a-71 a 19a-1, Bogotá\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -62,15 +62,84 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/sedes/{{sede_id}}/servicios/{{servicio1_id}}",
+							"raw": "{{baseUrl}}/ubicaciones",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
-								"sedes",
-								"{{sede_id}}",
-								"servicios",
-								"{{servicio1_id}}"
+								"ubicaciones"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Crear una Sede Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json()\r",
+							"pm.globals.set(\"sede_id_1\", data.id);\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"   pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"Spa del Jardín\",\r\n    \"imagen\": \"https://www.visit.alsace/wp-content/uploads/lei/pictures/215002309-nature-spa-la-cheneaudiere-11-1600x900.jpg\",\r\n    \"ubicacion\": \r\n        {\r\n            \"id\": {{ubicacion_id_1}}\r\n        },\r\n    \"servicios\":[],\r\n    \"serviciosExtra\":[],\r\n    \"packs\":[],\r\n    \"trabajadores\":[]\r\n\r\n    \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/sedes",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"sedes"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Crear una Sede",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"nombre\": \"Spa del Jardín\",\r\n    \"imagen\": \"https://www.visit.alsace/wp-content/uploads/lei/pictures/215002309-nature-spa-la-cheneaudiere-11-1600x900.jpg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/sedes",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"sedes"
 							]
 						}
 					},
@@ -78,6 +147,80 @@
 					"code": 201,
 					"_postman_previewlanguage": null,
 					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Crear y Añadir un Servicio a una sede",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json()\r",
+							"pm.globals.set(\"servicio_id_1\", data.id);\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"   pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"duracion\": 3,\r\n    \"restricciones\": \"restricción\",\r\n    \"disponible\": true,\r\n    \"horaInicio\": 8,\r\n    \"nombre\": \"masaje\",\r\n    \"descripcion\": \"masaje de relajacion\",\r\n    \"precio\": \"30000\",\r\n    \"imagen\": \"https://thumbs.dreamstime.com/b/spa-massage-outdoor-balinese-woman-receiving-back-53105227.jpg\",\r\n    \"sede\": {\r\n        \"id\": {{sede_id_1}}\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/servicios",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"servicios"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Crear un Servicio",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"nombre\": \"masaje\",\r\n    \"descripcion\": \"masaje de relajacion\",\r\n    \"precio\": 30000.0,\r\n    \"imagen\": \"https://thumbs.dreamstime.com/b/spa-massage-outdoor-balinese-woman-receiving-back-53105227.jpg\",\r\n    \"duracion\": 3,\r\n    \"restricciones\": \"restricción\",\r\n    \"disponible\": true,\r\n    \"horaInicio\": 8,\r\n    \"sede\": {\r\n        \"id\": 1,\r\n        \"nombre\": \"Spa del Jardín\",\r\n        \"imagen\": \"https://www.visit.alsace/wp-content/uploads/lei/pictures/215002309-nature-spa-la-cheneaudiere-11-1600x900.jpg\",\r\n        \"ubicacion\": {\r\n            \"id\": 1,\r\n            \"latitud\": 4.603014,\r\n            \"longitud\": 74.065227,\r\n            \"ciudad\": \"Bogotá\",\r\n            \"direccion\": \"Cl. 20 #19a-71 a 19a-1, Bogotá\"\r\n        }\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/servicios",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"servicios"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": null,
+					"header": [],
 					"cookie": [],
 					"body": null
 				}
@@ -224,6 +367,80 @@
 			]
 		},
 		{
+			"name": "Crear un servicio 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json()\r",
+							"pm.globals.set(\"servicio_id_2\", data.id);\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"   pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"duracion\": 3,\r\n    \"restricciones\": \"restricción\",\r\n    \"disponible\": true,\r\n    \"horaInicio\": 8,\r\n    \"nombre\": \"masaje\",\r\n    \"descripcion\": \"masaje de relajacion extra\",\r\n    \"precio\": \"30000\",\r\n    \"imagen\": \"https://thumbs.dreamstime.com/b/spa-massage-outdoor-balinese-woman-receiving-back-53105227.jpg\",\r\n    \"sede\": {\r\n        \"id\": {{sede_id_1}}\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/servicios",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"servicios"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Crear un Servicio",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"nombre\": \"masaje\",\r\n    \"descripcion\": \"masaje de relajacion\",\r\n    \"precio\": 30000.0,\r\n    \"imagen\": \"https://thumbs.dreamstime.com/b/spa-massage-outdoor-balinese-woman-receiving-back-53105227.jpg\",\r\n    \"duracion\": 3,\r\n    \"restricciones\": \"restricción\",\r\n    \"disponible\": true,\r\n    \"horaInicio\": 8,\r\n    \"sede\": {\r\n        \"id\": 1,\r\n        \"nombre\": \"Spa del Jardín\",\r\n        \"imagen\": \"https://www.visit.alsace/wp-content/uploads/lei/pictures/215002309-nature-spa-la-cheneaudiere-11-1600x900.jpg\",\r\n        \"ubicacion\": {\r\n            \"id\": 1,\r\n            \"latitud\": 4.603014,\r\n            \"longitud\": 74.065227,\r\n            \"ciudad\": \"Bogotá\",\r\n            \"direccion\": \"Cl. 20 #19a-71 a 19a-1, Bogotá\"\r\n        }\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/servicios",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"servicios"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": null,
+					"header": [],
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
 			"name": "Editar un servicio de una sede",
 			"event": [
 				{
@@ -243,7 +460,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"duracion\": 3,\r\n    \"restricciones\": \"\",\r\n    \"disponible\": true,\r\n    \"horaInicio\": 8,\r\n    \"nombre\": \"masaje\",\r\n    \"descripcion\": \"masaje de relajacion\",\r\n    \"precio\": \"30000\",\r\n    \"imagen\": \"https://thumbs.dreamstime.com/b/spa-massage-outdoor-balinese-woman-receiving-back-53105227.jpg\"\r\n}",
+					"raw": "[\r\n    {\r\n        \"id\": {{servicio_id_2}}\r\n    }\r\n]",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -251,15 +468,83 @@
 					}
 				},
 				"url": {
-					"raw": "{{baseUrl}}/sedes/{{sede_id_1}}/servicios/{{servicio_id_1}}",
+					"raw": "{{baseUrl}}/sedes/{{sede_id_1}}/servicios",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
 						"sedes",
 						"{{sede_id_1}}",
-						"servicios",
-						"{{servicio_id_1}}"
+						"servicios"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Editar un servicio de una sede",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"duracion\": 3,\r\n    \"restricciones\": \"\",\r\n    \"disponible\": true,\r\n    \"horaInicio\": 8,\r\n    \"nombre\": \"masaje\",\r\n    \"descripcion\": \"masaje de relajacion\",\r\n    \"precio\": \"30000\",\r\n    \"imagen\": \"https://thumbs.dreamstime.com/b/spa-massage-outdoor-balinese-woman-receiving-back-53105227.jpg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Editar un servicio de una sede que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"   pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.apierror.message).to.eql(\"SEDE_NOT_FOUND\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    {\r\n        \"id\": {{servicio_id_2}}\r\n    }\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/sedes/0/servicios",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"sedes",
+						"0",
+						"servicios"
 					]
 				}
 			},
@@ -316,14 +601,14 @@
 					}
 				},
 				"url": {
-					"raw": "{{baseUrl}}/sedes/{{sede_id_1}}/servicio/{{servicio_id_1}}",
+					"raw": "{{baseUrl}}/sedes/{{sede_id_1}}/servicios/{{servicio_id_1}}",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
 						"sedes",
 						"{{sede_id_1}}",
-						"servicio",
+						"servicios",
 						"{{servicio_id_1}}"
 					]
 				}
@@ -366,7 +651,7 @@
 							"\r",
 							"pm.test(\"Get expected error message\", function () {\r",
 							"   var data = pm.response.json();\r",
-							"   pm.expect(data.apierror.message).to.eql(\"The servicio with the given id was not found\");\r",
+							"   pm.expect(data.apierror.message).to.eql(\"SERVICE_NOT_FOUND\");\r",
 							"});"
 						],
 						"type": "text/javascript"
@@ -386,14 +671,14 @@
 					}
 				},
 				"url": {
-					"raw": "{{baseUrl}}/sedes/{{sede_id_1}}/servicio/0",
+					"raw": "{{baseUrl}}/sedes/{{sede_id_1}}/servicios/0",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
 						"sedes",
 						"{{sede_id_1}}",
-						"servicio",
+						"servicios",
 						"0"
 					]
 				}
@@ -424,14 +709,14 @@
 			]
 		},
 		{
-			"name": "Editar un servicio de una sede que no existe",
+			"name": "Borrar un Servicio",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Status code is 404\", function () {\r",
-							"   pm.response.to.have.status(404);\r",
+							"pm.test(\"Status code is 204\", function () {\r",
+							"   pm.response.to.have.status(204);\r",
 							"});"
 						],
 						"type": "text/javascript"
@@ -439,48 +724,203 @@
 				}
 			],
 			"request": {
-				"method": "PUT",
+				"method": "DELETE",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"duracion\": 3,\r\n    \"restricciones\": \"\",\r\n    \"disponible\": true,\r\n    \"horaInicio\": 8,\r\n    \"nombre\": \"masaje\",\r\n    \"descripcion\": \"masaje de relajacion\",\r\n    \"precio\": \"30000\",\r\n    \"imagen\": \"https://thumbs.dreamstime.com/b/spa-massage-outdoor-balinese-woman-receiving-back-53105227.jpg\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
 				"url": {
-					"raw": "{{baseUrl}}/sedes/{{sede_id_1}}/servicio/0",
+					"raw": "{{baseUrl}}/servicios/{{servicio_id_1}}",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
-						"sedes",
-						"{{sede_id_1}}",
-						"servicio",
-						"0"
+						"servicios",
+						"{{servicio_id_1}}"
 					]
 				}
 			},
 			"response": [
 				{
-					"name": "Editar un servicio de una sede",
+					"name": "Borrar un Servicio",
 					"originalRequest": {
-						"method": "PUT",
+						"method": "DELETE",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"duracion\": 3,\r\n    \"restricciones\": \"\",\r\n    \"disponible\": true,\r\n    \"horaInicio\": 8,\r\n    \"nombre\": \"masaje\",\r\n    \"descripcion\": \"masaje de relajacion\",\r\n    \"precio\": \"30000\",\r\n    \"imagen\": \"https://thumbs.dreamstime.com/b/spa-massage-outdoor-balinese-woman-receiving-back-53105227.jpg\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+						"url": {
+							"raw": "{{baseUrl}}/servicios/{{servicio_id_1}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"servicios",
+								"{{servicio_id_1}}"
+							]
 						}
 					},
-					"status": "OK",
-					"code": 200,
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Borrar un Servicio 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {\r",
+							"   pm.response.to.have.status(204);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/servicios/{{servicio_id_2}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"servicios",
+						"{{servicio_id_2}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Borrar un Servicio",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/servicios/{{servicio_id_1}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"servicios",
+								"{{servicio_id_1}}"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Borrar una Sede",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {\r",
+							"   pm.response.to.have.status(204);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/sedes/{{sede_id_1}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"sedes",
+						"{{sede_id_1}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Borrar una Sede",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/sedes/{{sede_id_1}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"sedes",
+								"{{sede_id_1}}"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Borrar una Ubicación",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {",
+							"   pm.response.to.have.status(204);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/ubicaciones/{{ubicacion_id_1}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"ubicaciones",
+						"{{ubicacion_id_1}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Borrar una Ubicación",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/ubicaciones/{{ubicacion_id_1}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"ubicaciones",
+								"{{ubicacion_id_1}}"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
 					"_postman_previewlanguage": null,
 					"header": null,
 					"cookie": [],
