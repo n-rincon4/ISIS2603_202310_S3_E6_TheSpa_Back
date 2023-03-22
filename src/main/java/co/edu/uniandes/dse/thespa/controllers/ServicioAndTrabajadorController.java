@@ -17,6 +17,7 @@ import java.util.List;
 
 import co.edu.uniandes.dse.thespa.services.ServicioAndTrabajadorService;
 import co.edu.uniandes.dse.thespa.entities.TrabajadorEntity;
+import co.edu.uniandes.dse.thespa.dto.ServicioDTO;
 import co.edu.uniandes.dse.thespa.dto.TrabajadorDTO;
 
 import org.modelmapper.TypeToken;
@@ -34,6 +35,18 @@ public class ServicioAndTrabajadorController {
     @Autowired
     private ModelMapper modelMapper;
 
+    @Autowired
+    private TrabajadorAndServicioController trabajadorAndServicioController;
+
+    // añade un trabajador a un servicio
+    @PostMapping(value = "{id}/trabajadores/{idTrabajador}")
+    @ResponseStatus(code = HttpStatus.CREATED)
+    public ServicioDTO create(@PathVariable("id") Long id, @PathVariable("idTrabajador") Long idTrabajador)
+            throws IllegalOperationException, EntityNotFoundException {
+
+        return trabajadorAndServicioController.addServicioToTrabajador(idTrabajador, id);
+    }
+
     // Encuentra todos los trabajadores de un servicio
     @GetMapping("/{id}/trabajadores")
     @ResponseStatus(code = HttpStatus.OK)
@@ -46,26 +59,30 @@ public class ServicioAndTrabajadorController {
 
     @GetMapping("/{id}/trabajadores/{idTrabajador}")
     @ResponseStatus(code = HttpStatus.OK)
-    public TrabajadorDTO findOne(@PathVariable("id") Long id, @PathVariable("idTrabajador") Long idTrabajador) throws EntityNotFoundException, IllegalOperationException {
+    public TrabajadorDTO findOne(@PathVariable("id") Long id,
+            @PathVariable("idTrabajador") Long idTrabajador) throws EntityNotFoundException, IllegalOperationException {
         TrabajadorEntity trabajador = service.getTrabajador(id, idTrabajador);
         return modelMapper.map(trabajador, TrabajadorDTO.class);
     }
 
-    // Agrega un trabajador a un servicio
-    @PostMapping("/{id}/trabajadores/{idTrabajador}")
-    @ResponseStatus(code = HttpStatus.OK)
-    public TrabajadorDTO create(@PathVariable("id") Long id, @PathVariable("idTrabajador") Long idTrabajador)
-            throws EntityNotFoundException, IllegalOperationException {
-        TrabajadorEntity trabajador = service.addTrabajador(id, idTrabajador);
-        return modelMapper.map(trabajador, TrabajadorDTO.class);
-    }
+    // // Agrega un trabajador a un servicio
+    // @PostMapping("/{id}/trabajadores/{idTrabajador}")
+    // @ResponseStatus(code = HttpStatus.OK)
+    // public TrabajadorDTO create(@PathVariable("id") Long id,
+    // @PathVariable("idTrabajador") Long idTrabajador)
+    // throws EntityNotFoundException, IllegalOperationException {
+    // TrabajadorEntity trabajador = service.addTrabajador(id, idTrabajador);
+    // return modelMapper.map(trabajador, TrabajadorDTO.class);
+    // }
 
     // Elimina un traajador de un servicio
     @DeleteMapping(value = "/{id}/trabajadores/{idTrabajador}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
-    public TrabajadorDTO delete(@PathVariable("id") Long id, @PathVariable("idTrabajador") Long idTrabajador)
+    public TrabajadorDTO delete(@PathVariable("id") Long id,
+            @PathVariable("idTrabajador") Long idTrabajador)
             throws EntityNotFoundException, IllegalOperationException {
-        TrabajadorEntity trabajadorEliminado = service.removeTrabajador(id, idTrabajador);
+        TrabajadorEntity trabajadorEliminado = service.removeTrabajador(id,
+                idTrabajador);
         return modelMapper.map(trabajadorEliminado, TrabajadorDTO.class);
     }
 
