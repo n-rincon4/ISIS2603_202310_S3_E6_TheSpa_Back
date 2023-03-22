@@ -56,10 +56,11 @@ public class TrabajadorController {
     // Método para crear un trabajador a partir de un DTO
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
-    public TrabajadorDetailDTO create(@RequestBody TrabajadorDetailDTO trabajadorDTO) 
+    public TrabajadorDetailDTO create(@RequestBody TrabajadorDetailDTO trabajadorDTO)
             throws IllegalOperationException, EntityNotFoundException {
 
-        TrabajadorEntity trabajador = trabajadorService.createTrabajador(modelMapper.map(trabajadorDTO, TrabajadorEntity.class));
+        TrabajadorEntity trabajador = trabajadorService
+                .createTrabajador(modelMapper.map(trabajadorDTO, TrabajadorEntity.class));
         return modelMapper.map(trabajador, TrabajadorDetailDTO.class);
     }
 
@@ -67,8 +68,9 @@ public class TrabajadorController {
     @PutMapping(value = "{id}")
     @ResponseStatus(code = HttpStatus.OK)
     public TrabajadorDetailDTO update(@PathVariable("id") Long id, @RequestBody TrabajadorDetailDTO trabajadorDTO)
-                        throws EntityNotFoundException, IllegalOperationException {
-        TrabajadorEntity trabajadorEntity = trabajadorService.updateTrabajador(id, modelMapper.map(trabajadorDTO, TrabajadorEntity.class));
+            throws EntityNotFoundException, IllegalOperationException {
+        TrabajadorEntity trabajadorEntity = trabajadorService.updateTrabajador(id,
+                modelMapper.map(trabajadorDTO, TrabajadorEntity.class));
         return modelMapper.map(trabajadorEntity, TrabajadorDetailDTO.class);
     }
 

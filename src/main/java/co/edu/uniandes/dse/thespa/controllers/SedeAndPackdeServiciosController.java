@@ -1,4 +1,5 @@
 package co.edu.uniandes.dse.thespa.controllers;
+
 import java.util.List;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
@@ -16,8 +17,6 @@ import co.edu.uniandes.dse.thespa.dto.PackDeServiciosDTO;
 import co.edu.uniandes.dse.thespa.services.SedeAndPackServicesService;
 import co.edu.uniandes.dse.thespa.entities.PackDeServiciosEntity;
 
-
-
 @RestController
 @RequestMapping("/sedes")
 public class SedeAndPackdeServiciosController {
@@ -28,11 +27,13 @@ public class SedeAndPackdeServiciosController {
     // inyecta el model mapper
     private ModelMapper modelMapper;
 
-    // metodo para encontrar todos los packs de servicios dentro de una sede dado su id
+    // metodo para encontrar todos los packs de servicios dentro de una sede dado su
+    // id
     @GetMapping(value = "{id}/packs")
     @ResponseStatus(code = HttpStatus.OK)
-    public List<PackDeServiciosEntity> findAll(@PathVariable("id") Long id) throws EntityNotFoundException, IllegalOperationException {
-        List<PackDeServiciosEntity> servicios = saP.obtenerAllPacks(id);
+    public List<PackDeServiciosEntity> findAll(@PathVariable("id") Long id)
+            throws EntityNotFoundException, IllegalOperationException {
+        List<PackDeServiciosEntity> servicios = SaP.obtenerAllPacks(id);
         return modelMapper.map(servicios, new TypeToken<List<PackDeServiciosDTO>>() {
         }.getType());
     }
