@@ -25,6 +25,7 @@ public class PackDeServiciosAndServicioService {
     // reporte
     private static final String MENSAJE_PACK_NO_EXISTE = "El pack de servicios con el id = {0} no existe";
     private static final String MENSAJE_SERVICIO_NO_EXISTE = "El servicio con el id = {0} no existe";
+    private static final String MENSAJE_SERVICIO_NOTIN_PACK = "El servicio con el id = {0} no esta en el pack de servicios con el id = {1}";
 
     // Inyeccion de dependencias -> Repositorio PackDeServicios
     @Autowired
@@ -44,6 +45,36 @@ public class PackDeServiciosAndServicioService {
         }
         log.info("Servicios del pack de servicios encontrados");
         return packsBuscados.get().getServicios();
+    }
+
+    // obtiene un servicio de un pack de servicios dado el id del pack de servicios
+    // y el id del servicio
+    @Transactional
+    public ServicioEntity getServicio(Long packid, Long servicioID)
+            throws EntityNotFoundException, IllegalOperationException {
+        log.info("Consultando el servicio con id = {} del pack de servicios con id = {}", servicioID, packid);
+
+        // Busca el pack de servicios
+        Optional<PackDeServiciosEntity> packsBuscados = packDeServiciosRepository.findById(packid);
+        if (packsBuscados.isEmpty()) {
+            throw new EntityNotFoundException(String.format(MENSAJE_PACK_NO_EXISTE, packid));
+        }
+
+        // Busca el servicio
+        Optional<ServicioEntity> serviciosBuscados = servicioRepository.findById(servicioID);
+        if (serviciosBuscados.isEmpty()) {
+            throw new EntityNotFoundException(String.format(MENSAJE_SERVICIO_NO_EXISTE, servicioID));
+        }
+
+        // Verifica que el servicio este en el pack de servicios
+        if (!packsBuscados.get().getServicios().contains(serviciosBuscados.get())) {
+            throw new IllegalOperationException(String.format(MENSAJE_SERVICIO_NOTIN_PACK, servicioID, packid));
+        }
+
+        log.info("Servicio encontrado");
+
+        // Retorna el servicio
+        return serviciosBuscados.get();
     }
 
     // Agrega un servicio a un pack de servicios
@@ -75,6 +106,8 @@ public class PackDeServiciosAndServicioService {
 
         log.info("Servicio agregado al pack de servicios");
 
+        // Retorna el servicio
+
         return serviciosBuscados.get();
 
     }
@@ -99,8 +132,7 @@ public class PackDeServiciosAndServicioService {
 
         // Verifica que el servicio este en el pack de servicios
         if (!packsBuscados.get().getServicios().contains(serviciosBuscados.get())) {
-            throw new IllegalOperationException("El servicio con el id = " + servicioID
-                    + " no esta en el pack de servicios con el id = " + packid);
+            throw new IllegalOperationException(String.format(MENSAJE_SERVICIO_NOTIN_PACK, servicioID, packid));
         }
 
         // Elimina el servicio del pack de servicios
@@ -109,6 +141,35 @@ public class PackDeServiciosAndServicioService {
         log.info("Servicio eliminado del pack de servicios");
 
         return serviciosBuscados.get();
+    }
+
+    // actualiza un pack de servicios con una nueva lista de servicios
+    @Transactional
+    public List<ServicioEntity> updateServicios(Long packid, List<ServicioEntity> servicios)
+            throws EntityNotFoundException, IllegalOperationException {
+
+        log.info("Actualizando los servicios del pack de servicios con id = {}", packid);
+
+        // Busca el pack de servicios
+        Optional<PackDeServiciosEntity> packsBuscados = packDeServiciosRepository.findById(packid);
+        if (packsBuscados.isEmpty()) {
+            throw new EntityNotFoundException(String.format(MENSAJE_PACK_NO_EXISTE, packid));
+        }
+
+        // por cada servicio en la lista de servicios, verifica que exista
+        for (ServicioEntity servicio : servicios) {
+            Optional<ServicioEntity> serviciosBuscados = servicioRepository.findById(servicio.getId());
+            if (serviciosBuscados.isEmpty()) {
+                throw new EntityNotFoundException(String.format(MENSAJE_SERVICIO_NO_EXISTE, servicio.getId()));
+            }
+        }
+
+        // actualiza la lista de servicios del pack de servicios
+        packsBuscados.get().setServicios(servicios);
+
+        log.info("Servicios del pack de servicios actualizados");
+
+        return packsBuscados.get().getServicios();
     }
 
 }

@@ -1,4 +1,5 @@
 package co.edu.uniandes.dse.thespa.controllers;
+
 import java.util.List;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
@@ -16,23 +17,22 @@ import co.edu.uniandes.dse.thespa.dto.PackDeServiciosDTO;
 import co.edu.uniandes.dse.thespa.services.SedeAndPackServicesService;
 import co.edu.uniandes.dse.thespa.entities.PackDeServiciosEntity;
 
-
-
 @RestController
 @RequestMapping("/sedes")
 public class SedeAndPackdeServiciosController {
 
     // inyectar el servicio de sedes y packs de servicios
-    private SedeAndPackServicesService SaP;
+    private SedeAndPackServicesService saP;
 
     // inyecta el model mapper
     private ModelMapper modelMapper;
 
-    // metodo para encontrar todos los packs de servicios dentro de una sede dado su id
+    // metodo para encontrar todos los packs de servicios dentro de una sede dado su
+    // id
     @GetMapping(value = "{id}/packs")
     @ResponseStatus(code = HttpStatus.OK)
-    public List<PackDeServiciosEntity> findAll(@PathVariable("id") Long id) throws EntityNotFoundException, IllegalOperationException {
-        List<PackDeServiciosEntity> servicios = SaP.obtenerAllPacks(id);
+    public List<PackDeServiciosEntity> findAll(@PathVariable("id") Long id) {
+        List<PackDeServiciosEntity> servicios = saP.obtenerAllPacks(id);
         return modelMapper.map(servicios, new TypeToken<List<PackDeServiciosDTO>>() {
         }.getType());
     }
@@ -43,7 +43,7 @@ public class SedeAndPackdeServiciosController {
     public PackDeServiciosDTO create(@PathVariable("id") Long id, @PathVariable("idPack") Long idPack)
             throws IllegalOperationException, EntityNotFoundException {
 
-        PackDeServiciosEntity servicio = SaP.addSedePackDeServicios(id, idPack);
+        PackDeServiciosEntity servicio = saP.addSedePackDeServicios(id, idPack);
         return modelMapper.map(servicio, PackDeServiciosDTO.class);
     }
 
@@ -53,7 +53,7 @@ public class SedeAndPackdeServiciosController {
     public PackDeServiciosDTO delete(@PathVariable("id") Long id, @PathVariable("idPack") Long idPack)
             throws IllegalOperationException, EntityNotFoundException {
 
-        PackDeServiciosEntity servicioEliminado = SaP.deleteSedePackDeServicios(id, idPack);
+        PackDeServiciosEntity servicioEliminado = saP.deleteSedePackDeServicios(id, idPack);
         return modelMapper.map(servicioEliminado, PackDeServiciosDTO.class);
     }
 

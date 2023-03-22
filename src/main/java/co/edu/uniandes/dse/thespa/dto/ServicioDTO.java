@@ -10,6 +10,5 @@ public class ServicioDTO extends ProductoDTO {
     private String restricciones;
     private Boolean disponible;
     private Integer horaInicio;
-    private SedeDTO sede;
 
 }

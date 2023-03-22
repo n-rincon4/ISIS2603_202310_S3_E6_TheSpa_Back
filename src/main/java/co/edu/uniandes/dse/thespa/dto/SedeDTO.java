@@ -9,5 +9,4 @@ public class SedeDTO {
     private long id;
     private String nombre;
     private String imagen;
-    private UbicacionDTO ubicacion;
 }

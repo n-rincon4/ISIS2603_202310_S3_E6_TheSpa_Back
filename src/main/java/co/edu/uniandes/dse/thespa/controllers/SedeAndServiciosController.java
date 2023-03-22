@@ -1,7 +1,9 @@
 package co.edu.uniandes.dse.thespa.controllers;
+
 import java.util.List;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,35 +16,51 @@ import co.edu.uniandes.dse.thespa.exceptions.EntityNotFoundException;
 import co.edu.uniandes.dse.thespa.exceptions.IllegalOperationException;
 import co.edu.uniandes.dse.thespa.dto.ServicioDTO;
 import co.edu.uniandes.dse.thespa.services.SedeAndServicioService;
+import co.edu.uniandes.dse.thespa.services.ServicioService;
 import co.edu.uniandes.dse.thespa.entities.ServicioEntity;
-
 
 @RestController
 @RequestMapping("/sedes")
 public class SedeAndServiciosController {
 
     // inyectar el servicio de sedes y trabajadores
-    private SedeAndServicioService SaS;
+    @Autowired
+    private SedeAndServicioService saS;
 
     // inyecta el model mapper
+    @Autowired
     private ModelMapper modelMapper;
+
+    @Autowired
+    private ServicioService SS;
 
     // metodo para encontrar todos los servicios dentro de una sede dado su id
     @GetMapping(value = "{id}/servicios")
     @ResponseStatus(code = HttpStatus.OK)
-    public List<ServicioEntity> findAll(@PathVariable("id") Long id) throws EntityNotFoundException, IllegalOperationException {
-        List<ServicioEntity> servicios = SaS.obtenerAllServicios(id);
+    public List<ServicioEntity> findAll(@PathVariable("id") Long id)
+            throws EntityNotFoundException {
+        List<ServicioEntity> servicios = saS.obtenerAllServicios(id);
         return modelMapper.map(servicios, new TypeToken<List<ServicioDTO>>() {
         }.getType());
     }
 
+    // metodo para encontrar un servicio dentro de una sede dado su id
+    @GetMapping(value = "{id}/servicios/{idServicio}")
+    @ResponseStatus(code = HttpStatus.OK)
+    public ServicioDTO findOne(@PathVariable("id") Long id, @PathVariable("idServicio") Long idServicio)
+            throws IllegalOperationException, EntityNotFoundException {
+
+        ServicioEntity servicio = SS.getServicio(idServicio);
+        return modelMapper.map(servicio, ServicioDTO.class);
+    }
+
     // metodo para agregar un servicio a una sede dado su id
     @PostMapping(value = "{id}/servicios/{idServicio}")
-    @ResponseStatus(code = HttpStatus.CREATED)
+    @ResponseStatus(code = HttpStatus.OK)
     public ServicioDTO create(@PathVariable("id") Long id, @PathVariable("idServicio") Long idServicio)
             throws IllegalOperationException, EntityNotFoundException {
 
-        ServicioEntity servicio = SaS.addSedeServicio(id, idServicio);
+        ServicioEntity servicio = saS.addSedeServicio(id, idServicio);
         return modelMapper.map(servicio, ServicioDTO.class);
     }
 
@@ -52,7 +70,7 @@ public class SedeAndServiciosController {
     public ServicioDTO delete(@PathVariable("id") Long id, @PathVariable("idServicio") Long idServicio)
             throws IllegalOperationException, EntityNotFoundException {
 
-        ServicioEntity servicioEliminado = SaS.deleteSedeServicio(id, idServicio);
+        ServicioEntity servicioEliminado = saS.deleteSedeServicio(id, idServicio);
         return modelMapper.map(servicioEliminado, ServicioDTO.class);
     }
 

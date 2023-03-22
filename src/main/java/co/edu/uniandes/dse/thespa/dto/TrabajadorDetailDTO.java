@@ -9,6 +9,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class TrabajadorDetailDTO extends TrabajadorDTO {
+    private List<SedeDTO> sedes = new ArrayList<>();
     private List<ServicioDTO> servicios = new ArrayList<>();
 
 }

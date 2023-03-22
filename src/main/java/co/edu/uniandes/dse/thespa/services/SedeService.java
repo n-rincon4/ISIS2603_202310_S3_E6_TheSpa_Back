@@ -63,20 +63,32 @@ public class SedeService {
             throw new IllegalOperationException("La sede tiene que tener una ubicacion.");
         }
 
-        // Se le asigna una lista vacia de Servicios
-        sede.setServicios(new ArrayList<ServicioEntity>());
+        // revisa que la lista de trabajadores no sea null
 
-        // Se le asigna una lista vacia de ServiciosExtra
-        sede.setServiciosExtra(new ArrayList<ServicioExtraEntity>());
+        if (sede.getTrabajadores() == null) {
+            sede.setTrabajadores(new ArrayList<TrabajadorEntity>());
+        }
 
-        // Se le asigna una lista vacia de ArticulosDERopa
-        sede.setArticulosDeRopa(new ArrayList<ArticuloDeRopaEntity>());
+        // revisa que la lista de articulos de ropa no sea null
+        if (sede.getArticulosDeRopa() == null) {
+            sede.setArticulosDeRopa(new ArrayList<ArticuloDeRopaEntity>());
+        }
 
-        // Se le asigna una lista vacia de Trabajadores
-        sede.setTrabajadores(new ArrayList<TrabajadorEntity>());
+        // revisa que la lista de servicios no sea null
+        if (sede.getServicios() == null) {
+            sede.setServicios(new ArrayList<ServicioEntity>());
+        }
 
-        // Se le asigna una lista vacia de PacksDeServicios
-        sede.setPacksDeServicios(new ArrayList<PackDeServiciosEntity>());
+        // revisa que la lista de servicios extra no sea null
+        if (sede.getServiciosExtra() == null) {
+            sede.setServiciosExtra(new ArrayList<ServicioExtraEntity>());
+        }
+
+        // revisa que la lista de packs de servicios no sea null
+        if (sede.getPacksDeServicios() == null) {
+            sede.setPacksDeServicios(new ArrayList<PackDeServiciosEntity>());
+        }
+
         log.info("Finaliza proceso de creacion de Sede.");
         return sedeRepo.save(sede);
 

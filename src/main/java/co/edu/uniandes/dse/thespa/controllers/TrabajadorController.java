@@ -46,32 +46,36 @@ public class TrabajadorController {
     }
 
     // Método para encontrar un trabajador dado su id
-    @GetMapping(value = "/{id}")
+    @GetMapping(value = "{id}")
     @ResponseStatus(code = HttpStatus.OK)
-    public TrabajadorDetailDTO findOne(@PathVariable("id") Long id) throws EntityNotFoundException {
+    public TrabajadorDTO findOne(@PathVariable("id") Long id) throws EntityNotFoundException {
         TrabajadorEntity trabajadorEntity = trabajadorService.getTrabajador(id);
-        return modelMapper.map(trabajadorEntity, TrabajadorDetailDTO.class);
+        return modelMapper.map(trabajadorEntity, TrabajadorDTO.class);
     }
 
     // Método para crear un trabajador a partir de un DTO
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
-    public TrabajadorDTO create(@RequestBody TrabajadorDTO trabajadorDTO) throws IllegalOperationException, EntityNotFoundException {
-        TrabajadorEntity trabajadorEntity = trabajadorService.createTrabajador(modelMapper.map(trabajadorDTO, TrabajadorEntity.class));
-        return modelMapper.map(trabajadorEntity, TrabajadorDTO.class);
+    public TrabajadorDetailDTO create(@RequestBody TrabajadorDetailDTO trabajadorDTO)
+            throws IllegalOperationException, EntityNotFoundException {
+
+        TrabajadorEntity trabajador = trabajadorService
+                .createTrabajador(modelMapper.map(trabajadorDTO, TrabajadorEntity.class));
+        return modelMapper.map(trabajador, TrabajadorDetailDTO.class);
     }
 
     // Método para actualizar la información de un trabajador dado su id
-    @PutMapping(value = "/{id}")
+    @PutMapping(value = "{id}")
     @ResponseStatus(code = HttpStatus.OK)
-    public TrabajadorDTO update(@PathVariable("id") Long id, @RequestBody TrabajadorDTO trabajadorDTO)
-                        throws EntityNotFoundException, IllegalOperationException {
-        TrabajadorEntity trabajadorEntity = trabajadorService.updateTrabajador(id, modelMapper.map(trabajadorDTO, TrabajadorEntity.class));
-        return modelMapper.map(trabajadorEntity, TrabajadorDTO.class);
+    public TrabajadorDetailDTO update(@PathVariable("id") Long id, @RequestBody TrabajadorDetailDTO trabajadorDTO)
+            throws EntityNotFoundException, IllegalOperationException {
+        TrabajadorEntity trabajadorEntity = trabajadorService.updateTrabajador(id,
+                modelMapper.map(trabajadorDTO, TrabajadorEntity.class));
+        return modelMapper.map(trabajadorEntity, TrabajadorDetailDTO.class);
     }
 
     // Método para borrar la información de un trabajador dado su id
-    @DeleteMapping(value = "/{id}")
+    @DeleteMapping(value = "{id}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     public void delete(@PathVariable("id") Long id) throws EntityNotFoundException, IllegalOperationException {
         trabajadorService.deleteTrabajador(id);

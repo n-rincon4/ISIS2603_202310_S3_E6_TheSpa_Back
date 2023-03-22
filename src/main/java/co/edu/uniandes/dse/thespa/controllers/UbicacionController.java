@@ -22,6 +22,7 @@ import co.edu.uniandes.dse.thespa.exceptions.IllegalOperationException;
 import co.edu.uniandes.dse.thespa.services.UbicacionService;
 
 import co.edu.uniandes.dse.thespa.dto.UbicacionDTO;
+import co.edu.uniandes.dse.thespa.dto.UbicacionDetailDTO;
 import co.edu.uniandes.dse.thespa.entities.UbicacionEntity;
 
 @RestController
@@ -56,11 +57,11 @@ public class UbicacionController {
     // Método para crear una ubicacion a partir de un DTO
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
-    public UbicacionDTO create(@RequestBody UbicacionDTO ubicacionDTO)
-            throws IllegalOperationException, EntityNotFoundException {
+    public UbicacionDetailDTO create(@RequestBody UbicacionDetailDTO ubicacionDTO)
+            throws IllegalOperationException {
         UbicacionEntity ubicacionEntity = ubicacionService
                 .createUbicacion(modelMapper.map(ubicacionDTO, UbicacionEntity.class));
-        return modelMapper.map(ubicacionEntity, UbicacionDTO.class);
+        return modelMapper.map(ubicacionEntity, UbicacionDetailDTO.class);
     }
 
     // Método para actualizar una ubicacion a partir de un DTO
@@ -76,7 +77,7 @@ public class UbicacionController {
     // Método para eliminar una ubicacion dado su id
     @DeleteMapping(value = "/{id}")
     @ResponseStatus(code = HttpStatus.OK)
-    public void delete(@PathVariable("id") Long id) throws IllegalOperationException, EntityNotFoundException {
+    public void delete(@PathVariable("id") Long id) throws EntityNotFoundException {
         ubicacionService.deleteUbicacion(id);
     }
 

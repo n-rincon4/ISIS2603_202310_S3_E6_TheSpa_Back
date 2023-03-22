@@ -1,4 +1,5 @@
 package co.edu.uniandes.dse.thespa.controllers;
+
 import java.util.List;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
@@ -22,7 +23,7 @@ import co.edu.uniandes.dse.thespa.entities.TrabajadorEntity;
 public class SedeAndTrabajadoresController {
 
     // inyectar el servicio de sedes y trabajadores
-    private SedeAndTrabajadorService SaTService;
+    private SedeAndTrabajadorService saTService;
 
     // inyecta el model mapper
     private ModelMapper modelMapper;
@@ -31,7 +32,7 @@ public class SedeAndTrabajadoresController {
     @GetMapping(value = "{id}/trabajadores")
     @ResponseStatus(code = HttpStatus.OK)
     public List<TrabajadorEntity> findAll(@PathVariable("id") Long id) throws EntityNotFoundException {
-        List<TrabajadorEntity> trabajadores = SaTService.obtenerTrabajadroes(id);
+        List<TrabajadorEntity> trabajadores = saTService.obtenerTrabajadroes(id);
         return modelMapper.map(trabajadores, new TypeToken<List<SedeDTO>>() {
         }.getType());
     }
@@ -42,7 +43,7 @@ public class SedeAndTrabajadoresController {
     public TrabajadorDTO create(@PathVariable("id") Long id, @PathVariable("idTrabajador") Long idTrabajador)
             throws IllegalOperationException, EntityNotFoundException {
 
-        TrabajadorEntity trabajador = SaTService.addSedeTrabajador(id, idTrabajador);
+        TrabajadorEntity trabajador = saTService.addSedeTrabajador(id, idTrabajador);
         return modelMapper.map(trabajador, TrabajadorDTO.class);
     }
 
@@ -52,7 +53,7 @@ public class SedeAndTrabajadoresController {
     public TrabajadorDTO delete(@PathVariable("id") Long id, @PathVariable("idTrabajador") Long idTrabajador)
             throws IllegalOperationException, EntityNotFoundException {
 
-        TrabajadorEntity trabajadorEliminado = SaTService.deleteSedeTrabajador(id, idTrabajador);
+        TrabajadorEntity trabajadorEliminado = saTService.deleteSedeTrabajador(id, idTrabajador);
         return modelMapper.map(trabajadorEliminado, TrabajadorDTO.class);
     }
 

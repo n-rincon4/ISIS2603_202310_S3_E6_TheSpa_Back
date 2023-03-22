@@ -1,5 +1,6 @@
 package co.edu.uniandes.dse.thespa.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -18,14 +19,14 @@ import uk.co.jemos.podam.common.PodamExclude;
 public class PackDeServiciosEntity extends BaseEntity {
     private Integer descuento;
     private String nombre;
-    private String image;
+    private String imagen;
 
     @PodamExclude
     @ManyToOne
     private SedeEntity sede;
 
     @PodamExclude
-    @ManyToMany(mappedBy = "packsDeServicios")
-    private List<ServicioEntity> servicios;
+    @ManyToMany
+    private List<ServicioEntity> servicios = new ArrayList<>();
 
 }

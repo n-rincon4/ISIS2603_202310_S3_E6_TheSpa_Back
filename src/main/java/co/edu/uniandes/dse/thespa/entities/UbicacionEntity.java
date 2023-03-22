@@ -27,7 +27,7 @@ public class UbicacionEntity extends BaseEntity {
     private String direccion;
 
     @PodamExclude
-    @OneToOne
+    @OneToOne(mappedBy = "ubicacion")
     private SedeEntity sede;
 
 }

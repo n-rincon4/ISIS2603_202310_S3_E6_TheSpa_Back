@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class ServicioExtraDTO extends ProductoDTO {
-    private Boolean disponible;
+public class UbicacionDetailDTO extends UbicacionDTO {
+    private SedeDTO sede;
 
 }

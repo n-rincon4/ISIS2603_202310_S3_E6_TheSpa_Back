@@ -11,5 +11,4 @@ public class UbicacionDTO {
     private Double longitud;
     private String ciudad;
     private String direccion;
-    private SedeDTO sede;
 }

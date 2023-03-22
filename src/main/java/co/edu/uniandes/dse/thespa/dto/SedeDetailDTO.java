@@ -1,4 +1,5 @@
 package co.edu.uniandes.dse.thespa.dto;
+
 import java.util.ArrayList;
 import java.util.List;
 import lombok.Getter;
@@ -6,11 +7,12 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class SedeDetailDTO extends SedeDTO{
-    private List<ServicioExtraDTO> ServiciosExtra = new ArrayList<>();
-    private List<PackDeServiciosDTO> PackServicios = new ArrayList<>();
-    private List<ArticuloDeRopaDTO> Articulos = new ArrayList<>();
-    private List<TrabajadorDTO> Trabajadores = new ArrayList<>();
-    private List<ServicioDTO> Servicios = new ArrayList<>();
+public class SedeDetailDTO extends SedeDTO {
+    private UbicacionDTO ubicacion;
+    private List<ServicioExtraDTO> serviciosExtra = new ArrayList<>();
+    private List<PackDeServiciosDTO> packServicios = new ArrayList<>();
+    private List<ArticuloDeRopaDTO> articulos = new ArrayList<>();
+    private List<TrabajadorDTO> trabajadores = new ArrayList<>();
+    private List<ServicioDTO> servicios = new ArrayList<>();
 
 }
