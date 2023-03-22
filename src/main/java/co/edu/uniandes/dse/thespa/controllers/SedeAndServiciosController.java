@@ -16,6 +16,7 @@ import co.edu.uniandes.dse.thespa.exceptions.EntityNotFoundException;
 import co.edu.uniandes.dse.thespa.exceptions.IllegalOperationException;
 import co.edu.uniandes.dse.thespa.dto.ServicioDTO;
 import co.edu.uniandes.dse.thespa.services.SedeAndServicioService;
+import co.edu.uniandes.dse.thespa.services.ServicioService;
 import co.edu.uniandes.dse.thespa.entities.ServicioEntity;
 
 @RestController
@@ -30,6 +31,9 @@ public class SedeAndServiciosController {
     @Autowired
     private ModelMapper modelMapper;
 
+    @Autowired
+    private ServicioService SS;
+
     // metodo para encontrar todos los servicios dentro de una sede dado su id
     @GetMapping(value = "{id}/servicios")
     @ResponseStatus(code = HttpStatus.OK)
@@ -39,6 +43,16 @@ public class SedeAndServiciosController {
         return modelMapper.map(servicios, new TypeToken<List<ServicioDTO>>() {
         }.getType());
     }
+
+    // metodo para encontrar un servicio dentro de una sede dado su id
+    @GetMapping(value = "{id}/servicios/{idServicio}")
+    @ResponseStatus(code = HttpStatus.OK)
+    public ServicioDTO findOne(@PathVariable("id") Long id, @PathVariable("idServicio") Long idServicio)
+    throws IllegalOperationException, EntityNotFoundException {
+
+    ServicioEntity servicio = SS.getServicio(idServicio);
+    return modelMapper.map(servicio, ServicioDTO.class);
+}
 
     // metodo para agregar un servicio a una sede dado su id
     @PostMapping(value = "{id}/servicios/{idServicio}")
