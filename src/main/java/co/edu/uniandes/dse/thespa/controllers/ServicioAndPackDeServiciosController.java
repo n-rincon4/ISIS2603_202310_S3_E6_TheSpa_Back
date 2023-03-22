@@ -6,10 +6,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 
 import java.util.List;
 
@@ -38,7 +40,7 @@ public class ServicioAndPackDeServiciosController {
     public List<PackDeServiciosEntity> findAll(@PathVariable("id") Long id) throws EntityNotFoundException {
 
         List<PackDeServiciosEntity> packsDeServicios = service.getPacksDeServicios(id);
-        return modelMapper.map(packsDeServicios, new TypeToken<List<PackDeServiciosEntity>>() {
+        return modelMapper.map(packsDeServicios, new TypeToken<List<PackDeServiciosDTO>>() {
         }.getType());
     }
 
@@ -66,4 +68,17 @@ public class ServicioAndPackDeServiciosController {
         PackDeServiciosEntity packEliminado = service.removePackDeServicios(id, idPack);
         return modelMapper.map(packEliminado, PackDeServiciosDTO.class);
     }
+
+    @PutMapping(value = "/{id}/packsdeservicios")
+    @ResponseStatus(code = HttpStatus.OK)
+    public List<PackDeServiciosDTO> update(@PathVariable("id") Long id, @RequestBody List<PackDeServiciosDTO> packsDeServicios)
+            throws IllegalOperationException, EntityNotFoundException {
+
+        List<PackDeServiciosEntity> entities = modelMapper.map(packsDeServicios, new TypeToken<List<PackDeServiciosEntity>>() {
+        }.getType());
+        List<PackDeServiciosEntity> packsDeServiciosActualizados = service.updatePacks(id, entities);
+        return modelMapper.map(packsDeServiciosActualizados, new TypeToken<List<PackDeServiciosDTO>>() {
+        }.getType());
+    }
+   
 }

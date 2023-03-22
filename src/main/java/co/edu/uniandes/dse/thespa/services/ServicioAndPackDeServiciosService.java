@@ -117,4 +117,31 @@ public class ServicioAndPackDeServiciosService {
         return packDeServiciosEntity.get();
     }
 
+    @Transactional
+    public List<PackDeServiciosEntity> updatePacks(Long servicioID, List<PackDeServiciosEntity> packs)
+            throws EntityNotFoundException, IllegalOperationException {
+        log.info("Actualizando los packs de servicios del servicio con id = {}", servicioID);
+
+        // Busca el servicio
+        Optional<ServicioEntity> serviciosBuscados = servicioRepository.findById(servicioID);
+        if (serviciosBuscados.isEmpty()) {
+            throw new EntityNotFoundException(String.format(MENSAJE_SERVICIO_NO_EXISTE, servicioID));
+        }
+
+        // por cada pack en la lista de packs, verifica que exista
+        for (PackDeServiciosEntity pack : packs) {
+            Optional<PackDeServiciosEntity> packsBuscados = packDeServiciosRepository.findById(pack.getId());
+            if (packsBuscados.isEmpty()) {
+                throw new EntityNotFoundException(String.format(MENSAJE_PACK_NO_EXISTE, pack.getId()));
+            }
+        }
+
+        // actualiza la lista de packs del servicio
+        serviciosBuscados.get().setPacksDeServicios(packs);
+
+        log.info("Packs de servicios del servicio actualizados");
+
+        return serviciosBuscados.get().getPacksDeServicios();
+    }
+
 }
