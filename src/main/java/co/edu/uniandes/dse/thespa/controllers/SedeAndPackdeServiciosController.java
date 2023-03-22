@@ -31,8 +31,7 @@ public class SedeAndPackdeServiciosController {
     // id
     @GetMapping(value = "{id}/packs")
     @ResponseStatus(code = HttpStatus.OK)
-    public List<PackDeServiciosEntity> findAll(@PathVariable("id") Long id)
-            throws EntityNotFoundException, IllegalOperationException {
+    public List<PackDeServiciosEntity> findAll(@PathVariable("id") Long id) {
         List<PackDeServiciosEntity> servicios = saP.obtenerAllPacks(id);
         return modelMapper.map(servicios, new TypeToken<List<PackDeServiciosDTO>>() {
         }.getType());

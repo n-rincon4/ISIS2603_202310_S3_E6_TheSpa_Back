@@ -38,7 +38,7 @@ public class SedeAndServiciosController {
     @GetMapping(value = "{id}/servicios")
     @ResponseStatus(code = HttpStatus.OK)
     public List<ServicioEntity> findAll(@PathVariable("id") Long id)
-            throws EntityNotFoundException, IllegalOperationException {
+            throws EntityNotFoundException {
         List<ServicioEntity> servicios = saS.obtenerAllServicios(id);
         return modelMapper.map(servicios, new TypeToken<List<ServicioDTO>>() {
         }.getType());
