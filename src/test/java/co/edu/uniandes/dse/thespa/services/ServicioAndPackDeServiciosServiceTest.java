@@ -80,12 +80,86 @@ public class ServicioAndPackDeServiciosServiceTest {
     }
 
     @Test
+    void addPackEmptyServicioTest() throws EntityNotFoundException, IllegalOperationException {
+        Long id = 0L;
+        PackDeServiciosEntity pack = factory.manufacturePojo(PackDeServiciosEntity.class);
+        entityManager.persist(pack);
+        packs.add(pack);
+
+        assertThrows(EntityNotFoundException.class, () -> {
+            servicioService.addPackDeServicios(id, pack.getId());
+        });
+    }
+
+    @Test
+    void addPackEmptyPackTest() throws EntityNotFoundException, IllegalOperationException {
+        Long id = 0L;
+        ServicioEntity servicio = servicios.get(0);
+
+        assertThrows(EntityNotFoundException.class, () -> {
+            servicioService.addPackDeServicios(servicio.getId(), id);
+        });
+    }
+
+    @Test
     void addPackAlreadyInServicioTest() throws EntityNotFoundException, IllegalOperationException {
         ServicioEntity servicio = servicios.get(0);
         PackDeServiciosEntity pack = packs.get(0);
 
         assertThrows(IllegalOperationException.class, () -> {
             servicioService.addPackDeServicios(servicio.getId(), pack.getId());
+        });
+    }
+
+    @Test
+    void getPackEmptyPackTest() throws EntityNotFoundException, IllegalOperationException {
+        Long id = 0L;
+        ServicioEntity servicio = servicios.get(0);
+
+        assertThrows(EntityNotFoundException.class, () -> {
+            servicioService.addPackDeServicios(servicio.getId(), id);
+        });
+    }
+
+    @Test
+    void getPackEmptyServicioTest() throws EntityNotFoundException, IllegalOperationException {
+        Long id = 0L;
+        PackDeServiciosEntity pack = packs.get(0);
+
+        assertThrows(EntityNotFoundException.class, () -> {
+            servicioService.addPackDeServicios(id, pack.getId());
+        });
+    }
+
+    @Test
+    void getPackNotInServicioTest() throws EntityNotFoundException, IllegalOperationException {
+        ServicioEntity servicio = servicios.get(0);
+        PackDeServiciosEntity pack = factory.manufacturePojo(PackDeServiciosEntity.class);
+        entityManager.persist(pack);
+        packs.add(pack);
+
+        assertThrows(IllegalOperationException.class, () -> {
+            servicioService.getPack(servicio.getId(), pack.getId());
+        });
+    }
+
+    @Test
+    void getPackTest() throws EntityNotFoundException, IllegalOperationException {
+        ServicioEntity servicio = servicios.get(0);
+        PackDeServiciosEntity pack = packs.get(0);
+
+        PackDeServiciosEntity result = servicioService.getPack(servicio.getId(), pack.getId());
+
+        assertNotNull(result);
+        assertEquals(pack, result);
+    }
+
+    @Test
+    void getPacksEmptyServicioTest() throws EntityNotFoundException {
+        Long id = 0L;
+
+        assertThrows(EntityNotFoundException.class, () -> {
+            servicioService.getPacksDeServicios(id);
         });
     }
 
@@ -97,6 +171,38 @@ public class ServicioAndPackDeServiciosServiceTest {
 
         assertNotNull(result);
         assertEquals(servicio.getPacksDeServicios(), result);
+    }
+
+    @Test
+    void removePackEmptyServicioTest() throws EntityNotFoundException, IllegalOperationException {
+        Long id = 0L;
+        PackDeServiciosEntity pack = packs.get(0);
+
+        assertThrows(EntityNotFoundException.class, () -> {
+            servicioService.removePackDeServicios(id, pack.getId());
+        });
+    }
+
+    @Test
+    void removePackEmptyPackTest() throws EntityNotFoundException, IllegalOperationException {
+        Long id = 0L;
+        ServicioEntity servicio = servicios.get(0);
+
+        assertThrows(EntityNotFoundException.class, () -> {
+            servicioService.removePackDeServicios(servicio.getId(), id);
+        });
+    }
+
+    @Test
+    void removePackNotInServicioTest() throws EntityNotFoundException, IllegalOperationException {
+        ServicioEntity servicio = servicios.get(0);
+        PackDeServiciosEntity pack = factory.manufacturePojo(PackDeServiciosEntity.class);
+        entityManager.persist(pack);
+        packs.add(pack);
+
+        assertThrows(IllegalOperationException.class, () -> {
+            servicioService.removePackDeServicios(servicio.getId(), pack.getId());
+        });
     }
 
     @Test
@@ -112,14 +218,36 @@ public class ServicioAndPackDeServiciosServiceTest {
     }
 
     @Test
-    void removePackNotInServicioTest() throws EntityNotFoundException, IllegalOperationException {
-        ServicioEntity servicio = servicios.get(0);
-        PackDeServiciosEntity pack = factory.manufacturePojo(PackDeServiciosEntity.class);
-        entityManager.persist(pack);
-        packs.add(pack);
+    void updatePackEmptyServiceTest() throws EntityNotFoundException, IllegalOperationException {
+        Long id = 0L;
 
-        assertThrows(IllegalOperationException.class, () -> {
-            servicioService.removePackDeServicios(servicio.getId(), pack.getId());
+        assertThrows(EntityNotFoundException.class, () -> {
+            servicioService.updatePacks(id, packs);
         });
+    }
+
+    // @Test
+    // NO PUEDO HACER EL TEST DE LOS PACKS
+    // void updatePackEmptyPacksTest() throws EntityNotFoundException, IllegalOperationException {
+    //     ServicioEntity servicio = servicios.get(0);
+
+    //     List<PackDeServiciosEntity> result = new ArrayList<PackDeServiciosEntity>();
+    //     result.add(factory.manufacturePojo(PackDeServiciosEntity.class));
+
+    //     assertThrows(IllegalOperationException.class, () -> {
+    //         servicioService.updatePacks(servicio.getId(), result);
+    //     });
+    // }
+
+
+    @Test
+    void updatePackTest() throws EntityNotFoundException, IllegalOperationException {
+        ServicioEntity servicio = servicios.get(0);
+
+        servicioService.updatePacks(servicio.getId(), packs);
+
+        List<PackDeServiciosEntity> packs2 = servicioService.getPacksDeServicios(servicio.getId());
+        assertNotNull(packs2);
+        assertEquals(packs.size(), packs2.size());
     }
 }

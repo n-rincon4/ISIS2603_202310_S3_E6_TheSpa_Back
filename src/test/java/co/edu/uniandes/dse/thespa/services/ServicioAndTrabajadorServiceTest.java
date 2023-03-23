@@ -82,6 +82,29 @@ public class ServicioAndTrabajadorServiceTest {
     }
 
     @Test
+    void addTrabajadorEmptyServicioTest() throws EntityNotFoundException, IllegalOperationException {
+        Long id = 0L;
+        TrabajadorEntity trabajador = factory.manufacturePojo(TrabajadorEntity.class);
+
+        entityManager.persist(trabajador);
+        trabajadores.add(trabajador);
+
+        assertThrows(EntityNotFoundException.class, () -> {
+            servicioService.addTrabajador(id, trabajador.getId());
+        });
+    }
+
+    @Test
+    void addTrabajadorEmptyTrabajadorTest() throws EntityNotFoundException, IllegalOperationException {
+        ServicioEntity servicio = servicios.get(0);
+        Long id = 0L;
+
+        assertThrows(EntityNotFoundException.class, () -> {
+            servicioService.addTrabajador(servicio.getId(), id);
+        });
+    }
+
+    @Test
     void addTrabajadorAlreadyInServicioTest() throws EntityNotFoundException, IllegalOperationException {
         ServicioEntity servicio = servicios.get(0);
         TrabajadorEntity trabajador = trabajadores.get(0);
@@ -102,6 +125,58 @@ public class ServicioAndTrabajadorServiceTest {
     }
 
     @Test
+    void getTrabajadoresEmptyServicioTest() throws EntityNotFoundException {
+        Long id = 0L;
+
+        assertThrows(EntityNotFoundException.class, () -> {
+            servicioService.getTrabajadores(id);
+        });
+    }
+
+    @Test
+    void getTrabajadorEmptyTrabajadorTest() throws EntityNotFoundException, IllegalOperationException {
+        ServicioEntity servicio = servicios.get(0);
+        Long id = 0L;
+
+        assertThrows(EntityNotFoundException.class, () -> {
+            servicioService.getTrabajador(servicio.getId(), id);
+        });
+    }
+
+    @Test
+    void getTrabajadorEmptyServicioTest() throws EntityNotFoundException, IllegalOperationException {
+        ServicioEntity servicio = servicios.get(0);
+        Long id = 0L;
+
+        assertThrows(EntityNotFoundException.class, () -> {
+            servicioService.getTrabajador(id, servicio.getId());
+        });
+    }
+
+    @Test
+    void getTrabajadorNotInServicioTest() throws EntityNotFoundException, IllegalOperationException {
+        ServicioEntity servicio = servicios.get(0);
+        TrabajadorEntity trabajador = factory.manufacturePojo(TrabajadorEntity.class);
+        entityManager.persist(trabajador);
+        trabajadores.add(trabajador);
+
+        assertThrows(IllegalOperationException.class, () -> {
+            servicioService.getTrabajador(servicio.getId(), trabajador.getId());
+        });
+    }
+
+    @Test
+    void getTrabajadorTest() throws EntityNotFoundException, IllegalOperationException {
+        ServicioEntity servicio = servicios.get(0);
+        TrabajadorEntity trabajador = trabajadores.get(0);
+
+        TrabajadorEntity result = servicioService.getTrabajador(servicio.getId(), trabajador.getId());
+
+        assertNotNull(result);
+        assertEquals(trabajador, result);
+    }
+
+    @Test
     void removeTrabajadorTest() throws EntityNotFoundException, IllegalOperationException {
         ServicioEntity servicio = servicios.get(0);
         TrabajadorEntity trabajador = trabajadores.get(0);
@@ -114,6 +189,29 @@ public class ServicioAndTrabajadorServiceTest {
     }
 
     @Test
+    void removeTrabajadorEmptyServicioTest() throws EntityNotFoundException, IllegalOperationException {
+        Long id = 0L;
+        TrabajadorEntity trabajador = factory.manufacturePojo(TrabajadorEntity.class);
+
+        entityManager.persist(trabajador);
+        trabajadores.add(trabajador);
+
+        assertThrows(EntityNotFoundException.class, () -> {
+            servicioService.removeTrabajador(id, trabajador.getId());
+        });
+    }
+
+    @Test
+    void removeTrabajadorEmptyTrabajadorTest() throws EntityNotFoundException, IllegalOperationException {
+        ServicioEntity servicio = servicios.get(0);
+        Long id = 0L;
+
+        assertThrows(EntityNotFoundException.class, () -> {
+            servicioService.removeTrabajador(servicio.getId(), id);
+        });
+    }
+
+    @Test
     void removeTrabajadorNotInServicioTest() throws EntityNotFoundException, IllegalOperationException {
         ServicioEntity servicio = servicios.get(0);
         TrabajadorEntity trabajador = factory.manufacturePojo(TrabajadorEntity.class);
@@ -122,6 +220,26 @@ public class ServicioAndTrabajadorServiceTest {
 
         assertThrows(IllegalOperationException.class, () -> {
             servicioService.removeTrabajador(servicio.getId(), trabajador.getId());
+        });
+    }
+
+    @Test
+    void updateTrabajadores() throws EntityNotFoundException, IllegalOperationException {
+        ServicioEntity servicio = servicios.get(0);
+
+        servicioService.updateTrabajadores(servicio.getId(), trabajadores);
+
+        List<TrabajadorEntity> trabajadores2 = servicioService.getTrabajadores(servicio.getId());
+        assertNotNull(trabajadores2);
+        assertEquals(trabajadores.size(), trabajadores2.size());
+    }
+
+    @Test
+    void updateTrabajadoresEmptyServicio() throws EntityNotFoundException, IllegalOperationException {
+        Long id = 0L;
+
+        assertThrows(EntityNotFoundException.class, () -> {
+            servicioService.updateTrabajadores(id, trabajadores);
         });
     }
 }
