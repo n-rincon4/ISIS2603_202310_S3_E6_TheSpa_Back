@@ -65,16 +65,6 @@ public class ServicioAndTrabajadorController {
         return modelMapper.map(trabajador, TrabajadorDTO.class);
     }
 
-    // // Agrega un trabajador a un servicio
-    // @PostMapping("/{id}/trabajadores/{idTrabajador}")
-    // @ResponseStatus(code = HttpStatus.OK)
-    // public TrabajadorDTO create(@PathVariable("id") Long id,
-    // @PathVariable("idTrabajador") Long idTrabajador)
-    // throws EntityNotFoundException, IllegalOperationException {
-    // TrabajadorEntity trabajador = service.addTrabajador(id, idTrabajador);
-    // return modelMapper.map(trabajador, TrabajadorDTO.class);
-    // }
-
     // Elimina un trabajador de un servicio
     @DeleteMapping(value = "/{id}/trabajadores/{idTrabajador}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)

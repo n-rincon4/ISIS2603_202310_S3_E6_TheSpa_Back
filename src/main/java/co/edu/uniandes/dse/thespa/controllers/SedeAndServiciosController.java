@@ -34,7 +34,7 @@ public class SedeAndServiciosController {
     private ModelMapper modelMapper;
 
     @Autowired
-    private ServicioService Ss;
+    private ServicioService ss;
 
     // metodo para encontrar todos los servicios dentro de una sede dado su id
     @GetMapping(value = "/{id}/servicios")
@@ -52,7 +52,7 @@ public class SedeAndServiciosController {
     public ServicioDTO findOne(@PathVariable("id") Long id, @PathVariable("idServicio") Long idServicio)
             throws EntityNotFoundException {
 
-        ServicioEntity servicio = Ss.getServicio(idServicio);
+        ServicioEntity servicio = ss.getServicio(idServicio);
         return modelMapper.map(servicio, ServicioDTO.class);
     }
 

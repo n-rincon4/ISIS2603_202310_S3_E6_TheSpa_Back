@@ -26,7 +26,7 @@ import co.edu.uniandes.dse.thespa.entities.ArticuloDeRopaEntity;
 public class SedeAndArticuloRopaController {
 
 	@Autowired
-	private SedeAndArticuloRopaService SaR;
+	private SedeAndArticuloRopaService saR;
 
 	@Autowired
 	private ModelMapper modelMapper;
@@ -37,7 +37,7 @@ public class SedeAndArticuloRopaController {
 	public ArticuloDeRopaDTO addArticuloToSede(@PathVariable("articuloId") Long articuloId,
 			@PathVariable("sedeId") Long sedeId)
 			throws EntityNotFoundException, IllegalOperationException {
-		ArticuloDeRopaEntity articuloEntity = SaR.addSedeArticuloDeRopa(sedeId, articuloId);
+		ArticuloDeRopaEntity articuloEntity = saR.addSedeArticuloDeRopa(sedeId, articuloId);
 		return modelMapper.map(articuloEntity, ArticuloDeRopaDTO.class);
 	}
 
@@ -47,16 +47,15 @@ public class SedeAndArticuloRopaController {
 	public ArticuloDeRopaDetailDTO getServicio(@PathVariable("sedeId") Long sedeId,
 			@PathVariable("articuloId") Long articuloId)
 			throws EntityNotFoundException, IllegalOperationException {
-		ArticuloDeRopaEntity articulo = SaR.getArticulo(sedeId, articuloId);
+		ArticuloDeRopaEntity articulo = saR.getArticulo(sedeId, articuloId);
 		return modelMapper.map(articulo, ArticuloDeRopaDetailDTO.class);
 	}
 
 	// Busca todos los articulos asociados a una sede
 	@GetMapping(value = "{sedeId}/articulosDeRopa")
 	@ResponseStatus(code = HttpStatus.OK)
-	public List<ArticuloDeRopaDetailDTO> getArticulos(@PathVariable("sedeId") Long sedeId)
-			throws EntityNotFoundException {
-		List<ArticuloDeRopaEntity> articulos = SaR.obtenerAllArticulos(sedeId);
+	public List<ArticuloDeRopaDetailDTO> getArticulos(@PathVariable("sedeId") Long sedeId) {
+		List<ArticuloDeRopaEntity> articulos = saR.obtenerAllArticulos(sedeId);
 		return modelMapper.map(articulos, new TypeToken<List<ArticuloDeRopaDetailDTO>>() {
 		}.getType());
 	}
@@ -67,7 +66,7 @@ public class SedeAndArticuloRopaController {
 	public void deleteArticuloFromSede(@PathVariable("sedeId") Long sedeId,
 			@PathVariable("articuloId") Long articuloId)
 			throws EntityNotFoundException, IllegalOperationException {
-		SaR.deleteSedeArticuloDeRopa(sedeId, articuloId);
+		saR.deleteSedeArticuloDeRopa(sedeId, articuloId);
 	}
 
 	// actualiza los articulos de ropa de una sede
@@ -79,7 +78,7 @@ public class SedeAndArticuloRopaController {
 		List<ArticuloDeRopaEntity> articulosEntity = modelMapper.map(articulos,
 				new TypeToken<List<ArticuloDeRopaEntity>>() {
 				}.getType());
-		List<ArticuloDeRopaEntity> articulosUpdated = SaR.updateArticulos(sedeId, articulosEntity);
+		List<ArticuloDeRopaEntity> articulosUpdated = saR.updateArticulos(sedeId, articulosEntity);
 		return modelMapper.map(articulosUpdated, new TypeToken<List<ArticuloDeRopaDetailDTO>>() {
 		}.getType());
 	}

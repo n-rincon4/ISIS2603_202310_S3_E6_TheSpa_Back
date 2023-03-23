@@ -20,6 +20,9 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 public class SedeAndPackServicesService {
 
+    private static final String SEDE_NOT_FOUND = "SEDE_NOT_FOUND";
+    private static final String PACK_NOT_FOUND = "PACK_NOT_FOUND";
+
     // Inyeccion de dependencias -> Repositorio Sede
     @Autowired
     SedeRepository sedeRepo;
@@ -41,12 +44,12 @@ public class SedeAndPackServicesService {
         log.info("Inicia proceso de añadir a la sede un PackDeServicios con con id = {0}", packDeServiciosId);
         Optional<PackDeServiciosEntity> packEntity = packDeServiciosRepo.findById(packDeServiciosId);
         if (packEntity.isEmpty()) {
-            throw new EntityNotFoundException("PACK_NOT_FOUND");
+            throw new EntityNotFoundException(PACK_NOT_FOUND);
         }
 
         Optional<SedeEntity> sedeEntity = sedeRepo.findById(sedeId);
         if (sedeEntity.isEmpty()) {
-            throw new EntityNotFoundException("SEDE_NOT_FOUND");
+            throw new EntityNotFoundException(SEDE_NOT_FOUND);
         }
 
         // revisa si el pack ya esta en la sede, si esta lanza una
@@ -75,13 +78,13 @@ public class SedeAndPackServicesService {
         // Busca la sede
         Optional<SedeEntity> sedeBuscado = sedeRepo.findById(sedeid);
         if (sedeBuscado.isEmpty()) {
-            throw new EntityNotFoundException("SEDE_NOT_FOUND");
+            throw new EntityNotFoundException(SEDE_NOT_FOUND);
         }
 
         // Busca el articulo
         Optional<PackDeServiciosEntity> pack = packDeServiciosRepo.findById(packID);
         if (pack.isEmpty()) {
-            throw new EntityNotFoundException("PACK_NOT_FOUND");
+            throw new EntityNotFoundException(PACK_NOT_FOUND);
         }
 
         // Verifica que el pack este en la sede
@@ -102,12 +105,12 @@ public class SedeAndPackServicesService {
         log.info("Inicia proceso de remover a la sede un PackDeServicios con con id = {0}", packDeServiciosId);
         Optional<PackDeServiciosEntity> packEntity = packDeServiciosRepo.findById(packDeServiciosId);
         if (packEntity.isEmpty()) {
-            throw new EntityNotFoundException("PACK_NOT_FOUND");
+            throw new EntityNotFoundException(PACK_NOT_FOUND);
         }
 
         Optional<SedeEntity> sedeEntity = sedeRepo.findById(sedeId);
         if (sedeEntity.isEmpty()) {
-            throw new EntityNotFoundException("SEDE_NOT_FOUND");
+            throw new EntityNotFoundException(SEDE_NOT_FOUND);
         }
 
         // revisa si el pack no esta en la sede, si no esta lanza una
@@ -133,14 +136,14 @@ public class SedeAndPackServicesService {
         log.info("Inicia proceso de actualizar la lista de packs de servicios de la sede con id = {0}", sedeId);
         Optional<SedeEntity> sedeEntity = sedeRepo.findById(sedeId);
         if (sedeEntity.isEmpty()) {
-            throw new EntityNotFoundException("SEDE_NOT_FOUND");
+            throw new EntityNotFoundException(SEDE_NOT_FOUND);
         }
 
         // revisa que los packs existan
         for (PackDeServiciosEntity pack : packs) {
             Optional<PackDeServiciosEntity> packEntity = packDeServiciosRepo.findById(pack.getId());
             if (packEntity.isEmpty()) {
-                throw new EntityNotFoundException("PACK_NOT_FOUND");
+                throw new EntityNotFoundException(PACK_NOT_FOUND);
             }
         }
 
