@@ -141,6 +141,19 @@ public class TrabajadorServiceTest {
     }
 
     @Test
+    // Crea un trabajador con una lista vacía de sedes -> Operación ilegal
+    void testCreateTrabajadorSinSede2() {
+        assertThrows(IllegalOperationException.class, () -> {
+            TrabajadorEntity newEntity = factory.manufacturePojo(TrabajadorEntity.class);
+            // añade un servicio a la entidad
+            newEntity.setServicios(trabajadorList.get(0).getServicios());
+            // setear las sedes al posible error
+            newEntity.setSedes(new ArrayList<>());
+            trabajadorService.createTrabajador(newEntity);
+        });
+    }
+
+    @Test
     // Crea un trabajador sin un servicio asociado -> Operación ilegal
     void testCreateTrabajadorSinServicios() {
         assertThrows(IllegalOperationException.class, () -> {

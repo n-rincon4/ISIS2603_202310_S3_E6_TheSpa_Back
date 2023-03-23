@@ -59,8 +59,8 @@ public class ServicioExtraServiceTest {
         SedeEntity sede = factory.manufacturePojo(SedeEntity.class);
         entityManager.persist(sede);
         // Asocia la sede a los servicios extra
-        for (ServicioExtraEntity trabajador : servicioExtraList) {
-            trabajador.setSede(sede);
+        for (ServicioExtraEntity sExtra : servicioExtraList) {
+            sExtra.setSede(sede);
         }
     }
 
