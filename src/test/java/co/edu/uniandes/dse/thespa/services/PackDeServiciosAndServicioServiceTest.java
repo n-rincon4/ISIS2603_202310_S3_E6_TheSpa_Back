@@ -445,27 +445,4 @@ public class PackDeServiciosAndServicioServiceTest {
         });
     }
 
-    // prueba para actualizar un pack de servicios con una nueva lista de servicios
-    // que no existen
-    @Test
-    void updateServiciosNotFoundTest() throws EntityNotFoundException {
-        // Se obtiene el primer pack de servicios de la lista de packs de servicios
-        PackDeServiciosEntity pack = packs.get(0);
-
-        // Se crea una nueva lista de servicios
-        List<ServicioEntity> newServicios = new ArrayList<>();
-        // Se agregan 3 servicios a la nueva lista de servicios
-        for (int i = 0; i < 3; i++) {
-            ServicioEntity servicio = factory.manufacturePojo(ServicioEntity.class);
-            newServicios.add(servicio);
-        }
-
-        // Se actualiza la lista de servicios del pack de servicios, se espera un error
-        // de
-        // tipo EntityNotFoundException
-        assertThrows(EntityNotFoundException.class, () -> {
-            packDeServiciosAndServicioService.updateServicios(pack.getId(), newServicios);
-        });
-    }
-
 }

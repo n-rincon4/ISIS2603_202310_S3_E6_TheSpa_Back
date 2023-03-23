@@ -247,8 +247,23 @@ public class PackDeServiciosTest {
     // illegalOperationException
     @Test
     void createPackDeServiciosConMenosDeDosServiciosTest() {
-        PackDeServiciosEntity newEntity = packs.get(0);
-        newEntity.setServicios(servicios.get(0));
+
+        // crea un nuevo pack de servicios
+        PackDeServiciosEntity newEntity = factory.manufacturePojo(PackDeServiciosEntity.class);
+        entityManager.persist(newEntity);
+
+        // le añade una sede al pojoEntity
+        newEntity.setSede(sedes.get(1));
+
+        // crea una lista de servicios con un solo servicio
+        List<ServicioEntity> newServicio = new ArrayList<>();
+        ServicioEntity servicio = factory.manufacturePojo(ServicioEntity.class);
+        entityManager.persist(servicio);
+        newServicio.add(servicio);
+
+        // le añade un servicio al pojoEntity
+        newEntity.setServicios(newServicio);
+
         assertThrows(IllegalOperationException.class, () -> {
             PackDeServiciosService.createPackDeServicios(newEntity);
         });
