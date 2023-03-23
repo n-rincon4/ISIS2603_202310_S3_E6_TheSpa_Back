@@ -133,7 +133,9 @@ public class SedeAndTrabajadorService {
 
         for (TrabajadorEntity serv : sedeExtraServiceId) {
             Optional<TrabajadorEntity> servEntity = trabajadoresRepo.findById(serv.getId());
-            servs.add(servEntity.get());
+            if (servEntity.isPresent()) {
+                servs.add(servEntity.get());
+            }
         }
 
         sedeEntity.get().setTrabajadores(servs);

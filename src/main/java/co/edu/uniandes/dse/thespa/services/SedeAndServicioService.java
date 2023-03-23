@@ -149,7 +149,9 @@ public class SedeAndServicioService {
         List<ServicioEntity> serviciosActuales = new ArrayList<>();
         for (ServicioEntity servicio : servicios) {
             Optional<ServicioEntity> servEntity = servicioRepo.findById(servicio.getId());
-            serviciosActuales.add(servEntity.get());
+            if (servEntity.isPresent()) {
+                serviciosActuales.add(servEntity.get());
+            }
         }
 
         sedeEntity.get().setServicios(serviciosActuales);

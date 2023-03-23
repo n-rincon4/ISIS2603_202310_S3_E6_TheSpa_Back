@@ -85,7 +85,8 @@ public class ServicioAndTrabajadorService {
         }
 
         if (!serviciosBuscados.get().getTrabajadores().contains(trabajadorBuscado.get())) {
-            throw new IllegalOperationException(String.format(MENSAJE_TRABAJADOR_NOTIN_SERVICIO, servicioID, trabajadorid));
+            throw new IllegalOperationException(
+                    String.format(MENSAJE_TRABAJADOR_NOTIN_SERVICIO, servicioID, trabajadorid));
         }
 
         log.info("Pack de Servicios encontrado");
@@ -117,7 +118,6 @@ public class ServicioAndTrabajadorService {
         return trabajadorEntity.get();
     }
 
-    
     @Transactional
     public List<TrabajadorEntity> updateTrabajadores(Long servicioID, List<TrabajadorEntity> trabajadores)
             throws EntityNotFoundException, IllegalOperationException {
@@ -143,7 +143,9 @@ public class ServicioAndTrabajadorService {
         // servicios
         for (TrabajadorEntity trabajador : trabajadores) {
             Optional<TrabajadorEntity> trabajadoresBuscados = trabajadorRepository.findById(trabajador.getId());
-            trabajadoresF.add(trabajadoresBuscados.get());
+            if (trabajadoresBuscados.isPresent()) {
+                trabajadoresF.add(trabajadoresBuscados.get());
+            }
         }
 
         // actualiza la lista de packs del servicio

@@ -182,4 +182,42 @@ public class UbicacionAndSedeTest {
         });
     }
 
+    // prueba para asignar una sede a una ubicacion que no existe
+    @Test
+    public void addSedeNullTest() throws EntityNotFoundException, IllegalOperationException {
+        // Seleccionar una ubicacion
+        UbicacionEntity ubicacion = dataUbicacion.get(0);
+        // Seleccionar una sede
+        SedeEntity sede = dataSede.get(0);
+        // Asignar la sede a la ubicacion
+        ubicacionAndSedeService.asignarSede(ubicacion.getId(), sede.getId());
+        // Verificar que la sede se haya asignado correctamente
+        assertEquals(sede, ubicacionAndSedeService.obtenerSede(ubicacion.getId()));
+        // Eliminar la sede de la ubicacion
+        ubicacionAndSedeService.eliminarSede(ubicacion.getId());
+        // Verificar que la sede se haya eliminado correctamente
+        assertThrows(EntityNotFoundException.class, () -> {
+            ubicacionAndSedeService.asignarSede(ubicacion.getId() + 100, sede.getId());
+        });
+    }
+
+    // prueba para asignar una sede que no existe a una ubicacion
+    @Test
+    public void addSedeNullTest2() throws EntityNotFoundException, IllegalOperationException {
+        // Seleccionar una ubicacion
+        UbicacionEntity ubicacion = dataUbicacion.get(0);
+        // Seleccionar una sede
+        SedeEntity sede = dataSede.get(0);
+        // Asignar la sede a la ubicacion
+        ubicacionAndSedeService.asignarSede(ubicacion.getId(), sede.getId());
+        // Verificar que la sede se haya asignado correctamente
+        assertEquals(sede, ubicacionAndSedeService.obtenerSede(ubicacion.getId()));
+        // Eliminar la sede de la ubicacion
+        ubicacionAndSedeService.eliminarSede(ubicacion.getId());
+        // Verificar que la sede se haya eliminado correctamente
+        assertThrows(EntityNotFoundException.class, () -> {
+            ubicacionAndSedeService.asignarSede(ubicacion.getId(), sede.getId() + 100);
+        });
+    }
+
 }
