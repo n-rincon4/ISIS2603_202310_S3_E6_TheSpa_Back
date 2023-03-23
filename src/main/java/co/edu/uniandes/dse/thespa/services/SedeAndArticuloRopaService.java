@@ -21,6 +21,9 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 public class SedeAndArticuloRopaService {
 
+    private static final String SEDE_NOT_FOUND = "SEDE_NOT_FOUND";
+    private static final String ARTICULO_NOT_FOUND = "ARTICULO_NOT_FOUND";
+
     // Inyeccion de dependencias -> Repositorio Sede
     @Autowired
     SedeRepository sedeRepo;
@@ -37,17 +40,17 @@ public class SedeAndArticuloRopaService {
 
     // Añadir un Pack de servicios a la sede
     @Transactional
-    public ArticuloDeRopaEntity addSedeArticuloDeRopa(Long sedeId, Long ArticuloDeRopaId)
+    public ArticuloDeRopaEntity addSedeArticuloDeRopa(Long sedeId, Long articuloDeRopaId)
             throws EntityNotFoundException, IllegalOperationException {
-        log.info("Inicia proceso de añadir a la sede un ArticuloDeRopa con con id = {0}", ArticuloDeRopaId);
-        Optional<ArticuloDeRopaEntity> packEntity = articuloRepo.findById(ArticuloDeRopaId);
+        log.info("Inicia proceso de añadir a la sede un ArticuloDeRopa con con id = {0}", articuloDeRopaId);
+        Optional<ArticuloDeRopaEntity> packEntity = articuloRepo.findById(articuloDeRopaId);
         if (packEntity.isEmpty()) {
-            throw new EntityNotFoundException("ARTICULO_NOT_FOUND");
+            throw new EntityNotFoundException(ARTICULO_NOT_FOUND);
         }
 
         Optional<SedeEntity> sedeEntity = sedeRepo.findById(sedeId);
         if (sedeEntity.isEmpty()) {
-            throw new EntityNotFoundException("SEDE_NOT_FOUND");
+            throw new EntityNotFoundException(SEDE_NOT_FOUND);
         }
 
         // revisa si el pack ya esta en la sede, si esta lanza una
@@ -56,10 +59,10 @@ public class SedeAndArticuloRopaService {
             throw new IllegalOperationException("ARTICULO_ALREADY_EXISTS");
         }
 
-        List<ArticuloDeRopaEntity> ArticuloDeRopaS = sedeEntity.get().getArticulosDeRopa();
-        ArticuloDeRopaS.add(packEntity.get());
+        List<ArticuloDeRopaEntity> articuloDeRopaS = sedeEntity.get().getArticulosDeRopa();
+        articuloDeRopaS.add(packEntity.get());
 
-        sedeEntity.get().setArticulosDeRopa(ArticuloDeRopaS);
+        sedeEntity.get().setArticulosDeRopa(articuloDeRopaS);
 
         log.info("Termina proceso de añadir a la sede un Articulo con con id = {0}", sedeId);
 
@@ -75,13 +78,13 @@ public class SedeAndArticuloRopaService {
         // Busca la sede
         Optional<SedeEntity> sedeBuscado = sedeRepo.findById(sedeid);
         if (sedeBuscado.isEmpty()) {
-            throw new EntityNotFoundException("SEDE_NOT_FOUND");
+            throw new EntityNotFoundException(SEDE_NOT_FOUND);
         }
 
         // Busca el articulo
         Optional<ArticuloDeRopaEntity> articulo = articuloRepo.findById(articuloID);
         if (articulo.isEmpty()) {
-            throw new EntityNotFoundException("ARTICULO_NOT_FOUND");
+            throw new EntityNotFoundException(ARTICULO_NOT_FOUND);
         }
 
         // Verifica que el articulo este en la sede
@@ -97,17 +100,17 @@ public class SedeAndArticuloRopaService {
 
     // Eliminar un articulo de ropa de la sede
     @Transactional
-    public ArticuloDeRopaEntity deleteSedeArticuloDeRopa(Long sedeId, Long ArticuloDeRopaId)
+    public ArticuloDeRopaEntity deleteSedeArticuloDeRopa(Long sedeId, Long articuloDeRopaId)
             throws EntityNotFoundException, IllegalOperationException {
-        log.info("Inicia proceso de remover a la sede un ArticuloDeRopa con con id = {0}", ArticuloDeRopaId);
-        Optional<ArticuloDeRopaEntity> articuloEntity = articuloRepo.findById(ArticuloDeRopaId);
+        log.info("Inicia proceso de remover a la sede un ArticuloDeRopa con con id = {0}", articuloDeRopaId);
+        Optional<ArticuloDeRopaEntity> articuloEntity = articuloRepo.findById(articuloDeRopaId);
         if (articuloEntity.isEmpty()) {
-            throw new EntityNotFoundException("ARTICULO_NOT_FOUND");
+            throw new EntityNotFoundException(ARTICULO_NOT_FOUND);
         }
 
         Optional<SedeEntity> sedeEntity = sedeRepo.findById(sedeId);
         if (sedeEntity.isEmpty()) {
-            throw new EntityNotFoundException("SEDE_NOT_FOUND");
+            throw new EntityNotFoundException(SEDE_NOT_FOUND);
         }
 
         // revisa si el articulo no esta en la sede, si no esta lanza una
@@ -133,14 +136,14 @@ public class SedeAndArticuloRopaService {
         log.info("Inicia proceso de actualizar la lista de articulos de ropa de la sede con id = {0}", sedeId);
         Optional<SedeEntity> sedeEntity = sedeRepo.findById(sedeId);
         if (sedeEntity.isEmpty()) {
-            throw new EntityNotFoundException("SEDE_NOT_FOUND");
+            throw new EntityNotFoundException(SEDE_NOT_FOUND);
         }
 
         // revisa que todos los articulos existan
         for (ArticuloDeRopaEntity articulo : articulos) {
             Optional<ArticuloDeRopaEntity> articuloEntity = articuloRepo.findById(articulo.getId());
             if (articuloEntity.isEmpty()) {
-                throw new EntityNotFoundException("ARTICULO_NOT_FOUND");
+                throw new EntityNotFoundException(ARTICULO_NOT_FOUND);
             }
         }
 

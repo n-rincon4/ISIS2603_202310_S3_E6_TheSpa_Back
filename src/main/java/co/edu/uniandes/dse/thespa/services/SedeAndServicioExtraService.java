@@ -20,6 +20,9 @@ import co.edu.uniandes.dse.thespa.repositories.ServicioExtraRepository;
 @Service
 public class SedeAndServicioExtraService {
 
+    private static final String SEDE_NOT_FOUND = "SEDE_NOT_FOUND";
+    private static final String EXTRA_SERVICE_NOT_FOUND = "EXTRA_SERVICE_NOT_FOUND";
+
     // Inyeccion de dependencias -> Repositorio Sede
     @Autowired
     SedeRepository sedeRepo;
@@ -41,12 +44,12 @@ public class SedeAndServicioExtraService {
         log.info("Inicia proceso de añadir a la sede un servicio extra con con id = {0}", sedeExtraServiceId);
         Optional<ServicioExtraEntity> servEntity = servicioExtraRepo.findById(sedeExtraServiceId);
         if (servEntity.isEmpty()) {
-            throw new EntityNotFoundException("EXTRA_SERVICE_NOT_FOUND");
+            throw new EntityNotFoundException(EXTRA_SERVICE_NOT_FOUND);
         }
 
         Optional<SedeEntity> sedeEntity = sedeRepo.findById(sedeId);
         if (sedeEntity.isEmpty()) {
-            throw new EntityNotFoundException("SEDE_NOT_FOUND");
+            throw new EntityNotFoundException(SEDE_NOT_FOUND);
         }
 
         // revisa si el servicio extra ya esta en la sede, si esta lanza una
@@ -72,12 +75,12 @@ public class SedeAndServicioExtraService {
         log.info("Inicia proceso de remover a la sede un servicio extra con con id = {0}", sedeExtraServiceId);
         Optional<ServicioExtraEntity> servEntity = servicioExtraRepo.findById(sedeExtraServiceId);
         if (servEntity.isEmpty()) {
-            throw new EntityNotFoundException("EXTRA_SERVICE_NOT_FOUND");
+            throw new EntityNotFoundException(EXTRA_SERVICE_NOT_FOUND);
         }
 
         Optional<SedeEntity> sedeEntity = sedeRepo.findById(sedeId);
         if (sedeEntity.isEmpty()) {
-            throw new EntityNotFoundException("SEDE_NOT_FOUND");
+            throw new EntityNotFoundException(SEDE_NOT_FOUND);
         }
 
         // revisa si el servicio extra no esta en la sede, si no esta lanza una
@@ -104,19 +107,19 @@ public class SedeAndServicioExtraService {
         log.info("Inicia proceso de actualizar la lista de servicios extra de la sede con con id = {0}", sedeId);
         Optional<SedeEntity> sedeEntity = sedeRepo.findById(sedeId);
         if (sedeEntity.isEmpty()) {
-            throw new EntityNotFoundException("SEDE_NOT_FOUND");
+            throw new EntityNotFoundException(SEDE_NOT_FOUND);
         }
 
         // revisa si los servicios extra existen
         for (ServicioExtraEntity serv : sedeExtraServiceId) {
             Optional<ServicioExtraEntity> servEntity = servicioExtraRepo.findById(serv.getId());
             if (servEntity.isEmpty()) {
-                throw new EntityNotFoundException("EXTRA_SERVICE_NOT_FOUND");
+                throw new EntityNotFoundException(EXTRA_SERVICE_NOT_FOUND);
             }
         }
 
         // crea una lista de servicios extra
-        List<ServicioExtraEntity> servs = new ArrayList<ServicioExtraEntity>();
+        List<ServicioExtraEntity> servs = new ArrayList<>();
 
         for (ServicioExtraEntity serv : sedeExtraServiceId) {
             Optional<ServicioExtraEntity> servEntity = servicioExtraRepo.findById(serv.getId());

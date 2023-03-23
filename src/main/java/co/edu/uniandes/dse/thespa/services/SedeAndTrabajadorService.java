@@ -19,6 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Service
 public class SedeAndTrabajadorService {
+
     // String estático para eliminar el code smell en el mensaje de excepción y
     // reporte
     private static final String TRABAJADOR_NOT_FOUND = "TRABAJADOR_NOT_FOUND";
@@ -116,19 +117,19 @@ public class SedeAndTrabajadorService {
         log.info("Inicia proceso de actualizar la lista de servicios extra de la sede con con id = {0}", sedeId);
         Optional<SedeEntity> sedeEntity = sedeRepo.findById(sedeId);
         if (sedeEntity.isEmpty()) {
-            throw new EntityNotFoundException("SEDE_NOT_FOUND");
+            throw new EntityNotFoundException(SEDE_NOT_FOUND);
         }
 
         // revisa si los servicios extra existen
         for (TrabajadorEntity serv : sedeExtraServiceId) {
             Optional<TrabajadorEntity> servEntity = trabajadoresRepo.findById(serv.getId());
             if (servEntity.isEmpty()) {
-                throw new EntityNotFoundException("TRABAJADOR_NOT_FOUND");
+                throw new EntityNotFoundException(TRABAJADOR_NOT_FOUND);
             }
         }
 
         // crea una lista de servicios extra
-        List<TrabajadorEntity> servs = new ArrayList<TrabajadorEntity>();
+        List<TrabajadorEntity> servs = new ArrayList<>();
 
         for (TrabajadorEntity serv : sedeExtraServiceId) {
             Optional<TrabajadorEntity> servEntity = trabajadoresRepo.findById(serv.getId());
