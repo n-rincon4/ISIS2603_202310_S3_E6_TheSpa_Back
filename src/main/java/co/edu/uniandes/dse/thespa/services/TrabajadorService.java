@@ -34,7 +34,7 @@ public class TrabajadorService {
         if ((trabajadorEntity.getNombre() == null) || (trabajadorEntity.getNombre().equals("")))
             throw new IllegalOperationException("El nombre del trabajador no puede estar vacío");
 
-        if ((trabajadorEntity.getSedes() == null) || (trabajadorEntity.getSedes().size() == 0))
+        if ((trabajadorEntity.getSedes() == null) || (trabajadorEntity.getSedes().isEmpty()))
             throw new IllegalOperationException("El trabajador debe estar en al menos una sede");
 
         if (trabajadorEntity.getServicios() == null)

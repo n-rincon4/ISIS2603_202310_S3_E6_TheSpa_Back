@@ -54,7 +54,7 @@ public class SedeAndArticuloRopaController {
 	// Busca todos los articulos asociados a una sede
 	@GetMapping(value = "{sedeId}/articulosDeRopa")
 	@ResponseStatus(code = HttpStatus.OK)
-	public List<ArticuloDeRopaDetailDTO> getArticulos(@PathVariable("sedeId") Long sedeId) {
+	public List<ArticuloDeRopaDetailDTO> getArticulos(@PathVariable("sedeId") Long sedeId) throws EntityNotFoundException {
 		List<ArticuloDeRopaEntity> articulos = saR.obtenerAllArticulos(sedeId);
 		return modelMapper.map(articulos, new TypeToken<List<ArticuloDeRopaDetailDTO>>() {
 		}.getType());

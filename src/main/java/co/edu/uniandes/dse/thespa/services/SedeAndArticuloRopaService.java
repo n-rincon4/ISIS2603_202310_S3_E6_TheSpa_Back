@@ -34,9 +34,13 @@ public class SedeAndArticuloRopaService {
 
     // Obtener todos los articulos de ropa de una sede
     @Transactional
-    public List<ArticuloDeRopaEntity> obtenerAllArticulos(Long sedeId) {
-        return articuloRepo.findAll();
-    }
+    public List<ArticuloDeRopaEntity> obtenerAllArticulos(Long sedeId) throws EntityNotFoundException {
+		Optional<SedeEntity> sedeEntity = sedeRepo.findById(sedeId);
+		if (sedeEntity.isEmpty())
+			throw new EntityNotFoundException(SEDE_NOT_FOUND);
+
+		return sedeEntity.get().getArticulosDeRopa();
+	}
 
     // Añadir un Pack de servicios a la sede
     @Transactional
