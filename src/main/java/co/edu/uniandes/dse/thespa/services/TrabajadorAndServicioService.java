@@ -4,6 +4,8 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -68,56 +70,74 @@ public class TrabajadorAndServicioService {
 
     // Consultar todos los servicios del trabajador
     @Transactional
-	public List<ServicioEntity> getServicios(Long trabajadorId) throws EntityNotFoundException {
-		log.info("Inicia proceso de consultar todos los servicios del trabajador con id = {0}", trabajadorId);
-		Optional<TrabajadorEntity> trabajadorEntity = trabajadorRepository.findById(trabajadorId);
-		if (trabajadorEntity.isEmpty())
-			throw new EntityNotFoundException(TRABAJADOR_NOT_FOUND);
+    public List<ServicioEntity> getServicios(Long trabajadorId) throws EntityNotFoundException {
+        log.info("Inicia proceso de consultar todos los servicios del trabajador con id = {0}", trabajadorId);
+        Optional<TrabajadorEntity> trabajadorEntity = trabajadorRepository.findById(trabajadorId);
+        if (trabajadorEntity.isEmpty())
+            throw new EntityNotFoundException(TRABAJADOR_NOT_FOUND);
 
-		log.info("Termina proceso de consultar todos los servicios del trabajador con id = {0}", trabajadorId);
-		return trabajadorEntity.get().getServicios();
-	}
+        log.info("Termina proceso de consultar todos los servicios del trabajador con id = {0}", trabajadorId);
+        return trabajadorEntity.get().getServicios();
+    }
 
-	// Consulta un servicio particular de un trabajador dados los IDs
-	@Transactional
-	public ServicioEntity getServicio(Long trabajadorId, Long servicioId) throws EntityNotFoundException, IllegalOperationException {
-		log.info("Inicia proceso de consultar el servicio con id = {0} del trabajador con id = " + trabajadorId, servicioId);
-		Optional<TrabajadorEntity> trabajadorEntity = trabajadorRepository.findById(trabajadorId);
-		Optional<ServicioEntity> servicioEntity = servicioRepository.findById(servicioId);
+    // Consulta un servicio particular de un trabajador dados los IDs
+    @Transactional
+    public ServicioEntity getServicio(Long trabajadorId, Long servicioId)
+            throws EntityNotFoundException, IllegalOperationException {
+        log.info("Inicia proceso de consultar el servicio con id = {0} del trabajador con id = " + trabajadorId,
+                servicioId);
+        Optional<TrabajadorEntity> trabajadorEntity = trabajadorRepository.findById(trabajadorId);
+        Optional<ServicioEntity> servicioEntity = servicioRepository.findById(servicioId);
 
-		if (trabajadorEntity.isEmpty())
-			throw new EntityNotFoundException(TRABAJADOR_NOT_FOUND);
+        if (trabajadorEntity.isEmpty())
+            throw new EntityNotFoundException(TRABAJADOR_NOT_FOUND);
 
-		if (servicioEntity.isEmpty())
-			throw new EntityNotFoundException(SERVICE_NOT_FOUND);
+        if (servicioEntity.isEmpty())
+            throw new EntityNotFoundException(SERVICE_NOT_FOUND);
 
-		log.info("Termina proceso de consultar el libro con id = {0} del autor con id = " + trabajadorId, servicioId);
-		if (!trabajadorEntity.get().getServicios().contains(servicioEntity.get()))
-			throw new IllegalOperationException("El servicio no está asociado al trabajador");
-		
-		return servicioEntity.get();
-	}
+        log.info("Termina proceso de consultar el libro con id = {0} del autor con id = " + trabajadorId, servicioId);
+        if (!trabajadorEntity.get().getServicios().contains(servicioEntity.get()))
+            throw new IllegalOperationException("El servicio no está asociado al trabajador");
 
-	// Reemplaza/Actualiza los servicios de un trabajador
-	@Transactional
-	public List<ServicioEntity> replaceServicios(Long trabajadorId, List<ServicioEntity> newServicios) throws EntityNotFoundException {
-		log.info("Inicia proceso de reemplazar los servicios asociados al trabajador con id = {0}", trabajadorId);
-		Optional<TrabajadorEntity> trabajadorEntity = trabajadorRepository.findById(trabajadorId);
-		if (trabajadorEntity.isEmpty())
-			throw new EntityNotFoundException(TRABAJADOR_NOT_FOUND);
+        return servicioEntity.get();
+    }
 
-		for (ServicioEntity servicio : newServicios) {
-			Optional<ServicioEntity> servicioEntity = servicioRepository.findById(servicio.getId());
-			if (servicioEntity.isEmpty())
-				throw new EntityNotFoundException(SERVICE_NOT_FOUND);
+    // Reemplaza/Actualiza los servicios de un trabajador
+    @Transactional
+    public List<ServicioEntity> replaceServicios(Long trabajadorId, List<ServicioEntity> newServicios)
+            throws EntityNotFoundException {
+        log.info("Inicia proceso de reemplazar los servicios asociados al trabajador con id = {0}", trabajadorId);
 
-			if (!servicioEntity.get().getTrabajadores().contains(trabajadorEntity.get()))
-            servicioEntity.get().getTrabajadores().add(trabajadorEntity.get());
-		}
-        trabajadorEntity.get().setServicios(newServicios);
-		log.info("Finaliza proceso de reemplazar los servicios asociados al trabajador con id = {0}", trabajadorId);
-		return trabajadorEntity.get().getServicios();
-	}
+        // revisa si el trabajador existe
+        Optional<TrabajadorEntity> trabajadorEntity = trabajadorRepository.findById(trabajadorId);
+        if (trabajadorEntity.isEmpty())
+            throw new EntityNotFoundException(TRABAJADOR_NOT_FOUND);
+
+        // revisa si los servicios existen
+        for (ServicioEntity servicio : newServicios) {
+            Optional<ServicioEntity> servicioEntity = servicioRepository.findById(servicio.getId());
+            if (servicioEntity.isEmpty())
+                throw new EntityNotFoundException(SERVICE_NOT_FOUND);
+        }
+
+        // crea una lista de servicios
+        List<ServicioEntity> servicios = new ArrayList<>();
+
+        // agrega los servicios a la lista
+        for (ServicioEntity servicio : newServicios) {
+            Optional<ServicioEntity> servicioEntity = servicioRepository.findById(servicio.getId());
+            if (servicioEntity.isPresent()) {
+                servicios.add(servicioEntity.get());
+            }
+        }
+
+        // asigna la lista de servicios al trabajador
+        trabajadorEntity.get().setServicios(servicios);
+
+        log.info("Termina proceso de reemplazar los servicios asociados al trabajador con id = {0}", trabajadorId);
+
+        return trabajadorEntity.get().getServicios();
+    }
 
     // Eliminar un servicio del trabajador
     @Transactional
