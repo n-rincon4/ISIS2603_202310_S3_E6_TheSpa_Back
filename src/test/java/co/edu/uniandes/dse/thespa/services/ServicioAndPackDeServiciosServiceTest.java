@@ -247,7 +247,7 @@ public class ServicioAndPackDeServiciosServiceTest {
         servicioService.updatePacks(servicio.getId(), packs);
 
         List<PackDeServiciosEntity> packs2 = servicioService.getPacksDeServicios(servicio.getId());
-        assertNotNull(packs);
+        assertNotNull(packs2);
         assertEquals(packs.size(), packs2.size());
     }
 }
