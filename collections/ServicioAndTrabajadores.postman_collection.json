@@ -247,7 +247,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"nombre\": \"Dwight Schrute\",\r\n    \"foto\": \"https://cdn.hobbyconsolas.com/sites/navi.axelspringer.es/public/styles/hc_1440x810/public/media/image/2022/06/office-dwight-schrute-2733589.jpg?itok=zAhOkd3D\",\r\n    \"calificacion\": 10,\r\n    \"enHallOfFame\": true,\r\n    \"sedes\": [\r\n        {\r\n            \"id\": {{sede_id_1}}\r\n        }\r\n    ],\r\n    \"servicios\": [\r\n    ]\r\n}",
+					"raw": "{\r\n    \"nombre\": \"Dwight Schrute\",\r\n    \"foto\": \"https://cdn.hobbyconsolas.com/sites/navi.axelspringer.es/public/styles/hc_1440x810/public/media/image/2022/06/office-dwight-schrute-2733589.jpg?itok=zAhOkd3D\",\r\n    \"calificacion\": 10,\r\n    \"enHallOfFame\": true,\r\n    \"sedes\": [\r\n        {\r\n            \"id\": {{sede_id_1}}\r\n        }\r\n    ],\r\n    \"servicios\": [ {\r\n        \"id\": {{servicio_id_1}}\r\n    }\r\n    ]\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -295,81 +295,6 @@
 					"header": null,
 					"cookie": [],
 					"body": null
-				}
-			]
-		},
-		{
-			"name": "Agregar un Trabajador a un Servicio",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 200\", function () {\r",
-							"   pm.response.to.have.status(200);\r",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [],
-				"url": {
-					"raw": "{{baseUrl}}/trabajadores/{{trabajador_id_1}}/servicios/{{servicio_id_1}}",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"trabajadores",
-						"{{trabajador_id_1}}",
-						"servicios",
-						"{{servicio_id_1}}"
-					]
-				}
-			},
-			"response": [
-				{
-					"name": "Agregar un Trabajador a un Servicio",
-					"originalRequest": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"id\": 1,\r\n    \"descuento\": 20,\r\n    \"nombre\": \"Ritual de relajación profunda\",\r\n    \"imagen\": \"https://www.centerpointmassage.com/web/core/pic/620.jpg\",\r\n    \"servicios\": [],\r\n    \"trabajadores\": [\r\n        {\r\n            \"id\": 1,\r\n            \"identificacion\": 45895622,\r\n            \"nombre\": \"Dwight Schrute\",\r\n            \"foto\": \"https://cdn.hobbyconsolas.com/sites/navi.axelspringer.es/public/styles/hc_1440x810/public/media/image/2022/06/office-dwight-schrute-2733589.jpg?itok=zAhOkd3D\",\r\n            \"calificacion\": 10,\r\n            \"enHallOfFame\": true\r\n        }\r\n    ]\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseUrl}}/servicios/{{servicio_id_1}}/trabajadores/{{trabajador_id_1}}",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"servicios",
-								"{{servicio_id_1}}",
-								"trabajadores",
-								"{{trabajador_id_1}}"
-							]
-						}
-					},
-					"status": "Created",
-					"code": 201,
-					"_postman_previewlanguage": "Text",
-					"header": [],
-					"cookie": [],
-					"body": ""
 				}
 			]
 		},
@@ -631,7 +556,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"identificacion\": 45895623,\r\n    \"nombre\": \"Charles Boyle\",\r\n    \"foto\": \"https://preview.redd.it/1vo0ix78h0q81.jpg?width=640&crop=smart&auto=webp&s=f493525e18b7abebae83c4fdbcc802b87e0646a3\",\r\n    \"calificacion\": 10,\r\n    \"enHallOfFame\": true\r\n}",
+					"raw": "{\r\n    \"identificacion\": 45895623,\r\n    \"nombre\": \"Charles Boyle\",\r\n    \"foto\": \"https://preview.redd.it/1vo0ix78h0q81.jpg?width=640&crop=smart&auto=webp&s=f493525e18b7abebae83c4fdbcc802b87e0646a3\",\r\n    \"calificacion\": 10,\r\n    \"enHallOfFame\": true,\r\n \"sedes\": [\r\n        {\r\n            \"id\": {{sede_id_1}}\r\n        }\r\n    ],\r\n    \"servicios\": [ \r\n    ]\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
