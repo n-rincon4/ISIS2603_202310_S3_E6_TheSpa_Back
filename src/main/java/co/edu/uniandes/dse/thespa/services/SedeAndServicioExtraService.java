@@ -120,7 +120,9 @@ public class SedeAndServicioExtraService {
 
         for (ServicioExtraEntity serv : sedeExtraServiceId) {
             Optional<ServicioExtraEntity> servEntity = servicioExtraRepo.findById(serv.getId());
-            servs.add(servEntity.get());
+            if (servEntity.isPresent()) {
+                servs.add(servEntity.get());
+            }
         }
 
         sedeEntity.get().setServiciosExtra(servs);

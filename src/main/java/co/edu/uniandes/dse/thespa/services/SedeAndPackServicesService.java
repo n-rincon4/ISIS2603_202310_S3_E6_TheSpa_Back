@@ -148,7 +148,9 @@ public class SedeAndPackServicesService {
         List<PackDeServiciosEntity> packDeServicios = new ArrayList<>();
         for (PackDeServiciosEntity pack : packs) {
             Optional<PackDeServiciosEntity> packEntity = packDeServiciosRepo.findById(pack.getId());
-            packDeServicios.add(packEntity.get());
+            if (packEntity.isPresent()) {
+                packDeServicios.add(packEntity.get());
+            }
         }
 
         // actualiza la lista de packs de servicios de la sede

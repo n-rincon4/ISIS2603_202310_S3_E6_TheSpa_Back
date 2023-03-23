@@ -243,4 +243,25 @@ public class PackDeServiciosTest {
         });
     }
 
+    // prueba para crear un pack con menos de 2 servicios, espera una
+    // illegalOperationException
+    @Test
+    void createPackDeServiciosConMenosDeDosServiciosTest() {
+        PackDeServiciosEntity newEntity = packs.get(0);
+        newEntity.setServicios(servicios.get(0));
+        assertThrows(IllegalOperationException.class, () -> {
+            PackDeServiciosService.createPackDeServicios(newEntity);
+        });
+    }
+
+    // prueba para revisar que el descuento de un pack no sea null
+    @Test
+    void createPackDeServiciosConDescuentoNullTest() {
+        PackDeServiciosEntity newEntity = packs.get(0);
+        newEntity.setDescuento(null);
+        assertThrows(IllegalOperationException.class, () -> {
+            PackDeServiciosService.createPackDeServicios(newEntity);
+        });
+    }
+
 }

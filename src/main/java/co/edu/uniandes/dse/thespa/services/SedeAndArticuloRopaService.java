@@ -148,7 +148,9 @@ public class SedeAndArticuloRopaService {
         List<ArticuloDeRopaEntity> articulosActuales = new ArrayList<>();
         for (ArticuloDeRopaEntity articulo : articulos) {
             Optional<ArticuloDeRopaEntity> articuloEntity = articuloRepo.findById(articulo.getId());
-            articulosActuales.add(articuloEntity.get());
+            if (articuloEntity.isPresent()) {
+                articulosActuales.add(articuloEntity.get());
+            }
         }
 
         sedeEntity.get().setArticulosDeRopa(articulosActuales);

@@ -142,7 +142,9 @@ public class ServicioAndPackDeServiciosService {
         // servicios
         for (PackDeServiciosEntity pack : packs) {
             Optional<PackDeServiciosEntity> packsBuscados = packDeServiciosRepository.findById(pack.getId());
-            packsDeServicios.add(packsBuscados.get());
+            if (packsBuscados.isPresent()) {
+                packsDeServicios.add(packsBuscados.get());
+            }
         }
 
         // actualiza la lista de packs del servicio
