@@ -45,9 +45,9 @@ public class SedeController {
     // metodo para encontrar una sede dado su id
     @GetMapping(value = "{id}")
     @ResponseStatus(code = HttpStatus.OK)
-    public SedeDTO findOne(@PathVariable("id") Long id) throws EntityNotFoundException {
+    public SedeDetailDTO findOne(@PathVariable("id") Long id) throws EntityNotFoundException {
         SedeEntity sede = sedeService.getSede(id);
-        return modelMapper.map(sede, SedeDTO.class);
+        return modelMapper.map(sede, SedeDetailDTO.class);
     }
 
     // metodo para crear una entidad de una sede dado un DTO, retorna el

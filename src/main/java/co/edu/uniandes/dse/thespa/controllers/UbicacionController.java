@@ -49,9 +49,9 @@ public class UbicacionController {
     // Método para encontrar una ubicacion dado su id
     @GetMapping(value = "{id}")
     @ResponseStatus(code = HttpStatus.OK)
-    public UbicacionDTO findOne(@PathVariable("id") Long id) throws EntityNotFoundException {
+    public UbicacionDetailDTO findOne(@PathVariable("id") Long id) throws EntityNotFoundException {
         UbicacionEntity ubicacionEntity = ubicacionService.getUbicacion(id);
-        return modelMapper.map(ubicacionEntity, UbicacionDTO.class);
+        return modelMapper.map(ubicacionEntity, UbicacionDetailDTO.class);
     }
 
     // Método para crear una ubicacion a partir de un DTO
