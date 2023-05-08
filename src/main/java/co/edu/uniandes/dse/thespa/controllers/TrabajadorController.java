@@ -39,18 +39,18 @@ public class TrabajadorController {
     // Método para encontrar todos los trabajadores
     @GetMapping
     @ResponseStatus(code = HttpStatus.OK)
-    public List<TrabajadorDetailDTO> findAll() {
+    public List<TrabajadorDTO> findAll() {
         List<TrabajadorEntity> trabajadores = trabajadorService.getTrabajadores();
-        return modelMapper.map(trabajadores, new TypeToken<List<TrabajadorDetailDTO>>() {
+        return modelMapper.map(trabajadores, new TypeToken<List<TrabajadorDTO>>() {
         }.getType());
     }
 
     // Método para encontrar un trabajador dado su id
     @GetMapping(value = "{id}")
     @ResponseStatus(code = HttpStatus.OK)
-    public TrabajadorDTO findOne(@PathVariable("id") Long id) throws EntityNotFoundException {
+    public TrabajadorDetailDTO findOne(@PathVariable("id") Long id) throws EntityNotFoundException {
         TrabajadorEntity trabajadorEntity = trabajadorService.getTrabajador(id);
-        return modelMapper.map(trabajadorEntity, TrabajadorDTO.class);
+        return modelMapper.map(trabajadorEntity, TrabajadorDetailDTO.class);
     }
 
     // Método para crear un trabajador a partir de un DTO

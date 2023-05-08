@@ -47,9 +47,9 @@ public class ServicioController {
 
     @GetMapping("/{id}")
     @ResponseStatus(code = HttpStatus.OK)
-    public ServicioDTO findOne(@PathVariable("id") Long id) throws EntityNotFoundException {
+    public ServicioDetailDTO findOne(@PathVariable("id") Long id) throws EntityNotFoundException {
         ServicioEntity servicio = servicioService.getServicio(id);
-        return modelMapper.map(servicio, ServicioDTO.class);
+        return modelMapper.map(servicio, ServicioDetailDTO.class);
     }
 
     @PostMapping

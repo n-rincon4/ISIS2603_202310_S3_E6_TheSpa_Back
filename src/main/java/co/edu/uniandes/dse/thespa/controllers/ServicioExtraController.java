@@ -48,9 +48,9 @@ public class ServicioExtraController {
     // Método para encontrar un servicio extra dado su id
     @GetMapping(value = "/{id}")
     @ResponseStatus(code = HttpStatus.OK)
-    public ServicioExtraDTO findOne(@PathVariable("id") Long id) throws EntityNotFoundException {
+    public ServicioExtraDetailDTO findOne(@PathVariable("id") Long id) throws EntityNotFoundException {
         ServicioExtraEntity servicioExtraEntity = servicioExtraService.getServicioExtra(id);
-        return modelMapper.map(servicioExtraEntity, ServicioExtraDTO.class);
+        return modelMapper.map(servicioExtraEntity, ServicioExtraDetailDTO.class);
     }
 
     // Método para crear un servicio extra a partir de un DTO
