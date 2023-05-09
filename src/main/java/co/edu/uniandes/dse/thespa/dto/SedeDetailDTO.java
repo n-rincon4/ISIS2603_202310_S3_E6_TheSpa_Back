@@ -10,7 +10,7 @@ import lombok.Setter;
 public class SedeDetailDTO extends SedeDTO {
     private UbicacionDTO ubicacion;
     private List<ServicioExtraDTO> serviciosExtra = new ArrayList<>();
-    private List<PackDeServiciosDTO> packServicios = new ArrayList<>();
+    private List<PackDeServiciosDTO> packsDeServicios = new ArrayList<>();
     private List<ArticuloDeRopaDTO> articulos = new ArrayList<>();
     private List<TrabajadorDTO> trabajadores = new ArrayList<>();
     private List<ServicioDTO> servicios = new ArrayList<>();
