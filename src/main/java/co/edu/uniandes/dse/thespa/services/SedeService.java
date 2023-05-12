@@ -63,6 +63,16 @@ public class SedeService {
             throw new IllegalOperationException("La sede tiene que tener una ubicacion.");
         }
 
+        // dos sedes no pueden tener la misma ubicacion
+        for (SedeEntity sed : allSedes) {
+            // revisa que la ubicación de sed no sea null
+            if (sed.getUbicacion() != null) {
+                if (sede.getUbicacion().getId().equals(sed.getUbicacion().getId())) {
+                    throw new IllegalOperationException("La sede no puede tener la misma ubicacion que otra sede.");
+                }
+            }
+        }
+
         // revisa que la lista de trabajadores no sea null
 
         if (sede.getTrabajadores() == null) {

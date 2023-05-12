@@ -76,6 +76,8 @@ public class SedeServiceTest {
         SedeEntity newEntity = factory.manufacturePojo(SedeEntity.class);
 
         newEntity.setNombre("Sede Ficticia 1");
+        UbicacionEntity ubicacion = factory.manufacturePojo(UbicacionEntity.class);
+        newEntity.setUbicacion(ubicacion);
 
         List<PackDeServiciosEntity> packServiciosFicticios = new ArrayList<>();
         packServiciosFicticios.add(new PackDeServiciosEntity());
@@ -88,8 +90,6 @@ public class SedeServiceTest {
         List<TrabajadorEntity> trabajadoresFicticios = new ArrayList<>();
         trabajadoresFicticios.add(new TrabajadorEntity());
         newEntity.setTrabajadores(trabajadoresFicticios);
-
-        newEntity.setUbicacion(new UbicacionEntity());
 
         SedeEntity result = SedeService.createSede(newEntity);
         sedes.add(result);
@@ -195,6 +195,58 @@ public class SedeServiceTest {
         assertThrows(EntityNotFoundException.class, () -> {
             SedeService.deleteSede(0L);
         });
+    }
+
+    // Prueba 11: crear una sede sin ubicacion
+    @Test
+    void testCreateSedeWithoutUbicacion() throws EntityNotFoundException, IllegalOperationException {
+        SedeEntity newEntity = factory.manufacturePojo(SedeEntity.class);
+
+        newEntity.setNombre("Sede Ficticia 1");
+
+        List<PackDeServiciosEntity> packServiciosFicticios = new ArrayList<>();
+        packServiciosFicticios.add(new PackDeServiciosEntity());
+        newEntity.setPacksDeServicios(packServiciosFicticios);
+
+        List<ServicioEntity> serviciosFicticios = new ArrayList<>();
+        serviciosFicticios.add(new ServicioEntity());
+        newEntity.setServicios(serviciosFicticios);
+
+        List<TrabajadorEntity> trabajadoresFicticios = new ArrayList<>();
+        trabajadoresFicticios.add(new TrabajadorEntity());
+        newEntity.setTrabajadores(trabajadoresFicticios);
+
+        assertThrows(IllegalOperationException.class, () -> {
+            SedeService.createSede(newEntity);
+        });
+
+    }
+
+    // Prueba 12: crear una sede con ubicación repetida
+    @Test
+    void testCreateSedeWithRepeatedUbicacion() throws EntityNotFoundException, IllegalOperationException {
+        SedeEntity newEntity = factory.manufacturePojo(SedeEntity.class);
+
+        newEntity.setNombre("Sede Ficticia 1");
+
+        List<PackDeServiciosEntity> packServiciosFicticios = new ArrayList<>();
+        packServiciosFicticios.add(new PackDeServiciosEntity());
+        newEntity.setPacksDeServicios(packServiciosFicticios);
+
+        List<ServicioEntity> serviciosFicticios = new ArrayList<>();
+        serviciosFicticios.add(new ServicioEntity());
+        newEntity.setServicios(serviciosFicticios);
+
+        List<TrabajadorEntity> trabajadoresFicticios = new ArrayList<>();
+        trabajadoresFicticios.add(new TrabajadorEntity());
+        newEntity.setTrabajadores(trabajadoresFicticios);
+
+        newEntity.setUbicacion(sedes.get(0).getUbicacion());
+
+        assertThrows(IllegalOperationException.class, () -> {
+            SedeService.createSede(newEntity);
+        });
+
     }
 
 }
