@@ -36,9 +36,9 @@ public class SedeController {
     // metodo para encontrar todas las sedes
     @GetMapping
     @ResponseStatus(code = HttpStatus.OK)
-    public List<SedeDTO> findAll() {
+    public List<SedeDetailDTO> findAll() {
         List<SedeEntity> sedes = sedeService.getSedes();
-        return modelMapper.map(sedes, new TypeToken<List<SedeDTO>>() {
+        return modelMapper.map(sedes, new TypeToken<List<SedeDetailDTO>>() {
         }.getType());
     }
 
