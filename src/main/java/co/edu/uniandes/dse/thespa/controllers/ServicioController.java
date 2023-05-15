@@ -38,9 +38,9 @@ public class ServicioController {
 
     @GetMapping
     @ResponseStatus(code = HttpStatus.OK)
-    public List<ServicioDTO> findAll() {
+    public List<ServicioDetailDTO> findAll() {
         List<ServicioEntity> servicios = servicioService.getServicios();
-        return modelMapper.map(servicios, new TypeToken<List<ServicioDTO>>() {
+        return modelMapper.map(servicios, new TypeToken<List<ServicioDetailDTO>>() {
         }.getType());
 
     }
