@@ -37,9 +37,9 @@ public class PackDeServiciosController {
     // metodo para encontrar todos los packs de servicios
     @GetMapping
     @ResponseStatus(code = HttpStatus.OK)
-    public List<PackDeServiciosDTO> findAll() {
+    public List<PackDeServiciosDetailDTO> findAll() {
         List<PackDeServiciosEntity> packs = packDeServiciosService.getPacksDeServicios();
-        return modelMapper.map(packs, new TypeToken<List<PackDeServiciosDTO>>() {
+        return modelMapper.map(packs, new TypeToken<List<PackDeServiciosDetailDTO>>() {
         }.getType());
     }
 
