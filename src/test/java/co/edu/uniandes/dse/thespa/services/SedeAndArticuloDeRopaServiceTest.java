@@ -215,6 +215,26 @@ public class SedeAndArticuloDeRopaServiceTest {
 		}
 	}
 
+    @Test
+    // eliminar un articulo de una sede
+    void testDeleteArticuloFromSede() throws EntityNotFoundException, IllegalOperationException {
+        SedeEntity sede = sedes.get(0);
+        ArticuloDeRopaEntity articuloDeRopa = sede.getArticulosDeRopa().get(0);
+
+        ArticuloDeRopaEntity answer = sedeArticuloDeRopaService.deleteSedeArticuloDeRopa(sede.getId(),
+                articuloDeRopa.getId());
+        assertNotNull(answer);
+        assertEquals(articuloDeRopa.getId(), answer.getId());
+    }
+
+    @Test
+    // eliminar un articulo a un sede que no existe -> Entidad no encontrada
+    void testDeleteArticuloFromSedeNotExist() throws EntityNotFoundException, IllegalOperationException {
+        assertThrows(EntityNotFoundException.class, () -> {
+            ArticuloDeRopaEntity articulo = articulosDeRopa.get(0);
+            sedeArticuloDeRopaService.deleteSedeArticuloDeRopa(0L, articulo.getId());
+        });
+    }
 
     // Prueba para eliminar un articulo de ropa que no existe de una sede
     // Se espera que se lance una excepción de tipo IllegalOperationException
