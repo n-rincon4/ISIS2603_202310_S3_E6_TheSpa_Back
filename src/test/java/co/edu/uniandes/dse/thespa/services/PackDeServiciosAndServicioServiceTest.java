@@ -422,8 +422,7 @@ public class PackDeServiciosAndServicioServiceTest {
     }
 
     // Prueba para actualizar un pack de servicios con una nueva lista de servicios
-    // que
-    // no existe
+    // que no existe
     @Test
     void updateServiciosPackNotFoundTest() {
         // Se obtiene el id de un pack de servicios que no existe
@@ -438,12 +437,32 @@ public class PackDeServiciosAndServicioServiceTest {
         }
 
         // Se actualiza la lista de servicios del pack de servicios, se espera un error
-        // de
-        // tipo EntityNotFoundException
+        // de tipo EntityNotFoundException
         assertThrows(EntityNotFoundException.class, () -> {
             packDeServiciosAndServicioService.updateServicios(id, newServicios);
         });
     }
+    
+    // Prueba para actualizar un pack de servicios con una nueva lista de servicios con servicios que no existen
+    @Test
+    void updateServiciosNonExistentTest() {
+        // Se obtiene el primer pack de servicios de la lista de packs de servicios
+        PackDeServiciosEntity pack = packs.get(0);
 
+        // Se crea una nueva lista de servicios
+        List<ServicioEntity> newServicios = new ArrayList<>();
+        // Se obtiene el id de un servicio que no existe
+        Long id = Long.MAX_VALUE;
+        // Se crea un servicio con el id que no existe
+        ServicioEntity servicio = factory.manufacturePojo(ServicioEntity.class);
+        servicio.setId(id);
+        newServicios.add(servicio);
+
+        // Se actualiza la lista de servicios del pack de servicios, se espera un error
+        // de tipo EntityNotFoundException
+        assertThrows(EntityNotFoundException.class, () -> {
+            packDeServiciosAndServicioService.updateServicios(pack.getId(), newServicios);
+        });
+    }
 
 }

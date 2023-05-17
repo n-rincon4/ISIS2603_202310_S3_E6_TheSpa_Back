@@ -43,16 +43,20 @@ public class SedeService {
         }
 
         // Assert 2: el nombre debe ser unico
-        // Assert 3: la sede no debe de existir en la base de datos
         List<SedeEntity> allSedes = getSedes();
         for (SedeEntity sed : allSedes) {
             if (sed.getNombre().equals(sede.getNombre())) {
                 throw new IllegalOperationException("El nombre de la sede debe ser unico.");
-            } else if (sed.getId().equals(sede.getId())) {
+            } 
+        }
+            
+        // Assert 3: la sede no debe de existir en la base de datos
+        for (SedeEntity sed : allSedes) {
+            if (sed.getId().equals(sede.getId())) {
                 throw new IllegalOperationException("La sede ya existe en la base de datos.");
             }
-
         }
+
         // Assert 4: el nombre no debe ser un string vacio
         if (nombreSede.equals("")) {
             throw new IllegalOperationException("La sede tiene que tener un nombre no vacio.");
@@ -66,12 +70,10 @@ public class SedeService {
         // dos sedes no pueden tener la misma ubicacion
         for (SedeEntity sed : allSedes) {
             // revisa que la ubicación de sed no sea null
-            if (sed.getUbicacion() != null) {
-                if (sede.getUbicacion().getId().equals(sed.getUbicacion().getId())) {
+            if (sed.getUbicacion() != null && sede.getUbicacion().getId().equals(sed.getUbicacion().getId())) {
                     throw new IllegalOperationException("La sede no puede tener la misma ubicacion que otra sede.");
                 }
             }
-        }
 
         // revisa que la lista de trabajadores no sea null
 
