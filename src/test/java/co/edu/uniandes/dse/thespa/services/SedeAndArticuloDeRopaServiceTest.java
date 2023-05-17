@@ -63,9 +63,9 @@ public class SedeAndArticuloDeRopaServiceTest {
         for (int i = 0; i < 3; i++) {
             SedeEntity sEntity = factory.manufacturePojo(SedeEntity.class);
             ArticuloDeRopaEntity aEntity = factory.manufacturePojo(ArticuloDeRopaEntity.class);
-            entityManager.persist(sEntity);
+            entityManager.persist(aEntity);
             articulosDeRopa.add(aEntity);
-
+    
             s.add(aEntity);
             sEntity.setArticulosDeRopa(s);
             entityManager.persist(sEntity);
@@ -149,9 +149,7 @@ public class SedeAndArticuloDeRopaServiceTest {
 	void testGetArticulo() throws EntityNotFoundException, IllegalOperationException {
         SedeEntity sede = sedes.get(0);
         ArticuloDeRopaEntity articuloEntity = articulosDeRopa.get(0);
-        sedeArticuloDeRopaService.addSedeArticuloDeRopa(0L, articuloEntity.getId());
-		sedeArticuloDeRopaService.getArticulo(sede.getId(), articuloEntity.getId());
-        ArticuloDeRopaEntity articulo = articuloEntity;
+        ArticuloDeRopaEntity articulo = sedeArticuloDeRopaService.getArticulo(sede.getId(), articuloEntity.getId());
 		assertNotNull(articulo);
 
         assertEquals(articuloEntity.getId(), articulo.getId());
