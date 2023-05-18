@@ -31,11 +31,9 @@ public class SedeService {
     @Autowired
     SedeRepository sedeRepo;
 
-    // Crear Sede
+    // Revisa que la sede sea legal
     @Transactional
-    public SedeEntity createSede(SedeEntity sede) throws EntityNotFoundException, IllegalOperationException {
-        log.info("Inicia proceso de creacion de Sede.");
-
+    public void sedeLegal(SedeEntity sede) throws IllegalOperationException {
         // Assert 1: el nombre no debe ser null
         String nombreSede = sede.getNombre();
         if (nombreSede == null) {
@@ -47,9 +45,9 @@ public class SedeService {
         for (SedeEntity sed : allSedes) {
             if (sed.getNombre().equals(sede.getNombre())) {
                 throw new IllegalOperationException("El nombre de la sede debe ser unico.");
-            } 
+            }
         }
-            
+
         // Assert 3: la sede no debe de existir en la base de datos
         for (SedeEntity sed : allSedes) {
             if (sed.getId().equals(sede.getId())) {
@@ -71,9 +69,18 @@ public class SedeService {
         for (SedeEntity sed : allSedes) {
             // revisa que la ubicación de sed no sea null
             if (sed.getUbicacion() != null && sede.getUbicacion().getId().equals(sed.getUbicacion().getId())) {
-                    throw new IllegalOperationException("La sede no puede tener la misma ubicacion que otra sede.");
-                }
+                throw new IllegalOperationException("La sede no puede tener la misma ubicacion que otra sede.");
             }
+        }
+    }
+
+    // Crear Sede
+    @Transactional
+    public SedeEntity createSede(SedeEntity sede) throws EntityNotFoundException, IllegalOperationException {
+        log.info("Inicia proceso de creacion de Sede.");
+
+        // revisa que la sede sea legal
+        sedeLegal(sede);
 
         // revisa que la lista de trabajadores no sea null
 
