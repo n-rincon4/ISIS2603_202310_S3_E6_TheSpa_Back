@@ -3,6 +3,8 @@ package co.edu.uniandes.dse.thespa.services;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.util.ArrayList;
 import java.util.List;
 import javax.transaction.Transactional;
@@ -27,7 +29,7 @@ public class SedeAndServiciosServiceTest {
 
     // Servicio que se va a probar
     @Autowired
-    private SedeAndServicioService SedeService;
+    private SedeAndServicioService sedeServicioService;
 
     // TestEntityManager
     @Autowired
@@ -58,26 +60,18 @@ public class SedeAndServiciosServiceTest {
 
     // Inserta los datos de prueba en la lista de Sedes
     private void insertData() {
+        List<ServicioEntity> s = new ArrayList<>();
+
         for (int i = 0; i < 3; i++) {
-            SedeEntity entity = factory.manufacturePojo(SedeEntity.class);
-            List<ServicioEntity> serviciosFicticios = new ArrayList<>();
+            SedeEntity sEntity = factory.manufacturePojo(SedeEntity.class);
+            ServicioEntity seEntity = factory.manufacturePojo(ServicioEntity.class);
+            entityManager.persist(seEntity);
+            servicios.add(seEntity);
 
-            for (int n = 0; n < 3; n++) {
-                ServicioEntity serEntity = factory.manufacturePojo(ServicioEntity.class);
-                entityManager.persist(serEntity);
-                serviciosFicticios.add(serEntity);
-            }
-
-            entity.setServicios(serviciosFicticios);
-
-            entityManager.persist(entity);
-            sedes.add(entity);
-
-        }
-        for (int i = 0; i < 3; i++) {
-            ServicioEntity entity = factory.manufacturePojo(ServicioEntity.class);
-            entityManager.persist(entity);
-            servicios.add(entity);
+            s.add(seEntity);
+            sEntity.setServicios(s);
+            entityManager.persist(sEntity);
+            sedes.add(sEntity);
         }
     }
 
@@ -85,9 +79,10 @@ public class SedeAndServiciosServiceTest {
     @Test
     void testAddServiceToSede() throws EntityNotFoundException, IllegalOperationException {
         SedeEntity sede = sedes.get(0);
-        ServicioEntity service = servicios.get(0);
+        ServicioEntity service = factory.manufacturePojo(ServicioEntity.class);
+        entityManager.persist(service);
 
-        ServicioEntity answer = SedeService.addSedeServicio(sede.getId(), service.getId());
+        ServicioEntity answer = sedeServicioService.addSedeServicio(sede.getId(), service.getId());
         assertNotNull(answer);
         assertEquals(service.getId(), answer.getId());
 
@@ -100,7 +95,49 @@ public class SedeAndServiciosServiceTest {
         ServicioEntity service = sede.getServicios().get(0);
 
         assertThrows(IllegalOperationException.class, () -> {
-            SedeService.addSedeServicio(sede.getId(), service.getId());
+            sedeServicioService.addSedeServicio(sede.getId(), service.getId());
+        });
+    }
+
+    // Prueba 2.1: Intentar agregar un servicio que no existe en una sede.
+    // Espera una EntityNotFoundException
+    @Test
+    void testAddSEToSedeNotExist() throws EntityNotFoundException, IllegalOperationException {
+        SedeEntity sede = sedes.get(0);
+
+        assertThrows(EntityNotFoundException.class, () -> {
+            sedeServicioService.addSedeServicio(sede.getId(), 0L);
+        });
+    }
+
+    // Prueba 2.2: Intentar agregar un servicio a una sede que no existe.
+    // Espera una EntityNotFoundException
+    @Test
+    void testAddSEToSedeNotExist2() throws EntityNotFoundException, IllegalOperationException {
+        ServicioEntity servicio = servicios.get(0);
+
+        assertThrows(EntityNotFoundException.class, () -> {
+            sedeServicioService.addSedeServicio(0L, servicio.getId());
+        });
+    }
+
+    // Prueba 2.3: Obtener los servicios de una sede
+    @Test
+    void testGetSEFromSede() throws EntityNotFoundException {
+        SedeEntity sede = sedes.get(0);
+        List<ServicioEntity> servicioEntities = sedeServicioService.obtenerAllServicios(sede.getId());
+
+        //assertEquals(sede.getServicios().size(), servicioEntities.size());
+		for (int i = 0; i < servicioEntities.size(); i++) {
+			assertTrue(servicioEntities.contains(servicios.get(i)));
+		}
+    }
+
+    // Prueba 2.4: Obtener los servicios de una sede no existente
+    @Test
+    void testGetSEFromSedeNotExist() throws EntityNotFoundException {
+        assertThrows(EntityNotFoundException.class, () -> {
+            sedeServicioService.obtenerAllServicios(0L);
         });
     }
 
@@ -110,20 +147,85 @@ public class SedeAndServiciosServiceTest {
         SedeEntity sede = sedes.get(0);
         ServicioEntity serv = sede.getServicios().get(0);
 
-        ServicioEntity answer = SedeService.deleteSedeServicio(sede.getId(), serv.getId());
+        ServicioEntity answer = sedeServicioService.deleteSedeServicio(sede.getId(), serv.getId());
 
         assertNotNull(answer);
         assertEquals(serv.getId(), answer.getId());
     }
 
-    // Prueba 4: eliminar un servicio que no existe en una sede
+        // Prueba para eliminar un servicio de una sede que no existe
+    // Se espera que se lance una excepción de tipo IllegalOperationException
     @Test
-    void testDeleteServiceToSedeNotExist() throws EntityNotFoundException, IllegalOperationException {
-        SedeEntity sede = sedes.get(0);
-        ServicioEntity serv = servicios.get(0);
-
-        assertThrows(IllegalOperationException.class, () -> {
-            SedeService.deleteSedeServicio(sede.getId(), serv.getId());
+    void deleteServicioNotExistsTest() throws EntityNotFoundException, IllegalOperationException {
+        // Se obtiene un servicio extra aleatorio
+        ServicioEntity servicio = factory.manufacturePojo(ServicioEntity.class);
+        entityManager.persist(servicio);
+        // Se elimina el servicio de la sede
+        assertThrows(EntityNotFoundException.class, () -> {
+            sedeServicioService.deleteSedeServicio(0L, servicio.getId());
         });
     }
+
+    // Prueba para eliminar un servicio que no existe de una sede
+    // Se espera que se lance una excepción de tipo IllegalOperationException
+    @Test
+    void deleteServicioExtraNotExistsTest2() throws EntityNotFoundException, IllegalOperationException {
+        // Se obtiene una sede aleatoria
+        SedeEntity sede = sedes.get(0);
+        // Se elimina el servicio de la sede
+        assertThrows(EntityNotFoundException.class, () -> {
+            sedeServicioService.deleteSedeServicio(sede.getId(), 0L);
+        });
+    }
+
+    // Prueba 4: eliminar un servicio que no está en una sede
+    @Test
+    void testDeleteServiceToSedeNotExist() throws EntityNotFoundException, IllegalOperationException {
+         // Se obtiene una sede aleatoria
+         SedeEntity sede = sedes.get(0);
+         // Se obtiene un servicio extra aleatorio
+         ServicioEntity servicio = factory.manufacturePojo(ServicioEntity.class);
+         entityManager.persist(servicio);
+         // Se elimina el servicio de la sede
+         assertThrows(IllegalOperationException.class, () -> {
+             sedeServicioService.deleteSedeServicio(sede.getId(), servicio.getId());
+         });
+    }
+
+    // Prueba 5: Actualizar un servicio de una sede
+    @Test
+    void testUpdateSEToSede() throws EntityNotFoundException, IllegalOperationException {
+        SedeEntity sede = sedes.get(0);
+        List<ServicioEntity> nuevaLista = new ArrayList<>();
+
+        for (int i = 0; i < 3; i++) {
+            ServicioEntity entity = factory.manufacturePojo(ServicioEntity.class);
+            entityManager.persist(entity);
+            nuevaLista.add(entity);
+        }
+
+        sedeServicioService.updateSedeServicios(sede.getId(), nuevaLista);
+        List<ServicioEntity> seEntities = entityManager.find(SedeEntity.class, sede.getId()).getServicios();
+        for (ServicioEntity item : seEntities) {
+            assertTrue(nuevaLista.contains(item));
+        }
+    }
+
+    // Prueba 5.1: Intentar actualizar un SErvicio en una sede que no existe.
+    // Espera una EntityNotFoundException
+    @Test
+    void testUpdateSEInvalidSede() {
+        assertThrows(EntityNotFoundException.class, () -> {
+            List<ServicioEntity> nuevaLista = new ArrayList<>();
+        
+            for (int i = 0; i < 3; i++) {
+                ServicioEntity entity = factory.manufacturePojo(ServicioEntity.class);
+                entityManager.persist(entity);
+                nuevaLista.add(entity);
+            }
+            
+            sedeServicioService.updateSedeServicios(0L, nuevaLista);
+        });
+    }
+
 }

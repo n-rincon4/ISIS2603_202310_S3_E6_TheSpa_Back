@@ -113,27 +113,63 @@ public class ServicioServiceTest {
 
     @Test
     void testCreateServicioSinNombre() {
-        ServicioEntity newEntity = factory.manufacturePojo(ServicioEntity.class);
-        newEntity.setNombre(null);
         assertThrows(IllegalOperationException.class, () -> {
+            ServicioEntity newEntity = factory.manufacturePojo(ServicioEntity.class);
+            newEntity.setNombre(null);
+            servicioService.createServicio(newEntity);
+        });
+    }
+
+    @Test
+    void testCreateServicioSinNombre2() {
+        assertThrows(IllegalOperationException.class, () -> {
+            ServicioEntity newEntity = factory.manufacturePojo(ServicioEntity.class);
+            newEntity.setNombre("");
+            servicioService.createServicio(newEntity);
+        });
+    }
+
+    @Test
+    void testCreateServicioSinDescripcion() {
+        assertThrows(IllegalOperationException.class, () -> {
+            ServicioEntity newEntity = factory.manufacturePojo(ServicioEntity.class);
+            newEntity.setDescripcion(null);
+            servicioService.createServicio(newEntity);
+        });
+    }
+
+    @Test
+    void testCreateServicioSinDescripcion2() {
+        assertThrows(IllegalOperationException.class, () -> {
+            ServicioEntity newEntity = factory.manufacturePojo(ServicioEntity.class);
+            newEntity.setDescripcion("");
+            servicioService.createServicio(newEntity);
+        });
+    }
+
+    @Test
+    void testCreateServicioSinPrecio() {
+        assertThrows(IllegalOperationException.class, () -> {
+            ServicioEntity newEntity = factory.manufacturePojo(ServicioEntity.class);
+            newEntity.setPrecio(null);
             servicioService.createServicio(newEntity);
         });
     }
 
     @Test
     void testCreateServicioSinSede() {
-        ServicioEntity newEntity = factory.manufacturePojo(ServicioEntity.class);
-        newEntity.setSede(null);
         assertThrows(IllegalOperationException.class, () -> {
+            ServicioEntity newEntity = factory.manufacturePojo(ServicioEntity.class);
+            newEntity.setSede(null);
             servicioService.createServicio(newEntity);
         });
     }
 
     @Test
     void testCreateServicioSinTrabajadores() {
-        ServicioEntity newEntity = factory.manufacturePojo(ServicioEntity.class);
-        newEntity.setTrabajadores(null);
         assertThrows(IllegalOperationException.class, () -> {
+            ServicioEntity newEntity = factory.manufacturePojo(ServicioEntity.class);
+            newEntity.setTrabajadores(null);
             servicioService.createServicio(newEntity);
         });
     }
@@ -154,36 +190,45 @@ public class ServicioServiceTest {
 
     @Test
     void testCreateServicioSinDuracion() {
-        ServicioEntity newEntity = factory.manufacturePojo(ServicioEntity.class);
-        newEntity.setDuracion(null);
         assertThrows(IllegalOperationException.class, () -> {
+            ServicioEntity newEntity = factory.manufacturePojo(ServicioEntity.class);
+            newEntity.setDuracion(null);
             servicioService.createServicio(newEntity);
         });
     }
 
     @Test
     void testCreateServicioSinRestricciones() {
-        ServicioEntity newEntity = factory.manufacturePojo(ServicioEntity.class);
-        newEntity.setRestricciones(null);
         assertThrows(IllegalOperationException.class, () -> {
+            ServicioEntity newEntity = factory.manufacturePojo(ServicioEntity.class);
+            newEntity.setRestricciones(null);
+            servicioService.createServicio(newEntity);
+        });
+    }
+
+    @Test
+    void testCreateServicioSinRestricciones2() {
+        assertThrows(IllegalOperationException.class, () -> {
+            ServicioEntity newEntity = factory.manufacturePojo(ServicioEntity.class);
+            newEntity.setRestricciones("");
             servicioService.createServicio(newEntity);
         });
     }
 
     @Test
     void testCreateServicioSinDisponible() {
-        ServicioEntity newEntity = factory.manufacturePojo(ServicioEntity.class);
-        newEntity.setDisponible(null);
         assertThrows(IllegalOperationException.class, () -> {
+            ServicioEntity newEntity = factory.manufacturePojo(ServicioEntity.class);
+            newEntity.setDisponible(null);
             servicioService.createServicio(newEntity);
         });
     }
 
     @Test
     void testCreateServicioSinHoraInicio() {
-        ServicioEntity newEntity = factory.manufacturePojo(ServicioEntity.class);
-        newEntity.setHoraInicio(null);
         assertThrows(IllegalOperationException.class, () -> {
+            ServicioEntity newEntity = factory.manufacturePojo(ServicioEntity.class);
+            newEntity.setHoraInicio(null);
             servicioService.createServicio(newEntity);
         });
     }

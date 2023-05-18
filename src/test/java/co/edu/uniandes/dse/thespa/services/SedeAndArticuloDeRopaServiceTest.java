@@ -196,7 +196,7 @@ public class SedeAndArticuloDeRopaServiceTest {
 
 	// reemplazar/actualizar los a de un s
 	@Test
-	void testReplaceASNotInA() throws EntityNotFoundException, IllegalOperationException {
+	void testReplaceArticulosInSede() throws EntityNotFoundException, IllegalOperationException {
 		List<ArticuloDeRopaEntity> nuevaLista = new ArrayList<>();
         SedeEntity sede = factory.manufacturePojo(SedeEntity.class);
         entityManager.persist(sede);
@@ -214,6 +214,33 @@ public class SedeAndArticuloDeRopaServiceTest {
 			assertTrue(nuevaLista.contains(item));
 		}
 	}
+
+    // reemplazar/actualizar los a de una s que no existe
+    @Test
+    void testReplaceArticulosInInvalidSede() {
+        assertThrows(EntityNotFoundException.class, () -> {
+            List<ArticuloDeRopaEntity> nuevaLista = new ArrayList<>();
+		
+            for (int i = 0; i < 3; i++) {
+                ArticuloDeRopaEntity entity = factory.manufacturePojo(ArticuloDeRopaEntity.class);
+                entityManager.persist(entity);
+                nuevaLista.add(entity);
+            }
+            
+            sedeArticuloDeRopaService.updateArticulos(0L, nuevaLista);
+		});
+    }
+
+    // reemplazar/actualizar los a de una s con una lista vacia
+    @Test
+    void testReplaceArticulosInSedeEmptyList() throws EntityNotFoundException, IllegalOperationException {
+        SedeEntity sede = sedes.get(0);
+        List<ArticuloDeRopaEntity> nuevaLista = new ArrayList<>();
+        sedeArticuloDeRopaService.updateArticulos(sede.getId(), nuevaLista);
+        List<ArticuloDeRopaEntity> aEntities = entityManager.find(SedeEntity.class, sede.getId()).getArticulosDeRopa();
+        assertEquals(0, aEntities.size());
+    }
+
 
     @Test
     // eliminar un articulo de una sede
@@ -236,10 +263,19 @@ public class SedeAndArticuloDeRopaServiceTest {
         });
     }
 
-    // Prueba para eliminar un articulo de ropa que no existe de una sede
+    @Test
+    // eliminar un articulo que no existe a un sede -> Entidad no encontrada
+    void testDeleteArticuloNotExistFromSede() throws EntityNotFoundException, IllegalOperationException {
+        assertThrows(EntityNotFoundException.class, () -> {
+            SedeEntity sede = sedes.get(0);
+            sedeArticuloDeRopaService.deleteSedeArticuloDeRopa(sede.getId(), 0L);
+        });
+    }
+
+    // Prueba para eliminar un articulo de ropa que no está agregado de una sede
     // Se espera que se lance una excepción de tipo IllegalOperationException
     @Test
-    void deleteArticuloNotExistsTest() throws EntityNotFoundException, IllegalOperationException {
+    void deleteArticuloNotContainedTest() throws EntityNotFoundException, IllegalOperationException {
         // Se obtiene una sede aleatoria
         SedeEntity sede = sedes.get(0);
         // Se obtiene un articulo aleatorio
