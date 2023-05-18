@@ -52,19 +52,6 @@ public class SedeAndServicioService {
         return servicios;
     }
 
-    // Eliminar una Sede
-    @Transactional
-    public void deleteSede(Long sedeId) throws EntityNotFoundException, IllegalOperationException {
-        log.info("Inicia proceso de borrar la sede con id = {0}", sedeId);
-        Optional<SedeEntity> sedeEntity = sedeRepo.findById(sedeId);
-        if (sedeEntity.isEmpty()) {
-            throw new EntityNotFoundException(SEDE_NOT_FOUND);
-        }
-
-        sedeRepo.deleteById(sedeId);
-        log.info("Termina proceso de borrar la sede con id = {0}", sedeId);
-    }
-
     // Añadir un servicio a la sede
     @Transactional
     public ServicioEntity addSedeServicio(Long sedeId, Long servicioId)

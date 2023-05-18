@@ -121,6 +121,95 @@ public class SedeServiceTest {
         });
     }
 
+    // Prueba 3.1: Crear una sede con un nombre repetido
+    @Test
+    void testCreateSedeWithRepeatedName() {
+        assertThrows(IllegalOperationException.class, () -> {
+            SedeEntity newEntity = factory.manufacturePojo(SedeEntity.class);
+            newEntity.setNombre(sedes.get(0).getNombre());
+            SedeService.createSede(newEntity);
+        });
+    }
+
+    // Prueba 3.2: Crear una sede ya existente en la base de datos
+    @Test
+    void testCreateSedeAlreadyExists() {
+        assertThrows(IllegalOperationException.class, () -> {
+            SedeEntity newEntity = sedes.get(0);
+            SedeService.createSede(newEntity);
+        });
+    }
+
+    // Prueba 3.3: Crear una sede con la misma ubicación que otra sede
+    @Test
+    void testCreateSedeWithRepeatedLocation() {
+        assertThrows(IllegalOperationException.class, () -> {
+            SedeEntity newEntity = factory.manufacturePojo(SedeEntity.class);
+            newEntity.setUbicacion(sedes.get(0).getUbicacion());
+            SedeService.createSede(newEntity);
+        });
+    }
+
+    // Prueba 3.4: Crear una sede con ubicación incorrecta (Nula)
+    @Test
+    void testCreateSedeWithNullLocation() {
+        assertThrows(IllegalOperationException.class, () -> {
+            SedeEntity newEntity = factory.manufacturePojo(SedeEntity.class);
+            newEntity.setUbicacion(null);
+            SedeService.createSede(newEntity);
+        });
+    }
+
+    // Prueba 3.5: Crear una sede con trabajadores incorrectos (Nula)
+    @Test
+    void testCreateSedeWithNullWorkers() {
+        assertThrows(IllegalOperationException.class, () -> {
+            SedeEntity newEntity = factory.manufacturePojo(SedeEntity.class);
+            newEntity.setTrabajadores(null);
+            SedeService.createSede(newEntity);
+        });
+    }
+
+    // Prueba 3.6: Crear una sede con articulos de ropa incorrectos (Nula)
+    @Test
+    void testCreateSedeWithNullArticles() {
+        assertThrows(IllegalOperationException.class, () -> {
+            SedeEntity newEntity = factory.manufacturePojo(SedeEntity.class);
+            newEntity.setArticulosDeRopa(null);
+            SedeService.createSede(newEntity);
+        });
+    }
+
+    // Prueba 3.7: Crear una sede con servicios incorrectos (Nula)
+    @Test
+    void testCreateSedeWithNullServices() {
+        assertThrows(IllegalOperationException.class, () -> {
+            SedeEntity newEntity = factory.manufacturePojo(SedeEntity.class);
+            newEntity.setServicios(null);
+            SedeService.createSede(newEntity);
+        });
+    }
+
+    // Prueba 3.8: Crear una sede con servicios extra incorrectos (Nula)
+    @Test
+    void testCreateSedeWithNullExtraServices() {
+        assertThrows(IllegalOperationException.class, () -> {
+            SedeEntity newEntity = factory.manufacturePojo(SedeEntity.class);
+            newEntity.setServiciosExtra(null);
+            SedeService.createSede(newEntity);
+        });
+    }
+
+    // Prueba 3.9: Crear una sede con packs incorrectos (Nula)
+    @Test
+    void testCreateSedeWithNullPacks() {
+        assertThrows(IllegalOperationException.class, () -> {
+            SedeEntity newEntity = factory.manufacturePojo(SedeEntity.class);
+            newEntity.setPacksDeServicios(null);
+            SedeService.createSede(newEntity);
+        });
+    }
+
     // Prueba 4: getSedes
     @Test
     void testGetSedes() {
