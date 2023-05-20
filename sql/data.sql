@@ -4,12 +4,12 @@
 DELETE FROM ARTICULO_DE_ROPA_ENTITY;
 DELETE FROM PACK_DE_SERVICIOS_ENTITY;
 DELETE FROM PACK_DE_SERVICIOS_ENTITY_SERVICIOS;
-DELETE FROM SEDE_ENTITY;
 DELETE FROM SERVICIO_ENTITY;
 DELETE FROM SERVICIO_EXTRA_ENTITY;
 DELETE FROM TRABAJADOR_ENTITY;
 DELETE FROM TRABAJADOR_ENTITY_SEDES;
 DELETE FROM TRABAJADOR_ENTITY_SERVICIOS;
+DELETE FROM SEDE_ENTITY;
 DELETE FROM UBICACION_ENTITY;
 
 -- Insertar datos de prueba
@@ -67,4 +67,71 @@ INSERT INTO SERVICIO_ENTITY (id, duracion, restricciones, disponible, hora_inici
 VALUES (11, '4', 'No aplican restricciones', true, 18, 'masaje deportivo', 'masaje para deportistas', '35000', 'https://www.genesiscareer.edu/wp-content/uploads/2019/06/swedishmassage.jpg', 6);
 INSERT INTO SERVICIO_ENTITY (id, duracion, restricciones, disponible, hora_inicio, nombre, descripcion, precio, imagen, sede_id)
 VALUES (12, '2', 'Ser mayor de 16 años', true, 19, 'tratamiento capilar', 'tratamiento para el cabello', '50000', 'https://www.genesiscareer.edu/wp-content/uploads/2019/06/swedishmassage.jpg', 6);
+
+-- Create pack 1
+INSERT INTO PACK_DE_SERVICIOS_ENTITY (id, descuento, nombre, imagen, sede_id)
+VALUES (1, 20, 'Ritual de relajación profunda', 'https://amomentspeace.com/wp-content/uploads/2021/02/AdobeStock_149758419-scaled.jpeg', 1);
+
+-- Add services to the pack
+INSERT INTO PACK_DE_SERVICIOS_ENTITY_SERVICIOS (packs_de_servicios_id, servicios_id)
+VALUES (1, 1);
+
+INSERT INTO PACK_DE_SERVICIOS_ENTITY_SERVICIOS (packs_de_servicios_id, servicios_id)
+VALUES (1, 2);
+
+-- Create pack 2
+INSERT INTO PACK_DE_SERVICIOS_ENTITY (id, descuento, nombre, imagen, sede_id)
+VALUES (2, 15, 'Pack de belleza completa', 'https://example.com/image.jpg', 2);
+
+-- Add services to the pack
+INSERT INTO PACK_DE_SERVICIOS_ENTITY_SERVICIOS (packs_de_servicios_id, servicios_id)
+VALUES (2, 3);
+
+INSERT INTO PACK_DE_SERVICIOS_ENTITY_SERVICIOS (packs_de_servicios_id, servicios_id)
+VALUES (2, 4);
+
+-- Create pack 3
+INSERT INTO PACK_DE_SERVICIOS_ENTITY (id, descuento, nombre, imagen, sede_id)
+VALUES (3, 10, 'Pack de cuidado personal', 'https://example.com/image.jpg', 3);
+
+-- Add services to the pack
+INSERT INTO PACK_DE_SERVICIOS_ENTITY_SERVICIOS (packs_de_servicios_id, servicios_id)
+VALUES (3, 5);
+
+INSERT INTO PACK_DE_SERVICIOS_ENTITY_SERVICIOS (packs_de_servicios_id, servicios_id)
+VALUES (3, 6);
+
+-- Create pack 4
+INSERT INTO PACK_DE_SERVICIOS_ENTITY (id, descuento, nombre, imagen, sede_id)
+VALUES (4, 25, 'Pack de relajación y bienestar', 'https://example.com/image.jpg', 4);
+
+-- Add services to the pack
+INSERT INTO PACK_DE_SERVICIOS_ENTITY_SERVICIOS (packs_de_servicios_id, servicios_id)
+VALUES (4, 7);
+
+INSERT INTO PACK_DE_SERVICIOS_ENTITY_SERVICIOS (packs_de_servicios_id, servicios_id)
+VALUES (4, 8);
+
+-- Create pack 5
+INSERT INTO PACK_DE_SERVICIOS_ENTITY (id, descuento, nombre, imagen, sede_id)
+VALUES (5, 30, 'Pack de belleza y estilo', 'https://example.com/image.jpg', 5);
+
+-- Add services to the pack
+INSERT INTO PACK_DE_SERVICIOS_ENTITY_SERVICIOS (packs_de_servicios_id, servicios_id)
+VALUES (5, 9);
+
+INSERT INTO PACK_DE_SERVICIOS_ENTITY_SERVICIOS (packs_de_servicios_id, servicios_id)
+VALUES (5, 10);
+
+-- Create pack 6
+INSERT INTO PACK_DE_SERVICIOS_ENTITY (id, descuento, nombre, imagen, sede_id)
+VALUES (6, 12, 'Pack de tratamientos especiales', 'https://example.com/image.jpg', 6);
+
+-- Add services to the pack
+INSERT INTO PACK_DE_SERVICIOS_ENTITY_SERVICIOS (packs_de_servicios_id, servicios_id)
+VALUES (6, 11);
+
+INSERT INTO PACK_DE_SERVICIOS_ENTITY_SERVICIOS (packs_de_servicios_id, servicios_id)
+VALUES (6, 12);
+
 
