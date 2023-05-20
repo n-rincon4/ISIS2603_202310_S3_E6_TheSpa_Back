@@ -2,8 +2,8 @@
 
 -- Borrar datos de prueba
 DELETE FROM ARTICULO_DE_ROPA_ENTITY;
-DELETE FROM PACK_DE_SERVICIOS_ENTITY;
 DELETE FROM PACK_DE_SERVICIOS_ENTITY_SERVICIOS;
+DELETE FROM PACK_DE_SERVICIOS_ENTITY;
 DELETE FROM SERVICIO_ENTITY;
 DELETE FROM SERVICIO_EXTRA_ENTITY;
 DELETE FROM TRABAJADOR_ENTITY;
@@ -75,7 +75,6 @@ VALUES (1, 20, 'Ritual de relajación profunda', 'https://amomentspeace.com/wp-c
 -- Add services to the pack
 INSERT INTO PACK_DE_SERVICIOS_ENTITY_SERVICIOS (packs_de_servicios_id, servicios_id)
 VALUES (1, 1);
-
 INSERT INTO PACK_DE_SERVICIOS_ENTITY_SERVICIOS (packs_de_servicios_id, servicios_id)
 VALUES (1, 2);
 
@@ -86,7 +85,6 @@ VALUES (2, 15, 'Pack de belleza completa', 'https://example.com/image.jpg', 2);
 -- Add services to the pack
 INSERT INTO PACK_DE_SERVICIOS_ENTITY_SERVICIOS (packs_de_servicios_id, servicios_id)
 VALUES (2, 3);
-
 INSERT INTO PACK_DE_SERVICIOS_ENTITY_SERVICIOS (packs_de_servicios_id, servicios_id)
 VALUES (2, 4);
 
@@ -97,7 +95,6 @@ VALUES (3, 10, 'Pack de cuidado personal', 'https://example.com/image.jpg', 3);
 -- Add services to the pack
 INSERT INTO PACK_DE_SERVICIOS_ENTITY_SERVICIOS (packs_de_servicios_id, servicios_id)
 VALUES (3, 5);
-
 INSERT INTO PACK_DE_SERVICIOS_ENTITY_SERVICIOS (packs_de_servicios_id, servicios_id)
 VALUES (3, 6);
 
@@ -108,7 +105,6 @@ VALUES (4, 25, 'Pack de relajación y bienestar', 'https://example.com/image.jpg
 -- Add services to the pack
 INSERT INTO PACK_DE_SERVICIOS_ENTITY_SERVICIOS (packs_de_servicios_id, servicios_id)
 VALUES (4, 7);
-
 INSERT INTO PACK_DE_SERVICIOS_ENTITY_SERVICIOS (packs_de_servicios_id, servicios_id)
 VALUES (4, 8);
 
@@ -119,7 +115,6 @@ VALUES (5, 30, 'Pack de belleza y estilo', 'https://example.com/image.jpg', 5);
 -- Add services to the pack
 INSERT INTO PACK_DE_SERVICIOS_ENTITY_SERVICIOS (packs_de_servicios_id, servicios_id)
 VALUES (5, 9);
-
 INSERT INTO PACK_DE_SERVICIOS_ENTITY_SERVICIOS (packs_de_servicios_id, servicios_id)
 VALUES (5, 10);
 
@@ -130,8 +125,57 @@ VALUES (6, 12, 'Pack de tratamientos especiales', 'https://example.com/image.jpg
 -- Add services to the pack
 INSERT INTO PACK_DE_SERVICIOS_ENTITY_SERVICIOS (packs_de_servicios_id, servicios_id)
 VALUES (6, 11);
-
 INSERT INTO PACK_DE_SERVICIOS_ENTITY_SERVICIOS (packs_de_servicios_id, servicios_id)
 VALUES (6, 12);
 
+-- Articulos
+INSERT INTO ARTICULO_DE_ROPA_ENTITY (id, nombre, descripcion, precio, imagen, num_disponible, talla, color, sede_id)
+VALUES (1, 'Crop Top The Spa', 'Camiseta corta', 15000.0, 'https://cdn.shopify.com/s/files/1/0156/6146/products/TrainingFractionCropTopToffeeBrownB2A5Y-NBH6.1054.142.jpg?v=1668618724g', 100, 6, 'azul', 1);
+INSERT INTO ARTICULO_DE_ROPA_ENTITY (id, nombre, descripcion, precio, imagen, num_disponible, talla, color, sede_id)
+VALUES (2, 'Pantalón Deportivo', 'Pantalón cómodo para entrenamiento', 25000.0, 'https://cdn.shopify.com/s/files/1/0156/6146/products/TrainingFractionCropTopToffeeBrownB2A5Y-NBH6.1054.142.jpg?v=1668618724g', 50, 8, 'negro', 1);
+INSERT INTO ARTICULO_DE_ROPA_ENTITY (id, nombre, descripcion, precio, imagen, num_disponible, talla, color, sede_id)
+VALUES (3, 'Vestido Elegante', 'Vestido para ocasiones especiales', 35000.0, 'https://cdn.shopify.com/s/files/1/0156/6146/products/TrainingFractionCropTopToffeeBrownB2A5Y-NBH6.1054.142.jpg?v=1668618724g', 20, 10, 'rojo', 2);
+INSERT INTO ARTICULO_DE_ROPA_ENTITY (id, nombre, descripcion, precio, imagen, num_disponible, talla, color, sede_id)
+VALUES (4, 'Camisa Casual', 'Camisa cómoda para uso diario', 20000.0, 'https://cdn.shopify.com/s/files/1/0156/6146/products/TrainingFractionCropTopToffeeBrownB2A5Y-NBH6.1054.142.jpg?v=1668618724g', 30, 7, 'blanco', 2);
+INSERT INTO ARTICULO_DE_ROPA_ENTITY (id, nombre, descripcion, precio, imagen, num_disponible, talla, color, sede_id)
+VALUES (5, 'Falda Plisada', 'Falda elegante y versátil', 18000.0, 'https://cdn.shopify.com/s/files/1/0156/6146/products/TrainingFractionCropTopToffeeBrownB2A5Y-NBH6.1054.142.jpg?v=1668618724g', 40, 9, 'negro', 3);
+INSERT INTO ARTICULO_DE_ROPA_ENTITY (id, nombre, descripcion, precio, imagen, num_disponible, talla, color, sede_id)
+VALUES (6, 'Short Deportivo', 'Short cómodo para actividades físicas', 12000.0, 'https://cdn.shopify.com/s/files/1/0156/6146/products/TrainingFractionCropTopToffeeBrownB2A5Y-NBH6.1054.142.jpg?v=1668618724g', 60, 5, 'gris', 3);
+INSERT INTO ARTICULO_DE_ROPA_ENTITY (id, nombre, descripcion, precio, imagen, num_disponible, talla, color, sede_id)
+VALUES (7, 'Camiseta Estampada', 'Camiseta con diseño exclusivo', 25000.0, 'https://cdn.shopify.com/s/files/1/0156/6146/products/TrainingFractionCropTopToffeeBrownB2A5Y-NBH6.1054.142.jpg?v=1668618724g', 80, 7, 'azul', 4);
+INSERT INTO ARTICULO_DE_ROPA_ENTITY (id, nombre, descripcion, precio, imagen, num_disponible, talla, color, sede_id)
+VALUES (8, 'Pantalón Casual', 'Pantalón cómodo para uso diario', 30000.0, 'https://cdn.shopify.com/s/files/1/0156/6146/products/TrainingFractionCropTopToffeeBrownB2A5Y-NBH6.1054.142.jpg?v=1668618724g', 25, 6, 'negro', 4);
+INSERT INTO ARTICULO_DE_ROPA_ENTITY (id, nombre, descripcion, precio, imagen, num_disponible, talla, color, sede_id)
+VALUES (9, 'Blusa Elegante', 'Blusa con estilo sofisticado', 28000.0, 'https://cdn.shopify.com/s/files/1/0156/6146/products/TrainingFractionCropTopToffeeBrownB2A5Y-NBH6.1054.142.jpg?v=1668618724g', 35, 8, 'blanco', 5);
+INSERT INTO ARTICULO_DE_ROPA_ENTITY (id, nombre, descripcion, precio, imagen, num_disponible, talla, color, sede_id)
+VALUES (10, 'Short Vaquero', 'Short de tela vaquera resistente', 22000.0, 'https://cdn.shopify.com/s/files/1/0156/6146/products/TrainingFractionCropTopToffeeBrownB2A5Y-NBH6.1054.142.jpg?v=1668618724g', 15, 7, 'azul', 5);
+INSERT INTO ARTICULO_DE_ROPA_ENTITY (id, nombre, descripcion, precio, imagen, num_disponible, talla, color, sede_id)
+VALUES (11, 'Camisa Formal', 'Camisa ideal para eventos elegantes', 40000.0, 'https://cdn.shopify.com/s/files/1/0156/6146/products/TrainingFractionCropTopToffeeBrownB2A5Y-NBH6.1054.142.jpg?v=1668618724g', 50, 9, 'blanco', 6);
+INSERT INTO ARTICULO_DE_ROPA_ENTITY (id, nombre, descripcion, precio, imagen, num_disponible, talla, color, sede_id)
+VALUES (12, 'Pantalón de Vestir', 'Pantalón formal para ocasiones especiales', 35000.0, 'https://cdn.shopify.com/s/files/1/0156/6146/products/TrainingFractionCropTopToffeeBrownB2A5Y-NBH6.1054.142.jpg?v=1668618724g', 40, 8, 'negro', 6);
 
+-- Servicios Extra
+INSERT INTO SERVICIO_EXTRA_ENTITY (nombre, descripcion, precio, imagen, disponible, sede_id)
+VALUES ('Sandwich Gourmet', 'Para disfrutar mientras espera ser atendido', 5000.0, 'https://d320djwtwnl5uo.cloudfront.net/recetas/cover/s-ndw_AfsS859PRoHcJpKwd6r4Me0FUBDtCg.png', true, 1);
+INSERT INTO SERVICIO_EXTRA_ENTITY (nombre, descripcion, precio, imagen, disponible, sede_id)
+VALUES ('Bebida Refrescante', 'Una bebida refrescante para acompañar su visita', 3000.0, 'https://d320djwtwnl5uo.cloudfront.net/recetas/cover/s-ndw_AfsS859PRoHcJpKwd6r4Me0FUBDtCg.png', true, 1);
+INSERT INTO SERVICIO_EXTRA_ENTITY (nombre, descripcion, precio, imagen, disponible, sede_id)
+VALUES ('Café Especial', 'Un café especial hecho por nuestros baristas', 4000.0, 'https://d320djwtwnl5uo.cloudfront.net/recetas/cover/s-ndw_AfsS859PRoHcJpKwd6r4Me0FUBDtCg.png', true, 2);
+INSERT INTO SERVICIO_EXTRA_ENTITY (nombre, descripcion, precio, imagen, disponible, sede_id)
+VALUES ('Postre Delicioso', 'Un postre delicioso para culminar su experiencia', 6000.0, 'https://d320djwtwnl5uo.cloudfront.net/recetas/cover/s-ndw_AfsS859PRoHcJpKwd6r4Me0FUBDtCg.png', true, 2);
+INSERT INTO SERVICIO_EXTRA_ENTITY (nombre, descripcion, precio, imagen, disponible, sede_id)
+VALUES ('Aperitivo Exclusivo', 'Un aperitivo exclusivo para abrir su apetito', 4500.0, 'https://d320djwtwnl5uo.cloudfront.net/recetas/cover/s-ndw_AfsS859PRoHcJpKwd6r4Me0FUBDtCg.png', true, 3);
+INSERT INTO SERVICIO_EXTRA_ENTITY (nombre, descripcion, precio, imagen, disponible, sede_id)
+VALUES ('Refresco Natural', 'Un refresco natural hecho con ingredientes frescos', 3500.0, 'https://d320djwtwnl5uo.cloudfront.net/recetas/cover/s-ndw_AfsS859PRoHcJpKwd6r4Me0FUBDtCg.png', true, 3);
+INSERT INTO SERVICIO_EXTRA_ENTITY (nombre, descripcion, precio, imagen, disponible, sede_id)
+VALUES ('Snack Saludable', 'Un snack saludable para picar entre servicios', 2500.0, 'https://d320djwtwnl5uo.cloudfront.net/recetas/cover/s-ndw_AfsS859PRoHcJpKwd6r4Me0FUBDtCg.png', true, 4);
+INSERT INTO SERVICIO_EXTRA_ENTITY (nombre, descripcion, precio, imagen, disponible, sede_id)
+VALUES ('Té Caliente', 'Un té caliente para relajarse durante su visita', 3500.0, 'https://d320djwtwnl5uo.cloudfront.net/recetas/cover/s-ndw_AfsS859PRoHcJpKwd6r4Me0FUBDtCg.png', true, 4);
+INSERT INTO SERVICIO_EXTRA_ENTITY (nombre, descripcion, precio, imagen, disponible, sede_id)
+VALUES ('Batido Energizante', 'Un batido energizante para revitalizarse', 4500.0, 'https://d320djwtwnl5uo.cloudfront.net/recetas/cover/s-ndw_AfsS859PRoHcJpKwd6r4Me0FUBDtCg.png', true, 5);
+INSERT INTO SERVICIO_EXTRA_ENTITY (nombre, descripcion, precio, imagen, disponible, sede_id)
+VALUES ('Galleta Casera', 'Una galleta casera para endulzar su día', 2000.0, 'https://d320djwtwnl5uo.cloudfront.net/recetas/cover/s-ndw_AfsS859PRoHcJpKwd6r4Me0FUBDtCg.png', true, 5);
+INSERT INTO SERVICIO_EXTRA_ENTITY (nombre, descripcion, precio, imagen, disponible, sede_id)
+VALUES ('Zumo Natural', 'Un zumo natural hecho con frutas frescas', 4000.0, 'https://d320djwtwnl5uo.cloudfront.net/recetas/cover/s-ndw_AfsS859PRoHcJpKwd6r4Me0FUBDtCg.png', true, 6);
+INSERT INTO SERVICIO_EXTRA_ENTITY (nombre, descripcion, precio, imagen, disponible, sede_id)
+VALUES ('Helado Artesanal', 'Un helado artesanal para refrescar su paladar', 5000.0, 'https://d320djwtwnl5uo.cloudfront.net/recetas/cover/s-ndw_AfsS859PRoHcJpKwd6r4Me0FUBDtCg.png', true, 6);
