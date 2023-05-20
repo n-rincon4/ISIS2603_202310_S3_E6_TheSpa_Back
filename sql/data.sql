@@ -80,7 +80,7 @@ VALUES (1, 2);
 
 -- Create pack 2
 INSERT INTO PACK_DE_SERVICIOS_ENTITY (id, descuento, nombre, imagen, sede_id)
-VALUES (2, 15, 'Pack de belleza completa', 'https://example.com/image.jpg', 2);
+VALUES (2, 15, 'Pack de belleza completa', 'https://amomentspeace.com/wp-content/uploads/2021/02/AdobeStock_149758419-scaled.jpeg', 2);
 
 -- Add services to the pack
 INSERT INTO PACK_DE_SERVICIOS_ENTITY_SERVICIOS (packs_de_servicios_id, servicios_id)
@@ -90,7 +90,7 @@ VALUES (2, 4);
 
 -- Create pack 3
 INSERT INTO PACK_DE_SERVICIOS_ENTITY (id, descuento, nombre, imagen, sede_id)
-VALUES (3, 10, 'Pack de cuidado personal', 'https://example.com/image.jpg', 3);
+VALUES (3, 10, 'Pack de cuidado personal', 'https://amomentspeace.com/wp-content/uploads/2021/02/AdobeStock_149758419-scaled.jpeg', 3);
 
 -- Add services to the pack
 INSERT INTO PACK_DE_SERVICIOS_ENTITY_SERVICIOS (packs_de_servicios_id, servicios_id)
@@ -100,7 +100,7 @@ VALUES (3, 6);
 
 -- Create pack 4
 INSERT INTO PACK_DE_SERVICIOS_ENTITY (id, descuento, nombre, imagen, sede_id)
-VALUES (4, 25, 'Pack de relajación y bienestar', 'https://example.com/image.jpg', 4);
+VALUES (4, 25, 'Pack de relajación y bienestar', 'https://amomentspeace.com/wp-content/uploads/2021/02/AdobeStock_149758419-scaled.jpeg', 4);
 
 -- Add services to the pack
 INSERT INTO PACK_DE_SERVICIOS_ENTITY_SERVICIOS (packs_de_servicios_id, servicios_id)
@@ -110,7 +110,7 @@ VALUES (4, 8);
 
 -- Create pack 5
 INSERT INTO PACK_DE_SERVICIOS_ENTITY (id, descuento, nombre, imagen, sede_id)
-VALUES (5, 30, 'Pack de belleza y estilo', 'https://example.com/image.jpg', 5);
+VALUES (5, 30, 'Pack de belleza y estilo', 'https://amomentspeace.com/wp-content/uploads/2021/02/AdobeStock_149758419-scaled.jpeg', 5);
 
 -- Add services to the pack
 INSERT INTO PACK_DE_SERVICIOS_ENTITY_SERVICIOS (packs_de_servicios_id, servicios_id)
@@ -120,7 +120,7 @@ VALUES (5, 10);
 
 -- Create pack 6
 INSERT INTO PACK_DE_SERVICIOS_ENTITY (id, descuento, nombre, imagen, sede_id)
-VALUES (6, 12, 'Pack de tratamientos especiales', 'https://example.com/image.jpg', 6);
+VALUES (6, 12, 'Pack de tratamientos especiales', 'https://amomentspeace.com/wp-content/uploads/2021/02/AdobeStock_149758419-scaled.jpeg', 6);
 
 -- Add services to the pack
 INSERT INTO PACK_DE_SERVICIOS_ENTITY_SERVICIOS (packs_de_servicios_id, servicios_id)
