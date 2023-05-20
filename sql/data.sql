@@ -4,11 +4,11 @@
 DELETE FROM ARTICULO_DE_ROPA_ENTITY;
 DELETE FROM PACK_DE_SERVICIOS_ENTITY_SERVICIOS;
 DELETE FROM PACK_DE_SERVICIOS_ENTITY;
+DELETE FROM TRABAJADOR_ENTITY_SERVICIOS;
 DELETE FROM SERVICIO_ENTITY;
 DELETE FROM SERVICIO_EXTRA_ENTITY;
-DELETE FROM TRABAJADOR_ENTITY;
 DELETE FROM TRABAJADOR_ENTITY_SEDES;
-DELETE FROM TRABAJADOR_ENTITY_SERVICIOS;
+DELETE FROM TRABAJADOR_ENTITY;
 DELETE FROM SEDE_ENTITY;
 DELETE FROM UBICACION_ENTITY;
 
@@ -155,27 +155,101 @@ INSERT INTO ARTICULO_DE_ROPA_ENTITY (id, nombre, descripcion, precio, imagen, nu
 VALUES (12, 'Pantalón de Vestir', 'Pantalón formal para ocasiones especiales', 35000.0, 'https://cdn.shopify.com/s/files/1/0156/6146/products/TrainingFractionCropTopToffeeBrownB2A5Y-NBH6.1054.142.jpg?v=1668618724g', 40, 8, 'negro', 6);
 
 -- Servicios Extra
-INSERT INTO SERVICIO_EXTRA_ENTITY (nombre, descripcion, precio, imagen, disponible, sede_id)
-VALUES ('Sandwich Gourmet', 'Para disfrutar mientras espera ser atendido', 5000.0, 'https://d320djwtwnl5uo.cloudfront.net/recetas/cover/s-ndw_AfsS859PRoHcJpKwd6r4Me0FUBDtCg.png', true, 1);
-INSERT INTO SERVICIO_EXTRA_ENTITY (nombre, descripcion, precio, imagen, disponible, sede_id)
-VALUES ('Bebida Refrescante', 'Una bebida refrescante para acompañar su visita', 3000.0, 'https://d320djwtwnl5uo.cloudfront.net/recetas/cover/s-ndw_AfsS859PRoHcJpKwd6r4Me0FUBDtCg.png', true, 1);
-INSERT INTO SERVICIO_EXTRA_ENTITY (nombre, descripcion, precio, imagen, disponible, sede_id)
-VALUES ('Café Especial', 'Un café especial hecho por nuestros baristas', 4000.0, 'https://d320djwtwnl5uo.cloudfront.net/recetas/cover/s-ndw_AfsS859PRoHcJpKwd6r4Me0FUBDtCg.png', true, 2);
-INSERT INTO SERVICIO_EXTRA_ENTITY (nombre, descripcion, precio, imagen, disponible, sede_id)
-VALUES ('Postre Delicioso', 'Un postre delicioso para culminar su experiencia', 6000.0, 'https://d320djwtwnl5uo.cloudfront.net/recetas/cover/s-ndw_AfsS859PRoHcJpKwd6r4Me0FUBDtCg.png', true, 2);
-INSERT INTO SERVICIO_EXTRA_ENTITY (nombre, descripcion, precio, imagen, disponible, sede_id)
-VALUES ('Aperitivo Exclusivo', 'Un aperitivo exclusivo para abrir su apetito', 4500.0, 'https://d320djwtwnl5uo.cloudfront.net/recetas/cover/s-ndw_AfsS859PRoHcJpKwd6r4Me0FUBDtCg.png', true, 3);
-INSERT INTO SERVICIO_EXTRA_ENTITY (nombre, descripcion, precio, imagen, disponible, sede_id)
-VALUES ('Refresco Natural', 'Un refresco natural hecho con ingredientes frescos', 3500.0, 'https://d320djwtwnl5uo.cloudfront.net/recetas/cover/s-ndw_AfsS859PRoHcJpKwd6r4Me0FUBDtCg.png', true, 3);
-INSERT INTO SERVICIO_EXTRA_ENTITY (nombre, descripcion, precio, imagen, disponible, sede_id)
-VALUES ('Snack Saludable', 'Un snack saludable para picar entre servicios', 2500.0, 'https://d320djwtwnl5uo.cloudfront.net/recetas/cover/s-ndw_AfsS859PRoHcJpKwd6r4Me0FUBDtCg.png', true, 4);
-INSERT INTO SERVICIO_EXTRA_ENTITY (nombre, descripcion, precio, imagen, disponible, sede_id)
-VALUES ('Té Caliente', 'Un té caliente para relajarse durante su visita', 3500.0, 'https://d320djwtwnl5uo.cloudfront.net/recetas/cover/s-ndw_AfsS859PRoHcJpKwd6r4Me0FUBDtCg.png', true, 4);
-INSERT INTO SERVICIO_EXTRA_ENTITY (nombre, descripcion, precio, imagen, disponible, sede_id)
-VALUES ('Batido Energizante', 'Un batido energizante para revitalizarse', 4500.0, 'https://d320djwtwnl5uo.cloudfront.net/recetas/cover/s-ndw_AfsS859PRoHcJpKwd6r4Me0FUBDtCg.png', true, 5);
-INSERT INTO SERVICIO_EXTRA_ENTITY (nombre, descripcion, precio, imagen, disponible, sede_id)
-VALUES ('Galleta Casera', 'Una galleta casera para endulzar su día', 2000.0, 'https://d320djwtwnl5uo.cloudfront.net/recetas/cover/s-ndw_AfsS859PRoHcJpKwd6r4Me0FUBDtCg.png', true, 5);
-INSERT INTO SERVICIO_EXTRA_ENTITY (nombre, descripcion, precio, imagen, disponible, sede_id)
-VALUES ('Zumo Natural', 'Un zumo natural hecho con frutas frescas', 4000.0, 'https://d320djwtwnl5uo.cloudfront.net/recetas/cover/s-ndw_AfsS859PRoHcJpKwd6r4Me0FUBDtCg.png', true, 6);
-INSERT INTO SERVICIO_EXTRA_ENTITY (nombre, descripcion, precio, imagen, disponible, sede_id)
-VALUES ('Helado Artesanal', 'Un helado artesanal para refrescar su paladar', 5000.0, 'https://d320djwtwnl5uo.cloudfront.net/recetas/cover/s-ndw_AfsS859PRoHcJpKwd6r4Me0FUBDtCg.png', true, 6);
+INSERT INTO SERVICIO_EXTRA_ENTITY (id, nombre, descripcion, precio, imagen, disponible, sede_id)
+VALUES (1, 'Sandwich Gourmet', 'Para disfrutar mientras espera ser atendido', 5000.0, 'https://d320djwtwnl5uo.cloudfront.net/recetas/cover/s-ndw_AfsS859PRoHcJpKwd6r4Me0FUBDtCg.png', true, 1);
+INSERT INTO SERVICIO_EXTRA_ENTITY (id, nombre, descripcion, precio, imagen, disponible, sede_id)
+VALUES (2, 'Bebida Refrescante', 'Una bebida refrescante para acompañar su visita', 3000.0, 'https://d320djwtwnl5uo.cloudfront.net/recetas/cover/s-ndw_AfsS859PRoHcJpKwd6r4Me0FUBDtCg.png', true, 1);
+INSERT INTO SERVICIO_EXTRA_ENTITY (id, nombre, descripcion, precio, imagen, disponible, sede_id)
+VALUES (3, 'Café Especial', 'Un café especial hecho por nuestros baristas', 4000.0, 'https://d320djwtwnl5uo.cloudfront.net/recetas/cover/s-ndw_AfsS859PRoHcJpKwd6r4Me0FUBDtCg.png', true, 2);
+INSERT INTO SERVICIO_EXTRA_ENTITY (id, nombre, descripcion, precio, imagen, disponible, sede_id)
+VALUES (4, 'Postre Delicioso', 'Un postre delicioso para culminar su experiencia', 6000.0, 'https://d320djwtwnl5uo.cloudfront.net/recetas/cover/s-ndw_AfsS859PRoHcJpKwd6r4Me0FUBDtCg.png', true, 2);
+INSERT INTO SERVICIO_EXTRA_ENTITY (id, nombre, descripcion, precio, imagen, disponible, sede_id)
+VALUES (5, 'Aperitivo Exclusivo', 'Un aperitivo exclusivo para abrir su apetito', 4500.0, 'https://d320djwtwnl5uo.cloudfront.net/recetas/cover/s-ndw_AfsS859PRoHcJpKwd6r4Me0FUBDtCg.png', true, 3);
+INSERT INTO SERVICIO_EXTRA_ENTITY (id, nombre, descripcion, precio, imagen, disponible, sede_id)
+VALUES (6, 'Refresco Natural', 'Un refresco natural hecho con ingredientes frescos', 3500.0, 'https://d320djwtwnl5uo.cloudfront.net/recetas/cover/s-ndw_AfsS859PRoHcJpKwd6r4Me0FUBDtCg.png', true, 3);
+INSERT INTO SERVICIO_EXTRA_ENTITY (id, nombre, descripcion, precio, imagen, disponible, sede_id)
+VALUES (7, 'Snack Saludable', 'Un snack saludable para picar entre servicios', 2500.0, 'https://d320djwtwnl5uo.cloudfront.net/recetas/cover/s-ndw_AfsS859PRoHcJpKwd6r4Me0FUBDtCg.png', true, 4);
+INSERT INTO SERVICIO_EXTRA_ENTITY (id, nombre, descripcion, precio, imagen, disponible, sede_id)
+VALUES (8, 'Té Caliente', 'Un té caliente para relajarse durante su visita', 3500.0, 'https://d320djwtwnl5uo.cloudfront.net/recetas/cover/s-ndw_AfsS859PRoHcJpKwd6r4Me0FUBDtCg.png', true, 4);
+INSERT INTO SERVICIO_EXTRA_ENTITY (id, nombre, descripcion, precio, imagen, disponible, sede_id)
+VALUES (9, 'Batido Energizante', 'Un batido energizante para revitalizarse', 4500.0, 'https://d320djwtwnl5uo.cloudfront.net/recetas/cover/s-ndw_AfsS859PRoHcJpKwd6r4Me0FUBDtCg.png', true, 5);
+INSERT INTO SERVICIO_EXTRA_ENTITY (id, nombre, descripcion, precio, imagen, disponible, sede_id)
+VALUES (10, 'Galleta Casera', 'Una galleta casera para endulzar su día', 2000.0, 'https://d320djwtwnl5uo.cloudfront.net/recetas/cover/s-ndw_AfsS859PRoHcJpKwd6r4Me0FUBDtCg.png', true, 5);
+INSERT INTO SERVICIO_EXTRA_ENTITY (id, nombre, descripcion, precio, imagen, disponible, sede_id)
+VALUES (11, 'Zumo Natural', 'Un zumo natural hecho con frutas frescas', 4000.0, 'https://d320djwtwnl5uo.cloudfront.net/recetas/cover/s-ndw_AfsS859PRoHcJpKwd6r4Me0FUBDtCg.png', true, 6);
+INSERT INTO SERVICIO_EXTRA_ENTITY (id, nombre, descripcion, precio, imagen, disponible, sede_id)
+VALUES (12, 'Helado Artesanal', 'Un helado artesanal para refrescar su paladar', 5000.0, 'https://d320djwtwnl5uo.cloudfront.net/recetas/cover/s-ndw_AfsS859PRoHcJpKwd6r4Me0FUBDtCg.png', true, 6);
+
+-- Trabajadores
+
+-- Trabajador 1 
+INSERT INTO TRABAJADOR_ENTITY (id, foto, nombre, calificacion, en_hall_of_fame)
+VALUES (1, 'https://www.leisureopportunities.co.uk/images/464391_26750.jpg', 'Sophia Anderson', 10, true);
+
+-- Trabajador-Sede association
+INSERT INTO TRABAJADOR_ENTITY_SEDES (TRABAJADORES_ID, SEDES_ID)
+VALUES (1, 1);
+
+-- Trabajador-Servicios association
+INSERT INTO TRABAJADOR_ENTITY_SERVICIOS (TRABAJADORES_ID, SERVICIOS_ID)
+VALUES (1, 1), (1, 2);
+
+-- Trabajador 2
+INSERT INTO TRABAJADOR_ENTITY (id, foto, nombre, calificacion, en_hall_of_fame)
+VALUES (2, 'https://www.leisureopportunities.co.uk/images/464391_26750.jpg', 'John Smith', 8, false);
+
+-- Trabajador-Sede association
+INSERT INTO TRABAJADOR_ENTITY_SEDES (TRABAJADORES_ID, SEDES_ID)
+VALUES (2, 2), (2, 3);
+
+-- Trabajador-Servicios association
+INSERT INTO TRABAJADOR_ENTITY_SERVICIOS (TRABAJADORES_ID, SERVICIOS_ID)
+VALUES (2, 3), (2, 4), (2, 5);
+
+-- Trabajador 3
+INSERT INTO TRABAJADOR_ENTITY (id, foto, nombre, calificacion, en_hall_of_fame)
+VALUES (3, 'https://www.leisureopportunities.co.uk/images/464391_26750.jpg', 'Emily Johnson', 9, true);
+
+-- Trabajador-Sede association
+INSERT INTO TRABAJADOR_ENTITY_SEDES (TRABAJADORES_ID, SEDES_ID)
+VALUES (3, 4);
+
+-- Trabajador-Servicios association
+INSERT INTO TRABAJADOR_ENTITY_SERVICIOS (TRABAJADORES_ID, SERVICIOS_ID)
+VALUES (3, 6), (3, 7);
+
+-- Trabajador 4
+INSERT INTO TRABAJADOR_ENTITY (id, foto, nombre, calificacion, en_hall_of_fame)
+VALUES (4, 'https://www.leisureopportunities.co.uk/images/464391_26750.jpg', 'Michael Williams', 7, false);
+
+-- Trabajador-Sede association
+INSERT INTO TRABAJADOR_ENTITY_SEDES (TRABAJADORES_ID, SEDES_ID)
+VALUES (4, 5), (4, 6);
+
+-- Trabajador-Servicios association
+INSERT INTO TRABAJADOR_ENTITY_SERVICIOS (TRABAJADORES_ID, SERVICIOS_ID)
+VALUES (4, 8), (4, 9), (4, 10);
+
+-- Trabajador 5
+INSERT INTO TRABAJADOR_ENTITY (id, foto, nombre, calificacion, en_hall_of_fame)
+VALUES (5, 'https://www.leisureopportunities.co.uk/images/464391_26750.jpg', 'Olivia Davis', 9, true);
+
+-- Trabajador-Sede association
+INSERT INTO TRABAJADOR_ENTITY_SEDES (TRABAJADORES_ID, SEDES_ID)
+VALUES (5, 1), (5, 2);
+
+-- Trabajador-Servicios association
+INSERT INTO TRABAJADOR_ENTITY_SERVICIOS (TRABAJADORES_ID, SERVICIOS_ID)
+VALUES (5, 11), (5, 12);
+
+-- Trabajador 6
+INSERT INTO TRABAJADOR_ENTITY (id, foto, nombre, calificacion, en_hall_of_fame)
+VALUES (6, 'https://www.leisureopportunities.co.uk/images/464391_26750.jpg', 'James Brown', 8, false);
+
+-- Trabajador-Sede association
+INSERT INTO TRABAJADOR_ENTITY_SEDES (TRABAJADORES_ID, SEDES_ID)
+VALUES (6, 3);
+
+-- Trabajador-Servicios association
+INSERT INTO TRABAJADOR_ENTITY_SERVICIOS (TRABAJADORES_ID, SERVICIOS_ID)
+VALUES (6, 1), (6, 2), (6, 3), (6, 4);
