@@ -196,7 +196,7 @@ VALUES (1, 1), (1, 2);
 
 -- Trabajador 2
 INSERT INTO TRABAJADOR_ENTITY (id, foto, nombre, calificacion, en_hall_of_fame)
-VALUES (2, 'https://www.leisureopportunities.co.uk/images/464391_26750.jpg', 'John Smith', 8, false);
+VALUES (2, 'https://media.istockphoto.com/id/915704700/photo/whatever-pain-you-have-we-will-sort-it-out.jpg?s=612x612&w=0&k=20&c=K2q0npEXddIThgfKp5GvMVkjGGa_0JuuS8wjICfS2K0=', 'John Smith', 8, false);
 
 -- Trabajador-Sede association
 INSERT INTO TRABAJADOR_ENTITY_SEDES (TRABAJADORES_ID, SEDES_ID)
@@ -208,7 +208,7 @@ VALUES (2, 3), (2, 4), (2, 5);
 
 -- Trabajador 3
 INSERT INTO TRABAJADOR_ENTITY (id, foto, nombre, calificacion, en_hall_of_fame)
-VALUES (3, 'https://www.leisureopportunities.co.uk/images/464391_26750.jpg', 'Emily Johnson', 9, true);
+VALUES (3, 'https://media.istockphoto.com/id/486842478/photo/woman-masseuse-at-the-spa.jpg?s=612x612&w=0&k=20&c=wy_t6tFdPp18fNhYdWJQa8xv4cdL0H_n-zdhOgJvC8o=', 'Emily Johnson', 9, true);
 
 -- Trabajador-Sede association
 INSERT INTO TRABAJADOR_ENTITY_SEDES (TRABAJADORES_ID, SEDES_ID)
@@ -220,7 +220,7 @@ VALUES (3, 6), (3, 7);
 
 -- Trabajador 4
 INSERT INTO TRABAJADOR_ENTITY (id, foto, nombre, calificacion, en_hall_of_fame)
-VALUES (4, 'https://www.leisureopportunities.co.uk/images/464391_26750.jpg', 'Michael Williams', 7, false);
+VALUES (4, 'https://img.freepik.com/fotos-premium/retrato-empleado-fisioterapeuta-spa-quiropractico-listo-fisioterapia-consulta-feliz-fisioterapia-trabajador-apoyo-que-siente-orgulloso-exito-clinica-terapia-salud_590464-104454.jpg?w=740', 'Michael Williams', 7, false);
 
 -- Trabajador-Sede association
 INSERT INTO TRABAJADOR_ENTITY_SEDES (TRABAJADORES_ID, SEDES_ID)
@@ -232,7 +232,7 @@ VALUES (4, 8), (4, 9), (4, 10);
 
 -- Trabajador 5
 INSERT INTO TRABAJADOR_ENTITY (id, foto, nombre, calificacion, en_hall_of_fame)
-VALUES (5, 'https://www.leisureopportunities.co.uk/images/464391_26750.jpg', 'Olivia Davis', 9, true);
+VALUES (5, 'https://media.istockphoto.com/id/1126310650/photo/portrait-of-a-business-owner-working-at-a-spa.jpg?s=612x612&w=0&k=20&c=n2hFdeF9pWlB6ESZdAdXop0JYnHRf5L99PzvyYD331Y=', 'Olivia Davis', 9, true);
 
 -- Trabajador-Sede association
 INSERT INTO TRABAJADOR_ENTITY_SEDES (TRABAJADORES_ID, SEDES_ID)
@@ -244,7 +244,7 @@ VALUES (5, 11), (5, 12);
 
 -- Trabajador 6
 INSERT INTO TRABAJADOR_ENTITY (id, foto, nombre, calificacion, en_hall_of_fame)
-VALUES (6, 'https://www.leisureopportunities.co.uk/images/464391_26750.jpg', 'James Brown', 8, false);
+VALUES (6, 'https://img.wellspa360.com/files/base/allured/all/image/2022/05/dreamstime_s_241404666.62882510b027a.png', 'James Brown', 8, false);
 
 -- Trabajador-Sede association
 INSERT INTO TRABAJADOR_ENTITY_SEDES (TRABAJADORES_ID, SEDES_ID)
