@@ -37,9 +37,9 @@ public class ArticuloDeRopaController {
     // metodo para encontrar todos los articulos de ropa
     @GetMapping
     @ResponseStatus(code = HttpStatus.OK)
-    public List<ArticuloDeRopaDTO> findAll() {
+    public List<ArticuloDeRopaDetailDTO> findAll() {
         List<ArticuloDeRopaEntity> articulos = articuloDeRopaService.getArticulosDeRopa();
-        return modelMapper.map(articulos, new TypeToken<List<ArticuloDeRopaDTO>>() {
+        return modelMapper.map(articulos, new TypeToken<List<ArticuloDeRopaDetailDTO>>() {
         }.getType());
     }
 
