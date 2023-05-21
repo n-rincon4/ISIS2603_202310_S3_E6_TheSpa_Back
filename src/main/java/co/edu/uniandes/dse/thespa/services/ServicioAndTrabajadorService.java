@@ -27,12 +27,15 @@ public class ServicioAndTrabajadorService {
     private static final String MENSAJE_SERVICIO_NO_EXISTE = "El servicio con el id = {} no existe";
     private static final String MENSAJE_TRABAJADOR_NOTIN_SERVICIO = "El trabajador con el id = {} no esta en el servicio con el id = {}";
 
+    // Inyeccion de dependencias -> Repositorio Servicios
     @Autowired
     ServicioRepository servicioRepository;
 
+    // Inyeccion de dependencias -> Repositorio Trabajador
     @Autowired
     TrabajadorRepository trabajadorRepository;
 
+    // Creación de trabajadores
     @Transactional
     public TrabajadorEntity addTrabajador(Long servicioID, long trabajadorID)
             throws EntityNotFoundException, IllegalOperationException {
@@ -56,6 +59,7 @@ public class ServicioAndTrabajadorService {
         return trabajadorEntity.get();
     }
 
+    // Obtener todos los trabajadores de un servicio
     @Transactional
     public List<TrabajadorEntity> getTrabajadores(Long servicioID) throws EntityNotFoundException {
         log.info("Inicia proceso de consultar los trabajadores del servicio con id = {}", servicioID);
@@ -67,6 +71,7 @@ public class ServicioAndTrabajadorService {
         return servicioEntity.get().getTrabajadores();
     }
 
+    // Obtener un trabajador de un servicio
     @Transactional
     public TrabajadorEntity getTrabajador(Long servicioID, Long trabajadorid)
             throws EntityNotFoundException, IllegalOperationException {
@@ -95,6 +100,7 @@ public class ServicioAndTrabajadorService {
         return trabajadorBuscado.get();
     }
 
+    // Eliminar un trabajador de un servicio
     @Transactional
     public TrabajadorEntity removeTrabajador(Long servicioID, long trabajadorID)
             throws EntityNotFoundException, IllegalOperationException {
@@ -118,6 +124,7 @@ public class ServicioAndTrabajadorService {
         return trabajadorEntity.get();
     }
 
+    // Actualizar los trabajadores de un servicio
     @Transactional
     public List<TrabajadorEntity> updateTrabajadores(Long servicioID, List<TrabajadorEntity> trabajadores)
             throws EntityNotFoundException, IllegalOperationException {

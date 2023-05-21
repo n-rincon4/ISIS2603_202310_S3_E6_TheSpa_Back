@@ -22,20 +22,26 @@ import java.util.Optional;
 @Service
 
 public class ServicioService {
+    // String estático para eliminar el code smell en el mensaje de excepción y reporte
     private static final String SERVICE_NOT_FOUND = "Servicio not found";
 
+    // Inyeccion de dependencias -> Repositorio Servicio
     @Autowired
     ServicioRepository servicioRepository;
 
+    // Inyeccion de dependencias -> Repositorio PackDeServicios
     @Autowired
     PackDeServiciosRepository packDeServiciosRepository;
 
+    // Inyeccion de dependencias -> Repositorio Sede
     @Autowired
     SedeRepository sedeRepository;
 
+    // Inyeccion de dependencias -> Repositorio Trabajador
     @Autowired
     TrabajadorRepository trabajadorRepository;
 
+    // Crear un servicio
     @Transactional
     public ServicioEntity createServicio(ServicioEntity servicioEntity)
             throws EntityNotFoundException, IllegalOperationException {
@@ -86,12 +92,14 @@ public class ServicioService {
         return servicioRepository.save(servicioEntity);
     }
 
+    // Obtener todos los servicios
     @Transactional
     public List<ServicioEntity> getServicios() {
         log.info("Inicia proceso de consultar todos los servicios");
         return servicioRepository.findAll();
     }
 
+    // Obtener un servicio
     @Transactional
     public ServicioEntity getServicio(Long servicioId) throws EntityNotFoundException {
         log.info("Inicia proceso de consultar el servicio con id = {0}", servicioId);
@@ -103,6 +111,7 @@ public class ServicioService {
         return servicioEntity.get();
     }
 
+    // Actualizar un servicio
     @Transactional
     public ServicioEntity updateServicio(Long servicioId, ServicioEntity servicio) throws EntityNotFoundException {
         log.info("Inicia proceso de actualizar el servicio con id = {0}", servicioId);
@@ -115,6 +124,7 @@ public class ServicioService {
         return servicioRepository.save(servicio);
     }
 
+    // Eliminar un servicio
     @Transactional
     public void deleteServicio(Long servicioId) throws EntityNotFoundException {
         log.info("Inicia proceso de borrar el servicio con id = {0}", servicioId);

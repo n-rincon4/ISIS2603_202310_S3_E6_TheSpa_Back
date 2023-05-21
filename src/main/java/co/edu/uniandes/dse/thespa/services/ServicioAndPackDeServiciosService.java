@@ -27,12 +27,15 @@ public class ServicioAndPackDeServiciosService {
     private static final String MENSAJE_SERVICIO_NO_EXISTE = "El servicio con el id = {0} no existe";
     private static final String MENSAJE_PACK_NOTIN_SERVICIO = "El pack de servicios con el id = {1} no esta en el servicio con el id = {0}";
 
+    // Inyeccion de dependencias -> Repositorio Servicios
     @Autowired
     ServicioRepository servicioRepository;
 
+    // Inyeccion de dependencias -> Repositorio PackDeServicios
     @Autowired
     PackDeServiciosRepository packDeServiciosRepository;
 
+    // Creación de packs de servicios
     @Transactional
     public PackDeServiciosEntity addPackDeServicios(Long servicioID, long packDeServiciosID)
             throws EntityNotFoundException, IllegalOperationException {
@@ -56,6 +59,7 @@ public class ServicioAndPackDeServiciosService {
         return packDeServiciosEntity.get();
     }
 
+    // Obtener todos los packs de servicios
     @Transactional
     public PackDeServiciosEntity getPack(Long servicioID, Long packid)
             throws EntityNotFoundException, IllegalOperationException {
@@ -83,6 +87,7 @@ public class ServicioAndPackDeServiciosService {
         return packsBuscados.get();
     }
 
+    // Obtener todos los packs de servicios
     @Transactional
     public List<PackDeServiciosEntity> getPacksDeServicios(Long servicioID) throws EntityNotFoundException {
         log.info("Inicia proceso de consultar los packs de servicios del servicio con id = {0}", servicioID);
@@ -94,6 +99,7 @@ public class ServicioAndPackDeServiciosService {
         return servicioEntity.get().getPacksDeServicios();
     }
 
+    // Eliminar un pack de servicios
     @Transactional
     public PackDeServiciosEntity removePackDeServicios(Long servicioID, long packDeServiciosID)
             throws EntityNotFoundException, IllegalOperationException {
@@ -117,6 +123,7 @@ public class ServicioAndPackDeServiciosService {
         return packDeServiciosEntity.get();
     }
 
+    // Actualizar los packs de servicios de un servicio
     @Transactional
     public List<PackDeServiciosEntity> updatePacks(Long servicioID, List<PackDeServiciosEntity> packs)
             throws EntityNotFoundException, IllegalOperationException {
