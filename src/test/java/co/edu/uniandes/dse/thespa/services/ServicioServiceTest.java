@@ -28,14 +28,18 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class ServicioServiceTest {
 
+    // Servicio que se va a probar
     @Autowired
     private ServicioService servicioService;
 
+    // TestEntityManager
     @Autowired
     private TestEntityManager entityManager;
 
+    // PodamFactory para generar datos aleatorios
     private PodamFactory factory = new PodamFactoryImpl();
 
+    // Listas de servicios, packs, sedes y trabajadores
     private List<ServicioEntity> servicioList = new ArrayList<>();
     private List<PackDeServiciosEntity> packList = new ArrayList<>();
     private List<SedeEntity> sedeList = new ArrayList<>();
@@ -91,6 +95,9 @@ public class ServicioServiceTest {
 
     }
 
+    /*
+     * Prueba para crear un servicio.
+     */
     @Test
     void testCreateServicio() throws EntityNotFoundException, IllegalOperationException {
         ServicioEntity newEntity = servicioList.get(0);
@@ -111,6 +118,9 @@ public class ServicioServiceTest {
 
     }
 
+    /*
+     * Prueba para crear un servicio sin nombre.
+     */
     @Test
     void testCreateServicioSinNombre() {
         assertThrows(IllegalOperationException.class, () -> {
@@ -156,6 +166,9 @@ public class ServicioServiceTest {
         });
     }
 
+    /*
+     * Prueba para crear un servicio sin descripcion.
+     */
     @Test
     void testCreateServicioSinSede() {
         assertThrows(IllegalOperationException.class, () -> {
@@ -165,6 +178,9 @@ public class ServicioServiceTest {
         });
     }
 
+    /*
+     * Prueba para crear un servicio sin trabajadores.
+     */
     @Test
     void testCreateServicioSinTrabajadores() {
         assertThrows(IllegalOperationException.class, () -> {
@@ -174,6 +190,9 @@ public class ServicioServiceTest {
         });
     }
 
+    /*
+     * Prueba para crear un servicio sin packs.
+     */
     @Test
     void testCreateServicioSinPacks() {
         ServicioEntity newEntity = factory.manufacturePojo(ServicioEntity.class);
@@ -184,10 +203,8 @@ public class ServicioServiceTest {
     }
 
     /*
-     * duracion, restricciones, disponible, horaInicio, horaFin, precio
-     * 
+     * Prueba para crear un servicio sin precio.
      */
-
     @Test
     void testCreateServicioSinDuracion() {
         assertThrows(IllegalOperationException.class, () -> {
@@ -197,6 +214,9 @@ public class ServicioServiceTest {
         });
     }
 
+    /*
+     * Prueba para crear un servicio sin precio.
+     */
     @Test
     void testCreateServicioSinRestricciones() {
         assertThrows(IllegalOperationException.class, () -> {
@@ -215,6 +235,9 @@ public class ServicioServiceTest {
         });
     }
 
+    /*
+     * Prueba para crear un servicio sin precio.
+     */
     @Test
     void testCreateServicioSinDisponible() {
         assertThrows(IllegalOperationException.class, () -> {
@@ -224,6 +247,9 @@ public class ServicioServiceTest {
         });
     }
 
+    /*
+     * Prueba para crear un servicio sin precio.
+     */
     @Test
     void testCreateServicioSinHoraInicio() {
         assertThrows(IllegalOperationException.class, () -> {
@@ -233,6 +259,9 @@ public class ServicioServiceTest {
         });
     }
 
+    /*
+     * Prueba para crear un servicio sin precio.
+     */
     @Test
     void testGetServicios() {
         List<ServicioEntity> list = servicioService.getServicios();
@@ -248,6 +277,9 @@ public class ServicioServiceTest {
         }
     }
 
+    /*
+     * Prueba para consultar un servicio.
+     */
     @Test
     void testGetServicio() throws EntityNotFoundException {
         ServicioEntity entity = servicioList.get(0);
@@ -266,6 +298,9 @@ public class ServicioServiceTest {
         assertEquals(entity.getHoraInicio(), resultEntity.getHoraInicio());
     }
 
+    /*
+     * Prueba para consultar un servicio que no existe.
+     */
     @Test
     void testGetInvalidServicio() {
         assertThrows(EntityNotFoundException.class, () -> {
@@ -273,6 +308,9 @@ public class ServicioServiceTest {
         });
     }
 
+    /*
+     * Prueba para actualizar un servicio.
+     */
     @Test
     void testUpdateServicio() throws EntityNotFoundException, IllegalOperationException {
         ServicioEntity entity = servicioList.get(0);
@@ -294,6 +332,9 @@ public class ServicioServiceTest {
         assertEquals(pojoEntity.getHoraInicio(), resp.getHoraInicio());
     }
 
+    /*
+     * Prueba para actualizar un servicio sin nombre.
+     */
     @Test
     void testUpdateInvalidServicio() {
         ServicioEntity pojoEntity = factory.manufacturePojo(ServicioEntity.class);
@@ -302,6 +343,9 @@ public class ServicioServiceTest {
         });
     }
 
+    /*
+     * Prueba para actualizar un servicio sin nombre.
+     */
     @Test
     void testDeleteServicio() throws EntityNotFoundException, IllegalOperationException {
         ServicioEntity entity = servicioList.get(1);
@@ -310,6 +354,9 @@ public class ServicioServiceTest {
         assertNull(deleted);
     }
 
+    /*
+     * Prueba para actualizar un servicio sin nombre.
+     */
     @Test
     void testDeleteInvalidServicio() {
         assertThrows(EntityNotFoundException.class, () -> {

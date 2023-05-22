@@ -28,30 +28,50 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
 
 public class ServicioAndTrabajadorServiceTest {
 
+    /*
+     * Instancia de la clase que se quiere probar
+     */
     @Autowired
     private ServicioAndTrabajadorService servicioService;
 
+    /*
+     * Instancia para manejar la base de datos
+     */
     @Autowired
     private TestEntityManager entityManager;
 
+    /*
+     * Creación de objetos aleatorios de una manera muy sencilla.
+     */
     private PodamFactory factory = new PodamFactoryImpl();
 
+    /*
+     * Lista de servicios y trabajadores que se van a utilizar en las pruebas
+     */
     private List<ServicioEntity> servicios = new ArrayList<>();
-
     private List<TrabajadorEntity> trabajadores = new ArrayList<>();
 
+    /*
+     * Método que se ejecuta antes de cada método de prueba
+     */
     @BeforeEach
     void setUp() {
         clearData();
         insertData();
     }
 
+    /*
+     * Método que limpia la base de datos
+     */
     private void clearData() {
         entityManager.clear();
         entityManager.getEntityManager().createQuery("delete from ServicioEntity").executeUpdate();
         entityManager.getEntityManager().createQuery("delete from TrabajadorEntity").executeUpdate();
     }
 
+    /*
+     * Método que inserta datos en la base de datos
+     */
     private void insertData() {
         for (int i = 0; i < 3; i++) {
             ServicioEntity servicio = factory.manufacturePojo(ServicioEntity.class);
@@ -68,6 +88,9 @@ public class ServicioAndTrabajadorServiceTest {
 
     }
 
+    /*
+     * Prueba para agregar un trabajador a un servicio
+     */
     @Test
     void addTrabajadorTest() throws EntityNotFoundException, IllegalOperationException {
         ServicioEntity servicio = servicios.get(0);
@@ -81,6 +104,9 @@ public class ServicioAndTrabajadorServiceTest {
         assertEquals(trabajador, result);
     }
 
+    /*
+     * Prueba para agregar un trabajador a un servicio que no existe
+     */
     @Test
     void addTrabajadorEmptyServicioTest() throws EntityNotFoundException, IllegalOperationException {
         Long id = 0L;
@@ -94,6 +120,9 @@ public class ServicioAndTrabajadorServiceTest {
         });
     }
 
+    /*
+     * Prueba para agregar un trabajador que no existe a un servicio
+     */
     @Test
     void addTrabajadorEmptyTrabajadorTest() throws EntityNotFoundException, IllegalOperationException {
         ServicioEntity servicio = servicios.get(0);
@@ -104,6 +133,9 @@ public class ServicioAndTrabajadorServiceTest {
         });
     }
 
+    /*
+     * Prueba para agregar un trabajador que ya está en un servicio
+     */
     @Test
     void addTrabajadorAlreadyInServicioTest() throws EntityNotFoundException, IllegalOperationException {
         ServicioEntity servicio = servicios.get(0);
@@ -114,6 +146,9 @@ public class ServicioAndTrabajadorServiceTest {
         });
     }
 
+    /*
+     * Prueba para obtener los trabajadores de un servicio
+     */
     @Test
     void getTrabajadoresTest() throws EntityNotFoundException {
         ServicioEntity servicio = servicios.get(0);
@@ -124,6 +159,9 @@ public class ServicioAndTrabajadorServiceTest {
         assertEquals(servicio.getTrabajadores(), result);
     }
 
+    /*
+     * Prueba para obtener los trabajadores de un servicio que no existe
+     */
     @Test
     void getTrabajadoresEmptyServicioTest() throws EntityNotFoundException {
         Long id = 0L;
@@ -133,6 +171,9 @@ public class ServicioAndTrabajadorServiceTest {
         });
     }
 
+    /*
+     * Prueba para obtener un trabajador de un servicio
+     */
     @Test
     void getTrabajadorEmptyTrabajadorTest() throws EntityNotFoundException, IllegalOperationException {
         ServicioEntity servicio = servicios.get(0);
@@ -143,6 +184,9 @@ public class ServicioAndTrabajadorServiceTest {
         });
     }
 
+    /*
+     * Prueba para obtener un trabajador de un servicio que no existe
+     */
     @Test
     void getTrabajadorEmptyServicioTest() throws EntityNotFoundException, IllegalOperationException {
         ServicioEntity servicio = servicios.get(0);
@@ -153,6 +197,9 @@ public class ServicioAndTrabajadorServiceTest {
         });
     }
 
+    /*
+     * Prueba para obtener un trabajador que no está en un servicio
+     */
     @Test
     void getTrabajadorNotInServicioTest() throws EntityNotFoundException, IllegalOperationException {
         ServicioEntity servicio = servicios.get(0);
@@ -165,6 +212,9 @@ public class ServicioAndTrabajadorServiceTest {
         });
     }
 
+    /*
+     * Prueba para remover un trabajador de un servicio
+     */
     @Test
     void getTrabajadorTest() throws EntityNotFoundException, IllegalOperationException {
         ServicioEntity servicio = servicios.get(0);
@@ -176,6 +226,9 @@ public class ServicioAndTrabajadorServiceTest {
         assertEquals(trabajador, result);
     }
 
+    /*
+     * Prueba para remover un trabajador de un servicio que no existe
+     */
     @Test
     void removeTrabajadorTest() throws EntityNotFoundException, IllegalOperationException {
         ServicioEntity servicio = servicios.get(0);
@@ -188,6 +241,9 @@ public class ServicioAndTrabajadorServiceTest {
         assertEquals(2, result.size());
     }
 
+    /*
+     * Prueba para remover un trabajador de un servicio que no existe
+     */
     @Test
     void removeTrabajadorEmptyServicioTest() throws EntityNotFoundException, IllegalOperationException {
         Long id = 0L;
@@ -201,6 +257,9 @@ public class ServicioAndTrabajadorServiceTest {
         });
     }
 
+    /*
+     * Prueba para remover un trabajador que no existe de un servicio
+     */
     @Test
     void removeTrabajadorEmptyTrabajadorTest() throws EntityNotFoundException, IllegalOperationException {
         ServicioEntity servicio = servicios.get(0);
@@ -211,6 +270,9 @@ public class ServicioAndTrabajadorServiceTest {
         });
     }
 
+    /*
+     * Prueba para remover un trabajador que no está en un servicio
+     */
     @Test
     void removeTrabajadorNotInServicioTest() throws EntityNotFoundException, IllegalOperationException {
         ServicioEntity servicio = servicios.get(0);
@@ -223,6 +285,9 @@ public class ServicioAndTrabajadorServiceTest {
         });
     }
 
+    /*
+     * Prueba para actualizar los trabajadores de un servicio
+     */
     @Test
     void updateTrabajadores() throws EntityNotFoundException, IllegalOperationException {
         ServicioEntity servicio = servicios.get(0);
@@ -234,6 +299,9 @@ public class ServicioAndTrabajadorServiceTest {
         assertEquals(trabajadores.size(), trabajadores2.size());
     }
 
+    /*
+     * Prueba para actualizar los trabajadores de un servicio que no existe
+     */
     @Test
     void updateTrabajadoresEmptyServicio() throws EntityNotFoundException, IllegalOperationException {
         Long id = 0L;
