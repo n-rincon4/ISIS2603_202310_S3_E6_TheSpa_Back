@@ -154,6 +154,7 @@ public class ServicioExtraServiceTest {
     }
 
     @Test
+    // Obtiene todos los servicios extra existentes en la base de datos, asumiendo que hay 3 servicios extra creados
     void testGetServiciosExtra() {
         List<ServicioExtraEntity> list = servicioExtraService.getServiciosExtras();
         assertEquals(servicioExtraList.size(), list.size());
@@ -169,6 +170,7 @@ public class ServicioExtraServiceTest {
     }
 
     @Test
+    // Obtiene un servicio extra con ID dado, asumiendo todas las condiciones de un servicio extra
     void testGetServicioExtra() throws EntityNotFoundException {
         ServicioExtraEntity entity = servicioExtraList.get(0);
         ServicioExtraEntity resultEntity = servicioExtraService.getServicioExtra(entity.getId());
@@ -183,6 +185,7 @@ public class ServicioExtraServiceTest {
     }
 
     @Test
+    // Obtiene un servicio extra con ID inválido -> Operación inválida
     void testGetServicioExtraNoExistente() {
         assertThrows(EntityNotFoundException.class, () -> {
             servicioExtraService.getServicioExtra(0L);
@@ -190,8 +193,7 @@ public class ServicioExtraServiceTest {
     }
 
     @Test
-    // Actualiza el servicio extra con ID dado, asumiendo todas las condiciones de
-    // un servicio extra
+    // Actualiza el servicio extra con ID dado, asumiendo todas las condiciones de un servicio extra
     void testUpdateServicioExtra() throws EntityNotFoundException, IllegalOperationException {
         ServicioExtraEntity entity = servicioExtraList.get(0);
         ServicioExtraEntity pojoEntity = factory.manufacturePojo(ServicioExtraEntity.class);
@@ -210,7 +212,7 @@ public class ServicioExtraServiceTest {
     }
 
     @Test
-    // actualiza servicio extra con ID inválido
+    // Actualiza un servicio extra con ID inválido -> Operación inválida
     void testUpdateServicioExtraIDInvalido() {
         assertThrows(EntityNotFoundException.class, () -> {
             ServicioExtraEntity pojoEntity = factory.manufacturePojo(ServicioExtraEntity.class);
@@ -220,7 +222,7 @@ public class ServicioExtraServiceTest {
     }
 
     @Test
-    // actualiza servicio extra con nombre cadena vacía -> Operación inválida
+    // Actualiza servicio extra con nombre cadena vacía -> Operación inválida
     void testUpdateServicioExtraSinNombre() {
         assertThrows(IllegalOperationException.class, () -> {
             ServicioExtraEntity entity = servicioExtraList.get(0);
@@ -244,6 +246,7 @@ public class ServicioExtraServiceTest {
     }
 
     @Test
+    // Elimina un servicio extra con ID dado, asumiendo todas las condiciones de un servicio extra
     void testDeleteServicioExtra() throws EntityNotFoundException, IllegalOperationException {
         ServicioExtraEntity entity = servicioExtraList.get(0);
         servicioExtraService.deleteServicioExtra(entity.getId());
@@ -252,8 +255,7 @@ public class ServicioExtraServiceTest {
     }
 
     @Test
-    // eliminar un servicio extra con un índice incorrecto/no existente -> Operación
-    // inválida
+    // eliminar un servicio extra con un índice incorrecto/no existente -> Operación inválida
     void testDeleteServicioExtraIDInvalido() {
         assertThrows(EntityNotFoundException.class, () -> {
             servicioExtraService.deleteServicioExtra(0L);

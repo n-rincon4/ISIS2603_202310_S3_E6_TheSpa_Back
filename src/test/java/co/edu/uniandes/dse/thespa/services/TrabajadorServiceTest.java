@@ -167,6 +167,7 @@ public class TrabajadorServiceTest {
     }
 
     @Test
+    // Obtiene todos los trabajadores de la base de datos
     void testGetTrabajadores() {
         List<TrabajadorEntity> list = trabajadorService.getTrabajadores();
         assertEquals(trabajadorList.size(), list.size());
@@ -182,6 +183,7 @@ public class TrabajadorServiceTest {
     }
 
     @Test
+    // Obtiene un trabajador con ID dado, asumiendo todas las condiciones de un trabajador
     void testGetTrabajador() throws EntityNotFoundException {
         TrabajadorEntity entity = trabajadorList.get(0);
         TrabajadorEntity resultEntity = trabajadorService.getTrabajador(entity.getId());
@@ -196,6 +198,7 @@ public class TrabajadorServiceTest {
     }
 
     @Test
+    // Obtiene un trabajador con ID inválido -> Operación inválida
     void testGetTrabajadorNoExistente() {
         assertThrows(EntityNotFoundException.class, () -> {
             trabajadorService.getTrabajador(0L);
@@ -203,8 +206,7 @@ public class TrabajadorServiceTest {
     }
 
     @Test
-    // Actualiza el trabajador con ID dado, asumiendo todas las condiciones de un
-    // trabajador
+    // Actualiza el trabajador con ID dado, asumiendo todas las condiciones de un trabajador
     void testUpdateTrabajador() throws EntityNotFoundException, IllegalOperationException {
         TrabajadorEntity entity = trabajadorList.get(0);
         TrabajadorEntity pojoEntity = factory.manufacturePojo(TrabajadorEntity.class);
@@ -225,7 +227,7 @@ public class TrabajadorServiceTest {
     }
 
     @Test
-    // actualiza trabajador con ID inválido
+    // actualiza trabajador con ID inválido -> Operación inválida
     void testUpdateTrabajadorIDInvalido() {
         assertThrows(EntityNotFoundException.class, () -> {
             TrabajadorEntity pojoEntity = factory.manufacturePojo(TrabajadorEntity.class);
@@ -299,6 +301,7 @@ public class TrabajadorServiceTest {
     }
 
     @Test
+    // Elimina un trabajador con ID dado, asumiendo todas las condiciones de un trabajador
     void testDeleteTrabajador() throws EntityNotFoundException, IllegalOperationException {
         TrabajadorEntity entity = trabajadorList.get(0);
         trabajadorService.deleteTrabajador(entity.getId());
@@ -307,8 +310,7 @@ public class TrabajadorServiceTest {
     }
 
     @Test
-    // eliminar un trabajador con un índice incorrecto/no existente -> Operación
-    // inválida
+    // Eliminar un trabajador con un índice incorrecto/no existente -> Operación inválida
     void testDeleteTrabajadorIDInvalido() {
         assertThrows(EntityNotFoundException.class, () -> {
             trabajadorService.deleteTrabajador(0L);

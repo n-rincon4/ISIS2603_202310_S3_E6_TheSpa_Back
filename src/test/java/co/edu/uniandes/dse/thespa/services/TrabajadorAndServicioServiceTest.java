@@ -195,15 +195,16 @@ public class TrabajadorAndServicioServiceTest {
 	@Test
 	void testReplaceServiciosTrabajadorNotInServicio() throws EntityNotFoundException, IllegalOperationException {
 		List<ServicioEntity> nuevaLista = new ArrayList<>();
+        // Crear un trabajador y persistirlo
         TrabajadorEntity trabajador = factory.manufacturePojo(TrabajadorEntity.class);
         entityManager.persist(trabajador);
-		
+		// Crear servicios nuevos y agregarlos a la lista
 		for (int i = 0; i < 3; i++) {
 			ServicioEntity entity = factory.manufacturePojo(ServicioEntity.class);
 			entityManager.persist(entity);
 			nuevaLista.add(entity);
 		}
-		
+		// Llamar al servicio para reemplazar la lista de servicios
 		trabajadorandServicioService.replaceServicios(trabajador.getId(), nuevaLista);
 		
 		List<ServicioEntity> servicioEntities = entityManager.find(TrabajadorEntity.class, trabajador.getId()).getServicios();
@@ -216,14 +217,15 @@ public class TrabajadorAndServicioServiceTest {
      @Test
      void testReplaceServicios() throws EntityNotFoundException, IllegalOperationException {
          List<ServicioEntity> nuevaLista = new ArrayList<>();
+         // Acceder a un trabajador existente
          TrabajadorEntity trabajador = trabajadores.get(0);
-         
+         // Crear servicios nuevos y agregarlos a la lista
          for (int i = 0; i < 3; i++) {
              ServicioEntity entity = factory.manufacturePojo(ServicioEntity.class);
              entityManager.persist(entity);
              nuevaLista.add(entity);
          }
-         
+         // Llamar al servicio para reemplazar la lista de servicios
          trabajadorandServicioService.replaceServicios(trabajador.getId(), nuevaLista);
          
          List<ServicioEntity> servicioEntities = entityManager.find(TrabajadorEntity.class, trabajador.getId()).getServicios();
@@ -237,13 +239,13 @@ public class TrabajadorAndServicioServiceTest {
 	void testReplaceServiciosInvalidTrabajador() {
 		assertThrows(EntityNotFoundException.class, () -> {
             List<ServicioEntity> nuevaLista = new ArrayList<>();
-		
+            // Crear servicios nuevos y agregarlos a la lista
             for (int i = 0; i < 3; i++) {
                 ServicioEntity entity = factory.manufacturePojo(ServicioEntity.class);
                 entityManager.persist(entity);
                 nuevaLista.add(entity);
             }
-            
+            // Llamar al servicio para reemplazar la lista de servicios
             trabajadorandServicioService.replaceServicios(0L, nuevaLista);
 		});
 	}
@@ -256,6 +258,7 @@ public class TrabajadorAndServicioServiceTest {
 		assertThrows(EntityNotFoundException.class, () -> {
 			List<ServicioEntity> nuevaLista = new ArrayList<>();
 			ServicioEntity entity = factory.manufacturePojo(ServicioEntity.class);
+            // Setear el id de la entidad para que sea 0L y no sea válido
 			entity.setId(0L);
 			nuevaLista.add(entity);
 			trabajadorandServicioService.replaceServicios(trabajador.getId(), nuevaLista);
