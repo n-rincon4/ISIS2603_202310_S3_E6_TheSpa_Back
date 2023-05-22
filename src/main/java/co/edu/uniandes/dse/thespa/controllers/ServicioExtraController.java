@@ -39,9 +39,9 @@ public class ServicioExtraController {
     // Método para encontrar todos los servicios extra
     @GetMapping
     @ResponseStatus(code = HttpStatus.OK)
-    public List<ServicioExtraDTO> findAll() {
+    public List<ServicioExtraDetailDTO> findAll() {
         List<ServicioExtraEntity> serviciosExtra = servicioExtraService.getServiciosExtras();
-        return modelMapper.map(serviciosExtra, new TypeToken<List<ServicioExtraDTO>>() {
+        return modelMapper.map(serviciosExtra, new TypeToken<List<ServicioExtraDetailDTO>>() {
         }.getType());
     }
 
