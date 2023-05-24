@@ -17,7 +17,6 @@ import java.util.List;
 
 import co.edu.uniandes.dse.thespa.services.ServicioService;
 import co.edu.uniandes.dse.thespa.entities.ServicioEntity;
-import co.edu.uniandes.dse.thespa.dto.ServicioDTO;
 import co.edu.uniandes.dse.thespa.dto.ServicioDetailDTO;
 
 import org.modelmapper.TypeToken;
@@ -63,11 +62,11 @@ public class ServicioController {
 
     @PutMapping("/{id}")
     @ResponseStatus(code = HttpStatus.OK)
-    public ServicioDTO update(@PathVariable("id") Long id, @RequestBody ServicioDTO servicioDTO)
+    public ServicioDetailDTO update(@PathVariable("id") Long id, @RequestBody ServicioDetailDTO servicioDTO)
             throws EntityNotFoundException {
         ServicioEntity servicio = servicioService.updateServicio(id,
                 modelMapper.map(servicioDTO, ServicioEntity.class));
-        return modelMapper.map(servicio, ServicioDTO.class);
+        return modelMapper.map(servicio, ServicioDetailDTO.class);
     }
 
     @DeleteMapping("/{id}")

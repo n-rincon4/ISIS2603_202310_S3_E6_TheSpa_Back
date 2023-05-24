@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import co.edu.uniandes.dse.thespa.exceptions.EntityNotFoundException;
 import co.edu.uniandes.dse.thespa.exceptions.IllegalOperationException;
-import co.edu.uniandes.dse.thespa.dto.PackDeServiciosDTO;
 import co.edu.uniandes.dse.thespa.dto.PackDeServiciosDetailDTO;
 import co.edu.uniandes.dse.thespa.services.PackDeServiciosService;
 import co.edu.uniandes.dse.thespa.entities.PackDeServiciosEntity;
@@ -67,12 +66,12 @@ public class PackDeServiciosController {
     // entidad actualizada
     @PutMapping(value = "{id}")
     @ResponseStatus(code = HttpStatus.OK)
-    public PackDeServiciosDTO update(@PathVariable("id") Long id, @RequestBody PackDeServiciosDTO packDTO)
+    public PackDeServiciosDetailDTO update(@PathVariable("id") Long id, @RequestBody PackDeServiciosDetailDTO packDTO)
             throws EntityNotFoundException {
 
         PackDeServiciosEntity pack = packDeServiciosService
                 .updatePackDeServicios(id, modelMapper.map(packDTO, PackDeServiciosEntity.class));
-        return modelMapper.map(pack, PackDeServiciosDTO.class);
+        return modelMapper.map(pack, PackDeServiciosDetailDTO.class);
     }
 
     // metodo para eliminar un pack dado su id
