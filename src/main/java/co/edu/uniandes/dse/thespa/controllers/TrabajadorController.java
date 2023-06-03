@@ -20,7 +20,6 @@ import co.edu.uniandes.dse.thespa.exceptions.EntityNotFoundException;
 import co.edu.uniandes.dse.thespa.exceptions.IllegalOperationException;
 
 import co.edu.uniandes.dse.thespa.services.TrabajadorService;
-import co.edu.uniandes.dse.thespa.dto.TrabajadorDTO;
 import co.edu.uniandes.dse.thespa.dto.TrabajadorDetailDTO;
 import co.edu.uniandes.dse.thespa.entities.TrabajadorEntity;
 
@@ -39,9 +38,9 @@ public class TrabajadorController {
     // Método para encontrar todos los trabajadores
     @GetMapping
     @ResponseStatus(code = HttpStatus.OK)
-    public List<TrabajadorDTO> findAll() {
+    public List<TrabajadorDetailDTO> findAll() {
         List<TrabajadorEntity> trabajadores = trabajadorService.getTrabajadores();
-        return modelMapper.map(trabajadores, new TypeToken<List<TrabajadorDTO>>() {
+        return modelMapper.map(trabajadores, new TypeToken<List<TrabajadorDetailDTO>>() {
         }.getType());
     }
 
