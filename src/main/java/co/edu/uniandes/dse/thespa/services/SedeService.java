@@ -140,9 +140,10 @@ public class SedeService {
         if (sedeEntity.isEmpty())
             throw new EntityNotFoundException(SEDE_NOT_FOUND);
 
-        sede.setId(sedeId);
+        sedeEntity.get().setNombre(sede.getNombre());
+        sedeEntity.get().setImagen(sede.getImagen());
         log.info("Termina proceso de actualizar la Sede con id = {0}", sedeId);
-        return sedeRepo.save(sede);
+        return sedeRepo.save(sedeEntity.get());
     }
 
     // Eliminar una Sede
