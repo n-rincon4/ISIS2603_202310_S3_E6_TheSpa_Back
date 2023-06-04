@@ -55,10 +55,10 @@ public class ServicioExtraController {
     // Método para crear un servicio extra a partir de un DTO
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
-    public ServicioExtraDetailDTO create(@RequestBody ServicioExtraDetailDTO ServicioExtraDetailDTO)
+    public ServicioExtraDetailDTO create(@RequestBody ServicioExtraDetailDTO servicioExtraDetailDTO)
             throws IllegalOperationException, EntityNotFoundException {
         ServicioExtraEntity servicioExtraEntity = servicioExtraService
-                .createServicioExtra(modelMapper.map(ServicioExtraDetailDTO, ServicioExtraEntity.class));
+                .createServicioExtra(modelMapper.map(servicioExtraDetailDTO, ServicioExtraEntity.class));
         return modelMapper.map(servicioExtraEntity, ServicioExtraDetailDTO.class);
     }
 
@@ -66,10 +66,10 @@ public class ServicioExtraController {
     @PutMapping(value = "/{id}")
     @ResponseStatus(code = HttpStatus.OK)
     public ServicioExtraDetailDTO update(@PathVariable("id") Long id,
-            @RequestBody ServicioExtraDetailDTO ServicioExtraDetailDTO)
+            @RequestBody ServicioExtraDetailDTO servicioExtraDetailDTO)
             throws EntityNotFoundException, IllegalOperationException {
         ServicioExtraEntity servicioExtraEntity = servicioExtraService.updateServicioExtra(id,
-                modelMapper.map(ServicioExtraDetailDTO, ServicioExtraEntity.class));
+                modelMapper.map(servicioExtraDetailDTO, ServicioExtraEntity.class));
         return modelMapper.map(servicioExtraEntity, ServicioExtraDetailDTO.class);
     }
 
