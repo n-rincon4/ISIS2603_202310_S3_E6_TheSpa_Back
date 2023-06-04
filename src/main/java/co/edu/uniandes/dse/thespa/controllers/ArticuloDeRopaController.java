@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 import co.edu.uniandes.dse.thespa.exceptions.EntityNotFoundException;
 import co.edu.uniandes.dse.thespa.exceptions.IllegalOperationException;
 import co.edu.uniandes.dse.thespa.services.ArticuloDeRopaService;
-import co.edu.uniandes.dse.thespa.dto.ArticuloDeRopaDTO;
 import co.edu.uniandes.dse.thespa.dto.ArticuloDeRopaDetailDTO;
 import co.edu.uniandes.dse.thespa.entities.ArticuloDeRopaEntity;
 
@@ -75,11 +74,11 @@ public class ArticuloDeRopaController {
     // de la entidad actualizada
     @PutMapping(value = "{id}")
     @ResponseStatus(code = HttpStatus.OK)
-    public ArticuloDeRopaDTO update(@PathVariable("id") Long id, @RequestBody ArticuloDeRopaDTO articuloDTO)
+    public ArticuloDeRopaDetailDTO update(@PathVariable("id") Long id, @RequestBody ArticuloDeRopaDetailDTO articuloDTO)
             throws EntityNotFoundException {
         ArticuloDeRopaEntity articulo = articuloDeRopaService.updateArticuloDeRopaEntity(id,
                 modelMapper.map(articuloDTO, ArticuloDeRopaEntity.class));
-        return modelMapper.map(articulo, ArticuloDeRopaDTO.class);
+        return modelMapper.map(articulo, ArticuloDeRopaDetailDTO.class);
     }
 
 }
